@@ -304,7 +304,6 @@ class Autopilot:
         else:
             self.welcome = None
         self.wiper_mode_rollback_request = 0
-        self.wiper_signal_start = 0
         self.wiper_last_state = 0
 
     def disable_nag(self):
@@ -334,6 +333,8 @@ class Autopilot:
         self.nag_disabled = 0
         self.dash.nag_disabled = 0
         print('NAG Eliminator Deactivated')
+        if self.dash.wiper_state != 2:
+            self.wiper_mode_rollback_request = 0
 
     def engage_autopilot(self):
         self.tacc = 0
@@ -342,7 +343,6 @@ class Autopilot:
         self.first_down_time = 0
         self.gear_down_pressed = 0
         self.timer = 0
-        self.wiper_mode_rollback_request = 1
 
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x39d):
@@ -356,9 +356,6 @@ class Autopilot:
             if self.wiper_mode_rollback_request == 1:
                 ret = modify_packet_value(byte_data, 56, 3, self.wiper_last_state)
                 self.buffer.write_message_buffer(0, 0x273, ret)
-                if (time.time() - self.wiper_signal_start) > 0.5:
-                    # 0.5초 동안 메시지를 반복해서 보낸다 (차 UI에서 보내는 신호보다 늦게 보내야 하므로)
-                    self.wiper_mode_rollback_request = 0
 
         if (bus == 0) and (address == 0x229) and (self.dash.gear == 4):
             # 기어 스토크 상태 체크
@@ -371,6 +368,7 @@ class Autopilot:
                     if self.gear_down_pressed == 0:
                         self.gear_down_pressed = 1
                         self.tacc = 1
+                        self.wiper_mode_rollback_request = 1
                         self.first_down_time = self.gear_pressed_time
                     elif self.gear_down_pressed == 1:
                         gear_press_gap = (self.gear_pressed_time - self.first_down_time)
