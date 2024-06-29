@@ -19,3 +19,6 @@
 설치 가이드는 추후 업데이트 할 예정입니다.
 
 당분간 https://cafe.naver.com/canhacker 를 방문해 확인해주세요.
+
+후원계좌
+https://toss.me/canhackers
