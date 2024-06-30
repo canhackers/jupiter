@@ -30,11 +30,12 @@ KICKDOWN = KickDown(BUFFER, DASH)
 # Navdy 로딩
 from navdy import Navdy
 try:
-    with open('/home/navdy_mac', 'r') as f:
+    with open('mac_address', 'r') as f:
         mac_address = f.readline()
     NAVDY = Navdy(mac_address)
     navdy_connected = True
-except:
+except Exception as e:
+    print(e)
     NAVDY = Navdy('00:00:00:00:00:00')
     navdy_connected = False
     print('Failed to connect Navdy')
