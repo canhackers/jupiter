@@ -166,10 +166,11 @@ class WelcomeVolume:
             self.sender.can_send(0x3c2, command['volume_down'], 0)
             time.sleep(0.5)
         elif self.device == 'raspi':
-            self.tx_frame.data = list(bytearray(command['volume_down']))
+            # self.tx_frame.data = list(bytearray(command['volume_down']))
+            self.tx_frame.data = command['volume_down']
             self.sender.send(self.tx_frame)
             time.sleep(0.5)
-            self.tx_frame.data = list(bytearray(command['volume_up']))
+            self.tx_frame.data = command['volume_up']
             self.sender.send(self.tx_frame)
             time.sleep(0.5)
         else:
