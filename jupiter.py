@@ -26,7 +26,6 @@ BUCKLE = RearCenterBuckle(BUFFER)
 MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
 FRESH = FreshAir(BUFFER, DASH)
 KICKDOWN = KickDown(BUFFER, DASH)
-AP.disable_nag()
 
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
 WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
