@@ -28,7 +28,7 @@ FRESH = FreshAir(BUFFER, DASH)
 KICKDOWN = KickDown(BUFFER, DASH)
 
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
-WELCOME = WelcomeVolume(can.Message(), device='raspi')
+WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
 WELCOME.run()
 
 # 상시 모니터링 할 주요 차량정보 접근 주소

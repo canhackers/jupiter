@@ -150,7 +150,7 @@ class WelcomeVolume:
         if device == 'panda':
             self.device = 'panda'
             self.tx_frame = None
-        elif device == 'raspi' and type(sender) == list:
+        elif device == 'raspi' and type(sender) in (list, tuple):
             self.device == 'raspi'
             self.sender = sender[0]
             self.tx_frame = sender[1]
