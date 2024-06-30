@@ -18,13 +18,13 @@ logging_address = ['0x108', '0x118', '0x129', '0x132', '0x186', '0x1d5', '0x1d8'
 mux_address = {'0x282': 2, '0x352': 2, '0x3fd': 3, '0x332': 2, '0x261': 2, '0x243': 3, '0x7ff': 8, '0x2e1': 3,
                '0x201': 3, '0x7aa': 4, '0x2b3': 4, '0x3f2': 4, '0x32c': 8, '0x401': 8}
 
-
 command = {
     'volume_down': bytes.fromhex('2955010000000000'),
     'volume_up': bytes.fromhex('29553f0000000000'),
     'speed_down': bytes.fromhex('2955003f00000000'),
     'speed_up': bytes.fromhex('2955000100000000'),
 }
+
 
 class Buffer:
     def __init__(self):
@@ -78,12 +78,12 @@ class Dashboard:
         self.fresh_request = 0
         self.autopilot = 0
         self.nag_disabled = 0
-        self.recirc_mode = 0    # 0 Auto, 1 내기, 2 외기
+        self.recirc_mode = 0  # 0 Auto, 1 내기, 2 외기
         self.passenger = [0, 0, 0, 0, 0]  # fl, fr, rl, rc, rr
         self.passenger_cnt = 0
         self.wiper_state = 0
         self.wiper_off_request = 0
-        self.mirror_folded = [0, 0] # folded 1, unfolded 0
+        self.mirror_folded = [0, 0]  # folded 1, unfolded 0
 
     def update(self, name, signal):
         if name == 'UnixTime':
@@ -189,7 +189,7 @@ class Logger:
     def initialize(self):
         if not os.path.exists(csv_path):
             os.makedirs(csv_path)
-        if self.cloud ==1 and not os.path.exists(csv_path + 'sync/'):
+        if self.cloud == 1 and not os.path.exists(csv_path + 'sync/'):
             os.makedirs(csv_path + 'sync/')
 
         self.filename = time.strftime('DLOG_%y%m%d_%H%M%S.csv', time.localtime(self.dash.unix_time))
@@ -237,6 +237,7 @@ class MapLampControl:
         self.right_map_light_first_pressed_time = 0
         self.mirror_request = 0
         self.mirror_folded = 0
+        self.fold_request_time = None
 
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x3e2):
@@ -268,14 +269,16 @@ class MapLampControl:
 
         if (bus == 0) and (address == 0x273):
             if self.mirror_request == 1:
-                # print('현재 미러 상태', self.dash.mirror_folded)
                 if self.dash.mirror_folded[0] == 1 or self.dash.mirror_folded[1] == 1:
-                    # 둘 중 하나라도 닫혀 있거나 닫히고 있으면
                     ret = modify_packet_value(byte_data, 24, 2, 2)
                 else:
                     ret = modify_packet_value(byte_data, 24, 2, 1)
                 self.buffer.write_message_buffer(0, 0x273, ret)
-                self.mirror_request = 0
+                if self.fold_request_time is None:
+                    self.fold_request_time = time.time()
+                elif (time.time() - self.fold_request_time) > 1:
+                    self.mirror_request = 0
+                    self.fold_request_time = None
 
     def left_map_light_switch_long_pressed(self):
         print('Left Map Switch Pressed over 1 second')
@@ -383,7 +386,8 @@ class Autopilot:
                     print('NAG Eliminator Activated')
                     self.welcome.run()
             elif gear_position == 0:
-                if (self.autosteer == 0) and (self.first_down_time != 0) and (time.time() - self.gear_pressed_time) >= 1:
+                if (self.autosteer == 0) and (self.first_down_time != 0) and (
+                        time.time() - self.gear_pressed_time) >= 1:
                     self.first_down_time = 0
                     self.gear_down_pressed = 0
 
@@ -396,7 +400,6 @@ class Autopilot:
                             self.wiper_last_state = self.dash.wiper_state
 
             self.last_gear_position = gear_position
-
 
 
 class RearCenterBuckle:
