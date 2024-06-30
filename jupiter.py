@@ -26,6 +26,7 @@ BUCKLE = RearCenterBuckle(BUFFER)
 MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
 FRESH = FreshAir(BUFFER, DASH)
 KICKDOWN = KickDown(BUFFER, DASH)
+AP.disable_nag()
 
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
 WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
@@ -140,7 +141,9 @@ while True:
 
     try:
         for _, address, signal in BUFFER.message_buffer:
-            can_bus.send(can.Message(arbitration_id=address, data=list(bytearray(signal)), is_extended_id=False))
+            byte_signal = bytearray(signal)
+            dlc = len(byte_signal)
+            can_bus.send(can.Message(arbitration_id=address, channel='can0', data=byte_signal, dlc=dlc, is_extended_id=False))
     except Exception as e:
         print("Exception caught ", e)
         print("Recover CAN 0 Connection")
