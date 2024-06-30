@@ -21,9 +21,9 @@ DASH = Dashboard()
 LOGGER = Logger(BUFFER, DASH, cloud=0)
 
 #  부가 기능 로딩
-AP = Autopilot(BUFFER, DASH, can.Message(), device='raspi')
+AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
 BUCKLE = RearCenterBuckle(BUFFER)
-MAPLAMP = MapLampControl(BUFFER, DASH, can.Message(), device='raspi')
+MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
 FRESH = FreshAir(BUFFER, DASH)
 KICKDOWN = KickDown(BUFFER, DASH)
 
