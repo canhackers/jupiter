@@ -140,9 +140,11 @@ while True:
 
     try:
         for _, address, signal in BUFFER.message_buffer:
-            byte_signal = bytearray(signal)
-            dlc = len(byte_signal)
-            can_bus.send(can.Message(arbitration_id=address, channel='can0', data=byte_signal, dlc=dlc, is_extended_id=False))
+            can_bus.send(can.Message(arbitration_id=address,
+                                     channel='can0',
+                                     data=bytearray(signal),
+                                     dlc=len(bytearray(signal)),
+                                     is_extended_id=False))
     except Exception as e:
         print("Exception caught ", e)
         print("Recover CAN 0 Connection")
