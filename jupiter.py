@@ -27,6 +27,18 @@ MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
 FRESH = FreshAir(BUFFER, DASH)
 KICKDOWN = KickDown(BUFFER, DASH)
 
+# Navdy 로딩
+from navdy import Navdy
+try:
+    with open('navdy_mac', 'r') as f:
+        mac_address = f.readline()
+    NAVDY = Navdy(mac_address)
+    navdy_connected = True
+except:
+    NAVDY = Navdy('00:00:00:00:00:00')
+    navdy_connected = False
+    print('Failed to connect Navdy')
+
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
 WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
 WELCOME.run()
@@ -154,3 +166,38 @@ while True:
         WELCOME.run()
 
     BUFFER.flush_message_buffer()
+
+    ###################################################
+    ############ 파트3. Navdy HUD 업데이트 ##############
+    ###################################################
+    if TICK and navdy_connected:
+        if NAVDY.connected == False and DASH.unix_time % 5 == 0:
+            NAVDY.connected = NAVDY.connect()
+            if NAVDY.connected:
+                print('Navdy Connected ', NAVDY.mac_address)
+    try:
+        if navdy_connected and NAVDY.connected:
+            if (current_time - NAVDY.last_update_fast) >= 0.2:
+                NAVDY.last_update_fast = current_time
+                if DASH.parked:
+                    gear = 1
+                else:
+                    if DASH.autopilot == 1:
+                        gear = 6 if DASH.nag_disabled == 1 else 5
+                    else:
+                        gear = DASH.gear
+                payload = {'__speed__': DASH.ui_speed,
+                           '__tachometer__': abs(DASH.torque_front + DASH.torque_rear),
+                           'gear': gear
+                           }
+                if (current_time - NAVDY.last_update_slow) >= 2:
+                    NAVDY.last_update_slow = current_time
+                    payload['voltage'] = DASH.LVB_voltage
+                    payload['soc'] = DASH.soc
+                    payload['hv_temp'] = DASH.HVB_max_temp
+                    payload['ui_range'] = DASH.ui_range
+                    payload['ui_range_map'] = DASH.ui_range
+                    payload['raspi_temp'] = DASH.device_temp
+                NAVDY.send_message(payload)
+    except Exception as e:
+        print("Exception caught while processing Navdy Dash", e)
