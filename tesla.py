@@ -269,16 +269,10 @@ class MapLampControl:
                 self.right_map_light_first_pressed_time = 0
 
         if (bus == 0) and (address == 0x273):
-            print(self.mirror_request, self.fold_request_time, self.dash.mirror_folded)
             if self.mirror_request in [1, 2]:
                 ret = modify_packet_value(byte_data, 24, 2, self.mirror_request)
                 self.buffer.write_message_buffer(0, 0x273, ret)
                 self.mirror_request = 0
-            # if self.fold_request_time is None:
-            #     self.fold_request_time = time.time()
-            # elif (time.time() - self.fold_request_time) > 1:
-            #     self.mirror_request = 0
-            #     self.fold_request_time = None
 
     def mirror_fold(self):
         if self.dash.mirror_folded[0] == 1 or self.dash.mirror_folded[1] == 1:
