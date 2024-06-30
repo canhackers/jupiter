@@ -282,9 +282,9 @@ class MapLampControl:
 
     def mirror_fold(self):
         if self.dash.mirror_folded[0] == 1 or self.dash.mirror_folded[1] == 1:
-            self.mirror_request = 1
+            self.mirror_request = 2
         else:
-            self.mirror_request = -1
+            self.mirror_request = 1
 
     def left_map_light_switch_long_pressed(self):
         print('Left Map Switch Pressed over 1 second')
