@@ -15,9 +15,6 @@ Model3용 DBC 파일을 기준으로 만들었기 때문에 동일한 연식에�
 차종에 따라 모듈의 구성, 주소, 패킷 규칙이 달라져 동작하지 않을 수 있습니다.
 또한 차량 업데이트를 통해 주소, 패킷주소가 달라져 잘 동작하던 기능이 추후 사용할 수 없게 될 수 있습니다.
 
-★ NAVDY HUD 지원은 별도의 개조된 전용 펌웨어가 필요합니다.
-단종으로 인해 구하기 힘든 물건이니 참고하시고, 기존 보유자 중 전용 펌웨어를 사용 중이지 않는 분은 카페 채팅으로 별도 문의 바랍니다.
-사용을 위해서는 Clone 후 Jupiter 기기의 동일 폴더 안에 mac_address 파일을 만들어 00:00:00:00:00:00 형태로 본인 기기의 Mac Address를 넣어야 합니다.
 
 설치 가이드는 추후 업데이트 할 예정입니다.
 
@@ -25,3 +22,29 @@ Model3용 DBC 파일을 기준으로 만들었기 때문에 동일한 연식에�
 
 후원계좌
 https://toss.me/canhackers
+
+
+
+
+★ NAVDY HUD 지원은 별도의 개조된 전용 펌웨어가 필요합니다.
+단종으로 인해 구하기 힘든 물건이니 참고하시고, 기존 보유자 중 전용 펌웨어를 사용 중이지 않는 분은 카페 채팅으로 별도 문의 바랍니다.
+사용을 위해서는 Clone 후 Jupiter 기기의 /home 경로에 mac_address 파일을 만들어 00:00:00:00:00:00 형태로 본인 기기의 Mac Address를 넣어야 합니다.
+
+기본 설치법 외에 추가로 블루투스 페어링 절차가 필요합니다.
+
+sudo bluetoothctl
+scan on  (접속 가능한 블루투스 장치 목록이 뜹니다. Navdy를 찾으면 MAC Address도 알 수 있습니다.)
+pair 00:00:00:00:00:00  (본인 Navdy의 MAC Address를 찾아서)
+confirm passkey 질문에서 yes 입력, Navdy에서도 Confirm을 눌러줘야 합니다.
+trust 00:00:00:00:00:00  (본인 Navdy의 MAC Address를 찾아서)
+exit (bluetoothctl 빠져 나오기)
+cd jupiter
+git checkout navdy  (나브디 브랜치로 변경. 기존 설치 과정에서 git clone 되어 있어야 함.)
+sudo nano /home/mac_address
+Navdy MAC Address 입력
+Ctrl-X, Y로 저장
+sudo apt-get install python3-dev
+sudo apt-get install libbluetooth-dev
+source ./bin/activate
+pip3 install git+https://github.com/pybluez/pybluez.git#egg=PyBluez
+sudo reboot
