@@ -154,11 +154,12 @@ class WelcomeVolume:
             self.device = 'raspi'
             self.sender = sender[0]
             self.tx_frame = sender[1]
+            self.tx_frame.channel = 'can0'
+            self.tx_frame.dlc = 8
             self.tx_frame.arbitration_id = 0x3c2
             self.tx_frame.is_extended_id = False
         else:
             self.device = None
-
     def run(self):
         if self.device == 'panda':
             self.sender.can_send(0x3c2, command['volume_up'], 0)
@@ -167,10 +168,10 @@ class WelcomeVolume:
             time.sleep(0.5)
         elif self.device == 'raspi':
             # self.tx_frame.data = list(bytearray(command['volume_down']))
-            self.tx_frame.data = command['volume_down']
+            self.tx_frame.data = bytearray(command['volume_down'])
             self.sender.send(self.tx_frame)
             time.sleep(0.5)
-            self.tx_frame.data = command['volume_up']
+            self.tx_frame.data = bytearray(command['volume_up'])
             self.sender.send(self.tx_frame)
             time.sleep(0.5)
         else:
