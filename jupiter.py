@@ -30,7 +30,7 @@ KICKDOWN = KickDown(BUFFER, DASH)
 # Navdy 로딩
 from navdy import Navdy
 try:
-    with open('mac_address', 'r') as f:
+    with open('/home/mac_address', 'r') as f:
         mac_address = f.readline()
     NAVDY = Navdy(mac_address)
     navdy_connected = True
