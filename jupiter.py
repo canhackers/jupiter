@@ -31,7 +31,7 @@ KICKDOWN = KickDown(BUFFER, DASH)
 from navdy import Navdy
 try:
     with open('/home/mac_address', 'r') as f:
-        mac_address = f.readline()
+        mac_address = (f.readline()).strip()
     NAVDY = Navdy(mac_address)
     navdy_connected = True
 except Exception as e:
