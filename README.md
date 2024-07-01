@@ -32,19 +32,33 @@ https://toss.me/canhackers
 
 기본 설치법 외에 추가로 블루투스 페어링 절차가 필요합니다.
 
+
 sudo bluetoothctl
+
 scan on  (접속 가능한 블루투스 장치 목록이 뜹니다. Navdy를 찾으면 MAC Address도 알 수 있습니다.)
-pair 00:00:00:00:00:00  (본인 Navdy의 MAC Address를 찾아서)
+
+pair 54:ED:A3:xx:xx:xx  (본인 Navdy의 MAC Address를 찾아서)
+
 confirm passkey 질문에서 yes 입력, Navdy에서도 Confirm을 눌러줘야 합니다.
-trust 00:00:00:00:00:00  (본인 Navdy의 MAC Address를 찾아서)
+
+trust 54:ED:A3:xx:xx:xx  (본인 Navdy의 MAC Address를 찾아서)
+
 exit (bluetoothctl 빠져 나오기)
+
 cd jupiter
+
 git checkout navdy  (나브디 브랜치로 변경. 기존 설치 과정에서 git clone 되어 있어야 함.)
+
 sudo nano /home/mac_address
-Navdy MAC Address 입력
-Ctrl-X, Y로 저장
+
+Navdy MAC Address 입력 54:ED:A3:xx:xx:xx (Ctrl-X, Y로 저장)
+
 sudo apt-get install python3-dev
+
 sudo apt-get install libbluetooth-dev
+
 source ./bin/activate
+
 pip3 install git+https://github.com/pybluez/pybluez.git#egg=PyBluez
+
 sudo reboot

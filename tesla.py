@@ -335,7 +335,6 @@ class Autopilot:
         self.gear_down_pressed = 0
         self.nag_disabled = 0
         self.dash.nag_disabled = 0
-        print('NAG Eliminator Deactivated')
         if self.dash.wiper_state != 2:
             self.wiper_mode_rollback_request = 0
 
@@ -380,7 +379,7 @@ class Autopilot:
                             self.engage_autopilot()
                         else:
                             self.first_down_time = self.gear_pressed_time
-                if gear_position == 4 and self.autosteer == 1 and self.nag_disabled == 0:
+                if (self.mars_mode == 1) and (gear_position == 4) and (self.autosteer == 1) and (self.nag_disabled == 0):
                     self.nag_disabled = 1
                     self.dash.nag_disabled = 1
                     print('NAG Eliminator Activated')
@@ -392,7 +391,6 @@ class Autopilot:
                     self.gear_down_pressed = 0
 
                 if (self.wiper_last_state != self.dash.wiper_state):
-                    # 오토파일럿 시 와이퍼 상태 유지시키기 위해, 마지막 상태를 기억한다.
                     if (self.dash.wiper_state != 2):
                         self.wiper_last_state = self.dash.wiper_state
                     elif self.tacc or self.autosteer:
