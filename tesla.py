@@ -348,7 +348,7 @@ class Autopilot:
 
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x39d):
-            if (self.mars_mode) and (self.autosteer):
+            if (self.autosteer == 1) or (self.tacc == 1):
                 brake_switch = get_value(byte_data, 16, 2)
                 if brake_switch == 2:
                     self.disengage_autopilot()
