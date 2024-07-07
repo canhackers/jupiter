@@ -173,7 +173,6 @@ class WelcomeVolume:
             self.sender.can_send(0x3c2, command['volume_down'], 0)
             time.sleep(0.5)
         elif self.device == 'raspi':
-            # self.tx_frame.data = list(bytearray(command['volume_down']))
             self.tx_frame.data = bytearray(command['volume_down'])
             self.sender.send(self.tx_frame)
             time.sleep(0.5)
@@ -289,6 +288,7 @@ class MapLampControl:
                 ret = modify_packet_value(byte_data, 24, 2, self.mirror_request)
                 self.buffer.write_message_buffer(0, 0x273, ret)
                 self.mirror_request = 0
+                return ret
 
         if (bus == 0) and (address == 0x1f9):
             if self.door_open_request == 0:
@@ -299,6 +299,8 @@ class MapLampControl:
                 if ret:
                     self.buffer.write_message_buffer(0, 0x1f9, ret)
                 self.door_open_request = 0
+                return ret
+        return byte_data
 
     def mirror_fold(self):
         if self.dash.mirror_folded[0] == 1 or self.dash.mirror_folded[1] == 1:
@@ -380,8 +382,6 @@ class Autopilot:
         self.gear_down_pressed = 0
         self.nag_disabled = 0
         self.dash.nag_disabled = 0
-        self.wiper_mode_rollback_request = 0
-        self.user_changed_wiper_request = 0
 
     def engage_autopilot(self):
         self.gear_down_pressed = 0
@@ -415,34 +415,39 @@ class Autopilot:
                 if self.tacc or self.autosteer:
                     if self.dash.wiper_state == 2:
                         if self.user_changed_wiper_request == 1:
+                            # 오토파일럿에서 Auto로 명령을 지속하고 있는 것은 상태 메모리를 바꾸지 않고 유지.
+                            # 사용자 변경이 한번 있고 나면 그 이후 한번은 Auto를 마지막 값으로 기억
                             self.wiper_last_state = self.dash.wiper_state
                             self.user_changed_wiper_request = 0
-                        else:
-                            pass
                     else:
                         # Auto 가 아닌 다른 변경점은 마지막 상태 메모리로 기억
                         self.wiper_last_state = self.dash.wiper_state
                         self.user_changed_wiper_request = 1
                 else:
                     self.wiper_last_state = self.dash.wiper_state
+                    if self.dash.wiper_state != 2:
+                        self.wiper_mode_rollback_request = 0
 
-            if self.wiper_mode_rollback_request == 1:
-                if self.slow_wiper == 1:
-                    if self.dash.ui_speed == 0:
-                        if self.wiper_last_state in [0, 1, 2, 3]:
-                            target_state = 0
-                        elif self.wiper_last_state in [4, 5]:
-                            target_state = 1
-                        elif self.wiper_last_state >= 6:
-                            target_state = 2
-                        else:
-                            target_state = self.wiper_last_state
-                    else:
-                        target_state = self.wiper_last_state
+            if self.slow_wiper == 1 and self.dash.ui_speed == 0:
+                if self.wiper_last_state in [0, 1, 2, 3]:
+                    target_state = 1
+                elif self.wiper_last_state in [4, 5]:
+                    target_state = 3
+                elif self.wiper_last_state >= 6:
+                    target_state = 4
                 else:
                     target_state = self.wiper_last_state
+            else:
+                if self.wiper_mode_rollback_request == 1:
+                    target_state = self.wiper_last_state
+                else:
+                    target_state = self.dash.wiper_state
+
+            print('rollback wiper settings to last', target_state, 'car memory:', self.dash.wiper_state)
+            if target_state != self.dash.wiper_state:
                 ret = modify_packet_value(byte_data, 56, 3, target_state)
                 self.buffer.write_message_buffer(0, 0x273, ret)
+                return ret
 
         if (bus == 0) and (address == 0x229) and (self.dash.gear == 4):
             # 기어 스토크 상태 체크
@@ -473,7 +478,7 @@ class Autopilot:
                     self.first_down_time = 0
                     self.gear_down_pressed = 0
             self.last_gear_position = self.current_gear_position
-
+        return byte_data
 
 class RearCenterBuckle:
     def __init__(self, buffer, mode=0):
@@ -488,19 +493,21 @@ class RearCenterBuckle:
         if mux == 0:
             if self.mode == 1:
                 # 뒷좌석 가운데자리 착좌센서 끄고, 안전벨트 스위치 켜기
-                ret_data = modify_packet_value(byte_data, 54, 2, 1)
-                ret_data = modify_packet_value(ret_data, 62, 2, 2)
-                self.buffer.write_message_buffer(bus, address, ret_data)
+                ret = modify_packet_value(byte_data, 54, 2, 1)
+                ret = modify_packet_value(ret, 62, 2, 2)
+                self.buffer.write_message_buffer(bus, address, ret)
             elif self.mode == 2:
                 # ★★★★ Warning : 뒷좌석 안전벨트 미착용 상태로 승객을 태우는 것은 매우 위험하며, 도로교통법 위반입니다. ★★★★★
                 # 짐을 쌓은 상태로 부득이 정리가 어려운 경우에만 사용하세요.
-                ret_data = modify_packet_value(byte_data, 54, 2, 1)
-                ret_data = modify_packet_value(ret_data, 62, 2, 2)
+                ret = modify_packet_value(byte_data, 54, 2, 1)
+                ret = modify_packet_value(ret, 62, 2, 2)
                 # Disable rearLeftOccupancySwitch
-                ret_data = modify_packet_value(ret_data, 56, 2, 1)
+                ret = modify_packet_value(ret, 56, 2, 1)
                 # Disable rearRightOccupancySwitch
-                ret_data = modify_packet_value(ret_data, 58, 2, 1)
-                self.buffer.write_message_buffer(bus, address, ret_data)
+                ret = modify_packet_value(ret, 58, 2, 1)
+                self.buffer.write_message_buffer(bus, address, ret)
+            return ret
+        return byte_data
 
 
 class FreshAir:
@@ -512,7 +519,8 @@ class FreshAir:
         # 마지막으로 Frseh로 바뀐 시간, 마지막으로 Recirc로 바뀐 시간
         self.last_mode_change = time.time()
         # n명 탑승 시 (a분 내기, b분 외기)
-        self.time_dict = {1: (10, 5),
+        self.time_dict = {0: (10, 5),
+                          1: (10, 5),
                           2: (7, 8),
                           3: (5, 10),
                           4: (0, 1440),
@@ -520,32 +528,28 @@ class FreshAir:
 
     def check(self, bus, address, byte_data):
         if not self.enabled:
-            return False
-        if (self.dash.passenger_cnt == 0):
-            # 차 기본값 동작하도록
-            return
+            return byte_data
         if (bus == 0) and (address == 0x2f3):
-            if self.dash.recirc_mode != 0:
-                # UI에서 Auto로 설정되어 있는 경우에만 자동 조작
-                return
-        else:
-            return
-
-        recirc_time, fresh_time = self.time_dict[self.dash.passenger_cnt]
-        now = time.time()
-        elapsed = (now - self.last_mode_change)
-
-        if (self.recirc_mode == 1) and (elapsed > (60 * recirc_time)):
-            # 내기 모드로 지정 시간을 넘었을 때
-            self.recirc_mode = 2
-            self.last_mode_change = now
-        elif (self.recirc_mode == 2) and (elapsed > (60 * fresh_time)):
-            # 외기 모드로 지정 시간을 넘었을 때
-            self.recirc_mode = 1
-            self.last_mode_change = now
-
-        self.buffer.write_message_buffer(bus, address, modify_packet_value(byte_data, 20, 2, self.recirc_mode))
-
+            if self.dash.recirc_mode == 0:
+                parameters = self.time_dict.get(self.dash.passenger_cnt)
+                if parameters:
+                    recirc_time, fresh_time = parameters
+                else:
+                    return byte_data
+                now = time.time()
+                elapsed = (now - self.last_mode_change)
+                if (self.recirc_mode == 1) and (elapsed > (60 * recirc_time)):
+                    # 내기 모드로 지정 시간을 넘었을 때
+                    self.recirc_mode = 2
+                    self.last_mode_change = now
+                elif (self.recirc_mode == 2) and (elapsed > (60 * fresh_time)):
+                    # 외기 모드로 지정 시간을 넘었을 때
+                    self.recirc_mode = 1
+                    self.last_mode_change = now
+                ret = modify_packet_value(byte_data, 20, 2, self.recirc_mode)
+                self.buffer.write_message_buffer(bus, address, ret)
+                return ret
+        return byte_data
 
 class KickDown:
     def __init__(self, buffer, dash, enabled=0):
@@ -556,7 +560,7 @@ class KickDown:
 
     def check(self, bus, address, byte_data):
         if not self.enabled:
-            return False
+            return byte_data
         if (bus == 0) and (address == 0x39d):
             if self.apply:
                 brake_switch = get_value(byte_data, 16, 2)
@@ -571,9 +575,13 @@ class KickDown:
             if self.apply:
                 ret = make_new_packet(0x334, byte_data, [(5, 2, 1)])
                 self.buffer.write_message_buffer(bus, address, ret)
+                return ret
+
+        return byte_data
 
 class TurnSignal:
     def __init__(self, buffer, dash, enabled=0):
+        # up = right = 4,  down = left = 8
         self.crc_right = (163, 208, 18, 235, 235, 187, 116, 102, 7, 102, 218, 16, 2, 43, 151, 246)
         self.crc_right_half = (135, 244, 54, 207, 207, 159, 80, 66, 35, 66, 254, 52, 38, 15, 179, 210)
         self.crc_left = (235, 152, 90, 163, 163, 243, 60, 46, 79, 46, 146, 88, 74, 99, 223, 190)
@@ -586,18 +594,18 @@ class TurnSignal:
 
     def check(self, bus, address, byte_data):
         if not self.enabled:
-            return False
+            return byte_data
         if (bus == 0) and (address == 0x249):
             if self.turn_indicator == 0:
-                return False
+                return byte_data
             else:
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
-                if self.turn_indicator == 6:
+                if self.turn_indicator == 8:
+                    crc = self.crc_left[counter]
+                elif self.turn_indicator == 6:
                     crc = self.crc_left_half[counter]
                 elif self.turn_indicator == 4:
                     crc = self.crc_right[counter]
-                elif self.turn_indicator == 8:
-                    crc = self.crc_left[counter]
                 elif self.turn_indicator == 2:
                     crc = self.crc_right_half[counter]
                 else:
@@ -607,11 +615,12 @@ class TurnSignal:
                     ret = modify_packet_value(ret, 16, 4, self.turn_indicator)
                     ret = modify_packet_value(ret, 0, 8, crc)
                     self.buffer.write_message_buffer(bus, address, ret)
+                return ret
 
         if (bus == 0) and (address == 0x3c2):
             if (self.dash.autopilot == 1) or (self.dash.tacc == 1):
                 self.turn_indicator = 0
-                return False
+                return byte_data
             if get_value(byte_data, 0, 2) == 1:
                 if get_value(byte_data, 8, 2) == 2:
                     self.right_dial_click_time = time.time()
@@ -623,3 +632,4 @@ class TurnSignal:
                     if self.turn_indicator != 0:
                         if time.time() - self.right_dial_click_time > 0.1:
                             self.turn_indicator = 0
+        return byte_data
