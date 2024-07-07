@@ -20,7 +20,7 @@ def load_settings():
         'MarsMode': 0,
         'RearCenterBuckle': 1,
         'MapLampLeft' : 'mirror_fold',
-        'MapLampRight' : '',
+        'MapLampRight' : 'open_door_rr',
         'AutoRecirculation' : 1,
         'KickDown' : 1,
         'KeepWiperSpeed': 1,
