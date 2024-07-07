@@ -1,7 +1,10 @@
 import os
 import time
 import can
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, KickDown
+from functions import initialize_canbus_connection, load_settings
+from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, \
+    KickDown, TurnSignal
+
 try:
     from vcgencmd import Vcgencmd
     vcgm = Vcgencmd()
@@ -10,22 +13,33 @@ except:
 
 
 # CAN Bus Device 초기화
-os.system('sudo ip link set can0 type can bitrate 500000')
-os.system('sudo ifconfig can0 up')
+initialize_canbus_connection()
 can_bus = can.interface.Bus(channel='can0', interface='socketcan')
 bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
+last_recv_time = time.time()
+bus_connected = 0
+bus_error_count = 0
 
 # 핵심 기능 로딩
+settings = load_settings()
 BUFFER = Buffer()
 DASH = Dashboard()
-LOGGER = Logger(BUFFER, DASH, cloud=0)
+LOGGER = Logger(BUFFER, DASH, cloud=0, enabled=settings.get('Logger'))
 
 #  부가 기능 로딩
-AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
-BUCKLE = RearCenterBuckle(BUFFER)
-MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
-FRESH = FreshAir(BUFFER, DASH)
-KICKDOWN = KickDown(BUFFER, DASH)
+AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()),
+               device='raspi',
+               mars_mode=settings.get('MarsMode'),
+               keep_wiper_speed=settings.get('KeepWiperSpeed'),
+               slow_wiper=settings.get('SlowWiper'))
+BUCKLE = RearCenterBuckle(BUFFER, mode=settings.get('RearCenterBuckle'))
+MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()),
+                         device='raspi',
+                         left=settings.get('MapLampLeft'),
+                         right=settings.get('MapLampRight'))
+FRESH = FreshAir(BUFFER, DASH, enabled=settings.get('AutoRecirculation'))
+KICKDOWN = KickDown(BUFFER, DASH, enabled=settings.get('KickDown'))
+TURNSIGNAL = TurnSignal(BUFFER, DASH, enabled=settings.get('AltTurnSignal'))
 
 # Navdy 로딩
 from navdy import Navdy
@@ -67,11 +81,25 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
 TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
 while True:
     current_time = time.time()
+    if (bus_connected == 1) and (current_time - last_recv_time >= 60):
+        # 메시지 수신이 1분 이상 없을 때 CAN Bus를 10초간 다운 시킨 후 재기동 시도
+        # 총 5회 재시도 후에도 Bus가 살아나지 않으면 기기 재부팅
+        if bus_error_count > 5:
+            os.system('sudo reboot')
+        else:
+            bus_error_count += 1
+            initialize_canbus_connection(delay=10)
+            last_recv_time = time.time()
+    elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
+        print('Waiting until CAN Bus Connecting...', time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
+        last_recv_time = time.time()
+
     ###################################################
     ############## 파트1. 메시지를 읽는 영역 ##############
     ###################################################
     recv_message = can_bus.recv(1)
     if recv_message is not None:
+        last_recv_time = time.time()
         address = recv_message.arbitration_id
         signal = recv_message.data
         BUFFER.write_can_buffer(bus, address, signal)
@@ -101,6 +129,7 @@ while True:
         # 1초에 한번 전송되는 차량 시각 정보 수신
         if address == 0x528:
             TICK = True
+            bus_connected = 1
             DASH.update('UnixTime', signal)
         else:
             TICK = False
@@ -114,13 +143,18 @@ while True:
             print(f'Clock: {DASH.clock}  Temperature: {DASH.device_temp}')
 
             ##### Log writer ######
-            if LOGGER.file:
+            if (LOGGER.file is not None):
                 LOGGER.write()
 
             ##### Mars Mode ######
             AP.run()
 
         # 실시간 패킷 인식 및 변조
+        if address == 0x1f9:
+            MAPLAMP.check(bus, address, signal)
+        if address == 0x249:
+            ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
+            TURNSIGNAL.check(bus, address, signal)
         if address == 0x3e2:
             ##### 맵등 버튼을 길게 눌러 기능을 제공하기 위해, 눌림 상태를 점검 #####
             MAPLAMP.check(bus, address, signal)
@@ -131,7 +165,9 @@ while True:
             AP.check(bus, address, signal)
         if address == 0x3c2:
             ##### 주행 중 뒷좌석 가운데 안전벨트 체크 해제 #####
-            BUCKLE.modulate(bus, address, signal)
+            BUCKLE.check(bus, address, signal)
+            ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 버튼 체크 #####
+            TURNSIGNAL.check(bus, address, signal)
         if address == 0x334:
             ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
             KICKDOWN.check(bus, address, signal)
@@ -160,10 +196,7 @@ while True:
                                      is_extended_id=False))
     except Exception as e:
         print("Exception caught ", e)
-        print("Recover CAN 0 Connection")
-        os.system('sudo ifconfig can0 down')
-        time.sleep(2)
-        os.system('sudo ifconfig can0 up')
+        initialize_canbus_connection(2)
         WELCOME.run()
 
     BUFFER.flush_message_buffer()
