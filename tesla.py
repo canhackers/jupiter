@@ -425,16 +425,16 @@ class Autopilot:
                         self.user_changed_wiper_request = 1
                 else:
                     self.wiper_last_state = self.dash.wiper_state
-                    if self.dash.wiper_state != 2:
+                    if self.dash.wiper_state == 2:
+                        self.wiper_mode_rollback_request = 1
+                    else:
                         self.wiper_mode_rollback_request = 0
 
             if self.slow_wiper == 1 and self.dash.ui_speed == 0:
-                if self.wiper_last_state in [0, 1, 2, 3]:
+                if self.wiper_last_state in [0, 1, 2, 3, 4]:
                     target_state = 1
-                elif self.wiper_last_state in [4, 5]:
+                elif self.wiper_last_state in [5, 6]:
                     target_state = 3
-                elif self.wiper_last_state >= 6:
-                    target_state = 4
                 else:
                     target_state = self.wiper_last_state
             else:
