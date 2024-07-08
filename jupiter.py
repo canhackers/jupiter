@@ -97,7 +97,15 @@ while True:
     ###################################################
     ############## 파트1. 메시지를 읽는 영역 ##############
     ###################################################
-    recv_message = can_bus.recv(1)
+    try:
+        recv_message = can_bus.recv(1)
+    except Exception as e:
+        print('메시지 수신 실패\n', e)
+        bus_error_count += 1
+        initialize_canbus_connection(delay=10)
+        last_recv_time = time.time()
+        recv_message = None
+
     if recv_message is not None:
         last_recv_time = time.time()
         address = recv_message.arbitration_id
@@ -195,7 +203,7 @@ while True:
                                      dlc=len(bytearray(signal)),
                                      is_extended_id=False))
     except Exception as e:
-        print("Exception caught ", e)
+        print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
         initialize_canbus_connection(2)
         WELCOME.run()
 

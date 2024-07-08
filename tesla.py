@@ -167,20 +167,23 @@ class WelcomeVolume:
             self.device = None
 
     def run(self):
-        if self.device == 'panda':
-            self.sender.can_send(0x3c2, command['volume_up'], 0)
-            time.sleep(0.5)
-            self.sender.can_send(0x3c2, command['volume_down'], 0)
-            time.sleep(0.5)
-        elif self.device == 'raspi':
-            self.tx_frame.data = bytearray(command['volume_down'])
-            self.sender.send(self.tx_frame)
-            time.sleep(0.5)
-            self.tx_frame.data = bytearray(command['volume_up'])
-            self.sender.send(self.tx_frame)
-            time.sleep(0.5)
-        else:
-            pass
+        try:
+            if self.device == 'panda':
+                self.sender.can_send(0x3c2, command['volume_up'], 0)
+                time.sleep(0.5)
+                self.sender.can_send(0x3c2, command['volume_down'], 0)
+                time.sleep(0.5)
+            elif self.device == 'raspi':
+                self.tx_frame.data = bytearray(command['volume_down'])
+                self.sender.send(self.tx_frame)
+                time.sleep(0.5)
+                self.tx_frame.data = bytearray(command['volume_up'])
+                self.sender.send(self.tx_frame)
+                time.sleep(0.5)
+            else:
+                pass
+        except Exception as e:
+            print('Wecome 명령 실패\n', e)
 
 
 class Logger:
@@ -391,7 +394,6 @@ class Autopilot:
         self.dash.autopilot = 1
         self.first_down_time = 0
         self.timer = 0
-        self.user_changed_wiper_request = 0
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
@@ -399,9 +401,9 @@ class Autopilot:
         self.dash.tacc = 1
         self.autosteer = 0
         self.dash.autopilot = 0
-        if self.keep_wiper_speed == 1:
-            self.wiper_mode_rollback_request = 1
         self.first_down_time = self.gear_pressed_time
+        self.user_changed_wiper_request = 0
+        self.wiper_mode_rollback_request = 0
 
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x39d):
@@ -411,39 +413,43 @@ class Autopilot:
                     self.disengage_autopilot()
 
         if (bus == 0) and (address == 0x273):
-            if (self.wiper_last_state != self.dash.wiper_state):
-                if self.tacc or self.autosteer:
+            if (self.keep_wiper_speed == 1) and (self.wiper_last_state != self.dash.wiper_state):
+                # 와이퍼 상태가 바뀌었을 때
+                if (self.tacc or self.autosteer):
                     if self.dash.wiper_state == 2:
                         if self.user_changed_wiper_request == 1:
-                            # 오토파일럿에서 Auto로 명령을 지속하고 있는 것은 상태 메모리를 바꾸지 않고 유지.
-                            # 사용자 변경이 한번 있고 나면 그 이후 한번은 Auto를 마지막 값으로 기억
+                            # 사용자가 Auto가 아닌 상태를 쓰다가 Auto로 바꾼 경우 롤백 없이 Auto를 계속 사용
+                            self.wiper_mode_rollback_request = 0
                             self.wiper_last_state = self.dash.wiper_state
-                            self.user_changed_wiper_request = 0
+                        else:
+                            # 오토파일럿 진입 직후 상태가 자동으로 Auto로 바뀌었다면, 마지막 설정으로 롤백 명령 시작
+                            self.wiper_mode_rollback_request = 1
                     else:
-                        # Auto 가 아닌 다른 변경점은 마지막 상태 메모리로 기억
-                        self.wiper_last_state = self.dash.wiper_state
+                        # 사용자에 의해 바뀐 것
                         self.user_changed_wiper_request = 1
+                        self.wiper_last_state = self.dash.wiper_state
                 else:
-                    self.wiper_last_state = self.dash.wiper_state
-                    if self.dash.wiper_state == 2:
-                        self.wiper_mode_rollback_request = 1
+                    if self.wiper_mode_rollback_request == 1:
+                        # 오토파일럿 중 롤백 명령을 받은 상태가 유지되어 넘어온 것이니 마지막 설정을 유지하고 있다가, 오토가 아닌 값이 되면 롤백 해제
+                        if self.dash.wiper_state != 2:
+                            self.wiper_mode_rollback_request = 0
+                            self.wiper_last_state = self.dash.wiper_state
                     else:
-                        self.wiper_mode_rollback_request = 0
+                        self.wiper_last_state = self.dash.wiper_state
 
-            if self.slow_wiper == 1 and self.dash.ui_speed == 0:
-                if self.wiper_last_state in [0, 1, 2, 3, 4]:
+            if (self.slow_wiper == 1) and self.dash.ui_speed <= 3:
+                if self.dash.wiper_state in [0, 1, 2, 3, 4]:
                     target_state = 1
-                elif self.wiper_last_state in [5, 6]:
+                elif self.dash.wiper_state in [5, 6]:
                     target_state = 3
                 else:
-                    target_state = self.wiper_last_state
+                    target_state = self.dash.wiper_state
             else:
                 if self.wiper_mode_rollback_request == 1:
                     target_state = self.wiper_last_state
                 else:
                     target_state = self.dash.wiper_state
 
-            print('rollback wiper settings to last', target_state, 'car memory:', self.dash.wiper_state)
             if target_state != self.dash.wiper_state:
                 ret = modify_packet_value(byte_data, 56, 3, target_state)
                 self.buffer.write_message_buffer(0, 0x273, ret)
