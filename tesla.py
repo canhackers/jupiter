@@ -183,7 +183,7 @@ class WelcomeVolume:
             else:
                 pass
         except Exception as e:
-            print('Wecome 명령 실패\n', e)
+            print('Welcome 명령 실패\n', e)
 
 
 class Logger:
