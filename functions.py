@@ -17,15 +17,14 @@ def initialize_canbus_connection(delay=0):
 def load_settings():
     default_settings = {
         'Logger': 1,
-        'MarsMode': 0,
         'RearCenterBuckle': 1,
         'MapLampLeft' : 'mirror_fold',
         'MapLampRight' : 'open_door_rr',
         'AutoRecirculation' : 1,
         'KickDown' : 1,
         'KeepWiperSpeed': 1,
-        'SlowWiper' : 0,
-        'AltTurnSignal' : 0
+        'SlowWiper' : 1,
+        'AltTurnSignal' : 1
     }
     if not os.path.exists(json_file):
         # 설정 파일이 없으면 기본 설정 파일 생성
