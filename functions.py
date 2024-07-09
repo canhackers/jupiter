@@ -17,7 +17,6 @@ def initialize_canbus_connection(delay=0):
 def load_settings():
     default_settings = {
         'Logger': 1,
-        'MarsMode': 0,
         'RearCenterBuckle': 1,
         'MapLampLeft' : 'mirror_fold',
         'MapLampRight' : 'open_door_rr',
