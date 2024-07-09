@@ -81,15 +81,16 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
 TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
 while True:
     current_time = time.time()
-    if (bus_connected == 1) and (current_time - last_recv_time >= 60):
+    if (bus_connected == 1):
         # 메시지 수신이 1분 이상 없을 때 CAN Bus를 10초간 다운 시킨 후 재기동 시도
         # 총 5회 재시도 후에도 Bus가 살아나지 않으면 기기 재부팅
         if bus_error_count > 5:
             os.system('sudo reboot')
         else:
-            bus_error_count += 1
-            initialize_canbus_connection(delay=10)
-            last_recv_time = time.time()
+            if (current_time - last_recv_time >= 10):
+                bus_error_count += 1
+                initialize_canbus_connection(delay=2)
+                last_recv_time = time.time()
     elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
         print('Waiting until CAN Bus Connecting...', time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
         last_recv_time = time.time()
@@ -102,7 +103,7 @@ while True:
     except Exception as e:
         print('메시지 수신 실패\n', e)
         bus_error_count += 1
-        initialize_canbus_connection(delay=10)
+        initialize_canbus_connection(delay=2)
         last_recv_time = time.time()
         recv_message = None
 
