@@ -88,7 +88,7 @@ while True:
         if bus_error == 1:
             bus_error_count += 1
             initialize_canbus_connection()
-            CANBUS.can_bus = CanBus(can.interface.Bus(channel='can0', interface='socketcan'))
+            CANBUS.can_bus = can.interface.Bus(channel='can0', interface='socketcan')
             WELCOME.run()
             bus_error = 0
         else:
