@@ -82,7 +82,7 @@ TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 
 while True:
     current_time = time.time()
     if (bus_connected == 1):
-        if bus_error_count > 10:
+        if bus_error_count > 5:
             os.system('sudo reboot')
         if bus_error == 1:
             bus_error_count += 1
