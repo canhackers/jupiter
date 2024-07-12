@@ -17,10 +17,6 @@ def initialize_canbus_connection(delay=1):
         print('CAN Bus Initialize Error', e)
         return False
 
-class CanBus:
-    def __init__(self, can_bus):
-        self.can_bus = can_bus
-
 def load_settings():
     default_settings = {
         'Logger': 1,
