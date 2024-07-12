@@ -1,7 +1,7 @@
 import os
 import time
 import can
-from functions import initialize_canbus_connection, load_settings
+from functions import initialize_canbus_connection, load_settings, CanBus
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, \
     KickDown, TurnSignal
 
@@ -14,7 +14,7 @@ except:
 
 # CAN Bus Device 초기화
 initialize_canbus_connection()
-can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+CANBUS = CanBus(can.interface.Bus(channel='can0', interface='socketcan'))
 bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 last_recv_time = time.time()
 bus_connected = 0
@@ -28,13 +28,13 @@ DASH = Dashboard()
 LOGGER = Logger(BUFFER, DASH, cloud=0, enabled=settings.get('Logger'))
 
 #  부가 기능 로딩
-AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()),
+AP = Autopilot(BUFFER, DASH, (CANBUS.can_bus, can.Message()),
                device='raspi',
                mars_mode=settings.get('MarsMode'),
                keep_wiper_speed=settings.get('KeepWiperSpeed'),
                slow_wiper=settings.get('SlowWiper'))
 BUCKLE = RearCenterBuckle(BUFFER, mode=settings.get('RearCenterBuckle'))
-MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()),
+MAPLAMP = MapLampControl(BUFFER, DASH, (CANBUS.can_bus, can.Message()),
                          device='raspi',
                          left=settings.get('MapLampLeft'),
                          right=settings.get('MapLampRight'))
@@ -56,7 +56,7 @@ except Exception as e:
     print('Failed to connect Navdy')
 
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
-WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
+WELCOME = WelcomeVolume((CANBUS.can_bus, can.Message()), device='raspi')
 WELCOME.run()
 
 # 상시 모니터링 할 주요 차량정보 접근 주소
@@ -88,7 +88,9 @@ while True:
         if bus_error == 1:
             bus_error_count += 1
             initialize_canbus_connection()
+            CANBUS.can_bus = CanBus(can.interface.Bus(channel='can0', interface='socketcan'))
             WELCOME.run()
+            bus_error = 0
         else:
             if (current_time - last_recv_time >= 5):
                 bus_error_count += 1
@@ -101,7 +103,7 @@ while True:
     ############## 파트1. 메시지를 읽는 영역 ##############
     ###################################################
     try:
-        recv_message = can_bus.recv(1)
+        recv_message = CANBUS.can_bus.recv(1)
     except Exception as e:
         print('메시지 수신 실패\n', e)
         bus_error = 1
@@ -199,7 +201,7 @@ while True:
 
     try:
         for _, address, signal in BUFFER.message_buffer:
-            can_bus.send(can.Message(arbitration_id=address,
+            CANBUS.can_bus.send(can.Message(arbitration_id=address,
                                      channel='can0',
                                      data=bytearray(signal),
                                      dlc=len(bytearray(signal)),
