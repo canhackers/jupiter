@@ -96,7 +96,7 @@ while True:
                 can_bus = initialize_canbus_connection()
                 last_recv_time = time.time()
         if can_bus is not None:
-            WELCOME.rune()
+            WELCOME.run()
         else:
             continue
     elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
