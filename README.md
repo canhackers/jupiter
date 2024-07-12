@@ -1,159 +1,3557 @@
-â˜… ë¹„ìƒì—…ì  ìš©ë„ë¡œ ìˆ˜ì •, ìž¬ë°°í¬ê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤.
-   ìƒì—…ì ì¸ ì´ìš©ì€ ê¸ˆì§€ í•©ë‹ˆë‹¤.
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
 
-â˜… ìš´ì „ìžëŠ” í˜„ì§€ì˜ ë²•ë¥ ì„ ì¤€ìˆ˜í•  ì˜ë¬´ê°€ ìžˆìŠµë‹ˆë‹¤.
-   ëŒ€í•œë¯¼êµ­ì˜ ë„ë¡œêµí†µë²•ì€ ìš´ì „ ì¤‘ ì „ë°© ì£¼ì‹œ ì˜ë¬´, ì •í™•í•œ ì¡°í–¥ì„ í•  ì˜ë¬´ë¥¼ ìš´ì „ìžì—ê²Œ ë¶€ì—¬í•˜ê³  ìžˆìŠµë‹ˆë‹¤.
-   ëŒ€í•œë¯¼êµ­ì˜ íŠœë‹ ë²•ë¥ ì€ 'ê²½ë¯¸í•œ íŠœë‹'ìœ¼ë¡œì„œ ìŠ¹ì¸ ì˜ë¬´ê°€ ì—†ëŠ” íŠœë‹ì´ë¼ í•˜ë”ë¼ë„, ìžë™ì°¨ê´€ë¦¬ë²•ì˜ ì•ˆì „ê¸°ì¤€ì„ ì¤€ìˆ˜í•˜ë„ë¡ í•˜ê³  ìžˆìŠµë‹ˆë‹¤.
-   ìœ„ì— ìœ„ë°°ë˜ëŠ” íŠœë‹ ë° ìž¥ì¹˜ ì‚¬ìš©ì€ ì‚¬ìš©ìž ê°œì¸ì˜ ì±…ìž„ìž…ë‹ˆë‹¤.
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=ks_c_5601-1987">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="readme.files/filelist.xml">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>±¤¼ö ÃÖ</o:Author>
+  <o:LastAuthor>±¤¼ö ÃÖ</o:LastAuthor>
+  <o:Revision>4</o:Revision>
+  <o:TotalTime>10</o:TotalTime>
+  <o:Created>2024-07-12T10:58:00Z</o:Created>
+  <o:LastSaved>2024-07-12T11:00:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>813</o:Words>
+  <o:Characters>4640</o:Characters>
+  <o:Lines>38</o:Lines>
+  <o:Paragraphs>10</o:Paragraphs>
+  <o:CharactersWithSpaces>5443</o:CharactersWithSpaces>
+  <o:Version>16.00</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=themeData href="readme.files/themedata.thmx">
+<link rel=colorSchemeMapping href="readme.files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>KO</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:AdjustLineHeightInTable/>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="376">
+  <w:LsdException Locked="false" Priority="0" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 9"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="header"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footer"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index heading"/>
+  <w:LsdException Locked="false" Priority="35" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of figures"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope return"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="line number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="page number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of authorities"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="macro"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="toa heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 5"/>
+  <w:LsdException Locked="false" Priority="10" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Closing"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Signature"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Message Header"/>
+  <w:LsdException Locked="false" Priority="11" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Salutation"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Date"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Block Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="FollowedHyperlink"/>
+  <w:LsdException Locked="false" Priority="22" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Document Map"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Plain Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="E-mail Signature"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Top of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Bottom of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal (Web)"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Acronym"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Cite"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Code"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Definition"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Keyboard"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Preformatted"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Sample"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Typewriter"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Variable"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Table"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation subject"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="No List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Contemporary"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Elegant"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Professional"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Balloon Text"/>
+  <w:LsdException Locked="false" Priority="39" Name="Table Grid"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Theme"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+  <w:LsdException Locked="false" Priority="41" Name="Plain Table 1"/>
+  <w:LsdException Locked="false" Priority="42" Name="Plain Table 2"/>
+  <w:LsdException Locked="false" Priority="43" Name="Plain Table 3"/>
+  <w:LsdException Locked="false" Priority="44" Name="Plain Table 4"/>
+  <w:LsdException Locked="false" Priority="45" Name="Plain Table 5"/>
+  <w:LsdException Locked="false" Priority="40" Name="Grid Table Light"/>
+  <w:LsdException Locked="false" Priority="46" Name="Grid Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="Grid Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="Grid Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="46" Name="List Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="List Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="List Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hashtag"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Unresolved Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Link"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:-536869121 1107305727 33554432 0 415 0;}
+@font-face
+	{font-family:"¸¼Àº °íµñ";
+	panose-1:2 11 5 3 2 0 0 2 0 4;
+	mso-font-charset:129;
+	mso-generic-font-family:modern;
+	mso-font-pitch:variable;
+	mso-font-signature:-1879048145 701988091 18 0 524289 0;}
+@font-face
+	{font-family:±¼¸²Ã¼;
+	panose-1:2 11 6 9 0 1 1 1 1 1;
+	mso-font-charset:129;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1342176593 1775729915 48 0 524447 0;}
+@font-face
+	{font-family:"\@±¼¸²Ã¼";
+	mso-font-charset:129;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1342176593 1775729915 48 0 524447 0;}
+@font-face
+	{font-family:"\@¸¼Àº °íµñ";
+	mso-font-charset:129;
+	mso-generic-font-family:modern;
+	mso-font-pitch:variable;
+	mso-font-signature:-1879048145 701988091 18 0 524289 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 1 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:14.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:16.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+h2
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 2 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:8.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:14.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+h3
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 3 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:8.0pt;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:12.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+h4
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 4 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+h5
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 5 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:5.0pt;
+	mso-para-margin-top:4.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:2.0pt;
+	mso-para-margin-left:1.0gd;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+h6
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 6 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:10.0pt;
+	mso-para-margin-top:4.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:2.0pt;
+	mso-para-margin-left:2.0gd;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;
+	font-weight:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 7 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:15.0pt;
+	mso-para-margin-top:4.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:2.0pt;
+	mso-para-margin-left:3.0gd;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 8 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:20.0pt;
+	mso-para-margin-top:4.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:2.0pt;
+	mso-para-margin-left:4.0gd;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:8;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ 9 Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:4.0pt;
+	margin-right:0cm;
+	margin-bottom:2.0pt;
+	margin-left:25.0pt;
+	mso-para-margin-top:4.0pt;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:2.0pt;
+	mso-para-margin-left:5.0gd;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:lines-together;
+	page-break-after:avoid;
+	mso-outline-level:9;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;
+	mso-font-kerning:1.0pt;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	mso-add-space:auto;
+	text-align:center;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:28.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	letter-spacing:-.5pt;
+	mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpFirst, li.MsoTitleCxSpFirst, div.MsoTitleCxSpFirst
+	{mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ Char";
+	mso-style-next:Ç¥ÁØ;
+	mso-style-type:export-only;
+	margin:0cm;
+	mso-add-space:auto;
+	text-align:center;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:28.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	letter-spacing:-.5pt;
+	mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpMiddle, li.MsoTitleCxSpMiddle, div.MsoTitleCxSpMiddle
+	{mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ Char";
+	mso-style-next:Ç¥ÁØ;
+	mso-style-type:export-only;
+	margin:0cm;
+	mso-add-space:auto;
+	text-align:center;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:28.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	letter-spacing:-.5pt;
+	mso-font-kerning:14.0pt;}
+p.MsoTitleCxSpLast, li.MsoTitleCxSpLast, div.MsoTitleCxSpLast
+	{mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Á¦¸ñ Char";
+	mso-style-next:Ç¥ÁØ;
+	mso-style-type:export-only;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:4.0pt;
+	margin-left:0cm;
+	mso-add-space:auto;
+	text-align:center;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:28.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	letter-spacing:-.5pt;
+	mso-font-kerning:14.0pt;}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+	{mso-style-priority:11;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"ºÎÁ¦ Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	text-align:center;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:14.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#595959;
+	mso-themecolor:text1;
+	mso-themetint:166;
+	letter-spacing:.75pt;
+	mso-font-kerning:1.0pt;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#467886;
+	mso-themecolor:hyperlink;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:#96607D;
+	mso-themecolor:followedhyperlink;
+	text-decoration:underline;
+	text-underline:single;}
+pre
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-link:"¹Ì¸® ¼­½ÄÀÌ ÁöÁ¤µÈ HTML Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:±¼¸²Ã¼;
+	mso-bidi-font-family:±¼¸²Ã¼;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:36.0pt;
+	mso-add-space:auto;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	mso-add-space:auto;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	mso-add-space:auto;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:36.0pt;
+	mso-add-space:auto;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-font-kerning:1.0pt;}
+p.MsoQuote, li.MsoQuote, div.MsoQuote
+	{mso-style-priority:29;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"ÀÎ¿ë Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:8.0pt;
+	margin-right:0cm;
+	margin-bottom:8.0pt;
+	margin-left:0cm;
+	text-align:center;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	color:#404040;
+	mso-themecolor:text1;
+	mso-themetint:191;
+	mso-font-kerning:1.0pt;
+	font-style:italic;}
+p.MsoIntenseQuote, li.MsoIntenseQuote, div.MsoIntenseQuote
+	{mso-style-priority:30;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"°­ÇÑ ÀÎ¿ë Char";
+	mso-style-next:Ç¥ÁØ;
+	margin-top:18.0pt;
+	margin-right:43.2pt;
+	margin-bottom:18.0pt;
+	margin-left:43.2pt;
+	text-align:center;
+	line-height:107%;
+	mso-pagination:none;
+	text-autospace:none;
+	word-break:break-hangul;
+	border:none;
+	mso-border-top-alt:solid #0F4761 .5pt;
+	mso-border-top-themecolor:accent1;
+	mso-border-top-themeshade:191;
+	mso-border-bottom-alt:solid #0F4761 .5pt;
+	mso-border-bottom-themecolor:accent1;
+	mso-border-bottom-themeshade:191;
+	padding:0cm;
+	mso-padding-alt:10.0pt 0cm 10.0pt 0cm;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	color:#0F4761;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	mso-font-kerning:1.0pt;
+	font-style:italic;}
+span.MsoIntenseEmphasis
+	{mso-style-priority:21;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	color:#0F4761;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	font-style:italic;}
+span.MsoIntenseReference
+	{mso-style-priority:32;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	font-variant:small-caps;
+	color:#0F4761;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	letter-spacing:.25pt;
+	font-weight:bold;}
+span.1Char
+	{mso-style-name:"Á¦¸ñ 1 Char";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 1";
+	mso-ansi-font-size:16.0pt;
+	mso-bidi-font-size:16.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.2Char
+	{mso-style-name:"Á¦¸ñ 2 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 2";
+	mso-ansi-font-size:14.0pt;
+	mso-bidi-font-size:14.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.3Char
+	{mso-style-name:"Á¦¸ñ 3 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 3";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.4Char
+	{mso-style-name:"Á¦¸ñ 4 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 4";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.5Char
+	{mso-style-name:"Á¦¸ñ 5 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 5";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.6Char
+	{mso-style-name:"Á¦¸ñ 6 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 6";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.7Char
+	{mso-style-name:"Á¦¸ñ 7 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 7";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.8Char
+	{mso-style-name:"Á¦¸ñ 8 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 8";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.9Char
+	{mso-style-name:"Á¦¸ñ 9 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Á¦¸ñ 9";
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:black;
+	mso-themecolor:text1;}
+span.Char
+	{mso-style-name:"Á¦¸ñ Char";
+	mso-style-priority:10;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:Á¦¸ñ;
+	mso-ansi-font-size:28.0pt;
+	mso-bidi-font-size:28.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	letter-spacing:-.5pt;
+	mso-font-kerning:14.0pt;}
+span.Char0
+	{mso-style-name:"ºÎÁ¦ Char";
+	mso-style-priority:11;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:ºÎÁ¦;
+	mso-ansi-font-size:14.0pt;
+	mso-bidi-font-size:14.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#595959;
+	mso-themecolor:text1;
+	mso-themetint:166;
+	letter-spacing:.75pt;}
+span.Char1
+	{mso-style-name:"ÀÎ¿ë Char";
+	mso-style-priority:29;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:ÀÎ¿ë;
+	color:#404040;
+	mso-themecolor:text1;
+	mso-themetint:191;
+	font-style:italic;}
+span.Char2
+	{mso-style-name:"°­ÇÑ ÀÎ¿ë Char";
+	mso-style-priority:30;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"°­ÇÑ ÀÎ¿ë";
+	color:#0F4761;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	font-style:italic;}
+span.HTMLChar
+	{mso-style-name:"¹Ì¸® ¼­½ÄÀÌ ÁöÁ¤µÈ HTML Char";
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"¹Ì¸® ¼­½ÄÀÌ ÁöÁ¤µÈ HTML";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:±¼¸²Ã¼;
+	mso-ascii-font-family:±¼¸²Ã¼;
+	mso-fareast-font-family:±¼¸²Ã¼;
+	mso-hansi-font-family:±¼¸²Ã¼;
+	mso-bidi-font-family:±¼¸²Ã¼;
+	mso-font-kerning:0pt;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-ligatures:none;}
+.MsoPapDefault
+	{mso-style-type:export-only;
+	margin-bottom:8.0pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;}
+ /* Page Definitions */
+ @page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}
+@page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:3.0cm 72.0pt 72.0pt 72.0pt;
+	mso-header-margin:42.55pt;
+	mso-footer-margin:49.6pt;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Ç¥ÁØ Ç¥";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin-top:0cm;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:8.0pt;
+	mso-para-margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:107%;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"¸¼Àº °íµñ";
+	mso-ascii-font-family:"¸¼Àº °íµñ";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"¸¼Àº °íµñ";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"¸¼Àº °íµñ";
+	mso-hansi-theme-font:minor-latin;
+	mso-font-kerning:1.0pt;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
 
-â˜… CAN Busì— ìž¥ì¹˜ë¥¼ ì¶”ê°€í•˜ê±°ë‚˜, ì¶”ê°€ëœ ìž¥ì¹˜ë¥¼ í†µí•´ íŒ¨í‚·ì„ ì½ê³ /ë³´ë‚´ëŠ” ìž‘ì—…ì€ ì°¨ì˜ ê¸°ëŠ¥ì„ ê³ ìž¥ë‚´ê±°ë‚˜, ì£¼í–‰ ì¤‘ ì°¨ëŸ‰ì´ ë©ˆì¶œ ìˆ˜ ìžˆëŠ” ë¦¬ìŠ¤í¬ê°€ ìžˆìŠµë‹ˆë‹¤.
-   ì´ ë ˆí¬ì§€í† ë¦¬ì—ì„œ ì œê³µë˜ëŠ” ì½”ë“œëŠ” ì¶©ë¶„ížˆ ê²€ì¦ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.
-   ì‚¬ìš© ì¤‘ ë°œìƒí•  ìˆ˜ ìžˆëŠ” ëª¨ë“  ë¬¸ì œëŠ” ê°œì¸ì˜ ì±…ìž„ìž…ë‹ˆë‹¤.
+<body lang=KO link="#467886" vlink="#96607D" style='tab-interval:40.0pt;
+word-wrap:break-word'>
 
-â˜… ë³¸ ë¦¬í¬ì§€í† ë¦¬ëŠ” Tesla Model Y 2021 (Made in USA) ì—ì„œ í…ŒìŠ¤íŠ¸ ë˜ì—ˆìŠµë‹ˆë‹¤.
-   Model3ìš© DBC íŒŒì¼ì„ ê¸°ì¤€ìœ¼ë¡œ ë§Œë“¤ì—ˆê¸° ë•Œë¬¸ì— ë™ì¼í•œ ì—°ì‹ì—ì„œëŠ” ì‚¬ìš© ê°€ëŠ¥í•  ê²ƒìœ¼ë¡œ ë³´ì´ë‚˜,
-   ì°¨ì¢…ì— ë”°ë¼ ëª¨ë“ˆì˜ êµ¬ì„±, ì£¼ì†Œ, íŒ¨í‚· ê·œì¹™ì´ ë‹¬ë¼ì ¸ ë™ìž‘í•˜ì§€ ì•Šì„ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
-   ë˜í•œ ì°¨ëŸ‰ ì—…ë°ì´íŠ¸ë¥¼ í†µí•´ ì£¼ì†Œ, íŒ¨í‚·ì£¼ì†Œê°€ ë‹¬ë¼ì ¸ ìž˜ ë™ìž‘í•˜ë˜ ê¸°ëŠ¥ì´ ì¶”í›„ ì‚¬ìš©í•  ìˆ˜ ì—†ê²Œ ë  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+<div class=WordSection1>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú ºñ»ó¾÷Àû ¿ëµµ·Î ¼öÁ¤</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>, </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Àç¹èÆ÷°¡
+°¡´ÉÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-ê¸°ëŠ¥ ë¬¸ì˜ / ê±´ì˜ ë° ì¸í´ë¡œì ¸ ì œìž‘ ë¬¸ì˜ ë“±ì€ https://cafe.naver.com/canhacker ë¥¼ ë°©ë¬¸í•´ ì£¼ì„¸ìš”.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>»ó¾÷ÀûÀÎ ÀÌ¿ëÀº <span class=GramE>±ÝÁö ÇÕ´Ï´Ù</span></span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-ì»¤í”¼ í•œìž” ì‚¬ì£¼ê³  ì‹¶ìœ¼ì‹  ë¶„ì€ https://toss.me/canhackers
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú ¿îÀüÀÚ´Â ÇöÁöÀÇ ¹ý·üÀ» ÁØ¼öÇÒ ÀÇ¹«°¡ ÀÖ½À´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>´ëÇÑ¹Î±¹ÀÇ µµ·Î±³Åë¹ýÀº ¿îÀü Áß Àü¹æ ÁÖ½Ã ÀÇ¹«</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>, </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Á¤È®ÇÑ <span class=SpellE>Á¶ÇâÀ»</span> ÇÒ ÀÇ¹«¸¦
+¿îÀüÀÚ¿¡°Ô ºÎ¿©ÇÏ°í ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>´ëÇÑ¹Î±¹ÀÇ Æ©´× ¹ý·üÀº </span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>'</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>°æ¹ÌÇÑ Æ©´×</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>'</span><span class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>À¸·Î¼­</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> ½ÂÀÎ ÀÇ¹«°¡ ¾ø´Â Æ©´×ÀÌ¶ó ÇÏ´õ¶óµµ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>, </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÚµ¿Â÷°ü¸®¹ýÀÇ
+¾ÈÀü±âÁØÀ» ÁØ¼öÇÏµµ·Ï ÇÏ°í ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>À§¿¡ À§¹èµÇ´Â Æ©´× ¹× ÀåÄ¡ »ç¿ëÀº »ç¿ëÀÚ °³ÀÎÀÇ Ã¥ÀÓÀÔ´Ï´Ù</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-â˜… í•˜ë“œì›¨ì–´ êµ¬ì„± ì¤€ë¹„ë¬¼
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-1. ë¼ì¦ˆë² ë¦¬íŒŒì´ 2W ë˜ëŠ” 2WH : ë§Œì•½ 2Wë¥¼ êµ¬ìž…í–ˆë‹¤ë©´ HATì„ ì—°ê²°í•˜ê¸° ìœ„í•œ í—¤ë”í•€ì„ ë³„ë„ë¡œ êµ¬ìž…í•´ ë‚©ë•œ í•´ì•¼ í•©ë‹ˆë‹¤.
-2. Waveshare RS485 CAN HAT
-3. 12V â†’ 5V Step Down ëª¨ë“ˆ (MP1584EN å¤–)
-4. Micro USB Male Vertical PCB (https://www.aliexpress.com/item/1005002320414960.html)
-5. Micro SD ë©”ëª¨ë¦¬ ìµœì†Œ 8GB, ê¶Œìž¥ 32GB ì´ìƒ
-6. DIYìš© OBD ì»¤ë„¥í„° (https://www.aliexpress.com/item/1468276483.html)
-  - 6ë²ˆ í•€ CAN High, 14ë²ˆ í•€ Can Low, 16ë²ˆ í•€ 12V, 4ë²ˆí•€ GND
-7. ì „ìš© ì¸í´ë¡œì ¸ (https://cafe.naver.com/canhacker/27) ë˜ëŠ” ì§ì ‘ ë””ìžì¸ í•œ ì¼€ì´ìŠ¤
-8. Teslaìš© OBD ì»¨ë²„í„° ì¼€ì´ë¸” (https://www.aliexpress.com/item/1005006022463035.html)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú </span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>CAN Bus</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡ ÀåÄ¡¸¦
+Ãß°¡ÇÏ°Å³ª</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>, </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Ãß°¡µÈ ÀåÄ¡¸¦ ÅëÇØ ÆÐÅ¶À» ÀÐ°í</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>/</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>º¸³»´Â
+ÀÛ¾÷Àº Â÷ÀÇ ±â´ÉÀ» <span class=SpellE>°íÀå³»°Å³ª</span></span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>, </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÁÖÇà
+Áß Â÷·®ÀÌ ¸ØÃâ ¼ö ÀÖ´Â ¸®½ºÅ©°¡ ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ÀÌ <span class=SpellE>·¹Æ÷ÁöÅä¸®¿¡¼­</span> Á¦°øµÇ´Â ÄÚµå´Â ÃæºÐÈ÷ °ËÁõµÇÁö ¾Ê¾Ò½À´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-â˜… ì„¤ì¹˜ ë°©ë²•
-1. https://www.raspberrypi.com/software/
-   ì—ì„œ Raspberry Pi Imagerë¥¼ ë‹¤ìš´ë¡œë“œ ë°›ìŠµë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>»ç¿ë Áß ¹ß»ýÇÒ ¼ö ÀÖ´Â ¸ðµç ¹®Á¦´Â °³ÀÎÀÇ Ã¥ÀÓÀÔ´Ï´Ù</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-2. ë””ë°”ì´ìŠ¤ Raspberry Pi Zero 2W , ìš´ì˜ì²´ì œëŠ” Raspberry Pi OS (other)ì— ë“¤ì–´ê°„ ë’¤ Raspberry Pi OS Lite (64-bit)ì„ ì„ íƒí•©ë‹ˆë‹¤.
-   ì €ìž¥ì†ŒëŠ” MicroSDë¥¼ ì„ íƒí•©ë‹ˆë‹¤. ìµœì†Œ 8GB ì´ìƒì— ì„¤ì¹˜í•  ìˆ˜ ìžˆì§€ë§Œ ì£¼í–‰ ë¡œê·¸ ê¸°ë¡ì„ ìœ„í•´ 32GB ì´ìƒì„ ê¶Œìž¥í•©ë‹ˆë‹¤.   
-   â€» ì‹¤ìˆ˜ë¡œ MicroSD ë©”ëª¨ë¦¬ ì¹´ë“œê°€ ì•„ë‹Œ ì¤‘ìš”í•œ ë””ìŠ¤í¬ë¥¼ ì§€ìš°ì§€ ì•Šë„ë¡ ì£¼ì˜í•˜ì„¸ìš”!!
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-3. "OS ì»¤ìŠ¤í„°ë§ˆì´ì§•ì„ ì‚¬ìš©í•˜ì‹­ë‹ˆê¹Œ?" ì§ˆë¬¸ì—ì„œ "ì„¤ì •ì„ íŽ¸ì§‘í•˜ê¸°"ë¥¼ ì„ íƒí•©ë‹ˆë‹¤.
- 3-1. 'ì¼ë°˜' íƒ­ì—ì„œ hostnameê³¼ ì‚¬ìš©ìž ì´ë¦„/ë¹„ë°€ë²ˆí˜¸, ë¬´ì„ LAN ë“±ì„ ì„¤ì •í•˜ê³  ì²´í¬ê°€ í™œì„±í™” ë˜ë„ë¡ í•´ì¤ë‹ˆë‹¤.
-   ì˜ˆì‹œ) 
-   hostname: zero
-   ì‚¬ìš©ìžì´ë¦„: zero
-   ë¹„ë°€ë²ˆí˜¸: 0000              (ë¼ì¦ˆë² ë¦¬íŒŒì´ì— ì›ê²©ì ‘ì†í•  ë•Œ ì“¸ ë¹„ë°€ë²ˆí˜¸)
-   ë¬´ì„ LAN SSID: myrouter     (ì§‘ ê³µìœ ê¸° ë˜ëŠ” ìŠ¤ë§ˆíŠ¸í° í•«ìŠ¤íŒŸ ì£¼ì†Œ)
-   ë¹„ë°€ë²ˆí˜¸: 00000000          (ê³µìœ ê¸° ë˜ëŠ” í•«ìŠ¤íŒŸ ë¹„ë°€ë²ˆí˜¸)
-   ë¬´ì„ LANêµ­ê°€: GB              (í•œêµ­ì´ë¼ê³  KRì´ë¼ê³  ë°”ê¾¸ë©´ ìž˜ ì ‘ì†ë˜ì§€ ì•ŠëŠ” ì´ìŠˆê°€ ìžˆìŠµë‹ˆë‹¤)
-   ë¡œì¼€ì¼ ì„¤ì • ì‹œê°„ëŒ€ : Asia/Seoul
-   í‚¤ë³´ë“œ ë ˆì´ì•„ì›ƒ: us
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú º» <span class=SpellE>¸®Æ÷ÁöÅä¸®´Â</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Tesla Model Y 2021 (Made in USA<span
+class=GramE>) <span lang=EN-US style='font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼'><span lang=EN-US>¿¡¼­</span></span></span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Å×½ºÆ® µÇ¾ú½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-   â€» ì´ì–´ì§ˆ ì„¤ëª…ì—ì„œ ê³„ì •ëª…ì´ zeroë¼ëŠ” ê°€ì • í•˜ì— ìž‘ì„±í•¨
-   â€» hostnameì€ Bonjour ì„œë¹„ìŠ¤ê°€ í™œì„±í™” ëœ PCì—ì„œ ipì£¼ì†Œ ëŒ€ì‹  hostname.local ì´ë¼ëŠ” ì£¼ì†Œë¡œ ì ‘ì†í•  ìˆ˜ ìžˆê²Œ í•´ì¤ë‹ˆë‹¤.
-      WifiëŠ” 2.4GHz ê³µìœ ê¸°ì˜ SSIDë¥¼ ìž…ë ¥í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>Model3</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¿ë</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> DBC </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÄÀÏÀ» ±âÁØÀ¸·Î ¸¸µé¾ú±â ¶§¹®¿¡ µ¿ÀÏÇÑ ¿¬½Ä¿¡¼­´Â »ç¿ë °¡´ÉÇÒ °ÍÀ¸·Î º¸ÀÌ³ª</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>,<o:p></o:p></span></p>
 
- 3-2. 'ì„œë¹„ìŠ¤' íƒ­ì—ì„œ SSH ì‚¬ìš©ì— ì²´í¬í•˜ê³ , 'ë¹„ë°€ë²ˆí˜¸ ì¸ì¦ ì‚¬ìš©'ì„ ì„ íƒí•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Â÷Á¾¿¡ µû¶ó ¸ðµâÀÇ ±¸¼º</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>,
+</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>ÁÖ¼Ò</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>, </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÐÅ¶ ±ÔÄ¢ÀÌ ´Þ¶óÁ® µ¿ÀÛÇÏÁö ¾ÊÀ»
+¼ö ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-4. OS ì»¤ìŠ¤í„°ë§ˆì´ì§• ì„¤ì •ì„ ì ìš©í•˜ì‹œê³˜ìŠµë‹ˆê¹Œ? ì§ˆë¬¸ì— 'ì˜ˆ'ë¥¼ ì„ íƒí•œ ë’¤ Micro SDì¹´ë“œì— ì´ë¯¸ì§€ë¥¼ ê¸°ë¡í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¶ÇÇÑ Â÷·® ¾÷µ¥ÀÌÆ®¸¦ ÅëÇØ ÁÖ¼Ò</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>, </span><span class=SpellE><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÐÅ¶ÁÖ¼Ò°¡</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> ´Þ¶óÁ® Àß µ¿ÀÛÇÏ´ø ±â´ÉÀÌ ÃßÈÄ »ç¿ëÇÒ ¼ö ¾ø°Ô µÉ ¼ö ÀÖ½À´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-5. ì´ë¯¸ì§€ ê¸°ë¡ì´ ì™„ë£Œë˜ë©´ PCì—ì„œ MicroSDì¹´ë“œë¥¼ ì œê±°í•œ ë’¤ ë‹¤ì‹œ ì‚½ìž…í•©ë‹ˆë‹¤.
-    ê·¸ë¦¬ê³  config.txt íŒŒì¼ì„ ì—´ì–´ ê°€ìž¥ ì•„ëž˜ì— ë‹¤ìŒ ë‘ ì¤„ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-dtparam=spi=on
-dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=2000000
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>±â´É <span class=GramE>¹®ÀÇ <span
+lang=EN-US style='font-family:"Courier New"'>/</span></span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>°ÇÀÇ
+¹× <span class=SpellE>ÀÎÅ¬·ÎÁ®</span> Á¦ÀÛ ¹®ÀÇ µîÀº </span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#287BDE;mso-font-kerning:0pt'><a href="https://cafe.naver.com/canhacker">https://cafe.naver.com/canhacker</a></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¦ ¹æ¹®ÇØ ÁÖ¼¼¿ä</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]></span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p></o:p></span></p>
 
-6. ì´ì œ MicroSD ì¹´ë“œë¥¼ ë¼ì¦ˆë² ë¦¬íŒŒì´ì— ì‚½ìž…í•˜ê³  USB ì„ ì„ ì—°ê²°í•´ Wifiì— ì ‘ì†ë˜ê¸°ë¥¼ ê¸°ë‹¤ë¦½ë‹ˆë‹¤. 
-   ì´ ê³¼ì •ì—ì„œ CAN HATì€ ë¹¨ê°„ LEDê°€ ìƒì‹œì ë“±, ë¼ì¦ˆë² ë¦¬íŒŒì´ ë³¸ì²´ì—ëŠ” ë…¹ìƒ‰ LEDê°€ ì§€ì† ì ë“± ë˜ë‹¤ê°€ ê°„í—ì ìœ¼ë¡œ ê¹œë¹¡ìž…ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Ä¿ÇÇ ÇÑÀÜ »çÁÖ°í ½ÍÀ¸½Å ºÐÀº </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><a href="https://toss.me/canhackers">https://toss.me/canhackers</a><o:p></o:p></span></p>
 
-7. ë¼ì¦ˆë² ë¦¬íŒŒì´ì˜ IPì£¼ì†Œë¥¼ í™•ì¸í•˜ê¸° ìœ„í•´ Wifi ê³µìœ ê¸° ì„¤ì •í™”ë©´ ë˜ëŠ” ìŠ¤ë§ˆíŠ¸í°ì˜ í•«ìŠ¤íŒŸ ì„¤ì •ì— ë“¤ì–´ê°€ì„œ ì ‘ì†ë˜ì—ˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
-   â€» ì²« ë¶€íŒ…ì—ì„œëŠ” ì ‘ì†ê¹Œì§€ 5ë¶„ ì´ìƒ ê±¸ë¦¬ê¸°ë„ í•©ë‹ˆë‹¤.
-    ì •ìƒì ìœ¼ë¡œ Wifiì— ì—°ê²°ë˜ì—ˆë‹¤ë©´ ìœ„ì—ì„œ ì§€ì •í•œ RASPI-Z2Wë¼ëŠ” ìž¥ì¹˜ê°€ ì ‘ì†ë©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-   â€» ì¶”í›„ ì ‘ì†í•  ë„¤íŠ¸ì›Œí¬ë¥¼ ì¶”ê°€í•˜ë ¤ë©´ sshì—ì„œ sudo nmtui ëª…ë ¹ì–´ë¥¼ ì´ìš©í•´ ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
-     ì°¨ì—ì„œ ë…¸íŠ¸ë¶ì„ ì—°ê²°í•´ ëª¨ë‹ˆí„°ë§ í•  ìˆ˜ ìžˆë„ë¡ ìŠ¤ë§ˆíŠ¸í° í•«ìŠ¤íŒŸì„ ì¶”ê°€ ë„¤íŠ¸ì›Œí¬ë¡œ ë“±ë¡í•´ ì¤ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-8. ëª…ë ¹í”„ë¡¬í”„íŠ¸ë¥¼ ì—´ê³  ssh zero@192.168.1.xxx í˜•íƒœë¡œ sshì— ì ‘ì†í•©ë‹ˆë‹¤.
-   ì ‘ì† ì‹œ yes/no/fingerprintë¥¼ ë¬¼ì–´ë³´ë©´ yesë¥¼ ìž…ë ¥í•©ë‹ˆë‹¤.
-   ë¹„ë°€ë²ˆí˜¸ëŠ” ìœ„ì—ì„œ ì„¤ì •í•œëŒ€ë¡œ 0000ë¥¼ ìž…ë ¥í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-   â€» ë§Œì•½ ê¸°ê¸°ë¥¼ ì ‘ì†í•œ ì´ë ¥ì´ ìžˆëŠ”ë° ì´ˆê¸°í™” í›„ ë‹¤ì‹œ ì ‘ì†í•˜ëŠ” ê²½ìš° ì ‘ì†ì´ ì°¨ë‹¨ë˜ê¸°ë„ í•©ë‹ˆë‹¤.
-      ì´ ë•ŒëŠ” C:\Users\ë‚´ID\.ssh\ ì•ˆì— ìžˆëŠ” known_hosts íŒŒì¼ì„ ì‚­ì œí›„ ìž¬ì‹œë„ í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-9. ê¹ƒí—™ì—ì„œ ì†ŒìŠ¤ ë‹¤ìš´ë¡œë“œ ë°›ê¸°
-  9-1. sudo apt install git  ì„ ìž…ë ¥í•©ë‹ˆë‹¤. ë„ì¤‘ì— ë¬¼ì–´ë³´ëŠ” í•­ëª©ì€ Yë¥¼ ìž…ë ¥í•©ë‹ˆë‹¤.
-  9-2. git clone https://github.com/canhackers/jupiter.git
-       ìœ„ ëª…ë ¹ì„ ì´ìš©í•˜ì—¬ ì†ŒìŠ¤ë¥¼ ë‹¤ìš´ë¡œë“œ ë°›ìŠµë‹ˆë‹¤.
-  9-3. ì´ë¯¸ ì„¤ì¹˜ëœ ì†ŒìŠ¤ë¥¼ ì—…ë°ì´íŠ¸ í•  ë•ŒëŠ” git pull ëª…ë ¹ì–´ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
-       ê¸°ê¸°ì—ì„œ ë¡œì»¬ë¡œ ìˆ˜ì •í•œ íŒŒì¼ì€ git stash ëª…ë ¹ìœ¼ë¡œ ë³€ê²½ì ì„ íê¸°í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
-       ë³¸ì¸ì˜ ì†ŒìŠ¤ì½”ë“œ ë³€ê²½ì ì„ ìœ ì§€í•˜ê³  ì‹¶ë‹¤ë©´ Githubì— ë³„ë„ì˜ ë ˆí¬ì§€í† ë¦¬ ì‚¬ë³¸ì„ ë§Œë“¤ì–´ ê´€ë¦¬í•˜ì‹œê¸° ë°”ëžë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-10. sudo apt install screen (ë°±ê·¸ë¼ìš´ë“œì—ì„œ í”„ë¡œì„¸ìŠ¤ê°€ ì‹¤í–‰ë ìˆ˜ ìžˆë„ë¡ í•˜ëŠ” ê¸°ëŠ¥ ì„¤ì¹˜)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú ÇÏµå¿þ¾î ±¸¼º ÁØºñ¹°<span lang=EN-US><o:p></o:p></span></span></p>
 
-11. íŒŒì´ì¬ ê°€ìƒí™˜ê²½ ìƒì„±í•˜ê¸°
-  ë¼ì¦ˆë² ë¦¬íŒŒì´ëŠ” ê°€ìƒí™˜ê²½ì„ ìƒì„±í•˜ì§€ ì•Šìœ¼ë©´ ì„¤ì¹˜í•  ìˆ˜ ìžˆëŠ” ëª¨ë“ˆì˜ ì¢…ë¥˜ì— í•œê³„ê°€ ìžˆìŠµë‹ˆë‹¤.
-  10-1. cd jupiter    (ê²½ë¡œ ì´ë™)
-  10-2. python3 -m venv .    (ê°€ìƒí™˜ê²½ ìƒì„±.  . ì ì€ í˜„ìž¬ í´ë”ì— ìƒì„±í•œë‹¤ëŠ” ì˜ë¯¸ì´ë‹ˆ ë¹¼ë¨¹ì§€ ë§ˆì„¸ìš”)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-11. ê°€ìƒí™˜ê²½ ë‚´ ëª¨ë“ˆ ì„¤ì¹˜í•˜ê¸°
-  11-1. cd bin
-  11-2. source activate
-  11-3. pip install python-can       (canbus í†µì‹  ëª¨ë“ˆ)
-        pip install vcgencmd         (ì˜¨ë„ ëª¨ë‹ˆí„°ë§ìš© ëª¨ë“ˆ)
-  11-4. deactivate
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>1. </span><span
+class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶óÁîº£¸®ÆÄÀÌ</span></span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> 2W </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶Ç´Â</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> 2<span class=GramE>WH :</span> </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¸¾à</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> 2W</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ±¸ÀÔÇß´Ù¸é</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> HAT</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>À» ¿¬°áÇÏ±â
+À§ÇÑ <span class=SpellE>Çì´õÇÉÀ»</span> º°µµ·Î ±¸ÀÔÇØ ³³¶« ÇØ¾ß ÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-12. ìžë™ ì‹¤í–‰ í™˜ê²½ ë§Œë“¤ê¸°
-  12-1. sudo nano /etc/rc.local
-  12-2. exit 0 ìœ„ ê³µê°„ì— ë‹¤ìŒ ë‘ ì¤„ ì¶”ê°€
-   . /home/zero/jupiter/bin/activate
-   screen -dmS jupiter python /home/zero/jupiter/jupiter.py
-  12-3.  ctrl-x, y(ì €ìž¥)ìœ¼ë¡œ ë¹ ì ¸ë‚˜ì˜µë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>2. </span><span
+class=SpellE><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Waveshare</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> RS485 CAN HAT<o:p></o:p></span></p>
 
-13. sudo rebootìœ¼ë¡œ ìž¬ë¶€íŒ…í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>3. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>12V ¡æ 5V Step Down </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸ðµâ </span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>(MP1584EN </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>èâ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>4. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Micro USB Male Vertical PCB (</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><a
+href="https://www.aliexpress.com/item/1005002320414960.html">https://www.aliexpress.com/item/1005002320414960.html</a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>5. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Micro SD </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¸Þ¸ð¸® ÃÖ¼Ò</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> 8GB, </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>±ÇÀå</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> 32GB </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÌ»ó<span lang=EN-US><o:p></o:p></span></span></p>
 
-â˜… NAVDY HUD ì§€ì›ì€ ë³„ë„ì˜ ê°œì¡°ëœ ì „ìš© íŽŒì›¨ì–´ê°€ í•„ìš”í•©ë‹ˆë‹¤.
-ë‹¨ì¢…ìœ¼ë¡œ ì¸í•´ êµ¬í•˜ê¸° íž˜ë“  ë¬¼ê±´ì´ë‹ˆ ì°¸ê³ í•˜ì‹œê³ , ê¸°ì¡´ ë³´ìœ ìž ì¤‘ ì „ìš© íŽŒì›¨ì–´ë¥¼ ì‚¬ìš© ì¤‘ì´ì§€ ì•ŠëŠ” ë¶„ì€ ì¹´íŽ˜ ì±„íŒ…ìœ¼ë¡œ ë³„ë„ ë¬¸ì˜ ë°”ëžë‹ˆë‹¤.
-ì‚¬ìš©ì„ ìœ„í•´ì„œëŠ” Clone í›„ Jupiter ê¸°ê¸°ì˜ /home ê²½ë¡œì— mac_address íŒŒì¼ì„ ë§Œë“¤ì–´ 00:00:00:00:00:00 í˜•íƒœë¡œ ë³¸ì¸ ê¸°ê¸°ì˜ Mac Addressë¥¼ ë„£ì–´ì•¼ í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>6. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>DIY</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿ë</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> OBD </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Ä¿³ØÅÍ </span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>(</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><a
+href="https://www.aliexpress.com/item/1468276483.html">https://www.aliexpress.com/item/1468276483.html</a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
 
-ê¸°ë³¸ ì„¤ì¹˜ë²• ì™¸ì— ì¶”ê°€ë¡œ ë¸”ë£¨íˆ¬ìŠ¤ íŽ˜ì–´ë§ ì ˆì°¨ê°€ í•„ìš”í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>- </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>6</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¹ø ÇÉ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> CAN High, 14</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¹ø ÇÉ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Can Low, 16</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¹ø ÇÉ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> 12V, 4</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¹øÇÉ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> GND<o:p></o:p></span></p>
 
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>7. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Àü¿ë <span class=SpellE>ÀÎÅ¬·ÎÁ®</span> </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>(</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#287BDE;mso-font-kerning:0pt'>https://cafe.naver.com/canhacker/27</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>) </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶Ç´Â
+Á÷Á¢ <span class=GramE>µðÀÚÀÎ ÇÑ</span> ÄÉÀÌ½º<span lang=EN-US><o:p></o:p></span></span></p>
 
-sudo bluetoothctl
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>8. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Tesla</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¿ë</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> OBD </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÄÁ¹öÅÍ ÄÉÀÌºí </span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>(</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><a
+href="https://www.aliexpress.com/item/1005006022463035.html">https://www.aliexpress.com/item/1005006022463035.html</a></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
 
-scan on  (ì ‘ì† ê°€ëŠ¥í•œ ë¸”ë£¨íˆ¬ìŠ¤ ìž¥ì¹˜ ëª©ë¡ì´ ëœ¹ë‹ˆë‹¤. Navdyë¥¼ ì°¾ìœ¼ë©´ MAC Addressë„ ì•Œ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-pair 54:ED:A3:xx:xx:xx  (ë³¸ì¸ Navdyì˜ MAC Addressë¥¼ ì°¾ì•„ì„œ)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-confirm passkey ì§ˆë¬¸ì—ì„œ yes ìž…ë ¥, Navdyì—ì„œë„ Confirmì„ ëˆŒëŸ¬ì¤˜ì•¼ í•©ë‹ˆë‹¤.
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú ¼³Ä¡ ¹æ¹ý<span lang=EN-US><o:p></o:p></span></span></p>
 
-trust 54:ED:A3:xx:xx:xx  (ë³¸ì¸ Navdyì˜ MAC Addressë¥¼ ì°¾ì•„ì„œ)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>1. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><a
+href="https://www.raspberrypi.com/software/">https://www.raspberrypi.com/software/</a><o:p></o:p></span></p>
 
-exit (bluetoothctl ë¹ ì ¸ ë‚˜ì˜¤ê¸°)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¿¡¼­</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Raspberry Pi
+Imager</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ´Ù¿î·Îµå ¹Þ½À´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-cd jupiter
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-git checkout navdy  (ë‚˜ë¸Œë”” ë¸Œëžœì¹˜ë¡œ ë³€ê²½. ê¸°ì¡´ ì„¤ì¹˜ ê³¼ì •ì—ì„œ git clone ë˜ì–´ ìžˆì–´ì•¼ í•¨.)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>2. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>µð¹ÙÀÌ½º</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Raspberry Pi Zero 2<span class=GramE>W ,</span> </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¿î¿µÃ¼Á¦´Â</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Raspberry Pi OS (other)</span><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡ µé¾î°£ µÚ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Raspberry Pi OS Lite (64-bit)</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>À» ¼±ÅÃÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
 
-sudo nano /home/mac_address
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;</span><span style='mso-spacerun:yes'>&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀúÀå¼Ò´Â</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> MicroSD</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ¼±ÅÃÇÕ´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>. </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÃÖ¼Ò</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> 8GB </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ÀÌ»ó¿¡ ¼³Ä¡ÇÒ ¼ö ÀÖÁö¸¸ ÁÖÇà ·Î±× ±â·ÏÀ» À§ÇØ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> 32GB </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÌ»óÀ» ±ÇÀåÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-Navdy MAC Address ìž…ë ¥ 54:ED:A3:xx:xx:xx (Ctrl-X, Yë¡œ ì €ìž¥)
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp; </span><o:p></o:p></span></p>
 
-sudo apt-get install python3-dev
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø ½Ç¼ö·Î</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> MicroSD </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸Þ¸ð¸® Ä«µå°¡ ¾Æ´Ñ Áß¿äÇÑ µð½ºÅ©¸¦ Áö¿ìÁö ¾Êµµ·Ï ÁÖÀÇÇÏ¼¼¿ä</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>!!<o:p></o:p></span></p>
 
-sudo apt-get install libbluetooth-dev
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
 
-source ./bin/activate
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>3. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>&quot;OS </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Ä¿½ºÅÍ¸¶ÀÌÂ¡À» »ç¿ëÇÏ½Ê´Ï±î</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>?&quot;
+</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>Áú¹®¿¡¼­ </span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>&quot;</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¼³Á¤À»
+ÆíÁýÇÏ±â</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>&quot;</span><span
+class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦</span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> ¼±ÅÃÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-pip3 install git+https://github.com/pybluez/pybluez.git#egg=PyBluez
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;</span>3-1. '</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÏ¹Ý</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>' </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÅÇ¿¡¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> hostname</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>°ú »ç¿ëÀÚ ÀÌ¸§</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>/</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ºñ¹Ð¹øÈ£</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>, </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¹«¼±</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>LAN </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>µîÀ»
+¼³Á¤ÇÏ°í Ã¼Å©°¡ <span class=GramE>È°¼ºÈ­ µÇµµ·Ï</span> ÇØÁÝ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
 
-sudo reboot
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¿¹½Ã</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>) <o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span>hostname: zero<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>»ç¿ëÀÚÀÌ¸§</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>: zero<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ºñ¹Ð¹øÈ£</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>: 0000<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(</span><span class=SpellE><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶óÁîº£¸®ÆÄÀÌ¿¡</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> <span class=SpellE>¿ø°ÝÁ¢¼ÓÇÒ</span> ¶§ ¾µ ºñ¹Ð¹øÈ£</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¹«¼±</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>LAN SSID: <span
+class=SpellE>myrouter</span><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>(</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Áý °øÀ¯±â ¶Ç´Â ½º¸¶Æ®Æù ÇÖ½ºÆÌ ÁÖ¼Ò</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ºñ¹Ð¹øÈ£</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>: 00000000<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>°øÀ¯±â ¶Ç´Â ÇÖ½ºÆÌ ºñ¹Ð¹øÈ£</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¹«¼±</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>LAN</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>±¹°¡</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>: GB<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÇÑ±¹ÀÌ¶ó°í</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> KR</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÌ¶ó°í
+¹Ù²Ù¸é Àß Á¢¼ÓµÇÁö ¾Ê´Â ÀÌ½´°¡ ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>·ÎÄÉÀÏ ¼³Á¤ <span class=GramE>½Ã°£´ë <span lang=EN-US style='font-family:"Courier New"'>:</span></span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Asia/Seoul<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Å°º¸µå ·¹ÀÌ¾Æ¿ô</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>: us<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø ÀÌ¾îÁú ¼³¸í¿¡¼­ °èÁ¤¸íÀÌ</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+zero</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶ó´Â °¡Á¤ ÇÏ¿¡ ÀÛ¼ºÇÔ<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø </span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>hostname</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Àº</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Bonjour </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¼­ºñ½º°¡ È°¼ºÈ­ µÈ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> PC</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span class=SpellE>ip</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÁÖ¼Ò ´ë½Å</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> <span class=SpellE><span class=GramE>hostname.local</span></span> </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÌ¶ó´Â ÁÖ¼Ò·Î Á¢¼ÓÇÒ ¼ö ÀÖ°Ô ÇØÁÝ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+class=SpellE>Wifi</span></span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>´Â</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> 2.4GHz </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>°øÀ¯±âÀÇ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> SSID</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¦ ÀÔ·ÂÇÏ½Ã±â ¹Ù¶ø´Ï´Ù</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;</span>3-2. '</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¼­ºñ½º</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>' </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÅÇ¿¡¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> SSH </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>»ç¿ë¿¡ Ã¼Å©ÇÏ°í</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>, '</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ºñ¹Ð¹øÈ£ ÀÎÁõ »ç¿ë</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>'</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>À» ¼±ÅÃÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>4. </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>OS </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Ä¿½ºÅÍ¸¶ÀÌÂ¡
+¼³Á¤À» <span class=SpellE>Àû¿ëÇÏ½ÃÙ½À´Ï±î</span></span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>? </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Áú¹®¿¡ </span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>'</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¹</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>'</span><span class=SpellE><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¦</span></span><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> ¼±ÅÃÇÑ µÚ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Micro SD</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Ä«µå¿¡ ÀÌ¹ÌÁö¸¦ ±â·ÏÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>5. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÌ¹ÌÁö ±â·ÏÀÌ ¿Ï·áµÇ¸é</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> PC</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> MicroSD</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Ä«µå¸¦ Á¦°ÅÇÑ µÚ ´Ù½Ã »ðÀÔÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>±×¸®°í</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> config.txt </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÄÀÏÀ» ¿­¾î °¡Àå ¾Æ·¡¿¡ ´ÙÀ½ µÎ
+ÁÙÀ» Ãß°¡ÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>dtparam</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>=<span
+class=SpellE>spi</span>=on<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>dtoverlay=mcp2515-can<span
+class=GramE>0,oscillator</span>=12000000,interrupt=25,spimaxfrequency=2000000<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>6. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÌÁ¦</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> MicroSD </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Ä«µå¸¦ <span class=SpellE>¶óÁîº£¸®ÆÄÀÌ¿¡</span> »ðÀÔÇÏ°í</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> USB </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¼±À» ¿¬°áÇØ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=SpellE>Wifi</span></span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡ Á¢¼ÓµÇ±â¸¦ ±â´Ù¸³´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>. <o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ÀÌ °úÁ¤¿¡¼­</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> CAN HAT</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Àº »¡°£</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> LED</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>°¡ »ó½ÃÁ¡µî</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>, </span><span class=SpellE><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¶óÁîº£¸®ÆÄÀÌ</span></span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> º»Ã¼¿¡´Â
+³ì»ö</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> LED</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>°¡ Áö¼Ó Á¡µî µÇ´Ù°¡ °£ÇæÀûÀ¸·Î ±ôºýÀÔ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>7. </span><span
+class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶óÁîº£¸®ÆÄÀÌÀÇ</span></span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> IP</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÁÖ¼Ò¸¦
+È®ÀÎÇÏ±â À§ÇØ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=SpellE>Wifi</span> </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>°øÀ¯±â ¼³Á¤È­¸é ¶Ç´Â ½º¸¶Æ®ÆùÀÇ ÇÖ½ºÆÌ
+¼³Á¤¿¡ µé¾î°¡¼­ Á¢¼ÓµÇ¾ú´ÂÁö È®ÀÎÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø Ã¹ ºÎÆÃ¿¡¼­´Â Á¢¼Ó±îÁö</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+5</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ºÐ ÀÌ»ó °É¸®±âµµ ÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Á¤»óÀûÀ¸·Î</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> <span class=SpellE>Wifi</span></span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡ ¿¬°áµÇ¾ú´Ù¸é
+À§¿¡¼­ ÁöÁ¤ÇÑ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> RASPI-Z2W</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¶ó´Â ÀåÄ¡°¡ Á¢¼ÓµË´Ï´Ù</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø ÃßÈÄ Á¢¼ÓÇÒ ³×Æ®¿öÅ©¸¦ Ãß°¡ÇÏ·Á¸é</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> ssh</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡¼­</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> <span class=SpellE>sudo</span> <span
+class=SpellE>nmtui</span> </span><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸í·É¾î¸¦ ÀÌ¿ëÇØ Ãß°¡ÇÒ ¼ö
+ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Â÷¿¡¼­ ³ëÆ®ºÏÀ» ¿¬°áÇØ ¸ð´ÏÅÍ¸µ ÇÒ ¼ö ÀÖµµ·Ï ½º¸¶Æ®Æù <span class=SpellE>ÇÖ½ºÆÌÀ»</span>
+Ãß°¡ ³×Æ®¿öÅ©·Î µî·ÏÇØ ÁÝ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>8. </span><span
+class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸í·ÉÇÁ·ÒÇÁÆ®¸¦</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> ¿­°í</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> ssh zero@192.168.1.xxx </span><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÇüÅÂ·Î</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> ssh</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿¡ Á¢¼ÓÇÕ´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Á¢¼Ó ½Ã</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+yes/no/fingerprint</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ¹°¾îº¸¸é</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> yes</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ÀÔ·ÂÇÕ´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ºñ¹Ð¹øÈ£´Â À§¿¡¼­ ¼³Á¤ÇÑ´ë·Î</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+0000</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ÀÔ·ÂÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span></span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¡Ø ¸¸¾à ±â±â¸¦ Á¢¼ÓÇÑ ÀÌ·ÂÀÌ ÀÖ´Âµ¥ ÃÊ±âÈ­ ÈÄ ´Ù½Ã Á¢¼ÓÇÏ´Â °æ¿ì Á¢¼ÓÀÌ Â÷´ÜµÇ±âµµ ÇÕ´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÌ ¶§´Â</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> C:\Users\</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>³»</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>ID\.ssh\ </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>¾È¿¡ ÀÖ´Â</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=SpellE>known_hosts</span> </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÄÀÏÀ»
+<span class=SpellE>»èÁ¦ÈÄ</span> Àç½Ãµµ ÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>9. </span><span
+class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>±êÇé¿¡¼­</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> ¼Ò½º ´Ù¿î·Îµå ¹Þ±â<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>9-1. <span
+class=SpellE>sudo</span> apt install <span class=GramE>git<span
+style='mso-spacerun:yes'>&nbsp; </span><span lang=EN-US style='font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼'><span lang=EN-US>À»</span></span></span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> ÀÔ·ÂÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>. </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>µµÁß¿¡ ¹°¾îº¸´Â Ç×¸ñÀº</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> Y</span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ ÀÔ·ÂÇÕ´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp; </span>9-2. git clone </span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#287BDE;mso-font-kerning:0pt'><a
+href="https://github.com/canhackers/jupiter.git">https://github.com/canhackers/jupiter.git</a><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>À§ ¸í·ÉÀ» ÀÌ¿ëÇÏ¿© ¼Ò½º¸¦ ´Ù¿î·Îµå ¹Þ½À´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp; </span>9-3. </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÌ¹Ì
+¼³Ä¡µÈ ¼Ò½º¸¦ ¾÷µ¥ÀÌÆ® ÇÒ ¶§´Â</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+git pull </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸í·É¾î¸¦ »ç¿ëÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>±â±â¿¡¼­ ·ÎÄÃ·Î ¼öÁ¤ÇÑ ÆÄÀÏÀº</span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> git stash </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸í·ÉÀ¸·Î
+º¯°æÁ¡À» Æó±âÇÒ ¼ö ÀÖ½À´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>º»ÀÎÀÇ ¼Ò½ºÄÚµå º¯°æÁ¡À» À¯ÁöÇÏ°í ½Í´Ù¸é</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> <span class=SpellE>Github</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¿¡ º°µµÀÇ <span class=SpellE>·¹Æ÷ÁöÅä¸®</span> »çº»À» ¸¸µé¾î °ü¸®ÇÏ½Ã±â ¹Ù¶ø´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>10. </span><span
+class=SpellE><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>sudo</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> apt install screen (</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¹é±×¶ó¿îµå¿¡¼­ ÇÁ·Î¼¼½º°¡ <span class=SpellE>½ÇÇàµÉ¼ö</span> ÀÖµµ·Ï ÇÏ´Â ±â´É ¼³Ä¡</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>11. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÆÄÀÌ½ã °¡»óÈ¯°æ »ý¼ºÇÏ±â<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¶óÁîº£¸®ÆÄÀÌ´Â</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'> °¡»óÈ¯°æÀ» »ý¼ºÇÏÁö ¾ÊÀ¸¸é ¼³Ä¡ÇÒ ¼ö ÀÖ´Â ¸ðµâÀÇ Á¾·ù¿¡ ÇÑ°è°¡ ÀÖ½À´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>10-1. cd <span
+class=SpellE>jupiter</span><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>°æ·Î ÀÌµ¿</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>10-2. python3
+-m <span class=SpellE><span class=GramE>venv</span></span><span class=GramE> .</span><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>(</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>°¡»óÈ¯°æ »ý¼º</span><span class=GramE><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<span style='mso-spacerun:yes'>&nbsp;
+</span>.</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Á¡Àº ÇöÀç Æú´õ¿¡ »ý¼ºÇÑ´Ù´Â ÀÇ¹ÌÀÌ´Ï »©¸ÔÁö ¸¶¼¼¿ä</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>11. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>°¡»óÈ¯°æ ³» ¸ðµâ ¼³Ä¡ÇÏ±â<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>11-1. cd bin<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>11-2. <span
+class=GramE>source</span> activate<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>11-3. pip
+install python-can<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(<span
+class=SpellE>canbus</span> </span><span style='font-size:12.0pt;font-family:
+±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>Åë½Å ¸ðµâ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:24.0pt;mso-char-indent-count:2.0;line-height:normal;mso-pagination:
+widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>pip install <span
+class=SpellE>vcgencmd</span><span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¿Âµµ ¸ð´ÏÅÍ¸µ¿ë ¸ðµâ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;mso-char-indent-count:1.0;line-height:normal;mso-pagination:
+widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>11-4.
+deactivate<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>12. </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÚµ¿ ½ÇÇà È¯°æ ¸¸µé±â<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>12-1. <span
+class=SpellE>sudo</span> nano /<span class=SpellE>etc</span>/<span
+class=SpellE>rc.local</span><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>12-2. exit 0 </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>À§ °ø°£¿¡ ´ÙÀ½ µÎ ÁÙ Ãß°¡<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><span
+style='mso-spacerun:yes'>&nbsp;</span></span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>. /home/zero/<span class=SpellE>jupiter</span>/bin/activate<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>screen -<span
+class=SpellE>dmS</span> <span class=SpellE>jupiter</span> python
+/home/zero/jupiter/jupiter.py<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+text-indent:12.0pt;line-height:normal;mso-pagination:widow-orphan;tab-stops:
+45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>12-3.<span
+style='mso-spacerun:yes'>&nbsp; </span>ctrl-x, y(</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>ÀúÀå</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>À¸·Î ºüÁ®³ª¿É´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#CC7832;mso-font-kerning:0pt'>13. </span><span
+class=SpellE><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>sudo</span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> reboot</span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>À¸·Î <span class=SpellE>ÀçºÎÆÃÇÕ´Ï´Ù</span></span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¡Ú </span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>NAVDY HUD </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Áö¿øÀº º°µµÀÇ °³Á¶µÈ Àü¿ë Æß¿þ¾î°¡ ÇÊ¿äÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>´ÜÁ¾À¸·Î ÀÎÇØ ±¸ÇÏ±â Èûµç ¹°°ÇÀÌ´Ï Âü°íÇÏ½Ã°í</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>, </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>±âÁ¸
+º¸À¯ÀÚ Áß Àü¿ë Æß¿þ¾î¸¦ »ç¿ë ÁßÀÌÁö ¾Ê´Â ºÐÀº Ä«Æä Ã¤ÆÃÀ¸·Î º°µµ ¹®ÀÇ ¹Ù¶ø´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>»ç¿ëÀ» À§ÇØ¼­´Â</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> Clone </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÈÄ</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Jupiter </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>±â±âÀÇ </span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>/home </span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>°æ·Î¿¡</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> <span class=SpellE>mac_address</span> </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÆÄÀÏÀ»
+¸¸µé¾î</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=GramE>00:00:00:00:00:00</span> </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÇüÅÂ·Î
+º»ÀÎ ±â±âÀÇ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> Mac Address</span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¦ ³Ö¾î¾ß ÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>±âº» ¼³Ä¡¹ý ¿Ü¿¡ Ãß°¡·Î ºí·çÅõ½º <span class=SpellE>Æä¾î¸µ</span>
+ÀýÂ÷°¡ ÇÊ¿äÇÕ´Ï´Ù</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>sudo</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=SpellE>bluetoothctl</span><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>scan <span
+class=GramE>on<span style='mso-spacerun:yes'>&nbsp; </span>(</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>Á¢¼Ó °¡´ÉÇÑ ºí·çÅõ½º ÀåÄ¡ ¸ñ·ÏÀÌ ¶å´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>. <span class=SpellE>Navdy</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¸¦ Ã£À¸¸é</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> MAC Address</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>µµ ¾Ë ¼ö ÀÖ½À´Ï´Ù</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>pair <span
+class=GramE>54:ED</span>:A3:xx:xx:xx<span style='mso-spacerun:yes'>&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>º»ÀÎ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> <span class=SpellE>Navdy</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÇ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> MAC Address</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ Ã£¾Æ¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>confirm passkey
+</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>Áú¹®¿¡¼­</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> yes </span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÔ·Â</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>, <span class=SpellE>Navdy</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>¿¡¼­µµ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> Confirm</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>À» ´­·¯Áà¾ß ÇÕ´Ï´Ù</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>trust <span
+class=GramE>54:ED</span>:A3:xx:xx:xx<span style='mso-spacerun:yes'>&nbsp;
+</span>(</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>º»ÀÎ</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> <span class=SpellE>Navdy</span></span><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ÀÇ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'> MAC Address</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;
+mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>¸¦ Ã£¾Æ¼­</span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>exit (<span
+class=SpellE>bluetoothctl</span> </span><span class=GramE><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>ºüÁ® ³ª¿À±â</span></span><span lang=EN-US style='font-size:
+12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>cd Jupiter<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>git checkout <span
+class=SpellE><span class=GramE>navdy</span></span><span class=GramE><span
+style='mso-spacerun:yes'>&nbsp; </span>(</span></span><span class=SpellE><span
+style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;
+mso-font-kerning:0pt'>³ªºêµð</span></span><span style='font-size:12.0pt;
+font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'> <span
+class=SpellE>ºê·£Ä¡·Î</span> º¯°æ</span><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>. </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>±âÁ¸ ¼³Ä¡ °úÁ¤¿¡¼­</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> git clone </span><span style='font-size:
+12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>µÇ¾î ÀÖ¾î¾ß ÇÔ</span><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>.)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>sudo</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+nano /home/<span class=SpellE>mac_address</span><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>Navdy</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+MAC Address </span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>ÀÔ·Â</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'> <span class=GramE>54:ED</span>:A3:xx:xx:xx
+(Ctrl-X, Y</span><span style='font-size:12.0pt;font-family:±¼¸²Ã¼;mso-bidi-font-family:
+±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>·Î ÀúÀå</span><span lang=EN-US
+style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;
+color:#A9B7C6;mso-font-kerning:0pt'>)<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>sudo</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+apt-get install python3-dev<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>sudo</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+apt-get install <span class=SpellE>libbluetooth</span>-dev<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=GramE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>source .</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>/bin/activate<o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>pip3 install <span
+class=SpellE>git+<span style='color:#287BDE'>https</span></span></span><span
+lang=EN-US style='font-size:12.0pt;font-family:"Courier New";mso-fareast-font-family:
+±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'>://github.com/<span class=SpellE>pybluez</span>/<span
+class=SpellE>pybluez.git#egg</span>=<span class=SpellE>PyBluez</span><o:p></o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+mso-fareast-font-family:±¼¸²Ã¼;color:#287BDE;mso-font-kerning:0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=left style='margin-bottom:0cm;text-align:left;
+line-height:normal;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:#2B2B2B;text-autospace:ideograph-numeric ideograph-other;word-break:
+keep-all'><span class=SpellE><span lang=EN-US style='font-size:12.0pt;
+font-family:"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:
+0pt'>sudo</span></span><span lang=EN-US style='font-size:12.0pt;font-family:
+"Courier New";mso-fareast-font-family:±¼¸²Ã¼;color:#A9B7C6;mso-font-kerning:0pt'>
+reboot<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

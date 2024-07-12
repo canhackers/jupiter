@@ -13,12 +13,12 @@ except:
 
 
 # CAN Bus Device 초기화
-initialize_canbus_connection()
-can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+can_bus = initialize_canbus_connection()
 bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 last_recv_time = time.time()
 bus_connected = 0
 bus_error_count = 0
+bus_error = 0
 
 # 핵심 기능 로딩
 settings = load_settings()
@@ -82,15 +82,23 @@ TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 
 while True:
     current_time = time.time()
     if (bus_connected == 1):
-        # 메시지 수신이 1분 이상 없을 때 CAN Bus를 10초간 다운 시킨 후 재기동 시도
-        # 총 5회 재시도 후에도 Bus가 살아나지 않으면 기기 재부팅
-        if bus_error_count > 5:
+        if bus_error_count > 10:
             os.system('sudo reboot')
+        if (current_time - last_recv_time >= 5):
+            bus_error = 1
+            last_recv_time = time.time()
+        elif bus_error == 1:
+            bus_error_count += 1
+            can_bus = initialize_canbus_connection()
         else:
-            if (current_time - last_recv_time >= 10):
+            if (current_time - last_recv_time >= 5):
                 bus_error_count += 1
-                initialize_canbus_connection(delay=2)
+                can_bus = initialize_canbus_connection()
                 last_recv_time = time.time()
+        if can_bus is not None:
+            WELCOME.rune()
+        else:
+            continue
     elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
         print('Waiting until CAN Bus Connecting...', time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
         last_recv_time = time.time()
@@ -102,10 +110,9 @@ while True:
         recv_message = can_bus.recv(1)
     except Exception as e:
         print('메시지 수신 실패\n', e)
-        bus_error_count += 1
-        initialize_canbus_connection(delay=2)
-        last_recv_time = time.time()
+        bus_error = 1
         recv_message = None
+        continue
 
     if recv_message is not None:
         last_recv_time = time.time()
@@ -205,8 +212,7 @@ while True:
                                      is_extended_id=False))
     except Exception as e:
         print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
-        initialize_canbus_connection(2)
-        WELCOME.run()
+        bus_error = 1
 
     BUFFER.flush_message_buffer()
 

@@ -1,18 +1,22 @@
 import os
 import time
 import json
+import can
 
 json_file = os.path.join('/home/jupiter_settings.json')
-def initialize_canbus_connection(delay=0):
+def initialize_canbus_connection(delay=1):
     try:
+        os.system('sudo modprobe -r mcp251x')
+        time.sleep(delay)
+        os.system('sudo modprobe mcp251x')
         os.system('sudo ip link set can0 type can bitrate 500000')
         os.system('sudo ifconfig can0 down')
         time.sleep(delay)
         os.system('sudo ifconfig can0 up')
-        return True
+        return can.interface.Bus(channel='can0', interface='socketcan')
     except Exception as e:
         print('CAN Bus Initialize Error', e)
-        return False
+        return None
 
 def load_settings():
     default_settings = {
