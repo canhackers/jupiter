@@ -13,10 +13,11 @@ def initialize_canbus_connection(delay=1):
         os.system('sudo ifconfig can0 down')
         time.sleep(delay)
         os.system('sudo ifconfig can0 up')
-        return can.interface.Bus(channel='can0', interface='socketcan')
+        print('can bus initialized')
+        return True
     except Exception as e:
         print('CAN Bus Initialize Error', e)
-        return None
+        return False
 
 def load_settings():
     default_settings = {

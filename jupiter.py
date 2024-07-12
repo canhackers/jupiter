@@ -13,7 +13,8 @@ except:
 
 
 # CAN Bus Device 초기화
-can_bus = initialize_canbus_connection()
+initialize_canbus_connection()
+can_bus = can.interface.Bus(channel='can0', interface='socketcan')
 bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 last_recv_time = time.time()
 bus_connected = 0
@@ -84,21 +85,14 @@ while True:
     if (bus_connected == 1):
         if bus_error_count > 10:
             os.system('sudo reboot')
-        if (current_time - last_recv_time >= 5):
-            bus_error = 1
-            last_recv_time = time.time()
-        elif bus_error == 1:
+        if bus_error == 1:
             bus_error_count += 1
-            can_bus = initialize_canbus_connection()
+            initialize_canbus_connection()
+            WELCOME.run()
         else:
             if (current_time - last_recv_time >= 5):
                 bus_error_count += 1
-                can_bus = initialize_canbus_connection()
                 last_recv_time = time.time()
-        if can_bus is not None:
-            WELCOME.run()
-        else:
-            continue
     elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
         print('Waiting until CAN Bus Connecting...', time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
         last_recv_time = time.time()
