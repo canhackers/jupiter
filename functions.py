@@ -1,7 +1,5 @@
 import os
-import time
 import json
-import can
 
 json_file = os.path.join('/home/jupiter_settings.json')
 def initialize_canbus_connection(delay=1):
