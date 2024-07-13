@@ -88,6 +88,7 @@ while True:
             bus_error_count += 1
             initialize_canbus_connection()
             can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+            # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
             WELCOME.sender = can_bus
             AP.welcome.sender = can_bus
             WELCOME.run()
