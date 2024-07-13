@@ -2,7 +2,7 @@ import os
 import json
 
 json_file = os.path.join('/home/jupiter_settings.json')
-def initialize_canbus_connection(delay=1):
+def initialize_canbus_connection():
     try:
         os.system('sudo modprobe -r mcp251x')
         os.system('sudo modprobe mcp251x')
