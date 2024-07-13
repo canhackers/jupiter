@@ -91,7 +91,8 @@ while True:
             # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
             WELCOME.sender = can_bus
             AP.welcome.sender = can_bus
-            WELCOME.run()
+            if DASH.passenger_cnt != 0:
+                WELCOME.run()
             bus_error = 0
         else:
             if (current_time - last_recv_time >= 5):
@@ -202,6 +203,8 @@ while True:
     ###################################################
 
     try:
+        if DASH.passenger_cnt == 0:
+            continue
         for _, address, signal in BUFFER.message_buffer:
             can_bus.send(can.Message(arbitration_id=address,
                                      channel='can0',
