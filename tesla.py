@@ -242,11 +242,10 @@ class Logger:
 
 
 class MapLampControl:
-    def __init__(self, buffer, dash, sender=None, device='raspi', left=None, right=None):
+    def __init__(self, buffer, dash, device='raspi', left=None, right=None):
         self.buffer = buffer
         self.dash = dash
         self.device = device
-        self.sender = sender
         self.left_map_light_pressed = 0
         self.right_map_light_pressed = 0
         self.left_map_light_first_pressed_time = 0
