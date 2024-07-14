@@ -91,7 +91,7 @@ while True:
             # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
             WELCOME.sender = can_bus
             AP.welcome.sender = can_bus
-            if DASH.passenger_cnt != 0:
+            if DASH.occupancy == 1:
                 WELCOME.run()
             bus_error = 0
         else:
@@ -203,28 +203,32 @@ while True:
     ###################################################
 
     try:
-        if DASH.passenger_cnt == 0:
+        if DASH.occupancy == 0:
+            BUFFER.flush_message_buffer()
             continue
-        for _, address, signal in BUFFER.message_buffer:
-            can_bus.send(can.Message(arbitration_id=address,
-                                     channel='can0',
-                                     data=bytearray(signal),
-                                     dlc=len(bytearray(signal)),
-                                     is_extended_id=False))
+        else:
+            for _, address, signal in BUFFER.message_buffer:
+                can_bus.send(can.Message(arbitration_id=address,
+                                         channel='can0',
+                                         data=bytearray(signal),
+                                         dlc=len(bytearray(signal)),
+                                         is_extended_id=False))
     except Exception as e:
         print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
         bus_error = 1
 
     BUFFER.flush_message_buffer()
 
+
     ###################################################
     ############ 파트3. Navdy HUD 업데이트 ##############
     ###################################################
     if TICK and navdy_connected:
         if NAVDY.connected == False and DASH.unix_time % 5 == 0:
-            NAVDY.connected = NAVDY.connect()
-            if NAVDY.connected:
-                print('Navdy Connected ', NAVDY.mac_address)
+            if DASH.passenger_cnt > 0:
+                NAVDY.connected = NAVDY.connect()
+                if NAVDY.connected:
+                    print('Navdy Connected ', NAVDY.mac_address)
     try:
         if navdy_connected and NAVDY.connected:
             if (current_time - NAVDY.last_update_fast) >= 0.2:

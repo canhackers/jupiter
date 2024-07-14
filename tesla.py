@@ -85,6 +85,8 @@ class Dashboard:
         self.nag_disabled = 0
         self.recirc_mode = 0  # 0 Auto, 1 내기, 2 외기
         self.passenger = [0, 0, 0, 0, 0]  # fl, fr, rl, rc, rr
+        self.occupancy = 1
+        self.occupancy_timer = 0
         self.passenger_cnt = 0
         self.wiper_state = 0
         self.wiper_off_request = 0
@@ -147,6 +149,16 @@ class Dashboard:
                 self.mirror_folded[1] = 0
             elif state in [1, 3]:
                 self.mirror_folded[1] = 1
+
+        if self.passenger_cnt > 0:
+            if self.occupancy == 0:
+                self.occupancy_timer = time.time()
+                self.occupancy = 1
+        else:
+            if (self.occupancy == 1):
+                if time.time() - self.occupancy_timer > 5:
+                    self.occupancy = 0
+
 
 
 class WelcomeVolume:
