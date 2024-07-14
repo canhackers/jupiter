@@ -78,7 +78,8 @@ while True:
             # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
             WELCOME.sender = can_bus
             AP.welcome.sender = can_bus
-            WELCOME.run()
+            if DASH.occupancy == 1:
+                WELCOME.run()
             bus_error = 0
         else:
             if (current_time - last_recv_time >= 5):
@@ -189,12 +190,16 @@ while True:
     ###################################################
 
     try:
-        for _, address, signal in BUFFER.message_buffer:
-            can_bus.send(can.Message(arbitration_id=address,
-                                     channel='can0',
-                                     data=bytearray(signal),
-                                     dlc=len(bytearray(signal)),
-                                     is_extended_id=False))
+        if DASH.occupancy == 0:
+            BUFFER.flush_message_buffer()
+            continue
+        else:
+            for _, address, signal in BUFFER.message_buffer:
+                can_bus.send(can.Message(arbitration_id=address,
+                                         channel='can0',
+                                         data=bytearray(signal),
+                                         dlc=len(bytearray(signal)),
+                                         is_extended_id=False))
     except Exception as e:
         print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
         bus_error = 1
