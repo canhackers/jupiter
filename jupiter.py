@@ -1,7 +1,10 @@
 import os
 import time
 import can
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, KickDown
+from functions import initialize_canbus_connection, load_settings
+from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, \
+    KickDown, TurnSignal
+
 try:
     from vcgencmd import Vcgencmd
     vcgm = Vcgencmd()
@@ -10,22 +13,33 @@ except:
 
 
 # CAN Bus Device 초기화
-os.system('sudo ip link set can0 type can bitrate 500000')
-os.system('sudo ifconfig can0 up')
+initialize_canbus_connection()
 can_bus = can.interface.Bus(channel='can0', interface='socketcan')
 bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
+last_recv_time = time.time()
+bus_connected = 0
+bus_error_count = 0
+bus_error = 0
 
 # 핵심 기능 로딩
+settings = load_settings()
 BUFFER = Buffer()
 DASH = Dashboard()
-LOGGER = Logger(BUFFER, DASH, cloud=0)
+LOGGER = Logger(BUFFER, DASH, cloud=0, enabled=settings.get('Logger'))
 
 #  부가 기능 로딩
-AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
-BUCKLE = RearCenterBuckle(BUFFER)
-MAPLAMP = MapLampControl(BUFFER, DASH, (can_bus, can.Message()), device='raspi')
-FRESH = FreshAir(BUFFER, DASH)
-KICKDOWN = KickDown(BUFFER, DASH)
+AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()),
+               device='raspi',
+               mars_mode=settings.get('MarsMode'),
+               keep_wiper_speed=settings.get('KeepWiperSpeed'),
+               slow_wiper=settings.get('SlowWiper'))
+BUCKLE = RearCenterBuckle(BUFFER, mode=settings.get('RearCenterBuckle'))
+MAPLAMP = MapLampControl(BUFFER, DASH, device='raspi',
+                         left=settings.get('MapLampLeft'),
+                         right=settings.get('MapLampRight'))
+FRESH = FreshAir(BUFFER, DASH, enabled=settings.get('AutoRecirculation'))
+KICKDOWN = KickDown(BUFFER, DASH, enabled=settings.get('KickDown'))
+TURNSIGNAL = TurnSignal(BUFFER, DASH, enabled=settings.get('AltTurnSignal'))
 
 # 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
 WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
@@ -54,11 +68,40 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
 TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
 while True:
     current_time = time.time()
+    if (bus_connected == 1):
+        if bus_error_count > 5:
+            os.system('sudo reboot')
+        if bus_error == 1:
+            bus_error_count += 1
+            initialize_canbus_connection()
+            can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+            # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
+            WELCOME.sender = can_bus
+            AP.welcome.sender = can_bus
+            if DASH.occupancy == 1:
+                WELCOME.run()
+            bus_error = 0
+        else:
+            if (current_time - last_recv_time >= 5):
+                bus_error_count += 1
+                last_recv_time = time.time()
+    elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
+        print('Waiting until CAN Bus Connecting...', time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
+        last_recv_time = time.time()
+
     ###################################################
     ############## 파트1. 메시지를 읽는 영역 ##############
     ###################################################
-    recv_message = can_bus.recv(1)
+    try:
+        recv_message = can_bus.recv(1)
+    except Exception as e:
+        print('메시지 수신 실패\n', e)
+        bus_error = 1
+        recv_message = None
+        continue
+
     if recv_message is not None:
+        last_recv_time = time.time()
         address = recv_message.arbitration_id
         signal = recv_message.data
         BUFFER.write_can_buffer(bus, address, signal)
@@ -88,6 +131,7 @@ while True:
         # 1초에 한번 전송되는 차량 시각 정보 수신
         if address == 0x528:
             TICK = True
+            bus_connected = 1
             DASH.update('UnixTime', signal)
         else:
             TICK = False
@@ -101,37 +145,44 @@ while True:
             print(f'Clock: {DASH.clock}  Temperature: {DASH.device_temp}')
 
             ##### Log writer ######
-            if LOGGER.file:
+            if (LOGGER.file is not None):
                 LOGGER.write()
 
             ##### Mars Mode ######
             AP.run()
 
         # 실시간 패킷 인식 및 변조
+        if address == 0x1f9:
+            signal = MAPLAMP.check(bus, address, signal)
+        if address == 0x249:
+            ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
+            signal = TURNSIGNAL.check(bus, address, signal)
         if address == 0x3e2:
             ##### 맵등 버튼을 길게 눌러 기능을 제공하기 위해, 눌림 상태를 점검 #####
-            MAPLAMP.check(bus, address, signal)
+            signal = MAPLAMP.check(bus, address, signal)
         if address == 0x273:
-            ##### 미러 폴딩 기능 동작 #####
-            MAPLAMP.check(bus, address, signal)
             ##### 와이퍼 상태 유지 #####
-            AP.check(bus, address, signal)
+            signal = AP.check(bus, address, signal)
+            ##### 미러 폴딩 기능 동작 #####
+            signal = MAPLAMP.check(bus, address, signal)
         if address == 0x3c2:
             ##### 주행 중 뒷좌석 가운데 안전벨트 체크 해제 #####
-            BUCKLE.modulate(bus, address, signal)
+            signal = BUCKLE.check(bus, address, signal)
+            ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 버튼 체크 #####
+            signal = TURNSIGNAL.check(bus, address, signal)
         if address == 0x334:
             ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
-            KICKDOWN.check(bus, address, signal)
+            signal = KICKDOWN.check(bus, address, signal)
         if address == 0x39d:
             ##### 브레이크 밟힘 감지 - 브레이크를 감지해 해제해야 하는 기능 #####
-            AP.check(bus, address, signal)
-            KICKDOWN.check(bus, address, signal)
+            signal = AP.check(bus, address, signal)
+            signal = KICKDOWN.check(bus, address, signal)
         if address == 0x229:
             ##### 기어 스토크 조작 인식 - 오토파일럿 동작 여부 확인 #####
-            AP.check(bus, address, signal)
+            signal = AP.check(bus, address, signal)
         if address == 0x2f3:
             ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
-            FRESH.check(bus, address, signal)
+            signal = FRESH.check(bus, address, signal)
 
 
     ###################################################
@@ -139,18 +190,18 @@ while True:
     ###################################################
 
     try:
-        for _, address, signal in BUFFER.message_buffer:
-            can_bus.send(can.Message(arbitration_id=address,
-                                     channel='can0',
-                                     data=bytearray(signal),
-                                     dlc=len(bytearray(signal)),
-                                     is_extended_id=False))
+        if DASH.occupancy == 0:
+            BUFFER.flush_message_buffer()
+            continue
+        else:
+            for _, address, signal in BUFFER.message_buffer:
+                can_bus.send(can.Message(arbitration_id=address,
+                                         channel='can0',
+                                         data=bytearray(signal),
+                                         dlc=len(bytearray(signal)),
+                                         is_extended_id=False))
     except Exception as e:
-        print("Exception caught ", e)
-        print("Recover CAN 0 Connection")
-        os.system('sudo ifconfig can0 down')
-        time.sleep(2)
-        os.system('sudo ifconfig can0 up')
-        WELCOME.run()
+        print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
+        bus_error = 1
 
     BUFFER.flush_message_buffer()

@@ -126,6 +126,5 @@ dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=2000000<
 14. <b>sudo reboot</b>으로 재부팅합니다.<br>
 </p>
 <br><br><br>
-<p>
 </body>
 </html>
