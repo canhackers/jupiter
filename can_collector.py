@@ -12,6 +12,8 @@ f = open('/home/zero/jupiter/canlog.csv', 'w', newline='')
 csvwriter = csv.writer(f)
 csvwriter.writerow(['Time', 'MessageID', 'Message'])
 
+message_cnt = 0
+
 while True:
     try:
         recv_message = can_bus.recv(1)
@@ -22,6 +24,9 @@ while True:
         recv_message = None
         continue
     if recv_message is not None:
+        message_cnt += 1
+        if message_cnt % 1000 == 0:
+            print(message_cnt, 'Received')
         address = recv_message.arbitration_id
         signal = recv_message.data
         time_txt = time.strftime('%m/%d %H:%M:%S', time.localtime(recv_message.timestamp))
