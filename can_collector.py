@@ -13,7 +13,6 @@ csvwriter = csv.writer(f)
 csvwriter.writerow(['Time', 'MessageID', 'Message'])
 
 while True:
-    time_txt = time.strftime('%m/%d %H:%M:%S', time.localtime(time.time()))
     try:
         recv_message = can_bus.recv(1)
     except KeyboardInterrupt:
@@ -25,6 +24,7 @@ while True:
     if recv_message is not None:
         address = recv_message.arbitration_id
         signal = recv_message.data
+        time_txt = time.strftime('%m/%d %H:%M:%S', time.localtime(recv_message.timestamp))
         csvwriter.writerow([time_txt, str(hex(address)), '0x' + str(signal.hex())])
 
 print('기록 종료')
