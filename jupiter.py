@@ -3,7 +3,7 @@ import time
 import can
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, \
-    KickDown, TurnSignal
+    KickDown, TurnSignal, DistanceManager
 
 try:
     from vcgencmd import Vcgencmd
@@ -32,7 +32,9 @@ AP = Autopilot(BUFFER, DASH, (can_bus, can.Message()),
                device='raspi',
                mars_mode=settings.get('MarsMode'),
                keep_wiper_speed=settings.get('KeepWiperSpeed'),
-               slow_wiper=settings.get('SlowWiper'))
+               slow_wiper=settings.get('SlowWiper'),
+               auto_distance=settings.get('AutoFollowingDistance'))
+
 BUCKLE = RearCenterBuckle(BUFFER, mode=settings.get('RearCenterBuckle'))
 MAPLAMP = MapLampControl(BUFFER, DASH, device='raspi',
                          left=settings.get('MapLampLeft'),
@@ -47,16 +49,12 @@ try:
     with open('/home/mac_address', 'r') as f:
         mac_address = (f.readline()).strip()
     NAVDY = Navdy(mac_address)
-    navdy_connected = True
+    navdy_init = True
 except Exception as e:
     print(e)
     NAVDY = Navdy('00:00:00:00:00:00')
-    navdy_connected = False
-    print('Failed to connect Navdy')
-
-# 모듈 부팅 완료 알림 웰컴 세레모니 (볼륨 다이얼 Up/Down)
-WELCOME = WelcomeVolume((can_bus, can.Message()), device='raspi')
-WELCOME.run()
+    navdy_init = False
+    print('Can not find Navdy MAC Address file. check /home/mac_address')
 
 # 상시 모니터링 할 주요 차량정보 접근 주소
 monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
@@ -83,16 +81,19 @@ while True:
     current_time = time.time()
     if (bus_connected == 1):
         if bus_error_count > 5:
+            print('Bus Error Count Over, reboot')
             os.system('sudo reboot')
         if bus_error == 1:
             bus_error_count += 1
+            print(f'Bus Error, {bus_error_count}')
             initialize_canbus_connection()
             can_bus = can.interface.Bus(channel='can0', interface='socketcan')
-            # welcome 세레모니를 위해 can_bus를 클래스에 지정해줬던 경우 갱신 필요함
-            WELCOME.sender = can_bus
-            AP.welcome.sender = can_bus
-            if DASH.occupancy == 1:
-                WELCOME.run()
+            try:
+                AP.sender = can_bus
+                if DASH.occupancy == 1:
+                    AP.volume_updown()
+            except:
+                pass
             bus_error = 0
         else:
             if (current_time - last_recv_time >= 5):
@@ -183,6 +184,8 @@ while True:
             signal = BUCKLE.check(bus, address, signal)
             ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 버튼 체크 #####
             signal = TURNSIGNAL.check(bus, address, signal)
+            ##### 오토파일럿이 우측 다이얼 조작을 통한 거리 설정을 인지하게 하기 위함 #####
+            signal = AP.check(bus, address, signal)
         if address == 0x334:
             ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
             signal = KICKDOWN.check(bus, address, signal)
@@ -223,14 +226,21 @@ while True:
     ###################################################
     ############ 파트3. Navdy HUD 업데이트 ##############
     ###################################################
-    if TICK and navdy_connected:
+    if TICK and navdy_init:
         if NAVDY.connected == False and DASH.unix_time % 5 == 0:
             if DASH.passenger_cnt > 0:
+                NAVDY.connect_try_cnt += 1
+                bus_error_count = 0
+                print(f'Trying to connect to Navdy...{NAVDY.connect_try_cnt}')
                 NAVDY.connected = NAVDY.connect()
                 if NAVDY.connected:
                     print('Navdy Connected ', NAVDY.mac_address)
+                else:
+                    if NAVDY.connect_try_cnt >= 24:
+                        print('Stop trying to connect Navdy')
+                        navdy_init = False
     try:
-        if navdy_connected and NAVDY.connected:
+        if navdy_init and NAVDY.connected:
             if (current_time - NAVDY.last_update_fast) >= 0.2:
                 NAVDY.last_update_fast = current_time
                 if DASH.parked:

@@ -1,5 +1,6 @@
 import os
 import time
+import can
 import csv
 import zipfile
 import shutil
@@ -23,6 +24,8 @@ command = {
     'volume_up': bytes.fromhex('29553f0000000000'),
     'speed_down': bytes.fromhex('2955003f00000000'),
     'speed_up': bytes.fromhex('2955000100000000'),
+    'distance_far' : bytes.fromhex('2956000000000000'),
+    'distance_near' : bytes.fromhex('2959000000000000'),
     'door_open_fl': bytes.fromhex('6000000000000000'),
     'door_open_fr': bytes.fromhex('0003000000000000'),
     'door_open_rl': bytes.fromhex('0018000000000000'),
@@ -130,6 +133,7 @@ class Dashboard:
                 self.passenger[3] = 1 if get_value(signal, 54, 2) == 2 else 0  # rear center, occupancy
                 self.passenger[4] = 1 if get_value(signal, 58, 2) == 2 else 0  # rear right, occupancy
                 self.passenger_cnt = sum(self.passenger)
+
         elif name == 'VCRIGHT_switchStatus':
             mux = get_value(signal, 0, 2)
             if mux == 0:
@@ -158,8 +162,13 @@ class Dashboard:
             if (self.occupancy == 1):
                 if time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
-
-
+    def change_following_distance(self, loc):
+        if loc == 1 and self.following_distance_current < 7:
+            self.following_distance_current += 1
+            print(f'Following distance set to {self.following_distance_current}')
+        elif loc == -1 and self.following_distance_current > 2:
+            self.following_distance_current -= 1
+            print(f'Following distance set to {self.following_distance_current}')
 
 class WelcomeVolume:
     def __init__(self, sender, device='raspi'):
@@ -197,6 +206,61 @@ class WelcomeVolume:
         except Exception as e:
             print('Welcome 명령 실패\n', e)
 
+class DistanceManager:
+    def __init__(self, mother, sender, device='raspi'):
+        self.mother = mother
+        self.distance_current = 0
+        self.distance_target = 0
+        self.sender = sender
+        if device == 'panda':
+            self.device = 'panda'
+            self.tx_frame = None
+        elif device == 'raspi' and type(sender) in (list, tuple):
+            self.device = 'raspi'
+            self.sender = sender[0]
+            self.tx_frame = sender[1]
+            self.tx_frame.channel = 'can0'
+            self.tx_frame.dlc = 8
+            self.tx_frame.arbitration_id = 0x3c2
+            self.tx_frame.is_extended_id = False
+        else:
+            self.device = None
+
+    def set(self, current, target):
+        gap = target - current
+        if gap == 0:
+            return
+        else:
+            print(f'Change Following distance from {current} to {target}')
+            click_cnt = abs(gap)
+            if gap > 0:
+                for i in range(click_cnt):
+                    self.sender.can_send(0x3c2, command['distance_far'], 0)
+                    time.sleep(0.05)
+            else:
+                for i in range(click_cnt):
+                    self.sender.can_send(0x3c2, command['distance_near'], 0)
+                    time.sleep(0.05)
+
+    def reset(self):
+        try:
+            if self.device == 'panda':
+                for i in range(6):
+                    self.sender.can_send(0x3c2, command['distance_near'], 0)
+                    time.sleep(0.05)
+            elif self.device == 'raspi':
+                self.tx_frame.data = bytearray(command['distance_near'])
+                for i in range(6):
+                    self.sender.send(self.tx_frame)
+                    time.sleep(0.05)
+            else:
+                pass
+            print('Following distance set to closest')
+            self.distance_current = 2
+            self.distance_target = 2
+
+        except Exception as e:
+            print('Failed to set distance\n', e)
 
 class Logger:
     def __init__(self, buffer, dash, cloud=0, enabled=0):
@@ -349,7 +413,7 @@ class MapLampControl:
 
 
 class Autopilot:
-    def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed = 0, slow_wiper=0):
+    def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed = 0, slow_wiper=0, auto_distance=0):
         self.timer = 0
         self.buffer = buffer
         self.dash = dash
@@ -364,13 +428,23 @@ class Autopilot:
         self.mars_mode = mars_mode
         self.keep_wiper_speed = keep_wiper_speed
         self.slow_wiper = slow_wiper
+        self.auto_distance = auto_distance
         if sender:
-            self.welcome = WelcomeVolume(sender, device)
-        else:
-            self.welcome = None
+            self.sender = sender
+            if device == 'panda':
+                self.device = 'panda'
+            elif device == 'raspi' and type(sender) in (list, tuple):
+                self.device = 'raspi'
+            else:
+                self.device = None
+                print('device error. panda and raspi allowed')
+                raise
         self.user_changed_wiper_request = 0
         self.wiper_mode_rollback_request = 0
         self.wiper_last_state = 0
+        self.distance_current = 2
+        self.distance_target = 2
+        self.reset_distance()
 
     def run(self):
         # from Spleck's github (https://github.com/spleck/panda)
@@ -385,6 +459,69 @@ class Autopilot:
                 print('Right Scroll Wheel Up')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
                 self.timer = 0
+
+    def volume_updown(self):
+        try:
+            if self.device == 'panda':
+                self.sender.can_send(0x3c2, command['volume_up'], 0)
+                time.sleep(0.5)
+                self.sender.can_send(0x3c2, command['volume_down'], 0)
+                time.sleep(0.5)
+            elif self.device == 'raspi':
+                self.tx_frame = can.Message()
+                self.tx_frame.channel = 'can0'
+                self.tx_frame.dlc = 8
+                self.tx_frame.arbitration_id = 0x3c2
+                self.tx_frame.is_extended_id = False
+                self.tx_frame.data = bytearray(command['volume_down'])
+                self.sender.send(self.tx_frame)
+                time.sleep(0.5)
+                self.tx_frame.data = bytearray(command['volume_up'])
+                self.sender.send(self.tx_frame)
+                time.sleep(0.5)
+            else:
+                pass
+        except Exception as e:
+            print('Error occurred while control volumne up/down', e)
+
+    def reset_distance(self):
+        try:
+            if self.device == 'panda':
+                for i in range(6):
+                    self.sender.can_send(0x3c2, command['distance_near'], 0)
+                    time.sleep(0.05)
+            elif self.device == 'raspi':
+                self.tx_frame.data = bytearray(command['distance_near'])
+                for i in range(6):
+                    self.sender.send(self.tx_frame)
+                    time.sleep(0.05)
+            else:
+                pass
+            print('Following distance set to closest')
+
+        except Exception as e:
+            print('Failed to set distance\n', e)
+
+    def set_distance(self, target = None):
+        if target:
+            distance_target = target
+        else:
+            distance_target = self.distance_target
+        gap = distance_target - self.distance_current
+        if gap == 0:
+            return
+        else:
+            print(f'Change Following distance from {self.distance_current} to {distance_target}')
+            click_cnt = abs(gap)
+            if gap > 0:
+                for i in range(click_cnt):
+                    self.sender.can_send(0x3c2, command['distance_far'], 0)
+                    time.sleep(0.05)
+            else:
+                for i in range(click_cnt):
+                    self.sender.can_send(0x3c2, command['distance_near'], 0)
+                    time.sleep(0.05)
+        self.distance_current = distance_target
 
     def disengage_autopilot(self):
         print('Autopilot Disengaged')
@@ -405,6 +542,7 @@ class Autopilot:
         self.dash.autopilot = 1
         self.first_down_time = 0
         self.timer = 0
+        self.set_distance()
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
@@ -488,13 +626,29 @@ class Autopilot:
                     self.nag_disabled = 1
                     self.dash.nag_disabled = 1
                     print('NAG Eliminator Activated')
-                    self.welcome.run()
+                    self.volume_updown()
             elif self.current_gear_position == 0:
                 if (self.autosteer == 0) and (self.first_down_time != 0) and (
                         time.time() - self.gear_pressed_time) >= 1:
                     self.first_down_time = 0
                     self.gear_down_pressed = 0
             self.last_gear_position = self.current_gear_position
+
+        if (bus == 0) and (address == 0x3c2):
+            mux = get_value(byte_data, 0, 2)
+            if mux == 1:
+                if get_value(byte_data, 8, 2) == 2:
+                    if self.distance_current < 7:
+                        self.distance_current += 1
+                        print(f'Following distance set to {self.distance_current}')
+                elif get_value(byte_data, 10, 2) == 2:
+                    if self.distance_current > 2:
+                        self.distance_current -= 1
+                        print(f'Following distance set to {self.distance_current}')
+                # 수동으로 조작한 거리 단계는 타겟으로 인정. 다음 오토파일럿을 걸 때 목표로 자동 세팅
+                if self.tacc or self.autosteer:
+                    self.distance_target = self.distance_current
+
         return byte_data
 
 class RearCenterBuckle:
