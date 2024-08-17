@@ -3,7 +3,7 @@ import time
 import can
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, WelcomeVolume, MapLampControl, FreshAir, \
-    KickDown, TurnSignal, DistanceManager
+    KickDown, TurnSignal
 
 try:
     from vcgencmd import Vcgencmd

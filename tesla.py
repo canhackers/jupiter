@@ -206,62 +206,6 @@ class WelcomeVolume:
         except Exception as e:
             print('Welcome 명령 실패\n', e)
 
-class DistanceManager:
-    def __init__(self, mother, sender, device='raspi'):
-        self.mother = mother
-        self.distance_current = 0
-        self.distance_target = 0
-        self.sender = sender
-        if device == 'panda':
-            self.device = 'panda'
-            self.tx_frame = None
-        elif device == 'raspi' and type(sender) in (list, tuple):
-            self.device = 'raspi'
-            self.sender = sender[0]
-            self.tx_frame = sender[1]
-            self.tx_frame.channel = 'can0'
-            self.tx_frame.dlc = 8
-            self.tx_frame.arbitration_id = 0x3c2
-            self.tx_frame.is_extended_id = False
-        else:
-            self.device = None
-
-    def set(self, current, target):
-        gap = target - current
-        if gap == 0:
-            return
-        else:
-            print(f'Change Following distance from {current} to {target}')
-            click_cnt = abs(gap)
-            if gap > 0:
-                for i in range(click_cnt):
-                    self.sender.can_send(0x3c2, command['distance_far'], 0)
-                    time.sleep(0.05)
-            else:
-                for i in range(click_cnt):
-                    self.sender.can_send(0x3c2, command['distance_near'], 0)
-                    time.sleep(0.05)
-
-    def reset(self):
-        try:
-            if self.device == 'panda':
-                for i in range(6):
-                    self.sender.can_send(0x3c2, command['distance_near'], 0)
-                    time.sleep(0.05)
-            elif self.device == 'raspi':
-                self.tx_frame.data = bytearray(command['distance_near'])
-                for i in range(6):
-                    self.sender.send(self.tx_frame)
-                    time.sleep(0.05)
-            else:
-                pass
-            print('Following distance set to closest')
-            self.distance_current = 2
-            self.distance_target = 2
-
-        except Exception as e:
-            print('Failed to set distance\n', e)
-
 class Logger:
     def __init__(self, buffer, dash, cloud=0, enabled=0):
         # 클라우드 업로드용은 7zip 알고리즘을 사용하여 용량을 대폭 줄일 수 있으나, 일부 압축프로그램에서 열리지 않음
@@ -468,16 +412,16 @@ class Autopilot:
                 self.sender.can_send(0x3c2, command['volume_down'], 0)
                 time.sleep(0.5)
             elif self.device == 'raspi':
-                self.tx_frame = can.Message()
-                self.tx_frame.channel = 'can0'
-                self.tx_frame.dlc = 8
-                self.tx_frame.arbitration_id = 0x3c2
-                self.tx_frame.is_extended_id = False
-                self.tx_frame.data = bytearray(command['volume_down'])
-                self.sender.send(self.tx_frame)
+                tx_frame = can.Message()
+                tx_frame.channel = 'can0'
+                tx_frame.dlc = 8
+                tx_frame.arbitration_id = 0x3c2
+                tx_frame.is_extended_id = False
+                tx_frame.data = bytearray(command['volume_down'])
+                self.sender.send(tx_frame)
                 time.sleep(0.5)
-                self.tx_frame.data = bytearray(command['volume_up'])
-                self.sender.send(self.tx_frame)
+                tx_frame.data = bytearray(command['volume_up'])
+                self.sender.send(tx_frame)
                 time.sleep(0.5)
             else:
                 pass
@@ -491,9 +435,14 @@ class Autopilot:
                     self.sender.can_send(0x3c2, command['distance_near'], 0)
                     time.sleep(0.05)
             elif self.device == 'raspi':
-                self.tx_frame.data = bytearray(command['distance_near'])
+                tx_frame = can.Message()
+                tx_frame.channel = 'can0'
+                tx_frame.dlc = 8
+                tx_frame.arbitration_id = 0x3c2
+                tx_frame.is_extended_id = False
+                tx_frame.data = bytearray(command['distance_near'])
                 for i in range(6):
-                    self.sender.send(self.tx_frame)
+                    self.sender.send(tx_frame)
                     time.sleep(0.05)
             else:
                 pass
