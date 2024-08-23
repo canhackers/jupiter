@@ -514,7 +514,7 @@ class Autopilot:
         self.dash.autopilot = 1
         self.first_down_time = 0
         self.timer = 0
-        self.set_distance()
+        self.set_distance(3)
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
