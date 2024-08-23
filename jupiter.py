@@ -46,9 +46,8 @@ class Jupiter(threading.Thread):
         FRESH = FreshAir(BUFFER, DASH, enabled=settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, DASH, enabled=settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, DASH, enabled=settings.get('AltTurnSignal'))
-
+        TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
         while True:
-            TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
             current_time = time.time()
             DASH.current_time = current_time
             if (bus_connected == 1):
@@ -232,6 +231,7 @@ class Hud(threading.Thread):
                         #         self.init = False
             try:
                 if self.init and self.NAVDY.connected:
+                    print('navdy data update')
                     if (current_time - last_update_fast) >= 0.2:
                         last_update_fast = current_time
                         if DASH.parked:
