@@ -116,7 +116,6 @@ class Jupiter(threading.Thread):
 
                 # 1초에 한번 전송되는 차량 시각 정보 수신
                 if address == 0x528:
-                    print(address, signal)
                     TICK = True
                     bus_connected = 1
                     DASH.update('UnixTime', signal)

@@ -238,9 +238,11 @@ class Logger:
         self.enabled = 0
 
     def initialize(self):
+        print('로거 초기화')
         if self.enabled == 0:
             return False
         if not os.path.exists(csv_path):
+            print('로거 경로가 없어 생성합니다.')
             os.makedirs(csv_path)
         if self.cloud == 1 and not os.path.exists(csv_path + 'sync/'):
             os.makedirs(csv_path + 'sync/')
