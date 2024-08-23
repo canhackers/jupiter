@@ -238,9 +238,10 @@ class Logger:
         self.enabled = 0
 
     def initialize(self):
-        print('로거 초기화')
         if self.enabled == 0:
             return False
+        else:
+            print('로거 초기화')
         if not os.path.exists(csv_path):
             print('로거 경로가 없어 생성합니다.')
             os.makedirs(csv_path)
@@ -612,6 +613,7 @@ class Autopilot:
             if mux == 1:
                 far_state = get_value(byte_data, 8, 2)
                 near_state = get_value(byte_data, 10, 2)
+                print('거리 상태', far_state, near_state)
                 if far_state == 2:
                     self.distance_far_pressed = 1
                 else:
