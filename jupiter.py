@@ -227,6 +227,7 @@ class Hud(threading.Thread):
                         self.NAVDY.connected = self.NAVDY.connect()
                         if self.NAVDY.connected:
                             print('Navdy Connected ', self.NAVDY.mac_address)
+                            connect_try_cnt = 0
                         else:
                             if connect_try_cnt >= 24:
                                 print('Stop trying to connect Navdy')

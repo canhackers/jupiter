@@ -184,14 +184,6 @@ class Dashboard:
             if (self.occupancy == 1):
                 if time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
-    def change_following_distance(self, loc):
-        if loc == 1 and self.following_distance_current < 7:
-            self.following_distance_current += 1
-            print(f'Following distance set to {self.following_distance_current}')
-        elif loc == -1 and self.following_distance_current > 2:
-            self.following_distance_current -= 1
-            print(f'Following distance set to {self.following_distance_current}')
-
 class WelcomeVolume:
     def __init__(self, sender, device='raspi'):
         self.sender = sender
