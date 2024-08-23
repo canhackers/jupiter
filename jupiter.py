@@ -9,7 +9,7 @@ from vcgencmd import Vcgencmd
 
 vcgm = Vcgencmd()
 DASH = Dashboard()
-
+lock = threading.Lock()
 
 class Jupiter(threading.Thread):
     def __init__(self):
@@ -215,6 +215,7 @@ class Hud(threading.Thread):
         last_update_slow = 0
         connect_try_cnt = 0
         while True:
+            time.sleep(0.2)
             current_time = DASH.current_time
             if self.init:
                 if (self.NAVDY.connected == False) and (current_time - connect_try_time) > 5:
@@ -231,7 +232,6 @@ class Hud(threading.Thread):
                         #         self.init = False
             try:
                 if self.init and self.NAVDY.connected:
-                    print('navdy data update')
                     if (current_time - last_update_fast) >= 0.2:
                         last_update_fast = current_time
                         if DASH.parked:
