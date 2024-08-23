@@ -50,6 +50,7 @@ class Jupiter(threading.Thread):
         while True:
             TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
             current_time = time.time()
+            DASH.current_time = current_time
             if (bus_connected == 1):
                 if bus_error_count > 5:
                     print('Bus Error Count Over, reboot')
@@ -215,9 +216,9 @@ class Hud(threading.Thread):
         last_update_slow = 0
         connect_try_cnt = 0
         while True:
-            current_time = time.time()
+            current_time = DASH.current_time
             if self.init:
-                if self.NAVDY.connected == False and (current_time - connect_try_time) > 5:
+                if (self.NAVDY.connected == False) and (current_time - connect_try_time) > 5:
                     connect_try_time = current_time
                     if DASH.passenger_cnt > 0:
                         # connect_try_cnt += 1

@@ -83,6 +83,7 @@ class Buffer:
 
 class Dashboard:
     def __init__(self):
+        self.current_time = 0
         self.drive_start_time = 0
         self.last_update = 0
         self.unix_time = 0
