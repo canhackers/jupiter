@@ -465,7 +465,7 @@ class Autopilot:
                 tx_frame.data = bytearray(command['distance_near'])
                 for i in range(6):
                     self.sender.send(tx_frame)
-                    time.sleep(0.05)
+                    time.sleep(0.1)
             else:
                 pass
             print('Following distance set to closest')
@@ -497,7 +497,7 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_far'])
                         self.sender.send(tx_frame)
-                    time.sleep(0.05)
+                    time.sleep(0.1)
             else:
                 for i in range(click_cnt):
                     if self.device == 'panda':
@@ -510,7 +510,7 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_near'])
                         self.sender.send(tx_frame)
-                    time.sleep(0.05)
+                    time.sleep(0.1)
         self.distance_current = distance_target
 
     def disengage_autopilot(self):
