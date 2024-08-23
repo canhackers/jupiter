@@ -487,11 +487,29 @@ class Autopilot:
             click_cnt = abs(gap)
             if gap > 0:
                 for i in range(click_cnt):
-                    self.sender.can_send(0x3c2, command['distance_far'], 0)
+                    if self.device == 'panda':
+                        self.sender.can_send(0x3c2, command['distance_far'], 0)
+                    elif self.device == 'raspi':
+                        tx_frame = can.Message()
+                        tx_frame.channel = 'can0'
+                        tx_frame.dlc = 8
+                        tx_frame.arbitration_id = 0x3c2
+                        tx_frame.is_extended_id = False
+                        tx_frame.data = bytearray(command['distance_far'])
+                        self.sender.send(tx_frame)
                     time.sleep(0.05)
             else:
                 for i in range(click_cnt):
-                    self.sender.can_send(0x3c2, command['distance_near'], 0)
+                    if self.device == 'panda':
+                        self.sender.can_send(0x3c2, command['distance_far'], 0)
+                    elif self.device == 'raspi':
+                        tx_frame = can.Message()
+                        tx_frame.channel = 'can0'
+                        tx_frame.dlc = 8
+                        tx_frame.arbitration_id = 0x3c2
+                        tx_frame.is_extended_id = False
+                        tx_frame.data = bytearray(command['distance_near'])
+                        self.sender.send(tx_frame)
                     time.sleep(0.05)
         self.distance_current = distance_target
 
