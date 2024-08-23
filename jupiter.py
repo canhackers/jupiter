@@ -91,6 +91,7 @@ class Jupiter(threading.Thread):
                 address = recv_message.arbitration_id
                 signal = recv_message.data
                 BUFFER.write_can_buffer(bus, address, signal)
+                print(address, signal)
 
                 # 여러 로직에 활용하기 위한 차량 상태값 모니터링
                 dash_item = monitoring_addrs.get(address)
