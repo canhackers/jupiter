@@ -21,7 +21,7 @@ class Jupiter(threading.Thread):
         can_bus = can.interface.Bus(channel='can0', interface='socketcan')
         bus_connected = 0
         bus_error = 0
-        bus_error_count = 0
+        DASH.bus_error_count = 0
         last_recv_time = time.time()
         bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 
@@ -51,12 +51,12 @@ class Jupiter(threading.Thread):
             current_time = time.time()
             DASH.current_time = current_time
             if (bus_connected == 1):
-                if bus_error_count > 5:
+                if DASH.bus_error_count > 5:
                     print('Bus Error Count Over, reboot')
                     os.system('sudo reboot')
                 if bus_error == 1:
-                    bus_error_count += 1
-                    print(f'Bus Error, {bus_error_count}')
+                    DASH.bus_error_count += 1
+                    print(f'Bus Error, {DASH.bus_error_count}')
                     initialize_canbus_connection()
                     can_bus = can.interface.Bus(channel='can0', interface='socketcan')
                     try:
@@ -68,7 +68,8 @@ class Jupiter(threading.Thread):
                     bus_error = 0
                 else:
                     if (current_time - last_recv_time >= 5):
-                        bus_error_count += 1
+                        print('bus error counted')
+                        DASH.bus_error_count += 1
                         last_recv_time = time.time()
             elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
                 print('Waiting until CAN Bus Connecting...',
@@ -220,15 +221,16 @@ class Hud(threading.Thread):
                 if (self.NAVDY.connected == False) and (current_time - connect_try_time) > 5:
                     connect_try_time = current_time
                     if DASH.passenger_cnt > 0:
-                        # connect_try_cnt += 1
+                        connect_try_cnt += 1
+                        DASH.bus_error_count = 0
                         print(f'Trying to connect to Navdy...{connect_try_cnt}')
                         self.NAVDY.connected = self.NAVDY.connect()
                         if self.NAVDY.connected:
                             print('Navdy Connected ', self.NAVDY.mac_address)
-                        # else:
-                        #     if connect_try_cnt >= 24:
-                        #         print('Stop trying to connect Navdy')
-                        #         self.init = False
+                        else:
+                            if connect_try_cnt >= 24:
+                                print('Stop trying to connect Navdy')
+                                self.init = False
             try:
                 if self.init and self.NAVDY.connected:
                     if (current_time - last_update_fast) >= 0.2:

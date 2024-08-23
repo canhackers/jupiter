@@ -84,6 +84,7 @@ class Buffer:
 
 class Dashboard:
     def __init__(self):
+        self.bus_error_cout = 0
         self.current_time = 0
         self.drive_start_time = 0
         self.last_update = 0
