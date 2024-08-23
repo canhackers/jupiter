@@ -20,6 +20,7 @@ mux_address = {'0x282': 2, '0x352': 2, '0x3fd': 3, '0x332': 2, '0x261': 2, '0x24
                '0x201': 3, '0x7aa': 4, '0x2b3': 4, '0x3f2': 4, '0x32c': 8, '0x401': 8}
 
 command = {
+    'empty': bytes.fromhex('2955000000000000'),
     'volume_down': bytes.fromhex('2955010000000000'),
     'volume_up': bytes.fromhex('29553f0000000000'),
     'speed_down': bytes.fromhex('2955003f00000000'),
@@ -462,10 +463,12 @@ class Autopilot:
                 tx_frame.dlc = 8
                 tx_frame.arbitration_id = 0x3c2
                 tx_frame.is_extended_id = False
-                tx_frame.data = bytearray(command['distance_near'])
                 for i in range(6):
+                    tx_frame.data = bytearray(command['distance_near'])
                     self.sender.send(tx_frame)
-                    time.sleep(0.1)
+                    time.sleep(0.05)
+                    tx_frame.data = bytearray(command['empty'])
+                    self.sender.send(tx_frame)
             else:
                 pass
             print('Following distance set to closest')
@@ -497,7 +500,9 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_far'])
                         self.sender.send(tx_frame)
-                    time.sleep(0.1)
+                        time.sleep(0.05)
+                        tx_frame.data = bytearray(command['empty'])
+                        self.sender.send(tx_frame)
             else:
                 for i in range(click_cnt):
                     if self.device == 'panda':
@@ -510,7 +515,9 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_near'])
                         self.sender.send(tx_frame)
-                    time.sleep(0.1)
+                        time.sleep(0.05)
+                        tx_frame.data = bytearray(command['empty'])
+                        self.sender.send(tx_frame)
         self.distance_current = distance_target
 
     def disengage_autopilot(self):
