@@ -47,9 +47,8 @@ class Jupiter(threading.Thread):
         KICKDOWN = KickDown(BUFFER, DASH, enabled=settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, DASH, enabled=settings.get('AltTurnSignal'))
 
-        TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
-
         while True:
+            TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
             current_time = time.time()
             if (bus_connected == 1):
                 if bus_error_count > 5:
