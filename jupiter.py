@@ -91,7 +91,6 @@ class Jupiter(threading.Thread):
                 address = recv_message.arbitration_id
                 signal = recv_message.data
                 BUFFER.write_can_buffer(bus, address, signal)
-                print(address, signal)
 
                 # 여러 로직에 활용하기 위한 차량 상태값 모니터링
                 dash_item = monitoring_addrs.get(address)
@@ -117,6 +116,7 @@ class Jupiter(threading.Thread):
 
                 # 1초에 한번 전송되는 차량 시각 정보 수신
                 if address == 0x528:
+                    print(address, signal)
                     TICK = True
                     bus_connected = 1
                     DASH.update('UnixTime', signal)
