@@ -466,7 +466,7 @@ class Autopilot:
                 for i in range(6):
                     tx_frame.data = bytearray(command['distance_near'])
                     self.sender.send(tx_frame)
-                    time.sleep(0.05)
+                    time.sleep(0.2)
                     tx_frame.data = bytearray(command['empty'])
                     self.sender.send(tx_frame)
             else:
@@ -500,7 +500,7 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_far'])
                         self.sender.send(tx_frame)
-                        time.sleep(0.05)
+                        time.sleep(0.2)
                         tx_frame.data = bytearray(command['empty'])
                         self.sender.send(tx_frame)
             else:
@@ -515,7 +515,7 @@ class Autopilot:
                         tx_frame.is_extended_id = False
                         tx_frame.data = bytearray(command['distance_near'])
                         self.sender.send(tx_frame)
-                        time.sleep(0.05)
+                        time.sleep(0.2)
                         tx_frame.data = bytearray(command['empty'])
                         self.sender.send(tx_frame)
         self.distance_current = distance_target
