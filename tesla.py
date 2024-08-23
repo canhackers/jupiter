@@ -613,7 +613,6 @@ class Autopilot:
             if mux == 1:
                 far_state = get_value(byte_data, 8, 2)
                 near_state = get_value(byte_data, 10, 2)
-                print('거리 상태', far_state, near_state)
                 if far_state == 2:
                     self.distance_far_pressed = 1
                 else:
@@ -629,6 +628,7 @@ class Autopilot:
                         if self.distance_current > 2:
                             self.distance_current -= 1
                             print(f'Following distance set to {self.distance_current}')
+                    self.distance_near_pressed = 0
 
                 # 수동으로 조작한 거리 단계는 타겟으로 인정. 다음 오토파일럿을 걸 때 목표로 자동 세팅
                 if self.tacc or self.autosteer:
