@@ -235,15 +235,12 @@ class Logger:
         self.filename = None
         self.file = None
         self.csvwriter = None
-        self.enabled = 0
+        self.enabled = enabled
 
     def initialize(self):
         if self.enabled == 0:
             return False
-        else:
-            print('로거 초기화')
         if not os.path.exists(csv_path):
-            print('로거 경로가 없어 생성합니다.')
             os.makedirs(csv_path)
         if self.cloud == 1 and not os.path.exists(csv_path + 'sync/'):
             os.makedirs(csv_path + 'sync/')
