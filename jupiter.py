@@ -31,7 +31,8 @@ class Jupiter(threading.Thread):
         LOGGER = Logger(BUFFER, DASH, cloud=0, enabled=settings.get('Logger'))
 
         #  부가 기능 로딩
-        AP = Autopilot(BUFFER, DASH, sender=can_bus,
+        AP = Autopilot(BUFFER, DASH,
+                       sender=can_bus,
                        device='raspi',
                        mars_mode=settings.get('MarsMode'),
                        keep_wiper_speed=settings.get('KeepWiperSpeed'),
