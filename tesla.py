@@ -393,11 +393,10 @@ class Autopilot:
         self.slow_wiper = slow_wiper
         self.auto_distance = auto_distance
         if sender is not None:
-            print('type sender', type(sender))
             self.sender = sender
             if device == 'panda':
                 self.device = 'panda'
-            elif device == 'raspi' and type(sender) in (list, tuple):
+            elif device == 'raspi':
                 self.device = 'raspi'
             else:
                 self.device = None
