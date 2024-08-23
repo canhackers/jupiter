@@ -32,6 +32,25 @@ command = {
     'door_open_rr': bytes.fromhex('00c0000000000000'),
 }
 
+# 상시 모니터링 할 주요 차량정보 접근 주소
+monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
+                    0x103: 'VCRIGHT_doorStatus',
+                    0x108: 'DIR_torque',
+                    0x118: 'DriveSystemStatus',
+                    0x186: 'DIF_torque',
+                    0x257: 'DIspeed',
+                    0x261: '12vBattStatus',
+                    0x273: 'UI_vehicleControl',
+                    0x292: 'BMS_SOC',
+                    0x2f3: 'UI_hvacRequest',
+                    0x312: 'BMSthermal',
+                    0x33a: 'UI_rangeSOC',
+                    0x334: 'UI_powertrainControl',
+                    0x352: 'BMS_energyStatus',
+                    0x3c2: 'VCLEFT_switchStatus',
+                    0x31a: 'VCRIGHT_switchStatus',
+                    0x528: 'UnixTime',
+                    }
 
 class Buffer:
     def __init__(self):
@@ -388,6 +407,8 @@ class Autopilot:
         self.wiper_last_state = 0
         self.distance_current = 2
         self.distance_target = 2
+        self.distance_far_pressed = 0
+        self.distance_near_pressed = 0
         self.reset_distance()
 
     def run(self):
@@ -586,14 +607,24 @@ class Autopilot:
         if (bus == 0) and (address == 0x3c2):
             mux = get_value(byte_data, 0, 2)
             if mux == 1:
-                if get_value(byte_data, 8, 2) == 2:
-                    if self.distance_current < 7:
-                        self.distance_current += 1
-                        print(f'Following distance set to {self.distance_current}')
-                elif get_value(byte_data, 10, 2) == 2:
-                    if self.distance_current > 2:
-                        self.distance_current -= 1
-                        print(f'Following distance set to {self.distance_current}')
+                far_state = get_value(byte_data, 8, 2)
+                near_state = get_value(byte_data, 10, 2)
+                if far_state == 2:
+                    self.distance_far_pressed = 1
+                else:
+                    if self.distance_far_pressed == 1:
+                        if self.distance_current < 7:
+                            self.distance_current += 1
+                            print(f'Following distance set to {self.distance_current}')
+                    self.distance_far_pressed = 0
+                if near_state == 2:
+                    self.distance_near_pressed = 1
+                else:
+                    if self.distance_near_pressed == 1:
+                        if self.distance_current > 2:
+                            self.distance_current -= 1
+                            print(f'Following distance set to {self.distance_current}')
+
                 # 수동으로 조작한 거리 단계는 타겟으로 인정. 다음 오토파일럿을 걸 때 목표로 자동 세팅
                 if self.tacc or self.autosteer:
                     self.distance_target = self.distance_current

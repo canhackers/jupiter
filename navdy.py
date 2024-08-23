@@ -7,10 +7,7 @@ class Navdy:
         self.mac_address = mac_address
         self.uuid = "dfce890e-6631-4e4a-800d-9415d98ccff7"
         self.connected = False
-        self.connect_try_cnt = 0
         self.sock = None
-        self.last_update_fast = 0
-        self.last_update_slow = 0
 
     def connect(self):
         service_matches = bluetooth.find_service(address=self.mac_address, uuid=self.uuid)
