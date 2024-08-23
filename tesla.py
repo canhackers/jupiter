@@ -478,6 +478,7 @@ class Autopilot:
             distance_target = target
         else:
             distance_target = self.distance_target
+        print('distance target', distance_target, 'distance now', self.distance_current)
         gap = distance_target - self.distance_current
         if gap == 0:
             return
