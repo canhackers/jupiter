@@ -259,6 +259,7 @@ class Hud(threading.Thread):
             if not self.NAVDY.connected:
                 time.sleep(5)
                 continue
+            time.sleep(0.2)
             current_time = DASH.current_time
             try:
                 if (current_time - last_update_fast) >= 0.2:
