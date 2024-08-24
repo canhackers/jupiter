@@ -262,7 +262,7 @@ class Hud(threading.Thread):
         finally:
             self.loop.close()  # 루프 종료시 명시적으로 닫아줌
 
-    async def main_loop(self):
+    def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
@@ -270,11 +270,8 @@ class Hud(threading.Thread):
             print('커넥터 연결상태', self.connector.connected.is_set())
             if not self.NAVDY.connected:
                 print('NAVDY 접속을 기다리는 중')
-                await self.connector.connected.wait()
-                print('Navdy main loop 내에서 연결 확인됨')
-            print('Navdy 연결되어 있는 중')
-            await asyncio.sleep(0.2)
-            # time.sleep(0.2)
+                time.sleep(0.2)
+                continue
             current_time = DASH.current_time
             try:
                 if (current_time - last_update_fast) >= 0.2:
