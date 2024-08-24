@@ -223,7 +223,7 @@ class HudConnector:
         while self.init:
             if not self.connected.is_set():
                 self.connect_try_cnt += 1
-                print(f'Attemping to connect to Navdy...{self.connect_try_cnt}')
+                print(f'Attempting to connect to Navdy...{self.connect_try_cnt}')
                 self.NAVDY.connected = self.NAVDY.connect()
                 if self.NAVDY.connected:
                     print('Navdy Connected ', self.NAVDY.mac_address)
@@ -263,6 +263,7 @@ class Hud(threading.Thread):
             print('나브디 연결 상태', self.NAVDY.connected)
             print('커넥터 연결상태', self.connector.connected.is_set())
             if not self.NAVDY.connected:
+                print('NAVY 접속을 기다리는 중')
                 await self.connector.connected.wait()
                 print('Navdy main loop 내에서 연결 확인됨')
             print('Navdy 연결되어 있는 중')
@@ -308,10 +309,12 @@ def main():
     H.start()
 
     async def hud_connect():
-        await asyncio.gather(
-            HC.connect_hud(),
-            HC.monitor_connection()
-        )
+        await HC.connect_hud()
+        await HC.monitor_connection()
+        # await asyncio.gather(
+        #     HC.connect_hud(),
+        #     HC.monitor_connection()
+        # )
 
     try:
         asyncio.run(hud_connect())
