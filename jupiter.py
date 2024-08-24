@@ -255,14 +255,6 @@ class Hud(threading.Thread):
         self.loop = None
 
     def run(self):
-        self.loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self.loop)
-        try:
-            self.loop.run_until_complete(self.main_loop())
-        finally:
-            self.loop.close()  # 루프 종료시 명시적으로 닫아줌
-
-    def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
@@ -301,11 +293,6 @@ class Hud(threading.Thread):
 
     def stop(self):
         self.thread_online = False
-
-    def submit_coroutine(self, coro):
-        """스레드 내에서 코루틴을 실행"""
-        if self.loop:
-            return asyncio.run_coroutine_threadsafe(coro, self.loop)
 
 def main():
     J = Jupiter()
