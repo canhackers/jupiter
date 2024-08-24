@@ -2,6 +2,7 @@ import os
 import time
 import can
 import threading
+import asyncio
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, MapLampControl, FreshAir, \
     KickDown, TurnSignal, monitoring_addrs
@@ -11,11 +12,15 @@ vcgm = Vcgencmd()
 DASH = Dashboard()
 lock = threading.Lock()
 
+
 class Jupiter(threading.Thread):
     def __init__(self):
         super().__init__()
+        self.jupiter_online = True
 
     def run(self):
+        if not self.jupiter_online:
+            return False
         # CAN Bus Device 초기화
         initialize_canbus_connection()
         can_bus = can.interface.Bus(channel='can0', interface='socketcan')
@@ -47,6 +52,7 @@ class Jupiter(threading.Thread):
         KICKDOWN = KickDown(BUFFER, DASH, enabled=settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, DASH, enabled=settings.get('AltTurnSignal'))
         TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
+
         while True:
             current_time = time.time()
             DASH.current_time = current_time
@@ -190,82 +196,116 @@ class Jupiter(threading.Thread):
                 bus_error = 1
 
             BUFFER.flush_message_buffer()
+    def stop(self):
+        self.jupiter_online = False
 
-
-class Hud(threading.Thread):
+class HudConnector:
     def __init__(self):
-        super().__init__()
-        # Navdy 로딩
+        self.connected = asyncio.Event()
+        self.connect_try_cnt = 0
         from navdy import Navdy
-
         try:
             with open('/home/mac_address', 'r') as f:
                 mac_address = (f.readline()).strip()
+            self.mac_address = mac_address
             self.NAVDY = Navdy(mac_address)
             self.init = True
         except Exception as e:
             print(e)
+            self.mac_address = 'Not Available'
             self.NAVDY = Navdy('00:00:00:00:00:00')
-            self.init = False
             print('Can not find Navdy MAC Address file. check /home/mac_address')
+            self.init = False
+
+    async def connect_hud(self):
+        while self.init:
+            if not self.connected.is_set():
+                self.connect_try_cnt += 1
+                print(f'Attemping to connect to Navdy...{self.connect_try_cnt}')
+                self.NAVDY.connected = self.NAVDY.connect()
+                if self.NAVDY.connected:
+                    print('Navdy Connected ', self.NAVDY.mac_address)
+                    self.connected.set()
+                    self.connect_try_cnt = 0
+            await asyncio.sleep(5)
+
+    async def monitor_connection(self):
+        while self.init:
+            if self.connected.is_set():
+                await asyncio.sleep(5)
+                if self.NAVDY.connected == False:
+                    self.connected.clear()
+            await asyncio.sleep(1)
+
+    def stop(self):
+        self.init = False
+
+
+class Hud(threading.Thread):
+    def __init__(self, connector):
+        super().__init__()
+        self.connector = connector
+        self.NAVDY = self.connector.NAVDY
+        self.thread_online = True
 
     def run(self):
-        connect_try_time = 0
         last_update_fast = 0
         last_update_slow = 0
-        connect_try_cnt = 0
-        while True:
+        while self.thread_online:
+            if not self.NAVDY.connected:
+                self.connector.conected.wait()
+
             time.sleep(0.2)
             current_time = DASH.current_time
-            if self.init:
-                if (self.NAVDY.connected == False) and (current_time - connect_try_time) > 5:
-                    connect_try_time = current_time
-                    if DASH.passenger_cnt > 0:
-                        connect_try_cnt += 1
-                        DASH.bus_error_count = 0
-                        print(f'Trying to connect to Navdy...{connect_try_cnt}')
-                        self.NAVDY.connected = self.NAVDY.connect()
-                        if self.NAVDY.connected:
-                            print('Navdy Connected ', self.NAVDY.mac_address)
-                            connect_try_cnt = 0
-                        else:
-                            if connect_try_cnt >= 24:
-                                print('Stop trying to connect Navdy')
-                                self.init = False
             try:
-                if self.init and self.NAVDY.connected:
-                    if (current_time - last_update_fast) >= 0.2:
-                        last_update_fast = current_time
-                        if DASH.parked:
-                            gear = 1
+                if (current_time - last_update_fast) >= 0.2:
+                    last_update_fast = current_time
+                    if DASH.parked:
+                        gear = 1
+                    else:
+                        if DASH.autopilot == 1:
+                            gear = 6 if DASH.nag_disabled == 1 else 5
                         else:
-                            if DASH.autopilot == 1:
-                                gear = 6 if DASH.nag_disabled == 1 else 5
-                            else:
-                                gear = DASH.gear
-                        payload = {'__speed__': DASH.ui_speed,
-                                   '__tachometer__': abs(DASH.torque_front + DASH.torque_rear),
-                                   'gear': gear
-                                   }
-                        if (current_time - last_update_slow) >= 2:
-                            last_update_slow = current_time
-                            payload['voltage'] = DASH.LVB_voltage
-                            payload['soc'] = DASH.soc
-                            payload['hv_temp'] = DASH.HVB_max_temp
-                            payload['ui_range'] = DASH.ui_range
-                            payload['ui_range_map'] = DASH.ui_range
-                            payload['raspi_temp'] = DASH.device_temp
-                        self.NAVDY.send_message(payload)
+                            gear = DASH.gear
+                    payload = {'__speed__': DASH.ui_speed,
+                               '__tachometer__': abs(DASH.torque_front + DASH.torque_rear),
+                               'gear': gear
+                               }
+                    if (current_time - last_update_slow) >= 2:
+                        last_update_slow = current_time
+                        payload['voltage'] = DASH.LVB_voltage
+                        payload['soc'] = DASH.soc
+                        payload['hv_temp'] = DASH.HVB_max_temp
+                        payload['ui_range'] = DASH.ui_range
+                        payload['ui_range_map'] = DASH.ui_range
+                        payload['raspi_temp'] = DASH.device_temp
+                    self.NAVDY.send_message(payload)
             except Exception as e:
                 print("Exception caught while processing Navdy Dash", e)
 
+    def stop(self):
+        self.thread_online = False
 
 def main():
     J = Jupiter()
-    H = Hud()
+    HC = HudConnector()
+    H = Hud(HC)
 
     J.start()
     H.start()
+
+    async def hud_connect():
+        await asyncio.gather(
+            HC.connect_hud(),
+            HC.monitor_connection()
+        )
+    try:
+        asyncio.run(hud_connect())
+    finally:
+        J.stop()
+        H.stop()
+        J.join()
+        H.join()
 
 
 if __name__ == '__main__':
