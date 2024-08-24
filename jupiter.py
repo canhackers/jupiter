@@ -248,7 +248,7 @@ class Hud(threading.Thread):
         self.NAVDY = self.connector.NAVDY
         self.thread_online = True
 
-    def run(self):
+    async def run(self):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
