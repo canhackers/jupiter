@@ -248,7 +248,11 @@ class Hud(threading.Thread):
         self.NAVDY = self.connector.NAVDY
         self.thread_online = True
 
-    async def run(self):
+    def run(self):
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(self.main_loop())
+    async def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
