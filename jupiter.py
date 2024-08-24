@@ -253,7 +253,7 @@ class Hud(threading.Thread):
         last_update_slow = 0
         while self.thread_online:
             if not self.NAVDY.connected:
-                self.connector.connected.wait()
+                await self.connector.connected.wait()
 
             time.sleep(0.2)
             current_time = DASH.current_time
