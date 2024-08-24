@@ -229,8 +229,6 @@ class HudConnector:
                     print('Navdy Connected ', self.NAVDY.mac_address)
                     self.connected.set()
                     self.connect_try_cnt = 0
-                    print('Navdy Connect 상태', self.NAVDY.connected)
-                    print('이벤트 상태', self.connected.is_set())
             await asyncio.sleep(5)
 
     async def monitor_connection(self):
@@ -258,11 +256,8 @@ class Hud(threading.Thread):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
-            print('나브디 연결 상태', self.NAVDY.connected)
-            print('커넥터 연결상태', self.connector.connected.is_set())
             if not self.NAVDY.connected:
-                print('NAVDY 접속을 기다리는 중')
-                time.sleep(0.2)
+                time.sleep(5)
                 continue
             current_time = DASH.current_time
             try:
