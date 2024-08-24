@@ -257,7 +257,10 @@ class Hud(threading.Thread):
     def run(self):
         self.loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self.loop)
-        self.loop.run_until_complete(self.main_loop())
+        try:
+            self.loop.run_until_complete(self.main_loop())
+        finally:
+            self.loop.close()  # 루프 종료시 명시적으로 닫아줌
 
     async def main_loop(self):
         last_update_fast = 0
@@ -316,12 +319,10 @@ def main():
     H.start()
 
     async def hud_connect():
-        await HC.connect_hud()
-        await HC.monitor_connection()
-        # await asyncio.gather(
-        #     HC.connect_hud(),
-        #     HC.monitor_connection()
-        # )
+        await asyncio.gather(
+            HC.connect_hud(),
+            HC.monitor_connection()
+        )
 
     try:
         asyncio.run(hud_connect())
