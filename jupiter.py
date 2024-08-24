@@ -259,11 +259,12 @@ class Hud(threading.Thread):
     async def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
+        print('main loop 도는중')
         while self.thread_online:
             if not self.NAVDY.connected:
                 await self.connector.connected.wait()
                 print('Navdy main loop 내에서 연결 확인됨')
-
+            print('Navdy 연결되어 있는 중')
             await asyncio.sleep(0.2)
             # time.sleep(0.2)
             current_time = DASH.current_time
