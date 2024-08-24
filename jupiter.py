@@ -196,8 +196,10 @@ class Jupiter(threading.Thread):
                 bus_error = 1
 
             BUFFER.flush_message_buffer()
+
     def stop(self):
         self.jupiter_online = False
+
 
 class HudConnector:
     def __init__(self):
@@ -253,6 +255,7 @@ class Hud(threading.Thread):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self.main_loop())
+
     async def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
@@ -261,7 +264,8 @@ class Hud(threading.Thread):
                 await self.connector.connected.wait()
                 print('Navdy main loop 내에서 연결 확인됨')
 
-            time.sleep(0.2)
+            await asyncio.sleep(0.2)
+            # time.sleep(0.2)
             current_time = DASH.current_time
             try:
                 if (current_time - last_update_fast) >= 0.2:
@@ -292,6 +296,7 @@ class Hud(threading.Thread):
     def stop(self):
         self.thread_online = False
 
+
 def main():
     J = Jupiter()
     HC = HudConnector()
@@ -305,6 +310,7 @@ def main():
             HC.connect_hud(),
             HC.monitor_connection()
         )
+
     try:
         asyncio.run(hud_connect())
     finally:
