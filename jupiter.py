@@ -236,7 +236,6 @@ class HudConnector:
                 if self.NAVDY.connected == False:
                     print('NAVDY 접속이 끊겼습니다')
                     self.connected.clear()
-                    self.connect_hud()
             await asyncio.sleep(1)
 
     def stop(self):
@@ -260,6 +259,7 @@ class Hud(threading.Thread):
         while self.thread_online:
             if not self.NAVDY.connected:
                 await self.connector.connected.wait()
+                print('Navdy main loop 내에서 연결 확인됨')
 
             time.sleep(0.2)
             current_time = DASH.current_time
