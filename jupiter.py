@@ -252,11 +252,12 @@ class Hud(threading.Thread):
         self.connector = connector
         self.NAVDY = self.connector.NAVDY
         self.thread_online = True
+        self.loop = None
 
     def run(self):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(self.main_loop())
+        self.loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self.loop)
+        self.loop.run_until_complete(self.main_loop())
 
     async def main_loop(self):
         last_update_fast = 0
@@ -301,6 +302,10 @@ class Hud(threading.Thread):
     def stop(self):
         self.thread_online = False
 
+    def submit_coroutine(self, coro):
+        """스레드 내에서 코루틴을 실행"""
+        if self.loop:
+            return asyncio.run_coroutine_threadsafe(coro, self.loop)
 
 def main():
     J = Jupiter()
