@@ -1,6 +1,10 @@
+import threading
+import asyncio
 import bluetooth
 import struct
 import json
+import time
+
 
 class Navdy:
     def __init__(self, mac_address):
@@ -33,3 +37,93 @@ class Navdy:
         except:
             self.connected = False
             return False
+
+
+class HudConnector:
+    def __init__(self):
+        self.connected = asyncio.Event()
+        self.connect_try_cnt = 0
+        try:
+            with open('/home/mac_address', 'r') as f:
+                mac_address = (f.readline()).strip()
+            self.mac_address = mac_address
+            self.navdy = Navdy(mac_address)
+            self.init = True
+        except Exception as e:
+            print(e)
+            self.mac_address = 'Not Available'
+            self.navdy = Navdy('00:00:00:00:00:00')
+            print('Can not find Navdy MAC Address file. check /home/mac_address')
+            self.init = False
+
+    async def connect_hud(self):
+        while self.init:
+            if not self.connected.is_set():
+                self.connect_try_cnt += 1
+                print(f'Attempting to connect to Navdy...{self.connect_try_cnt}')
+                self.navdy.connected = self.navdy.connect()
+                if self.navdy.connected:
+                    print('Navdy Connected ', self.navdy.mac_address)
+                    self.connected.set()
+                    self.connect_try_cnt = 0
+            await asyncio.sleep(5)
+
+    async def monitor_connection(self):
+        while self.init:
+            if self.connected.is_set():
+                await asyncio.sleep(5)
+                if self.navdy.connected == False:
+                    print('NAVDY 접속이 끊겼습니다')
+                    self.connected.clear()
+            await asyncio.sleep(1)
+
+    def stop(self):
+        self.init = False
+
+
+class Hud(threading.Thread):
+    def __init__(self, connector, dash):
+        super().__init__()
+        self.connector = connector
+        self.navdy = self.connector.navdy
+        self.dash = dash
+        self.thread_online = True
+        self.loop = None
+
+    def run(self):
+        last_update_fast = 0
+        last_update_slow = 0
+        while self.thread_online:
+            if not self.navdy.connected:
+                time.sleep(5)
+                continue
+            time.sleep(0.2)
+            current_time = self.dash.current_time
+            try:
+                if (current_time - last_update_fast) >= 0.2:
+                    last_update_fast = current_time
+                    if self.dash.parked:
+                        gear = 1
+                    else:
+                        if self.dash.autopilot == 1:
+                            gear = 6 if self.dash.nag_disabled == 1 else 5
+                        else:
+                            gear = self.dash.gear
+                    payload = {'__speed__': self.dash.ui_speed,
+                               '__tachometer__': abs(self.dash.torque_front + self.dash.torque_rear),
+                               'gear': gear
+                               }
+                    if (current_time - last_update_slow) >= 2:
+                        last_update_slow = current_time
+                        payload['voltage'] = self.dash.LVB_voltage
+                        payload['soc'] = self.dash.soc
+                        payload['hv_temp'] = self.dash.HVB_max_temp
+                        payload['ui_range'] = self.dash.ui_range
+                        payload['ui_range_map'] = self.dash.ui_range
+                        payload['raspi_temp'] = self.dash.device_temp
+                    self.navdy.send_message(payload)
+            except Exception as e:
+                print("Exception caught while processing Navdy Dash", e)
+
+    def stop(self):
+        self.thread_online = False

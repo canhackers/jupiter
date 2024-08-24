@@ -401,7 +401,7 @@ class Autopilot:
         self.wiper_mode_rollback_request = 0
         self.wiper_last_state = 0
         self.distance_current = 2
-        self.distance_target = 2
+        self.distance_target = 3
         self.distance_far_pressed = 0
         self.distance_near_pressed = 0
         self.reset_distance()
@@ -459,9 +459,7 @@ class Autopilot:
                 for i in range(6):
                     tx_frame.data = bytearray(command['distance_near'])
                     self.sender.send(tx_frame)
-                    time.sleep(0.2)
-                    tx_frame.data = bytearray(command['empty'])
-                    self.sender.send(tx_frame)
+                    time.sleep(0.25)
             else:
                 pass
             print('Following distance set to closest')
@@ -480,37 +478,23 @@ class Autopilot:
             return
         else:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
+            tx_frame = can.Message()
+            tx_frame.channel = 'can0'
+            tx_frame.dlc = 8
+            tx_frame.arbitration_id = 0x3c2
+            tx_frame.is_extended_id = False
             click_cnt = abs(gap)
             if gap > 0:
-                for i in range(click_cnt):
-                    if self.device == 'panda':
-                        self.sender.can_send(0x3c2, command['distance_far'], 0)
-                    elif self.device == 'raspi':
-                        tx_frame = can.Message()
-                        tx_frame.channel = 'can0'
-                        tx_frame.dlc = 8
-                        tx_frame.arbitration_id = 0x3c2
-                        tx_frame.is_extended_id = False
-                        tx_frame.data = bytearray(command['distance_far'])
-                        self.sender.send(tx_frame)
-                        time.sleep(0.2)
-                        tx_frame.data = bytearray(command['empty'])
-                        self.sender.send(tx_frame)
+                cmd = command['distance_far']
             else:
-                for i in range(click_cnt):
-                    if self.device == 'panda':
-                        self.sender.can_send(0x3c2, command['distance_far'], 0)
-                    elif self.device == 'raspi':
-                        tx_frame = can.Message()
-                        tx_frame.channel = 'can0'
-                        tx_frame.dlc = 8
-                        tx_frame.arbitration_id = 0x3c2
-                        tx_frame.is_extended_id = False
-                        tx_frame.data = bytearray(command['distance_near'])
-                        self.sender.send(tx_frame)
-                        time.sleep(0.2)
-                        tx_frame.data = bytearray(command['empty'])
-                        self.sender.send(tx_frame)
+                cmd = command['distance_near']
+            for i in range(click_cnt):
+                if self.device == 'panda':
+                    self.sender.can_send(0x3c2, cmd, 0)
+                elif self.device == 'raspi':
+                    tx_frame.data = bytearray(cmd)
+                    self.sender.send(tx_frame)
+                time.sleep(0.2)
         self.distance_current = distance_target
 
     def disengage_autopilot(self):
@@ -532,7 +516,7 @@ class Autopilot:
         self.dash.autopilot = 1
         self.first_down_time = 0
         self.timer = 0
-        self.set_distance(3)
+        self.set_distance()
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
@@ -554,7 +538,7 @@ class Autopilot:
         if (bus == 0) and (address == 0x273):
             if (self.keep_wiper_speed == 1) and (self.wiper_last_state != self.dash.wiper_state):
                 # 와이퍼 상태가 바뀌었을 때
-                if (self.tacc or self.autosteer):
+                if self.tacc or self.autosteer:
                     if self.dash.wiper_state == 2:
                         if self.user_changed_wiper_request == 1:
                             # 사용자가 Auto가 아닌 상태를 쓰다가 Auto로 바꾼 경우 롤백 없이 Auto를 계속 사용
