@@ -233,8 +233,10 @@ class HudConnector:
         while self.init:
             if self.connected.is_set():
                 await asyncio.sleep(5)
-                if self.NAVDY.connected == False:
+                if self.NAVDY.connected == False
+                    print('NAVDY 접속이 끊겼습니다')
                     self.connected.clear()
+                    self.connect_hud()
             await asyncio.sleep(1)
 
     def stop(self):
