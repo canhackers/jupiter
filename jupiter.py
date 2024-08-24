@@ -259,8 +259,9 @@ class Hud(threading.Thread):
     async def main_loop(self):
         last_update_fast = 0
         last_update_slow = 0
-        print('main loop 도는중')
         while self.thread_online:
+            print('나브디 연결 상태', self.NAVDY.connected)
+            print('커넥터 연결상태', self.connector.connected.is_set())
             if not self.NAVDY.connected:
                 await self.connector.connected.wait()
                 print('Navdy main loop 내에서 연결 확인됨')
