@@ -3,18 +3,19 @@ import time
 import can
 import threading
 import asyncio
+from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, MapLampControl, FreshAir, \
     KickDown, TurnSignal, monitoring_addrs
 
 
 class Jupiter(threading.Thread):
-    def __init__(self, dash):
+    def __init__(self, dash, settings):
         super().__init__()
         self.jupiter_online = True
         self.dash = dash
-        from vcgencmd import Vcgencmd
         self.vcgm = Vcgencmd()
+        self.settings = settings
 
     def run(self):
         if not self.jupiter_online:
@@ -29,27 +30,25 @@ class Jupiter(threading.Thread):
         bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 
         # 핵심 기능 로딩
-        settings = load_settings()
         BUFFER = Buffer()
-        LOGGER = Logger(BUFFER, self.dash, cloud=0, enabled=settings.get('Logger'))
+        LOGGER = Logger(BUFFER, self.dash, cloud=0, enabled=self.settings.get('Logger'))
 
         #  부가 기능 로딩
         AP = Autopilot(BUFFER, self.dash,
                        sender=can_bus,
                        device='raspi',
-                       mars_mode=settings.get('MarsMode'),
-                       keep_wiper_speed=settings.get('KeepWiperSpeed'),
-                       slow_wiper=settings.get('SlowWiper'),
-                       auto_distance=settings.get('AutoFollowingDistance'))
+                       mars_mode=self.settings.get('MarsMode'),
+                       keep_wiper_speed=self.settings.get('KeepWiperSpeed'),
+                       slow_wiper=self.settings.get('SlowWiper'),
+                       auto_distance=self.settings.get('AutoFollowingDistance'))
 
-        BUCKLE = RearCenterBuckle(BUFFER, mode=settings.get('RearCenterBuckle'))
+        BUCKLE = RearCenterBuckle(BUFFER, mode=self.settings.get('RearCenterBuckle'))
         MAPLAMP = MapLampControl(BUFFER, self.dash, device='raspi',
-                                 left=settings.get('MapLampLeft'),
-                                 right=settings.get('MapLampRight'))
-        FRESH = FreshAir(BUFFER, self.dash, enabled=settings.get('AutoRecirculation'))
-        KICKDOWN = KickDown(BUFFER, self.dash, enabled=settings.get('KickDown'))
-        TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=settings.get('AltTurnSignal'))
-        TICK = False  # 차에서 1초 간격 Unix Time을 보내주는 타이밍인지 여부
+                                 left=self.settings.get('MapLampLeft'),
+                                 right=self.settings.get('MapLampRight'))
+        FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
+        KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
+        TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
 
         while True:
             current_time = time.time()
@@ -200,28 +199,30 @@ class Jupiter(threading.Thread):
 
 
 def main():
+    settings = load_settings()
     DASH = Dashboard()
-    J = Jupiter(DASH)
+    J = Jupiter(DASH, settings)
     J.start()
 
-    from navdy import Hud, HudConnector
-    HC = HudConnector()
-    H = Hud(HC, DASH)
-    H.start()
+    if settings.get('NavdyHud'):
+        from navdy import Hud, HudConnector
+        HC = HudConnector()
+        H = Hud(HC, DASH)
+        H.start()
 
-    async def hud_connect():
-        await asyncio.gather(
-            HC.connect_hud(),
-            HC.monitor_connection()
-        )
+        async def hud_connect():
+            await asyncio.gather(
+                HC.connect_hud(),
+                HC.monitor_connection()
+            )
 
-    try:
-        asyncio.run(hud_connect())
-    finally:
-        J.stop()
-        H.stop()
-        J.join()
-        H.join()
+        try:
+            asyncio.run(hud_connect())
+        finally:
+            J.stop()
+            H.stop()
+            J.join()
+            H.join()
 
 
 if __name__ == '__main__':
