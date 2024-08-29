@@ -206,23 +206,24 @@ def main():
 
     if settings.get('NavdyHud'):
         from navdy import Hud, HudConnector
-        HC = HudConnector()
-        H = Hud(HC, DASH)
+        # HC = HudConnector()
+        # H = Hud(HC, DASH)
+        H = Hud()
         H.start()
 
-        async def hud_connect():
-            await asyncio.gather(
-                HC.connect_hud(),
-                HC.monitor_connection()
-            )
+        # async def hud_connect():
+        #     await asyncio.gather(
+        #         HC.connect_hud(),
+        #         HC.monitor_connection()
+        #     )
 
-        try:
-            asyncio.run(hud_connect())
-        finally:
-            J.stop()
-            H.stop()
-            J.join()
-            H.join()
+        # try:
+        #     asyncio.run(hud_connect())
+        # finally:
+        #     J.stop()
+        #     H.stop()
+        #     J.join()
+        #     H.join()
 
 
 if __name__ == '__main__':

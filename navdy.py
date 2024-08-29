@@ -82,15 +82,21 @@ class HudConnector:
 
 
 class Hud(threading.Thread):
-    def __init__(self, connector, dash):
+    def __init__(self, dash):
         super().__init__()
-        self.connector = connector
+        self.connector = HudConnector()
         self.navdy = self.connector.navdy
         self.dash = dash
         self.thread_online = True
-        self.loop = None
+        self.loop = asyncio.new_event_loop()
 
     def run(self):
+        asyncio.set_event_loop(self.loop)
+        self.loop.create_task(self.connector.connect_hud())
+        self.loop.create_task(self.connector.monitor_connection())
+
+        # 이벤트 루프를 지속적으로 실행
+        self.loop.run_forever()
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
@@ -127,3 +133,51 @@ class Hud(threading.Thread):
 
     def stop(self):
         self.thread_online = False
+        self.loop.call_soon_threadsafe(self.loop.stop)
+
+# class Hud(threading.Thread):
+#     def __init__(self, connector, dash):
+#         super().__init__()
+#         self.connector = connector
+#         self.navdy = self.connector.navdy
+#         self.dash = dash
+#         self.thread_online = True
+#         self.loop = None
+#
+#     def run(self):
+#         last_update_fast = 0
+#         last_update_slow = 0
+#         while self.thread_online:
+#             if not self.navdy.connected:
+#                 time.sleep(5)
+#                 continue
+#             time.sleep(0.2)
+#             current_time = self.dash.current_time
+#             try:
+#                 if (current_time - last_update_fast) >= 0.2:
+#                     last_update_fast = current_time
+#                     if self.dash.parked:
+#                         gear = 1
+#                     else:
+#                         if self.dash.autopilot == 1:
+#                             gear = 6 if self.dash.nag_disabled == 1 else 5
+#                         else:
+#                             gear = self.dash.gear
+#                     payload = {'__speed__': self.dash.ui_speed,
+#                                '__tachometer__': abs(self.dash.torque_front + self.dash.torque_rear),
+#                                'gear': gear
+#                                }
+#                     if (current_time - last_update_slow) >= 2:
+#                         last_update_slow = current_time
+#                         payload['voltage'] = self.dash.LVB_voltage
+#                         payload['soc'] = self.dash.soc
+#                         payload['hv_temp'] = self.dash.HVB_max_temp
+#                         payload['ui_range'] = self.dash.ui_range
+#                         payload['ui_range_map'] = self.dash.ui_range
+#                         payload['raspi_temp'] = self.dash.device_temp
+#                     self.navdy.send_message(payload)
+#             except Exception as e:
+#                 print("Exception caught while processing Navdy Dash", e)
+#
+#     def stop(self):
+#         self.thread_online = False
