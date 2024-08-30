@@ -94,10 +94,6 @@ class HolyIoT(threading.Thread):
         registered_beacons = {}
         available_beacons = await scan_beacons(beacon_keyword)
 
-        if not available_beacons:
-            print("No beacons found during scanning.")
-            return []
-
         if not os.path.exists(filename):
             with open(filename, 'w') as f:
                 for idx, mac in enumerate(available_beacons):
@@ -107,13 +103,17 @@ class HolyIoT(threading.Thread):
                     else:
                         print(f"Failed to retrieve characteristics for {mac}.")
         try:
+            candidate = []
             with open(filename, 'r') as f:
                 lines = f.readlines()
                 for line in lines:
                     bid, addr, uuid = line.split(',')
-                    bid = bid.strip()
-                    addr = addr.strip()
-                    uuid = uuid.strip()
+                    candidate.append([bid.strip(), addr.strip(), uuid.strip()])
+                if not available_beacons:
+                    for (bid, addr, uuid) in candidate:
+                        os.system(f"echo 'disconnect {addr}' | bluetoothctl")
+                        await asyncio.sleep(1)
+                for (bid, addr, uuid) in candidate:
                     if addr in available_beacons:
                         print(f'ID: {bid} beacon MAC: {addr} UUID: {uuid} registered')
                         registered_beacons[bid] = (addr, uuid)
