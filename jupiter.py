@@ -132,8 +132,8 @@ class Jupiter(threading.Thread):
                     self.dash.device_temp = self.vcgm.measure_temp()
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
 
-                    for bid, val in self.dash.beacon.items():
-                        print(f'{bid} value is now {val}')
+                    # for bid, val in self.dash.beacon.items():
+                    #     print(f'{bid} value is now {val}')
 
                     ##### Log writer ######
                     if (LOGGER.file is not None):
