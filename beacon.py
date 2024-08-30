@@ -110,6 +110,7 @@ class HolyIoT(threading.Thread):
                     bid, addr, uuid = line.split(',')
                     candidate.append([bid.strip(), addr.strip(), uuid.strip()])
                 if not available_beacons:
+                    print('가용 Beacon이 없어 연결을 끊고 재탐색...')
                     for (bid, addr, uuid) in candidate:
                         os.system(f"echo 'disconnect {addr}' | bluetoothctl")
                         await asyncio.sleep(1)
