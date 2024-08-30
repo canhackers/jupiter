@@ -92,7 +92,6 @@ class HolyIoT(threading.Thread):
     async def get_uuids(self):
         print('Searching Beacons')
         registered_beacons = {}
-        available_beacons = await scan_beacons(beacon_keyword)
 
         if not os.path.exists(filename):
             with open(filename, 'w') as f:
@@ -109,15 +108,17 @@ class HolyIoT(threading.Thread):
                 for line in lines:
                     bid, addr, uuid = line.split(',')
                     candidate.append([bid.strip(), addr.strip(), uuid.strip()])
-                if not available_beacons:
-                    print('가용 Beacon이 없어 연결을 끊고 재탐색...')
-                    for (bid, addr, uuid) in candidate:
-                        os.system(f"echo 'disconnect {addr}' | bluetoothctl")
-                        await asyncio.sleep(1)
-                for (bid, addr, uuid) in candidate:
-                    if addr in available_beacons:
-                        print(f'ID: {bid} beacon MAC: {addr} UUID: {uuid} registered')
-                        registered_beacons[bid] = (addr, uuid)
+
+            for (bid, addr, uuid) in candidate:
+                os.system(f"echo 'disconnect {addr}' | bluetoothctl")
+                await asyncio.sleep(1)
+
+            available_beacons = await scan_beacons(beacon_keyword)
+
+            for (bid, addr, uuid) in candidate:
+                if addr in available_beacons:
+                    print(f'ID: {bid} beacon MAC: {addr} UUID: {uuid} registered')
+                    registered_beacons[bid] = (addr, uuid)
         except Exception as e:
             print('Error while loading beacons', e)
 
