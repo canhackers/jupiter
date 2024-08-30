@@ -208,7 +208,7 @@ def main():
         from navdy import Hud, HudConnector
         # HC = HudConnector()
         # H = Hud(HC, DASH)
-        H = Hud()
+        H = Hud(DASH)
         H.start()
 
         # async def hud_connect():

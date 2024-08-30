@@ -90,13 +90,14 @@ class Hud(threading.Thread):
         self.thread_online = True
         self.loop = asyncio.new_event_loop()
 
-    def run(self):
+    def start_event_loop(self):
         asyncio.set_event_loop(self.loop)
         self.loop.create_task(self.connector.connect_hud())
         self.loop.create_task(self.connector.monitor_connection())
-
-        # 이벤트 루프를 지속적으로 실행
         self.loop.run_forever()
+    def run(self):
+        loop_thread = threading.Thread(target=self.start_event_loop)
+        loop_thread.start()
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
