@@ -205,25 +205,13 @@ def main():
     J.start()
 
     if settings.get('NavdyHud'):
-        from navdy import Hud, HudConnector
-        # HC = HudConnector()
-        # H = Hud(HC, DASH)
+        from navdy import Hud
         H = Hud(DASH)
         H.start()
 
-        # async def hud_connect():
-        #     await asyncio.gather(
-        #         HC.connect_hud(),
-        #         HC.monitor_connection()
-        #     )
-
-        # try:
-        #     asyncio.run(hud_connect())
-        # finally:
-        #     J.stop()
-        #     H.stop()
-        #     J.join()
-        #     H.join()
+    from beacon import HolyIoT
+    B = HolyIoT(None)
+    B.start()
 
 
 if __name__ == '__main__':
