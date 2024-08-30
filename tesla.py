@@ -142,6 +142,7 @@ class Dashboard:
         self.wiper_state = 0
         self.wiper_off_request = 0
         self.mirror_folded = [0, 0]  # folded 1, unfolded 0
+        self.navdy_connected = 0
         self.beacon = {}
 
     def update(self, name, signal):

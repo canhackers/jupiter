@@ -216,6 +216,9 @@ def main():
         H = Hud(DASH)
         H.start()
 
+    while DASH.navdy_connected == 0:
+        time.sleep(5)
+
     from beacon import HolyIoT
     B = HolyIoT(DASH)
     B.start()

@@ -93,6 +93,29 @@ class HolyIoT(threading.Thread):
         print('Searching Beacons')
         registered_beacons = {}
 
+        candidate = []
+
+        try:
+            with open(filename, 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    bid, addr, uuid = line.split(',')
+                    candidate.append([bid.strip(), addr.strip(), uuid.strip()])
+
+        except Exception as e:
+            print('Error while loading beacons', e)
+
+        for (bid, addr, uuid) in candidate:
+            os.system(f"echo 'disconnect {addr}' | bluetoothctl")
+            await asyncio.sleep(1)
+
+        available_beacons = await scan_beacons(beacon_keyword)
+
+        for (bid, addr, uuid) in candidate:
+            if addr in available_beacons:
+                print(f'ID: {bid} beacon MAC: {addr} UUID: {uuid} registered')
+                registered_beacons[bid] = (addr, uuid)
+
         if not os.path.exists(filename):
             with open(filename, 'w') as f:
                 for idx, mac in enumerate(available_beacons):
@@ -101,26 +124,6 @@ class HolyIoT(threading.Thread):
                         f.write(f'{idx + 1}, {mac}, {uuid}\n')
                     else:
                         print(f"Failed to retrieve characteristics for {mac}.")
-        try:
-            candidate = []
-            with open(filename, 'r') as f:
-                lines = f.readlines()
-                for line in lines:
-                    bid, addr, uuid = line.split(',')
-                    candidate.append([bid.strip(), addr.strip(), uuid.strip()])
-
-            for (bid, addr, uuid) in candidate:
-                os.system(f"echo 'disconnect {addr}' | bluetoothctl")
-                await asyncio.sleep(1)
-
-            available_beacons = await scan_beacons(beacon_keyword)
-
-            for (bid, addr, uuid) in candidate:
-                if addr in available_beacons:
-                    print(f'ID: {bid} beacon MAC: {addr} UUID: {uuid} registered')
-                    registered_beacons[bid] = (addr, uuid)
-        except Exception as e:
-            print('Error while loading beacons', e)
 
         UUIDs = []
         if self.dash is not None:
