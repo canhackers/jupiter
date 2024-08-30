@@ -131,6 +131,9 @@ class Jupiter(threading.Thread):
                     self.dash.device_temp = self.vcgm.measure_temp()
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
 
+                    for bid, val in self.dash.beacon.items():
+                        print(f'{bid} value is now {val}')
+
                     ##### Log writer ######
                     if (LOGGER.file is not None):
                         LOGGER.write()
@@ -172,9 +175,6 @@ class Jupiter(threading.Thread):
                 if address == 0x2f3:
                     ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
                     signal = FRESH.check(bus, address, signal)
-
-                for bid, val in self.dash.beacon.items():
-                    print(f'{bid} value is now {val}')
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
