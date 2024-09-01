@@ -25,7 +25,9 @@ def load_settings():
         'KickDown' : 1,
         'KeepWiperSpeed': 1,
         'SlowWiper' : 1,
-        'AltTurnSignal' : 1
+        'AltTurnSignal' : 1,
+        'AutoFollowingDistance' : 1,
+        'NavdyHud' : 0
     }
     if not os.path.exists(json_file):
         # 설정 파일이 없으면 기본 설정 파일 생성

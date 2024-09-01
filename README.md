@@ -126,5 +126,29 @@ dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=2000000<
 14. <b>sudo reboot</b>으로 재부팅합니다.<br>
 </p>
 <br><br><br>
+<p>
+★ NAVDY HUD 지원은 별도의 개조된 전용 펌웨어가 필요합니다.<br>
+단종으로 인해 구하기 힘든 물건이니 참고하시고, 기존 보유자 중 전용 펌웨어를 사용 중이지 않는 분은 카페 채팅으로 별도 문의 바랍니다.<br>
+사용을 위해서는 Clone 후 Jupiter 기기의 /home 경로에 mac_address 파일을 만들어 00:00:00:00:00:00 형태로 본인 기기의 Mac Address를 넣어야 합니다.<br>
+또한 jupiter_settings에 Navdy 사용을 활성화 시켜야 합니다. 이 설정 파일은 주피터 최초 구동 후 생성되니 위 단계를 마치고 재부팅 후 수정하세요<br>
+<br>
+<b>sudo apt-get install python3-dev</b><br>
+<br>
+<b>sudo apt-get install libbluetooth-dev</b><br>
+<br>
+<b>source ./bin/activate</b><br>
+<br>
+<b>pip3 install git+https://github.com/pybluez/pybluez.git#egg=PyBluez</b><br>
+<br>
+<b>sudo nano /home/jupiter_settings.json</b><br>
+<br>
+'NavdyHud' : 0    →  1로 수정 후  (Ctrl-X, Y로 저장)<br>
+<br>
+<b>sudo nano /home/mac_address</b><br>
+<br>
+Navdy MAC Address 입력 <b>54:ED:A3:xx:xx:xx</b> (Ctrl-X, Y로 저장)<br>
+<br>
+<b>sudo reboot</b><br>
+</p>
 </body>
 </html>
