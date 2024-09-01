@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, MapLampControl, FreshAir, \
-    KickDown, TurnSignal, monitoring_addrs
+    KickDown, TurnSignal, Reboot, monitoring_addrs
 
 
 class Jupiter(threading.Thread):
@@ -48,6 +48,7 @@ class Jupiter(threading.Thread):
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
+        REBOOT = Reboot(self.dash)
 
         while True:
             current_time = time.time()
@@ -158,6 +159,9 @@ class Jupiter(threading.Thread):
                     signal = TURNSIGNAL.check(bus, address, signal)
                     ##### 오토파일럿이 우측 다이얼 조작을 통한 거리 설정을 인지하게 하기 위함 #####
                     signal = AP.check(bus, address, signal)
+                    ##### 재부팅 명령 모니터링 ###
+                    signal = REBOOT.check(bus, address, signal)
+
                 if address == 0x334:
                     ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
                     signal = KICKDOWN.check(bus, address, signal)
