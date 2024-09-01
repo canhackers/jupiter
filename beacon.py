@@ -76,9 +76,10 @@ class HolyIoT(threading.Thread):
         if not self.uuids:
             print("No beacons to monitor, stopping.")
             return
-        tasks = [asyncio.create_task(self.monitor_beacon(bid, mac, uuid)) for (bid, mac, uuid) in self.uuids]
-        print(f'Beacons Ready to Listen')
-        await asyncio.gather(*tasks, return_exceptions=True)  # 비콘을 병렬로 모니터링, 예외 처리 추가
+        if self.dash is not None:
+            tasks = [asyncio.create_task(self.monitor_beacon(bid, mac, uuid)) for (bid, mac, uuid) in self.uuids]
+            print(f'Beacons Ready to Listen')
+            await asyncio.gather(*tasks, return_exceptions=True)  # 비콘을 병렬로 모니터링, 예외 처리 추가
 
     def run(self):
         asyncio.set_event_loop(self.loop)
@@ -90,11 +91,11 @@ class HolyIoT(threading.Thread):
         self.loop.call_soon_threadsafe(self.loop.stop)
 
     async def get_uuids(self):
-        print('Searching Beacons')
         registered_beacons = {}
 
         candidate = []
 
+        print('Loading saved beacon addresses...')
         try:
             with open(filename, 'r') as f:
                 lines = f.readlines()
@@ -102,13 +103,15 @@ class HolyIoT(threading.Thread):
                     bid, addr, uuid = line.split(',')
                     candidate.append([bid.strip(), addr.strip(), uuid.strip()])
 
+            print('disconnect exist beacon connections to make new connections...')
+            for (bid, addr, uuid) in candidate:
+                os.system(f"echo 'disconnect {addr}' | bluetoothctl")
+                await asyncio.sleep(1)
+
         except Exception as e:
             print('Error while loading beacons', e)
 
-        for (bid, addr, uuid) in candidate:
-            os.system(f"echo 'disconnect {addr}' | bluetoothctl")
-            await asyncio.sleep(1)
-
+        print('Searching available beacons...')
         available_beacons = await scan_beacons(beacon_keyword)
 
         for (bid, addr, uuid) in candidate:
@@ -118,6 +121,7 @@ class HolyIoT(threading.Thread):
 
         if not os.path.exists(filename):
             with open(filename, 'w') as f:
+                print('Save available beacon info ...')
                 for idx, mac in enumerate(available_beacons):
                     uuid = await list_characteristics(mac)
                     if uuid:

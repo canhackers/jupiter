@@ -216,8 +216,9 @@ def main():
         H = Hud(DASH)
         H.start()
 
-    while DASH.navdy_connected == 0:
-        time.sleep(5)
+        # Navdy를 쓰는 경우, Beacon 접속 시도가 Navdy 접속에 간섭을 주기 때문에, Navdy 접속 전까지 넘어가지 않도록 한다.
+        while DASH.navdy_connected == 0:
+            time.sleep(5)
 
     from beacon import HolyIoT
     B = HolyIoT(DASH)
