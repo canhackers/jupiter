@@ -4,6 +4,7 @@ import can
 import csv
 import zipfile
 import shutil
+from collections import deque
 from packet_functions import get_value, modify_packet_value, make_new_packet
 
 csv_path = '/home/drive_record/'
@@ -25,8 +26,8 @@ command = {
     'volume_up': bytes.fromhex('29553f0000000000'),
     'speed_down': bytes.fromhex('2955003f00000000'),
     'speed_up': bytes.fromhex('2955000100000000'),
-    'distance_far' : bytes.fromhex('2956000000000000'),
-    'distance_near' : bytes.fromhex('2959000000000000'),
+    'distance_far': bytes.fromhex('2956000000000000'),
+    'distance_near': bytes.fromhex('2959000000000000'),
     'door_open_fl': bytes.fromhex('6000000000000000'),
     'door_open_fr': bytes.fromhex('0003000000000000'),
     'door_open_rl': bytes.fromhex('0018000000000000'),
@@ -52,6 +53,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x31a: 'VCRIGHT_switchStatus',
                     0x528: 'UnixTime',
                     }
+
 
 class Reboot:
     def __init__(self, dash):
@@ -120,6 +122,7 @@ class Dashboard:
         self.gear = 0
         self.accel_pedal_pos = 0
         self.drive_mode = 0
+        self.pedal_map = 0
         self.ui_speed = 0
         self.torque_front = 0
         self.torque_rear = 0
@@ -212,41 +215,7 @@ class Dashboard:
             if (self.occupancy == 1):
                 if time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
-class WelcomeVolume:
-    def __init__(self, sender, device='raspi'):
-        self.sender = sender
-        if device == 'panda':
-            self.device = 'panda'
-            self.tx_frame = None
-        elif device == 'raspi' and type(sender) in (list, tuple):
-            self.device = 'raspi'
-            self.sender = sender[0]
-            self.tx_frame = sender[1]
-            self.tx_frame.channel = 'can0'
-            self.tx_frame.dlc = 8
-            self.tx_frame.arbitration_id = 0x3c2
-            self.tx_frame.is_extended_id = False
-        else:
-            self.device = None
 
-    def run(self):
-        try:
-            if self.device == 'panda':
-                self.sender.can_send(0x3c2, command['volume_up'], 0)
-                time.sleep(0.5)
-                self.sender.can_send(0x3c2, command['volume_down'], 0)
-                time.sleep(0.5)
-            elif self.device == 'raspi':
-                self.tx_frame.data = bytearray(command['volume_down'])
-                self.sender.send(self.tx_frame)
-                time.sleep(0.5)
-                self.tx_frame.data = bytearray(command['volume_up'])
-                self.sender.send(self.tx_frame)
-                time.sleep(0.5)
-            else:
-                pass
-        except Exception as e:
-            print('Welcome 명령 실패\n', e)
 
 class Logger:
     def __init__(self, buffer, dash, cloud=0, enabled=0):
@@ -303,50 +272,81 @@ class Logger:
                         self.csvwriter.writerow([self.dash.clock, 0, str(hex(address)), mux, '0x' + str(signal.hex())])
 
 
-class MapLampControl:
-    def __init__(self, buffer, dash, device='raspi', left=None, right=None):
+class Button:
+    def __init__(self, btn_name):
+        self.name = btn_name
+        self.pressed = 0
+        self.first_pressed_time = 0
+        self.function = {'short': lambda *args, **kwargs: None,
+                         'long': lambda *args, **kwargs: None,
+                         'double': lambda *args, **kwargs: None}
+
+    def action(self, period, args=None):
+        if args:
+            self.function[period](*args)
+        else:
+            self.function[period]()
+
+    def press(self):
+        if self.pressed == 0:
+            self.first_pressed_time = time.time()
+            self.pressed = 1
+        if (self.first_pressed_time != 0) and (
+                time.time() - self.first_pressed_time >= 1):
+            print(f'{self.name} pressed over 1 second')
+            self.action('long')
+            self.first_pressed_time = 0
+
+    def release(self):
+        self.pressed = 0
+        self.first_pressed_time = 0
+
+
+class ButtonControl:
+    def __init__(self, buffer, dash, device='raspi'):
         self.buffer = buffer
         self.dash = dash
         self.device = device
-        self.left_map_light_pressed = 0
-        self.right_map_light_pressed = 0
-        self.left_map_light_first_pressed_time = 0
-        self.right_map_light_first_pressed_time = 0
+        self.buttons = {}
+
+        # 원래 CAN 메시지에 타이밍 맞춰 보내기 위해 사용하는 변수
         self.mirror_request = 0  # 0 중립, 1 접기 2 펴기
         self.fold_request_time = None
         self.door_open_request = 0
         self.door_open_start_time = 0
-        self.left = left
-        self.right = right
+
+    def get_function(self, function_name):
+        if function_name is None:
+            return lambda *args, **kwargs: None
+        if function_name == 'mirror_fold':
+            return self.mirror_fold()
+        if 'open_door' in function_name:
+            return self.open_door(function_name[-2:])
+
+    def add_button(self, btn_name):
+        self.buttons[btn_name] = Button(btn_name)
+
+    def assign(self, btn_name, press_type, function_name):
+        self.buttons[btn_name].function[press_type] = self.get_function(function_name)
 
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x3e2):
-            # Check Left Map Light Long Pressed
-            if get_value(byte_data, 14, 1) == 1:
-                if self.left_map_light_pressed == 0:
-                    self.left_map_light_first_pressed_time = time.time()
-                    self.left_map_light_pressed = 1
-                if (self.left_map_light_first_pressed_time != 0) and (
-                        time.time() - self.left_map_light_first_pressed_time >= 1):
-                    self.left_map_light_switch_long_pressed()
-                    self.left_map_light_first_pressed_time = 0
-            else:
-                self.left_map_light_pressed = 0
-                self.left_map_light_first_pressed_time = 0
+            # Check Map Lamp Pressed
+            map_lamp_left = self.buttons.get('MapLampLeft')
+            map_lamp_right = self.buttons.get('MapLampRight')
+            if map_lamp_left:
+                if get_value(byte_data, 14, 1) == 1:
+                    map_lamp_left.press()
+                else:
+                    map_lamp_left.release()
+            if map_lamp_right:
+                if get_value(byte_data, 15, 1) == 1:
+                    map_lamp_right.press()
+                else:
+                    map_lamp_right.release()
 
-            # Check Right Map Light Long Pressed
-            if get_value(byte_data, 15, 1) == 1:
-                if self.right_map_light_pressed == 0:
-                    self.right_map_light_first_pressed_time = time.time()
-                    self.right_map_light_pressed = 1
-                if (self.right_map_light_first_pressed_time != 0) and (
-                        time.time() - self.right_map_light_first_pressed_time >= 1):
-                    self.right_map_light_switch_long_pressed()
-                    self.right_map_light_first_pressed_time = 0
-            else:
-                self.right_map_light_pressed = 0
-                self.right_map_light_first_pressed_time = 0
 
+        # Mirror Action
         if (bus == 0) and (address == 0x273):
             if self.mirror_request in [1, 2]:
                 ret = modify_packet_value(byte_data, 24, 2, self.mirror_request)
@@ -354,6 +354,7 @@ class MapLampControl:
                 self.mirror_request = 0
                 return ret
 
+        # Door Open Action
         if (bus == 0) and (address == 0x1f9):
             if self.door_open_request == 0:
                 pass
@@ -366,40 +367,25 @@ class MapLampControl:
                 return ret
         return byte_data
 
+    # Action 함수들
     def mirror_fold(self):
         if self.dash.mirror_folded[0] == 1 or self.dash.mirror_folded[1] == 1:
             self.mirror_request = 2
         else:
             self.mirror_request = 1
 
-    def open_door(self):
+    def open_door(self, loc):
         if self.dash.parked == 1:
             indices = {'fl': 1, 'fr': 2, 'rl': 3, 'rr': 4}
-            pos = indices.get(self.right[-2:])
+            pos = indices.get(loc)
             if pos:
                 self.door_open_request = pos
 
-    def my_function(self):
-        print('Do Nothing')
-
-    def left_map_light_switch_long_pressed(self):
-        print('Left Map Switch Pressed over 1 second')
-        if self.left == 'mirror_fold':
-            self.mirror_fold()
-        elif self.left == 'my_function':
-            self.my_function()
-
-    def right_map_light_switch_long_pressed(self):
-        print('Right Map Switch Pressed over 1 second')
-        if 'open_door' in self.right:
-            self.open_door()
-        elif self.right == 'my_function':
-            # 현재 사용하지 않는 예비 기능
-            self.my_function()
 
 
 class Autopilot:
-    def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed = 0, slow_wiper=0, auto_distance=0):
+    def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed=0, slow_wiper=0,
+                 auto_distance=0):
         self.timer = 0
         self.buffer = buffer
         self.dash = dash
@@ -415,6 +401,7 @@ class Autopilot:
         self.keep_wiper_speed = keep_wiper_speed
         self.slow_wiper = slow_wiper
         self.auto_distance = auto_distance
+        self.manual_distance = 0
         if sender is not None:
             self.sender = sender
             if device == 'panda':
@@ -432,10 +419,27 @@ class Autopilot:
         self.distance_target = 3
         self.distance_far_pressed = 0
         self.distance_near_pressed = 0
+        self.speed_deque = deque([0, 0, 0])
+        self.smooth_speed = 0
         self.reset_distance()
 
     def run(self):
-        # from Spleck's github (https://github.com/spleck/panda)
+        # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
+        self.speed_deque.popleft()
+        self.speed_deque.append(self.dash.ui_speed)
+        self.smooth_speed = sum(s for _, s in self.speed_deque) / 3
+        if self.auto_distance and not self.manual_distance and self.autosteer:
+            if self.smooth_speed <= 60:
+                self.distance_target = 3
+            elif self.smooth_speed <= 80:
+                self.distance_target = 4
+            elif self.smooth_speed <= 100:
+                self.distance_target = 5
+            else:
+                self.distance_target = 6
+            self.set_distance(self.distance_target)
+
+        # Mars Mode from Spleck's github (https://github.com/spleck/panda)
         # 운전 중 스티어링 휠을 잡고 정확히 조향하는 것은 운전자의 의무입니다.
         # 미국 생산 차량에서만 다이얼을 이용한 NAG 제거가 유효하며, 중국 생산차량은 적용되지 않습니다.
         if (self.mars_mode) and (self.autosteer == 1) and (self.nag_disabled == 1):
@@ -495,7 +499,7 @@ class Autopilot:
         except Exception as e:
             print('Failed to set distance\n', e)
 
-    def set_distance(self, target = None):
+    def set_distance(self, target=None):
         if target:
             distance_target = target
         else:
@@ -514,16 +518,17 @@ class Autopilot:
             click_cnt = abs(gap)
             if gap > 0:
                 cmd = command['distance_far']
+                tx_frame.data = bytearray(cmd)
             else:
                 cmd = command['distance_near']
+                tx_frame.data = bytearray(cmd)
             for i in range(click_cnt):
                 if self.device == 'panda':
                     self.sender.can_send(0x3c2, cmd, 0)
                 elif self.device == 'raspi':
-                    tx_frame.data = bytearray(cmd)
                     self.sender.send(tx_frame)
-                time.sleep(0.2)
-        self.distance_current = distance_target
+                time.sleep(0.25)
+            self.distance_current = distance_target
 
     def disengage_autopilot(self):
         print('Autopilot Disengaged')
@@ -535,6 +540,7 @@ class Autopilot:
         self.gear_down_pressed = 0
         self.nag_disabled = 0
         self.dash.nag_disabled = 0
+        print(f'current distance : {self.distance_current}, current target : {self.distance_target}')
 
     def engage_autopilot(self):
         self.gear_down_pressed = 0
@@ -544,7 +550,9 @@ class Autopilot:
         self.dash.autopilot = 1
         self.first_down_time = 0
         self.timer = 0
-        self.set_distance()
+        if self.manual_distance == 1:
+            self.set_distance(self.distance_target)
+            self.manual_distance = 0
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
@@ -661,8 +669,10 @@ class Autopilot:
                 # 수동으로 조작한 거리 단계는 타겟으로 인정. 다음 오토파일럿을 걸 때 목표로 자동 세팅
                 if self.tacc or self.autosteer:
                     self.distance_target = self.distance_current
+                    self.manual_distance = 1
 
         return byte_data
+
 
 class RearCenterBuckle:
     def __init__(self, buffer, mode=0):
@@ -735,6 +745,7 @@ class FreshAir:
                 return ret
         return byte_data
 
+
 class KickDown:
     def __init__(self, buffer, dash, enabled=0):
         self.buffer = buffer
@@ -763,6 +774,7 @@ class KickDown:
 
         return byte_data
 
+
 class TurnSignal:
     def __init__(self, buffer, dash, enabled=0):
         # up = right = 4,  down = left = 8
@@ -773,7 +785,7 @@ class TurnSignal:
         self.buffer = buffer
         self.dash = dash
         self.enabled = enabled
-        self.turn_indicator = 0     # 8 = left, 4 = right, 6 = left half, 2 = right half
+        self.turn_indicator = 0  # 8 = left, 4 = right, 6 = left half, 2 = right half
         self.right_dial_click_time = 0
 
     def check(self, bus, address, byte_data):

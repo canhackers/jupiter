@@ -5,7 +5,7 @@ import threading
 import asyncio
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, MapLampControl, FreshAir, \
+from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonControl, FreshAir, \
     KickDown, TurnSignal, Reboot, monitoring_addrs
 
 
@@ -43,13 +43,15 @@ class Jupiter(threading.Thread):
                        auto_distance=self.settings.get('AutoFollowingDistance'))
 
         BUCKLE = RearCenterBuckle(BUFFER, mode=self.settings.get('RearCenterBuckle'))
-        MAPLAMP = MapLampControl(BUFFER, self.dash, device='raspi',
-                                 left=self.settings.get('MapLampLeft'),
-                                 right=self.settings.get('MapLampRight'))
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
         REBOOT = Reboot(self.dash)
+        BUTTON = ButtonControl(BUFFER, self.dash, device='raspi')
+        for btn in ('MapLampLeft', 'MapLampRight'):
+            if self.settings.get(btn):
+                BUTTON.add_button(btn_name=btn)
+                BUTTON.assign(btn_name=btn, press_type='long', function_name=self.settings.get(btn))
 
         while True:
             current_time = time.time()
@@ -144,18 +146,18 @@ class Jupiter(threading.Thread):
 
                 # 실시간 패킷 인식 및 변조
                 if address == 0x1f9:
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x249:
                     ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
                     signal = TURNSIGNAL.check(bus, address, signal)
                 if address == 0x3e2:
                     ##### 맵등 버튼을 길게 눌러 기능을 제공하기 위해, 눌림 상태를 점검 #####
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x273:
                     ##### 와이퍼 상태 유지 #####
                     signal = AP.check(bus, address, signal)
                     ##### 미러 폴딩 기능 동작 #####
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x3c2:
                     ##### 주행 중 뒷좌석 가운데 안전벨트 체크 해제 #####
                     signal = BUCKLE.check(bus, address, signal)
