@@ -351,7 +351,7 @@ class ButtonControl:
                     map_lamp_left.release()
             if map_lamp_right:
                 if get_value(byte_data, 15, 1) == 1:
-                    map_lamp_right.press('open_door_rr')
+                    map_lamp_right.press('rr')
                 else:
                     map_lamp_right.release()
 
