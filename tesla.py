@@ -436,8 +436,8 @@ class Autopilot:
         self.speed_deque.popleft()
         self.speed_deque.append(self.dash.ui_speed)
         self.smooth_speed = sum(s for s in self.speed_deque) / 3
+        print('auto pilot status', self.auto_distancem, self.manual_distance, self.autosteer)
         if self.auto_distance and not self.manual_distance and self.autosteer:
-
             if self.smooth_speed <= 60:
                 self.distance_target = 3
             elif self.smooth_speed <= 80:
