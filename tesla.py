@@ -286,7 +286,10 @@ class Button:
 
     def action(self, period, args=None):
         if args:
-            self.function[period](*args)
+            if type(args) in [list, tuple]:
+                self.function[period](*args)
+            else:
+                self.function[period](args)
         else:
             self.function[period]()
 
