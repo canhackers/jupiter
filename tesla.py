@@ -319,9 +319,9 @@ class ButtonControl:
         if function_name is None:
             return lambda *args, **kwargs: None
         if function_name == 'mirror_fold':
-            return self.mirror_fold()
+            return self.mirror_fold
         if 'open_door' in function_name:
-            return self.open_door(function_name[-2:])
+            return self.open_door
 
     def add_button(self, btn_name):
         self.buttons[btn_name] = Button(btn_name)
