@@ -327,6 +327,7 @@ class ButtonControl:
         self.buttons[btn_name] = Button(btn_name)
 
     def assign(self, btn_name, press_type, function_name):
+        print(f'{btn_name} 버튼을 {press_type} 할 때 {function_name}에 연결')
         self.buttons[btn_name].function[press_type] = self.get_function(function_name)
 
     def check(self, bus, address, byte_data):
