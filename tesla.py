@@ -287,14 +287,17 @@ class Button:
         else:
             self.function[period]()
 
-    def press(self):
+    def press(self, args=None):
         if self.pressed == 0:
             self.first_pressed_time = time.time()
             self.pressed = 1
         if (self.first_pressed_time != 0) and (
                 time.time() - self.first_pressed_time >= 1):
             print(f'{self.name} pressed over 1 second')
-            self.action('long')
+            if args:
+                self.action('long', args)
+            else:
+                self.action('long')
             self.first_pressed_time = 0
 
     def release(self):
