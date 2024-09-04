@@ -427,7 +427,7 @@ class Autopilot:
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
         self.speed_deque.popleft()
         self.speed_deque.append(self.dash.ui_speed)
-        self.smooth_speed = sum(s for _, s in self.speed_deque) / 3
+        self.smooth_speed = sum(s for s in self.speed_deque) / 3
         if self.auto_distance and not self.manual_distance and self.autosteer:
             if self.smooth_speed <= 60:
                 self.distance_target = 3
