@@ -437,6 +437,7 @@ class Autopilot:
         self.speed_deque.append(self.dash.ui_speed)
         self.smooth_speed = sum(s for s in self.speed_deque) / 3
         if self.auto_distance and not self.manual_distance and self.autosteer:
+
             if self.smooth_speed <= 60:
                 self.distance_target = 3
             elif self.smooth_speed <= 80:
@@ -445,6 +446,7 @@ class Autopilot:
                 self.distance_target = 5
             else:
                 self.distance_target = 6
+            print(self.smooth_speed, self.distance_target)
             self.set_distance(self.distance_target)
 
         # Mars Mode from Spleck's github (https://github.com/spleck/panda)
