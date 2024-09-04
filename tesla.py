@@ -280,6 +280,9 @@ class Button:
         self.function = {'short': lambda *args, **kwargs: None,
                          'long': lambda *args, **kwargs: None,
                          'double': lambda *args, **kwargs: None}
+        self.function_name = {'short': 'Undefined',
+                              'long': 'Undefined',
+                              'double': 'Undefined'}
 
     def action(self, period, args=None):
         if args:
@@ -332,7 +335,7 @@ class ButtonControl:
     def assign(self, btn_name, press_type, function_name):
         print(f'{btn_name} 버튼을 {press_type} 할 때 {function_name}에 연결')
         self.buttons[btn_name].function[press_type] = self.get_function(function_name)
-
+        self.buttons[btn_name].function_name[press_type] = function_name
     def check(self, bus, address, byte_data):
         if (bus == 0) and (address == 0x3e2):
             # Check Map Lamp Pressed
@@ -345,10 +348,9 @@ class ButtonControl:
                     map_lamp_left.release()
             if map_lamp_right:
                 if get_value(byte_data, 15, 1) == 1:
-                    map_lamp_right.press()
+                    map_lamp_right.press('open_door_rr')
                 else:
                     map_lamp_right.release()
-
 
         # Mirror Action
         if (bus == 0) and (address == 0x273):
@@ -384,7 +386,6 @@ class ButtonControl:
             pos = indices.get(loc)
             if pos:
                 self.door_open_request = pos
-
 
 
 class Autopilot:
