@@ -448,7 +448,7 @@ class Autopilot:
                 self.distance_target = 4
             else:
                 self.distance_target = 5
-            if self.timer < 5:
+            if self.timer == 0:
                 self.set_distance(self.distance_target)
 
         # Mars Mode from Spleck's github (https://github.com/spleck/panda)
@@ -541,7 +541,7 @@ class Autopilot:
                     self.sender.can_send(0x3c2, cmd, 0)
                 elif self.device == 'raspi':
                     self.sender.send(tx_frame)
-                time.sleep(0.25)
+                time.sleep(0.3)
             self.distance_current = distance_target
 
     def disengage_autopilot(self):
