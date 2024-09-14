@@ -42,7 +42,7 @@ class Jupiter(threading.Thread):
                        slow_wiper=self.settings.get('SlowWiper'),
                        auto_distance=self.settings.get('AutoFollowingDistance'))
 
-        BUCKLE = RearCenterBuckle(BUFFER, mode=self.settings.get('RearCenterBuckle'))
+        BUCKLE = RearCenterBuckle(BUFFER, self.dash, mode=self.settings.get('RearCenterBuckle'))
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
@@ -77,9 +77,10 @@ class Jupiter(threading.Thread):
                         print('bus error counted')
                         self.dash.bus_error_count += 1
                         last_recv_time = time.time()
-            elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
+            elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
                 print('Waiting until CAN Bus Connecting...',
                       time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
+                initialize_canbus_connection()
                 last_recv_time = time.time()
 
             ###################################################

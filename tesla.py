@@ -437,28 +437,33 @@ class Autopilot:
         self.speed_deque.append(self.dash.ui_speed)
         self.smooth_speed = sum(s for s in self.speed_deque) / 3
         if self.auto_distance and not self.manual_distance and self.autosteer:
-            if self.smooth_speed <= 60:
+            if self.smoothe_speed <= 20:
                 self.distance_target = 3
+            elif self.smooth_speed <= 60:
+                self.distance_target = 2
             elif self.smooth_speed <= 80:
-                self.distance_target = 4
+                self.distance_target = 3
             elif self.smooth_speed <= 100:
-                self.distance_target = 5
+                self.distance_target = 4
             else:
-                self.distance_target = 6
-            self.set_distance(self.distance_target)
+                self.distance_target = 5
 
         # Mars Mode from Spleck's github (https://github.com/spleck/panda)
         # 운전 중 스티어링 휠을 잡고 정확히 조향하는 것은 운전자의 의무입니다.
         # 미국 생산 차량에서만 다이얼을 이용한 NAG 제거가 유효하며, 중국 생산차량은 적용되지 않습니다.
         if (self.mars_mode) and (self.autosteer == 1) and (self.nag_disabled == 1):
             self.timer += 1
-            if self.timer == 6:
+            if self.timer < 5:
+                self.set_distance(self.distance_target)
+            elif self.timer == 6:
                 print('Right Scroll Wheel Down')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_down'])
             elif self.timer >= 7:
                 print('Right Scroll Wheel Up')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
                 self.timer = 0
+        else:
+            self.set_distance(self.distance_target)
 
     def volume_updown(self):
         try:
@@ -645,7 +650,7 @@ class Autopilot:
                     self.nag_disabled = 1
                     self.dash.nag_disabled = 1
                     print('NAG Eliminator Activated')
-                    self.volume_updown()
+                    # self.volume_updown()
             elif self.current_gear_position == 0:
                 if (self.autosteer == 0) and (self.first_down_time != 0) and (
                         time.time() - self.gear_pressed_time) >= 1:
@@ -684,9 +689,10 @@ class Autopilot:
 
 
 class RearCenterBuckle:
-    def __init__(self, buffer, mode=0):
+    def __init__(self, buffer, dash, mode=0):
         self.buffer = buffer
         self.mode = mode
+        self.dash = dash
         # mode: 0/None - 비활성화, 1 - 뒷좌석 중앙만, 2 - 모두
 
     def check(self, bus, address, byte_data):
@@ -695,10 +701,11 @@ class RearCenterBuckle:
         mux = get_value(byte_data, loc=0, length=2, endian='little', signed=False)
         if mux == 0:
             if self.mode == 1:
-                # 뒷좌석 가운데자리 착좌센서 끄고, 안전벨트 스위치 켜기
-                ret = modify_packet_value(byte_data, 54, 2, 1)
-                ret = modify_packet_value(ret, 62, 2, 2)
-                self.buffer.write_message_buffer(bus, address, ret)
+                # 뒷좌석 좌, 우 어느 한 쪽에 사람이 앉아 있는 상태에서 가운데에 착좌가 인식되는 경우 안전벨트 스위치 켜기
+                if self.dash.passenger[2] == 1 or self.dash.passenger[4] == 1:
+                    if self.dash.passenger[3] == 1:
+                        ret = modify_packet_value(byte_data, 62, 2, 2)
+                        self.buffer.write_message_buffer(bus, address, ret)
             elif self.mode == 2:
                 # ★★★★ Warning : 뒷좌석 안전벨트 미착용 상태로 승객을 태우는 것은 매우 위험하며, 도로교통법 위반입니다. ★★★★★
                 # 짐을 쌓은 상태로 부득이 정리가 어려운 경우에만 사용하세요.
