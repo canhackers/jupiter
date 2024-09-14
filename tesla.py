@@ -542,7 +542,7 @@ class Autopilot:
                 elif self.device == 'raspi':
                     self.sender.send(tx_frame)
                 if gap > 0:
-                    self.distance_current ÷= 1
+                    self.distance_current += 1
                 elif gap < 0:
                     self.distance_current -= 1
 
