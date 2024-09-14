@@ -698,26 +698,26 @@ class RearCenterBuckle:
     def check(self, bus, address, byte_data):
         if not self.mode:
             return False
-        mux = get_value(byte_data, loc=0, length=2, endian='little', signed=False)
+        ret = byte_data
+        mux = get_value(ret, loc=0, length=2, endian='little', signed=False)
         if mux == 0:
             if self.mode == 1:
                 # 뒷좌석 좌, 우 어느 한 쪽에 사람이 앉아 있는 상태에서 가운데에 착좌가 인식되는 경우 안전벨트 스위치 켜기
                 if self.dash.passenger[2] == 1 or self.dash.passenger[4] == 1:
                     if self.dash.passenger[3] == 1:
-                        ret = modify_packet_value(byte_data, 62, 2, 2)
+                        ret = modify_packet_value(ret, 62, 2, 2)
                         self.buffer.write_message_buffer(bus, address, ret)
             elif self.mode == 2:
                 # ★★★★ Warning : 뒷좌석 안전벨트 미착용 상태로 승객을 태우는 것은 매우 위험하며, 도로교통법 위반입니다. ★★★★★
                 # 짐을 쌓은 상태로 부득이 정리가 어려운 경우에만 사용하세요.
-                ret = modify_packet_value(byte_data, 54, 2, 1)
+                ret = modify_packet_value(ret, 54, 2, 1)
                 ret = modify_packet_value(ret, 62, 2, 2)
                 # Disable rearLeftOccupancySwitch
                 ret = modify_packet_value(ret, 56, 2, 1)
                 # Disable rearRightOccupancySwitch
                 ret = modify_packet_value(ret, 58, 2, 1)
                 self.buffer.write_message_buffer(bus, address, ret)
-            return ret
-        return byte_data
+        return ret
 
 
 class FreshAir:
