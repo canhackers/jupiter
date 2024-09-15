@@ -524,27 +524,32 @@ class Autopilot:
             return
         else:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
-            tx_frame = can.Message()
-            tx_frame.channel = 'can0'
-            tx_frame.dlc = 8
-            tx_frame.arbitration_id = 0x3c2
-            tx_frame.is_extended_id = False
-            click_cnt = abs(gap)
+            # tx_frame = can.Message()
+            # tx_frame.channel = 'can0'
+            # tx_frame.dlc = 8
+            # tx_frame.arbitration_id = 0x3c2
+            # tx_frame.is_extended_id = False
+            # click_cnt = abs(gap)
             if gap > 0:
                 cmd = command['distance_far']
-                tx_frame.data = bytearray(cmd)
+                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                self.distance_current += 1
+                # tx_frame.data = bytearray(cmd)
             else:
                 cmd = command['distance_near']
-                tx_frame.data = bytearray(cmd)
-            if click_cnt > 0:
-                if self.device == 'panda':
-                    self.sender.can_send(0x3c2, cmd, 0)
-                elif self.device == 'raspi':
-                    self.sender.send(tx_frame)
-                if gap > 0:
-                    self.distance_current += 1
-                elif gap < 0:
-                    self.distance_current -= 1
+                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                self.distance_current -= 1
+                # tx_frame.data = bytearray(cmd)
+            # if click_cnt > 0:
+                # self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                # if self.device == 'panda':
+                #     self.sender.can_send(0x3c2, cmd, 0)
+                # elif self.device == 'raspi':
+                #    self.sender.send(tx_frame)
+                # if gap > 0:
+                #    self.distance_current += 1
+                # elif gap < 0:
+                #    self.distance_current -= 1
 
     def disengage_autopilot(self):
         print('Autopilot Disengaged')
