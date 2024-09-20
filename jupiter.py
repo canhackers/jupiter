@@ -2,9 +2,10 @@ import os
 import time
 import can
 import threading
+import asyncio
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, MapLampControl, FreshAir, \
+from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonControl, FreshAir, \
     KickDown, TurnSignal, Reboot, monitoring_addrs
 
 
@@ -41,14 +42,16 @@ class Jupiter(threading.Thread):
                        slow_wiper=self.settings.get('SlowWiper'),
                        auto_distance=self.settings.get('AutoFollowingDistance'))
 
-        BUCKLE = RearCenterBuckle(BUFFER, mode=self.settings.get('RearCenterBuckle'))
-        MAPLAMP = MapLampControl(BUFFER, self.dash, device='raspi',
-                                 left=self.settings.get('MapLampLeft'),
-                                 right=self.settings.get('MapLampRight'))
+        BUCKLE = RearCenterBuckle(BUFFER, self.dash, mode=self.settings.get('RearCenterBuckle'))
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
         REBOOT = Reboot(self.dash)
+        BUTTON = ButtonControl(BUFFER, self.dash, device='raspi')
+        for btn in ('MapLampLeft', 'MapLampRight'):
+            if self.settings.get(btn):
+                BUTTON.add_button(btn_name=btn)
+                BUTTON.assign(btn_name=btn, press_type='long', function_name=self.settings.get(btn))
 
         while True:
             current_time = time.time()
@@ -74,9 +77,10 @@ class Jupiter(threading.Thread):
                         print('bus error counted')
                         self.dash.bus_error_count += 1
                         last_recv_time = time.time()
-            elif (bus_connected == 0) and (current_time - last_recv_time >= 5):
+            elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
                 print('Waiting until CAN Bus Connecting...',
                       time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
+                initialize_canbus_connection()
                 last_recv_time = time.time()
 
             ###################################################
@@ -131,6 +135,9 @@ class Jupiter(threading.Thread):
                     self.dash.device_temp = self.vcgm.measure_temp()
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
 
+                    # for bid, val in self.dash.beacon.items():
+                    #     print(f'{bid} value is now {val}')
+
                     ##### Log writer ######
                     if (LOGGER.file is not None):
                         LOGGER.write()
@@ -140,18 +147,18 @@ class Jupiter(threading.Thread):
 
                 # 실시간 패킷 인식 및 변조
                 if address == 0x1f9:
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x249:
                     ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
                     signal = TURNSIGNAL.check(bus, address, signal)
                 if address == 0x3e2:
                     ##### 맵등 버튼을 길게 눌러 기능을 제공하기 위해, 눌림 상태를 점검 #####
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x273:
                     ##### 와이퍼 상태 유지 #####
                     signal = AP.check(bus, address, signal)
                     ##### 미러 폴딩 기능 동작 #####
-                    signal = MAPLAMP.check(bus, address, signal)
+                    signal = BUTTON.check(bus, address, signal)
                 if address == 0x3c2:
                     ##### 주행 중 뒷좌석 가운데 안전벨트 체크 해제 #####
                     signal = BUCKLE.check(bus, address, signal)
@@ -211,6 +218,15 @@ def main():
         from navdy import Hud
         H = Hud(DASH)
         H.start()
+
+        # Navdy를 쓰는 경우, Beacon 접속 시도가 Navdy 접속에 간섭을 주기 때문에, Navdy 접속 전까지 넘어가지 않도록 한다.
+        while DASH.navdy_connected == 0:
+            time.sleep(5)
+
+    from beacon import HolyIoT
+    B = HolyIoT(DASH)
+    B.start()
+
 
 if __name__ == '__main__':
     main()

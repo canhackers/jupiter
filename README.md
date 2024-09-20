@@ -114,7 +114,8 @@ dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=2000000<
   12-2. <b>source activate</b><br>
   12-3. <b>pip install python-can</b>       (canbus 통신 모듈)<br>
         <b>pip install vcgencmd</b>         (온도 모니터링용 모듈)<br>
-  12-4. <b>deactivate</b><br>
+  12-4. <b>pip install bleak</b>            (비콘 버튼 구동용 모듈)<br>
+  12-5. <b>deactivate</b><br>
 <br>
 13. 자동 실행 환경 만들기<br>
   13-1. <b>sudo nano /etc/rc.local</b><br>
@@ -131,6 +132,21 @@ dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25,spimaxfrequency=2000000<
 단종으로 인해 구하기 힘든 물건이니 참고하시고, 기존 보유자 중 전용 펌웨어를 사용 중이지 않는 분은 카페 채팅으로 별도 문의 바랍니다.<br>
 사용을 위해서는 Clone 후 Jupiter 기기의 /home 경로에 mac_address 파일을 만들어 00:00:00:00:00:00 형태로 본인 기기의 Mac Address를 넣어야 합니다.<br>
 또한 jupiter_settings에 Navdy 사용을 활성화 시켜야 합니다. 이 설정 파일은 주피터 최초 구동 후 생성되니 위 단계를 마치고 재부팅 후 수정하세요<br>
+<br>
+기본 설치법 외에 추가로 블루투스 페어링 절차가 필요합니다.<br>
+<br><br>
+<b>sudo bluetoothctl</b><br>
+<br>
+<b>scan on</b>  (접속 가능한 블루투스 장치 목록이 뜹니다. Navdy를 찾으면 MAC Address도 알 수 있습니다.)<br>
+<br>
+<b>pair 54:ED:A3:xx:xx:xx</b>  (본인 Navdy의 MAC Address를 찾아서)<br>
+<br>
+confirm passkey 질문에서 yes 입력, Navdy에서도 Confirm을 눌러줘야 합니다.<br>
+<br>
+<b>trust 54:ED:A3:xx:xx:xx</b>  (본인 Navdy의 MAC Address를 찾아서)<br>
+<br>
+<b>exit</b> (bluetoothctl 빠져 나오기)<br>
+<br>
 <br>
 <b>sudo apt-get install python3-dev</b><br>
 <br>

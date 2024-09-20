@@ -104,6 +104,8 @@ class Hud(threading.Thread):
             if not self.navdy.connected:
                 time.sleep(5)
                 continue
+            else:
+                self.dash.navdy_connected = 1
             time.sleep(0.2)
             current_time = self.dash.current_time
             try:
