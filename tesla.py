@@ -502,7 +502,47 @@ class Button:
         self.long_click_timer.start()
 
     def handle_long_click(self):
-        with se
+        with self.lock:
+            if self.is_pressed and self.click_count == 1:
+                # 롱클릭 인식
+                self.on_click('long')
+                # 상태 초기화
+                self.click_count = 0
+                if self.single_click_timer:
+                    self.single_click_timer.cancel()
+                    self.single_click_timer = None
+
+    def handle_single_click(self):
+        with self.lock:
+            if self.click_count == 1:
+                # 싱글클릭 인식
+                self.on_click('short')
+            self.click_count = 0
+
+    def on_click(self, click_type):
+        if click_type in ['short', 'long', 'double']:
+            if self.dash.gear in [1, 3]:
+                drive_state = click_type + '_park'
+            elif self.dash.gear in [2, 4]:
+                drive_state = click_type + '_drive'
+            else:
+                drive_state = click_type  # 기어 정보가 없을 때 기본 상태
+            if self.args:
+                self.action(drive_state, self.args)
+                self.action(click_type, self.args)
+            else:
+                self.action(drive_state)
+                self.action(click_type)
+
+    def action(self, period, args=None):
+        print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
+        if args:
+            if isinstance(args, (list, tuple)):
+                self.function[period](*args)
+            else:
+                self.function[period](args)
+        else:
+            self.function[period]()
 
 
 class ButtonControl:
