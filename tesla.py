@@ -399,6 +399,9 @@ class Logger:
 
 import threading
 
+import threading
+import time
+
 class Button:
     def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
         self.dash = manager.dash
@@ -445,10 +448,28 @@ class Button:
             if not self.is_pressed:
                 self.is_pressed = True
                 self.last_press_time = current_time
-                # 롱클릭 타이머 시작
-                self.long_click_timer = threading.Timer(self.long_click_threshold, self.handle_long_click)
-                self.long_click_timer.start()
-                # print(f"{self.name}: Pressed at {current_time}")
+
+                if self.click_count == 1:
+                    time_since_last_release = current_time - self.last_release_time
+                    if time_since_last_release <= self.click_timeout:
+                        # 더블클릭 진행 중
+                        self.click_count += 1
+                        # 싱글클릭 타이머 취소
+                        if self.single_click_timer:
+                            self.single_click_timer.cancel()
+                            self.single_click_timer = None
+                        # 더블클릭 인식
+                        self.on_click('double')
+                        # 롱클릭 타이머 시작하지 않음
+                        self.long_click_timer = None
+                    else:
+                        # 새로운 클릭으로 간주
+                        self.click_count = 1
+                        self.start_long_click_timer()
+                else:
+                    # 첫 번째 클릭
+                    self.click_count = 1
+                    self.start_long_click_timer()
             # 이미 눌려있는 상태에서는 추가 처리 없음
 
     def release(self):
@@ -462,69 +483,26 @@ class Button:
                     self.long_click_timer.cancel()
                     self.long_click_timer = None
 
-                if press_duration >= self.long_click_threshold:
-                    # 롱클릭은 handle_long_click에서 처리되었으므로 추가 처리 없음
-                    pass
-                else:
-                    # 싱글 또는 더블클릭 처리
-                    if self.click_count == 0:
-                        self.click_count = 1
-                        # 싱글클릭 타이머 시작
-                        self.single_click_timer = threading.Timer(self.click_timeout, self.handle_single_click)
-                        self.single_click_timer.start()
-                    elif self.click_count == 1:
-                        # 더블클릭 인식
-                        if self.single_click_timer:
-                            self.single_click_timer.cancel()
-                            self.single_click_timer = None
-                        self.click_count = 0
-                        self.on_click('double')
+                if self.click_count == 2:
+                    # 더블클릭 진행 중이었음
+                    self.click_count = 0
+                    # 더블클릭은 이미 인식되었으므로 추가 처리 없음
+                elif self.click_count == 1:
+                    # 싱글클릭 대기 타이머 시작
+                    self.last_release_time = current_time
+                    self.single_click_timer = threading.Timer(self.click_timeout, self.handle_single_click)
+                    self.single_click_timer.start()
             # else:
                 # 버튼이 눌려있지 않은 상태에서 release가 호출된 경우 (무시 가능)
                 # pass
 
+    def start_long_click_timer(self):
+        # 롱클릭 타이머 시작
+        self.long_click_timer = threading.Timer(self.long_click_threshold, self.handle_long_click)
+        self.long_click_timer.start()
+
     def handle_long_click(self):
-        with self.lock:
-            if self.is_pressed:
-                # 롱클릭 인식
-                self.on_click('long')
-                # 상태 초기화
-                self.click_count = 0
-                if self.single_click_timer:
-                    self.single_click_timer.cancel()
-                    self.single_click_timer = None
-
-    def handle_single_click(self):
-        with self.lock:
-            if self.click_count == 1:
-                # 싱글클릭 인식
-                self.on_click('short')
-            self.click_count = 0
-
-    def on_click(self, click_type):
-        if click_type in ['short', 'long', 'double']:
-            if self.dash.gear in [1, 3]:
-                drive_state = click_type + '_park'
-            elif self.dash.gear in [2, 4]:
-                drive_state = click_type + '_drive'
-            else:
-                drive_state = click_type  # 기어 정보가 없을 때 기본 상태
-            if self.args:
-                self.action(drive_state, self.args)
-                self.action(click_type, self.args)
-            else:
-                self.action(drive_state)
-                self.action(click_type)
-
-    def action(self, period, args=None):
-        print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
-        if args:
-            if isinstance(args, (list, tuple)):
-                self.function[period](*args)
-            else:
-                self.function[period](args)
-        else:
-            self.function[period]()
+        with se
 
 
 class ButtonControl:
