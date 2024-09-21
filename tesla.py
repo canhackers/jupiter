@@ -433,10 +433,11 @@ class Autopilot:
 
     def run(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
+        self.timer += 1
         self.speed_deque.popleft()
         self.speed_deque.append(self.dash.ui_speed)
         self.smooth_speed = sum(s for s in self.speed_deque) / 3
-        if self.auto_distance and not self.manual_distance and self.autosteer:
+        if self.auto_distance and (not self.manual_distance) and (self.autosteer or self.tacc):
             if self.smooth_speed <= 20:
                 self.distance_target = 3
             elif self.smooth_speed <= 60:
@@ -447,23 +448,22 @@ class Autopilot:
                 self.distance_target = 4
             else:
                 self.distance_target = 5
+            if self.timer < 5:
+                self.set_distance(self.distance_target)
 
         # Mars Mode from Spleck's github (https://github.com/spleck/panda)
         # 운전 중 스티어링 휠을 잡고 정확히 조향하는 것은 운전자의 의무입니다.
         # 미국 생산 차량에서만 다이얼을 이용한 NAG 제거가 유효하며, 중국 생산차량은 적용되지 않습니다.
-        if (self.mars_mode) and (self.autosteer == 1) and (self.nag_disabled == 1):
-            self.timer += 1
-            if self.timer < 5:
-                self.set_distance(self.distance_target)
-            elif self.timer == 6:
+        if self.mars_mode and self.autosteer == 1 and self.nag_disabled == 1:
+            if self.timer == 5:
                 print('Right Scroll Wheel Down')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_down'])
-            elif self.timer >= 7:
+            elif self.timer == 6:
                 print('Right Scroll Wheel Up')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
-                self.timer = 0
-        # else:
-        #     self.set_distance(self.distance_target)
+
+        if self.timer >= 7:
+            self.timer = 0
 
     def reset_distance(self):
         try:
