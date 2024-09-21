@@ -356,6 +356,9 @@ class Button:
                     self.last_click_time = current_time
                     # self.on_click('short')
                     # print(self.name, '숏클릭')
+        # 싱글 클릭 여부를 주기적으로 확인
+        self.check_single_click()
+
     def schedule_single_click(self):
         # 싱글 클릭을 0.2초 대기한 후 처리 (더블 클릭 대기)
         if self.single_click_event_time is None:
