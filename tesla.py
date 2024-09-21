@@ -374,8 +374,6 @@ class Logger:
 #             self.function[period]()
 
 
-import time
-
 class Button:
     # 상태 정의
     STATE_IDLE = 'IDLE'
@@ -383,7 +381,7 @@ class Button:
     STATE_WAITING_FOR_DOUBLE_CLICK = 'WAITING_FOR_DOUBLE_CLICK'
     STATE_LONG_CLICK = 'LONG_CLICK'
 
-    def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
+    def __init__(self, manager, btn_name, short_time=0.2, long_time=1.0):
         self.dash = manager.dash
         self.buffer = manager.buffer
         self.name = btn_name
@@ -391,12 +389,6 @@ class Button:
         self.click_timeout = short_time  # 더블클릭 인식 시간 간격 (초)
         self.long_click_duration = long_time  # 롱클릭 인식 시간 (초)
         self.args = None
-
-        # 상태 머신 관련 변수
-        self.state = self.STATE_IDLE
-        self.click_time = 0  # 버튼이 눌린 시간
-        self.last_click_time = 0  # 마지막 클릭 시간
-        self.single_click_event_time = None  # 싱글클릭을 지연시키기 위한 타이머
 
         # 클릭 유형별 함수 매핑
         self.function = {
@@ -424,6 +416,11 @@ class Button:
             'double_drive': 'Undefined'
         }
 
+        # 상태 머신 관련 변수
+        self.state = self.STATE_IDLE
+        self.click_time = 0  # 버튼이 눌린 시간
+        self.last_click_time = 0  # 마지막 클릭 시간
+
     def press(self, args=None):
         if args:
             self.args = args
@@ -441,6 +438,7 @@ class Button:
             if self.pressed:
                 self.state = self.STATE_PRESSED
                 self.click_time = current_time
+                # print(f"{self.name} 상태: PRESSED")
 
         elif self.state == self.STATE_PRESSED:
             if not self.pressed:
@@ -450,10 +448,9 @@ class Button:
                     print(f"{self.name} 롱클릭")
                     self.state = self.STATE_IDLE
                 else:
-                    # 싱글클릭을 지연시키고 더블클릭을 기다림
                     self.state = self.STATE_WAITING_FOR_DOUBLE_CLICK
                     self.last_click_time = current_time
-                    self.single_click_event_time = current_time
+                    # print(f"{self.name} 상태: WAITING_FOR_DOUBLE_CLICK")
             else:
                 if current_time - self.click_time >= self.long_click_duration:
                     self.on_click('long')
@@ -466,25 +463,21 @@ class Button:
                     self.on_click('double')
                     print(f"{self.name} 더블클릭")
                     self.state = self.STATE_IDLE
-                    self.single_click_event_time = None  # 싱글클릭 대기를 취소
                 else:
-                    # 더블클릭 시간이 초과되었으므로 싱글클릭 처리
+                    # 더블클릭 시간이 초과되어 싱글클릭으로 처리
                     self.on_click('short')
                     print(f"{self.name} 숏클릭")
-                    self.state = self.STATE_PRESSED  # 새로운 클릭 대기
+                    self.state = self.STATE_PRESSED
                 self.click_time = current_time  # 새로운 클릭 시간 기록
-
             elif current_time - self.last_click_time > self.click_timeout:
-                # 더블클릭 시간이 초과되면 싱글클릭 처리
-                if self.single_click_event_time:
-                    self.on_click('short')
-                    print(f"{self.name} 숏클릭")
-                    self.single_click_event_time = None
+                self.on_click('short')
+                print(f"{self.name} 숏클릭")
                 self.state = self.STATE_IDLE
 
         elif self.state == self.STATE_LONG_CLICK:
             if not self.pressed:
                 self.state = self.STATE_IDLE
+                # print(f"{self.name} 상태: IDLE")
 
     def on_click(self, click_type):
         if click_type in ['short', 'long', 'double']:
