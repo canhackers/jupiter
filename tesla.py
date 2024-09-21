@@ -333,6 +333,9 @@ class Button:
                     self.is_double_click = True
                     self.on_click('double')
                     print(self.name, '더블클릭')
+            elif not self.is_long_click and (current_time - self.click_time >= self.long_click_duration):
+                self.is_long_click = True
+                self.on_click('long')
         else:  # 버튼이 눌리지 않았을 때 (해제 상태)
             if self.is_pressed:  # 클릭 해제 시점
                 self.is_pressed = False
@@ -341,12 +344,8 @@ class Button:
                 if self.is_double_click:
                     # 더블 클릭 처리 완료
                     pass
-                elif click_duration >= self.long_click_duration:
-                    # 롱 클릭으로 처리
-                    self.on_click('long')
-                    print(self.name, '롱클릭')
-                else:
-                    # 싱글 클릭 처리
+                elif not self.is_long_click:
+                    # 롱 클릭이 아닌 경우 싱글 클릭 처리
                     self.last_click_time = current_time
                     self.on_click('short')
                     print(self.name, '숏클릭')
