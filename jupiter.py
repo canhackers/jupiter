@@ -2,7 +2,6 @@ import os
 import time
 import can
 import threading
-import asyncio
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonControl, FreshAir, \
@@ -47,11 +46,25 @@ class Jupiter(threading.Thread):
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
         REBOOT = Reboot(self.dash)
-        BUTTON = ButtonControl(BUFFER, self.dash, device='raspi')
-        for btn in ('MapLampLeft', 'MapLampRight'):
-            if self.settings.get(btn):
-                BUTTON.add_button(btn_name=btn)
-                BUTTON.assign(btn_name=btn, press_type='long', function_name=self.settings.get(btn))
+        BUTTON = ButtonControl(BUFFER, self.dash)
+        BUTTON.add_button(btn_name='MapLampLeft')
+        BUTTON.add_button(btn_name='MapLampRight')
+        buttons_define = (
+            ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
+            ('MapLampLeft', 'long', self.settings.get('MapLampLeftLong')),
+            ('MapLampLeft', 'double', self.settings.get('MapLampLeftDouble')),
+            ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
+            ('MapLampRight', 'long', self.settings.get('MapLampRightLong')),
+            ('MapLampRight', 'double', self.settings.get('MapLampRightDouble'))
+        )
+        for (btn, ptype, func) in buttons_define:
+            if func:
+                functions = func.split(',')
+                if len(functions) == 1:
+                    BUTTON.assign(btn_name=btn, press_type=ptype, function_name=functions[0].strip())
+                else:
+                    BUTTON.assign(btn_name=btn, press_type=ptype + '_park', function_name=functions[0].strip())
+                    BUTTON.assign(btn_name=btn, press_type=ptype + '_drive', function_name=functions[1].strip())
 
         while True:
             current_time = time.time()
@@ -69,6 +82,7 @@ class Jupiter(threading.Thread):
                 else:
                     if (current_time - last_recv_time >= 5):
                         print('bus error counted')
+                        bus_error = 1
                         self.dash.bus_error_count += 1
                         last_recv_time = time.time()
             elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
@@ -106,12 +120,12 @@ class Jupiter(threading.Thread):
                     if (self.dash.gear == 4) and (self.dash.parked):  # Drive
                         print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
                         self.dash.parked = 0
-                        self.dash.drive_start_time = current_time
+                        self.dash.drive_time = 0
                         LOGGER.initialize()
                     elif (self.dash.gear == 1) and (not self.dash.parked):  # Park
                         print('Parking Gear Detected... Saving Drive history')
                         self.dash.parked = 1
-                        self.dash.drive_start_time = 0
+                        self.dash.drive_time = 0
                         LOGGER.close()
                     else:
                         pass
@@ -127,6 +141,8 @@ class Jupiter(threading.Thread):
                 # 매 1초마다 실행할 액션 지정
                 if TICK:
                     self.dash.device_temp = self.vcgm.measure_temp()
+                    if self.dash.gear == 4:
+                        self.dash.drive_time += 1
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
 
                     # for bid, val in self.dash.beacon.items():
@@ -137,7 +153,7 @@ class Jupiter(threading.Thread):
                         LOGGER.write()
 
                     ##### Mars Mode ######
-                    AP.run()
+                    AP.tick()
 
                 # 실시간 패킷 인식 및 변조
                 if address == 0x1f9:
@@ -216,11 +232,6 @@ def main():
         # Navdy를 쓰는 경우, Beacon 접속 시도가 Navdy 접속에 간섭을 주기 때문에, Navdy 접속 전까지 넘어가지 않도록 한다.
         while DASH.navdy_connected == 0:
             time.sleep(5)
-
-    from beacon import HolyIoT
-    B = HolyIoT(DASH)
-    B.start()
-
 
 if __name__ == '__main__':
     main()
