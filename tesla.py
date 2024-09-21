@@ -397,6 +397,8 @@ class Logger:
 #         else:
 #             self.function[period]()
 
+import threading
+
 class Button:
     def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
         self.dash = manager.dash
@@ -405,11 +407,10 @@ class Button:
         self.is_pressed = False
         self.last_press_time = 0
         self.last_release_time = 0
-        self.click_times = []
-        self.click_timeout = short_time  # 더블클릭 인식 시간 간격
         self.long_click_threshold = long_time  # 롱클릭 인식 시간 (1초)
-        self.long_click_detected = False
-        self.double_click_in_progress = False
+        self.click_timeout = short_time  # 더블클릭 인식 시간 간격 (0.5초)
+        self.long_click_timer = None
+        self.single_click_timer = None
         self.args = None
         self.function = {
             'short': lambda *args, **kwargs: None,
@@ -433,48 +434,72 @@ class Button:
             'long_drive': 'Undefined',
             'double_drive': 'Undefined'
         }
+        self.click_count = 0
+        self.lock = threading.Lock()  # 스레드 안전성을 위한 락
 
     def press(self, args=None):
-        if args:
-            self.args = args
-        current_time = time.time()
-        if not self.is_pressed:
-            self.is_pressed = True
-            self.last_press_time = current_time
-
-            if self.last_release_time and (current_time - self.last_release_time <= self.click_timeout):
-                # 더블클릭 인식
-                self.on_click('double')
-                self.double_click_in_progress = True
-            else:
-                self.double_click_in_progress = False
-
-            self.long_click_detected = False  # 롱클릭 인식 플래그 초기화
-        else:
-            # 이미 눌려있는 상태에서는 롱클릭인지 확인
-            if not self.long_click_detected and (current_time - self.last_press_time >= self.long_click_threshold):
-                self.long_click_detected = True
-                self.on_click('long')
+        with self.lock:
+            if args:
+                self.args = args
+            current_time = time.time()
+            if not self.is_pressed:
+                self.is_pressed = True
+                self.last_press_time = current_time
+                # 롱클릭 타이머 시작
+                self.long_click_timer = threading.Timer(self.long_click_threshold, self.handle_long_click)
+                self.long_click_timer.start()
+                # print(f"{self.name}: Pressed at {current_time}")
+            # 이미 눌려있는 상태에서는 추가 처리 없음
 
     def release(self):
-        current_time = time.time()
-        if self.is_pressed:
-            self.is_pressed = False
-            self.last_release_time = current_time
+        with self.lock:
+            current_time = time.time()
+            if self.is_pressed:
+                self.is_pressed = False
+                press_duration = current_time - self.last_press_time
 
-            if self.long_click_detected:
-                # 롱클릭이 이미 인식되었으므로 추가 처리 없음
-                self.long_click_detected = False  # 플래그 리셋
-            elif not self.double_click_in_progress:
-                # 숏클릭 인식
+                if self.long_click_timer:
+                    self.long_click_timer.cancel()
+                    self.long_click_timer = None
+
+                if press_duration >= self.long_click_threshold:
+                    # 롱클릭은 handle_long_click에서 처리되었으므로 추가 처리 없음
+                    pass
+                else:
+                    # 싱글 또는 더블클릭 처리
+                    if self.click_count == 0:
+                        self.click_count = 1
+                        # 싱글클릭 타이머 시작
+                        self.single_click_timer = threading.Timer(self.click_timeout, self.handle_single_click)
+                        self.single_click_timer.start()
+                    elif self.click_count == 1:
+                        # 더블클릭 인식
+                        if self.single_click_timer:
+                            self.single_click_timer.cancel()
+                            self.single_click_timer = None
+                        self.click_count = 0
+                        self.on_click('double')
+            # else:
+                # 버튼이 눌려있지 않은 상태에서 release가 호출된 경우 (무시 가능)
+                # pass
+
+    def handle_long_click(self):
+        with self.lock:
+            if self.is_pressed:
+                # 롱클릭 인식
+                self.on_click('long')
+                # 상태 초기화
+                self.click_count = 0
+                if self.single_click_timer:
+                    self.single_click_timer.cancel()
+                    self.single_click_timer = None
+
+    def handle_single_click(self):
+        with self.lock:
+            if self.click_count == 1:
+                # 싱글클릭 인식
                 self.on_click('short')
-            else:
-                # 더블클릭 진행 후 상태 초기화
-                self.double_click_in_progress = False
-
-    def update(self):
-        # 더 이상 필요 없음
-        pass
+            self.click_count = 0
 
     def on_click(self, click_type):
         if click_type in ['short', 'long', 'double']:
