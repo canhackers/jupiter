@@ -50,10 +50,10 @@ class Jupiter(threading.Thread):
         BUTTON.add_button(btn_name='MapLampLeft')
         BUTTON.add_button(btn_name='MapLampRight')
         buttons_define = (
-            # ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
+            ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
             ('MapLampLeft', 'long', self.settings.get('MapLampLeftLong')),
             ('MapLampLeft', 'double', self.settings.get('MapLampLeftDouble')),
-            # ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
+            ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
             ('MapLampRight', 'long', self.settings.get('MapLampRightLong')),
             ('MapLampRight', 'double', self.settings.get('MapLampRightDouble'))
         )
