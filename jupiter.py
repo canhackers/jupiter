@@ -82,6 +82,7 @@ class Jupiter(threading.Thread):
                 else:
                     if (current_time - last_recv_time >= 5):
                         print('bus error counted')
+                        bus_error = 1
                         self.dash.bus_error_count += 1
                         last_recv_time = time.time()
             elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
