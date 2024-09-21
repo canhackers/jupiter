@@ -274,106 +274,104 @@ class Logger:
                         self.csvwriter.writerow([self.dash.clock, 0, str(hex(address)), mux, '0x' + str(signal.hex())])
 
 
-# class Button:
-#     def __init__(self, manager, btn_name, short_time = 0.5, long_time = 1.0):
-#         self.dash = manager.dash
-#         self.buffer = manager.buffer
-#         self.name = btn_name
-#         self.pressed = 0
-#         self.click_time = 0
-#         self.last_click_time = 0
-#         self.is_pressed = False
-#         self.is_double_click = False
-#         self.is_long_click = False
-#         self.click_timeout = short_time  # 더블클릭 인식 시간 간격
-#         self.long_click_duration = long_time  # 롱클릭 인식 시간 (1초)
-#         self.args = None
-#         self.function = {'short': lambda *args, **kwargs: None,
-#                          'long': lambda *args, **kwargs: None,
-#                          'double': lambda *args, **kwargs: None,
-#                          'short_park': lambda *args, **kwargs: None,
-#                          'long_park': lambda *args, **kwargs: None,
-#                          'double_park': lambda *args, **kwargs: None,
-#                          'short_drive': lambda *args, **kwargs: None,
-#                          'long_drive': lambda *args, **kwargs: None,
-#                          'double_drive': lambda *args, **kwargs: None
-#                          }
-#         self.function_name = {'short': 'Undefined',
-#                               'long': 'Undefined',
-#                               'double': 'Undefined',
-#                               'short_park': 'Undefined',
-#                               'long_park': 'Undefined',
-#                               'double_park': 'Undefined',
-#                               'short_drive': 'Undefined',
-#                               'long_drive': 'Undefined',
-#                               'double_drive': 'Undefined'
-#                               }
-#
-#     def press(self, args=None):
-#         if args:
-#             self.args = args
-#         self.pressed = True
-#         self.update()
-#
-#     def release(self):
-#         self.pressed = False
-#         self.update()
-#
-#     def update(self):
-#         current_time = time.time()
-#         if self.pressed:
-#             if not self.is_pressed:
-#                 self.is_pressed = True
-#                 self.click_time = current_time  # 클릭 시작 시간 기록
-#                 self.is_long_click = False  # 롱 클릭 초기화
-#                 self.is_double_click = False  # 더블 클릭 초기화
-#
-#                 # 더블클릭인지 확인
-#                 if current_time - self.last_click_time <= self.click_timeout:
-#                     self.is_double_click = True
-#                     self.on_click('double')
-#                     print(self.name, '더블클릭')
-#             elif not self.is_long_click and (current_time - self.click_time >= self.long_click_duration):
-#                 self.is_long_click = True
-#                 self.on_click('long')
-#         else:  # 버튼이 눌리지 않았을 때 (해제 상태)
-#             if self.is_pressed:  # 클릭 해제 시점
-#                 self.is_pressed = False
-#                 click_duration = current_time - self.click_time  # 클릭 지속 시간 계산
-#
-#                 if self.is_double_click:
-#                     # 더블 클릭 처리 완료
-#                     pass
-#                 elif not self.is_long_click:
-#                     # 롱 클릭이 아닌 경우 싱글 클릭 처리
-#                     self.last_click_time = current_time
-#                     self.on_click('short')
-#                     print(self.name, '숏클릭')
-#
-#     def on_click(self, click_type):
-#         if click_type in ['short', 'long', 'double']:
-#             if self.dash.gear in [1, 3]:
-#                 drive_state = click_type + '_park'
-#             elif self.dash.gear in [2, 4]:
-#                 drive_state = click_type + '_drive'
-#             if self.args:
-#                 self.action(drive_state, self.args)
-#                 self.action(click_type, self.args)
-#             else:
-#                 self.action(drive_state)
-#                 self.action(click_type)
-#
-#     def action(self, period, args=None):
-#         print(period, '액션실행', self.function_name[period])
-#         if args:
-#             if type(args) in [list, tuple]:
-#                 self.function[period](*args)
-#             else:
-#                 self.function[period](args)
-#         else:
-#             self.function[period]()
+class Button:
+    def __init__(self, manager, btn_name, short_time = 0.5, long_time = 1.0):
+        self.dash = manager.dash
+        self.buffer = manager.buffer
+        self.name = btn_name
+        self.pressed = 0
+        self.click_time = 0
+        self.last_click_time = 0
+        self.is_pressed = False
+        self.is_double_click = False
+        self.is_long_click = False
+        self.click_timeout = short_time  # 더블클릭 인식 시간 간격
+        self.long_click_duration = long_time  # 롱클릭 인식 시간 (1초)
+        self.args = None
+        self.function = {'short': lambda *args, **kwargs: None,
+                         'long': lambda *args, **kwargs: None,
+                         'double': lambda *args, **kwargs: None,
+                         'short_park': lambda *args, **kwargs: None,
+                         'long_park': lambda *args, **kwargs: None,
+                         'double_park': lambda *args, **kwargs: None,
+                         'short_drive': lambda *args, **kwargs: None,
+                         'long_drive': lambda *args, **kwargs: None,
+                         'double_drive': lambda *args, **kwargs: None
+                         }
+        self.function_name = {'short': 'Undefined',
+                              'long': 'Undefined',
+                              'double': 'Undefined',
+                              'short_park': 'Undefined',
+                              'long_park': 'Undefined',
+                              'double_park': 'Undefined',
+                              'short_drive': 'Undefined',
+                              'long_drive': 'Undefined',
+                              'double_drive': 'Undefined'
+                              }
 
-import time
+    def press(self, args=None):
+        if args:
+            self.args = args
+        self.pressed = True
+        self.update()
+
+    def release(self):
+        self.pressed = False
+        self.update()
+
+    def update(self):
+        current_time = time.time()
+        if self.pressed:
+            if not self.is_pressed:
+                self.is_pressed = True
+                self.click_time = current_time  # 클릭 시작 시간 기록
+                self.is_long_click = False  # 롱 클릭 초기화
+                self.is_double_click = False  # 더블 클릭 초기화
+
+                # 더블클릭인지 확인
+                if current_time - self.last_click_time <= self.click_timeout:
+                    self.is_double_click = True
+                    self.on_click('double')
+                    print(self.name, '더블클릭')
+            elif not self.is_long_click and (current_time - self.click_time >= self.long_click_duration):
+                self.is_long_click = True
+                self.on_click('long')
+        else:  # 버튼이 눌리지 않았을 때 (해제 상태)
+            if self.is_pressed:  # 클릭 해제 시점
+                self.is_pressed = False
+                click_duration = current_time - self.click_time  # 클릭 지속 시간 계산
+
+                if self.is_double_click:
+                    # 더블 클릭 처리 완료
+                    pass
+                elif not self.is_long_click:
+                    # 롱 클릭이 아닌 경우 싱글 클릭 처리
+                    self.last_click_time = current_time
+                    self.on_click('short')
+                    print(self.name, '숏클릭')
+
+    def on_click(self, click_type):
+        if click_type in ['short', 'long', 'double']:
+            if self.dash.gear in [1, 3]:
+                drive_state = click_type + '_park'
+            elif self.dash.gear in [2, 4]:
+                drive_state = click_type + '_drive'
+            if self.args:
+                self.action(drive_state, self.args)
+                self.action(click_type, self.args)
+            else:
+                self.action(drive_state)
+                self.action(click_type)
+
+    def action(self, period, args=None):
+        print(period, '액션실행', self.function_name[period])
+        if args:
+            if type(args) in [list, tuple]:
+                self.function[period](*args)
+            else:
+                self.function[period](args)
+        else:
+            self.function[period]()
 
 class Button:
     # 상태 정의
@@ -657,6 +655,7 @@ class Autopilot:
         self.dash = dash
         self.tacc = 0
         self.autosteer = 0
+        self.autosteer_active_time = 0
         self.current_gear_position = 0
         self.last_gear_position = 0
         self.nag_disabled = 0
@@ -784,6 +783,7 @@ class Autopilot:
         self.nag_disabled = 0
         self.dash.nag_disabled = 0
         self.dash.turn_signal_on_ap = 0
+        self.autosteer_active_time = 0
 
     def engage_autopilot(self):
         if self.autosteer == 0:
@@ -792,6 +792,7 @@ class Autopilot:
             self.dash.tacc = 0
             self.autosteer = 1
             self.dash.autopilot = 1
+            self.autosteer_active_time = time.time()
             self.user_changed_wiper_request = 0
             self.wiper_mode_rollback_request = 0
             self.timer = 0
@@ -807,7 +808,8 @@ class Autopilot:
             self.wiper_mode_rollback_request = 0
             self.manual_distance = 0
         else:
-            self.nag_disabler()
+            if (self.autosteer_active_time != 0) and (time.time() - self.autosteer_active_time > 0.5):
+                self.nag_disabler()
 
     def nag_disabler(self):
         if self.mars_mode:
