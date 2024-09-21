@@ -530,8 +530,9 @@ class Autopilot:
         self.first_down_time = 0
         self.timer = 0
         if self.manual_distance == 1:
-            self.set_distance(self.distance_target)
             self.manual_distance = 0
+        self.set_distance(self.distance_target)
+
 
     def engage_tacc(self):
         self.gear_down_pressed = 1
