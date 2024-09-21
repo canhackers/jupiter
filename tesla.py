@@ -726,14 +726,14 @@ class Autopilot:
     def disengage_autopilot(self):
         if self.autosteer or self.tacc:
             print('Autopilot Disengaged')
-            self.tacc = 0
-            self.autosteer = 0
-            self.dash.tacc = 0
-            self.dash.autopilot = 0
-            self.nag_disabled = 0
-            self.dash.nag_disabled = 0
-            self.dash.turn_signal_on_ap = 0
             print(f'current distance : {self.distance_current}, current target : {self.distance_target}')
+        self.tacc = 0
+        self.autosteer = 0
+        self.dash.tacc = 0
+        self.dash.autopilot = 0
+        self.nag_disabled = 0
+        self.dash.nag_disabled = 0
+        self.dash.turn_signal_on_ap = 0
 
     def engage_autopilot(self):
         if self.autosteer == 0:
@@ -766,6 +766,8 @@ class Autopilot:
             print('NAG Eliminator Activated')
 
     def check(self, bus, address, byte_data):
+        if self.dash.gear != 4:
+            self.disengage_autopilot()
         if (bus == 0) and (address == 0x39d):
             if (self.autosteer == 1) or (self.tacc == 1):
                 brake_switch = get_value(byte_data, 16, 2)
