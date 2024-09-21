@@ -4,6 +4,7 @@ import can
 import csv
 import zipfile
 import shutil
+import threading
 from collections import deque
 from packet_functions import get_value, modify_packet_value, make_new_packet
 
@@ -274,134 +275,6 @@ class Logger:
                         self.csvwriter.writerow([self.dash.clock, 0, str(hex(address)), mux, '0x' + str(signal.hex())])
 
 
-# class Button:
-#     def __init__(self, manager, btn_name, short_time = 0.5, long_time = 1.0):
-#         self.dash = manager.dash
-#         self.buffer = manager.buffer
-#         self.name = btn_name
-#         self.pressed = 0
-#         self.click_time = 0
-#         self.last_click_time = 0
-#         self.is_pressed = False
-#         self.is_double_click = False
-#         self.is_long_click = False
-#         self.click_timeout = short_time  # 더블클릭 인식 시간 간격
-#         self.long_click_duration = long_time  # 롱클릭 인식 시간 (1초)
-#         self.single_click_event_time = None  # 싱글 클릭을 대기할 타이머
-#         self.args = None
-#         self.function = {'short': lambda *args, **kwargs: None,
-#                          'long': lambda *args, **kwargs: None,
-#                          'double': lambda *args, **kwargs: None,
-#                          'short_park': lambda *args, **kwargs: None,
-#                          'long_park': lambda *args, **kwargs: None,
-#                          'double_park': lambda *args, **kwargs: None,
-#                          'short_drive': lambda *args, **kwargs: None,
-#                          'long_drive': lambda *args, **kwargs: None,
-#                          'double_drive': lambda *args, **kwargs: None
-#                          }
-#         self.function_name = {'short': 'Undefined',
-#                               'long': 'Undefined',
-#                               'double': 'Undefined',
-#                               'short_park': 'Undefined',
-#                               'long_park': 'Undefined',
-#                               'double_park': 'Undefined',
-#                               'short_drive': 'Undefined',
-#                               'long_drive': 'Undefined',
-#                               'double_drive': 'Undefined'
-#                               }
-#
-#     def press(self, args=None):
-#         if args:
-#             self.args = args
-#         self.pressed = True
-#         self.update()
-#
-#     def release(self):
-#         self.pressed = False
-#         self.update()
-#
-#     def update(self):
-#         current_time = time.time()
-#         if self.pressed:
-#             if not self.is_pressed:
-#                 self.is_pressed = True
-#                 self.click_time = current_time  # 클릭 시작 시간 기록
-#                 self.is_long_click = False  # 롱 클릭 초기화
-#                 self.is_double_click = False  # 더블 클릭 초기화
-#
-#                 # 더블클릭인지 확인
-#                 if current_time - self.last_click_time <= self.click_timeout:
-#                     self.is_double_click = True
-#                     if self.single_click_event_time:
-#                         self.cancel_single_click()  # 싱글 클릭 대기 취소
-#                     self.on_click('double')
-#                     print(self.name, '더블클릭')
-#                 else:
-#                     self.schedule_single_click()  # 싱글 클릭 대기 시작
-#
-#             elif not self.is_long_click and (current_time - self.click_time >= self.long_click_duration):
-#                 self.is_long_click = True
-#                 self.cancel_single_click()  # 싱글 클릭 대기 취소
-#                 self.on_click('long')
-#         else:  # 버튼이 눌리지 않았을 때 (해제 상태)
-#             if self.is_pressed:  # 클릭 해제 시점
-#                 self.is_pressed = False
-#                 click_duration = current_time - self.click_time  # 클릭 지속 시간 계산
-#
-#                 if self.is_double_click:
-#                     # 더블 클릭 처리 완료
-#                     pass
-#                 elif not self.is_long_click:
-#                     # 롱 클릭이 아닌 경우 싱글 클릭 처리
-#                     self.last_click_time = current_time
-#                     # self.on_click('short')
-#                     # print(self.name, '숏클릭')
-#         # 싱글 클릭 여부를 주기적으로 확인
-#         self.check_single_click()
-#
-#     def schedule_single_click(self):
-#         # 싱글 클릭을 0.2초 대기한 후 처리 (더블 클릭 대기)
-#         if self.single_click_event_time is None:
-#             self.single_click_event_time = time.time()  # 현재 시점을 기록
-#
-#     def cancel_single_click(self):
-#         # 싱글 클릭 대기를 취소
-#         self.single_click_event_time = None
-#
-#     def check_single_click(self):
-#         # 더블 클릭 없이 0.2초 경과하면 싱글 클릭으로 처리
-#         if self.single_click_event_time and time.time() - self.single_click_event_time > self.click_timeout:
-#             self.on_click('single')
-#             self.cancel_single_click()
-#
-#     def on_click(self, click_type):
-#         if click_type in ['short', 'long', 'double']:
-#             if self.dash.gear in [1, 3]:
-#                 drive_state = click_type + '_park'
-#             elif self.dash.gear in [2, 4]:
-#                 drive_state = click_type + '_drive'
-#             if self.args:
-#                 self.action(drive_state, self.args)
-#                 self.action(click_type, self.args)
-#             else:
-#                 self.action(drive_state)
-#                 self.action(click_type)
-#
-#     def action(self, period, args=None):
-#         print(period, '액션실행', self.function_name[period])
-#         if args:
-#             if type(args) in [list, tuple]:
-#                 self.function[period](*args)
-#             else:
-#                 self.function[period](args)
-#         else:
-#             self.function[period]()
-
-import threading
-
-import threading
-import time
-
 class Button:
     def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
         self.dash = manager.dash
@@ -477,7 +350,6 @@ class Button:
             current_time = time.time()
             if self.is_pressed:
                 self.is_pressed = False
-                press_duration = current_time - self.last_press_time
 
                 if self.long_click_timer:
                     self.long_click_timer.cancel()
@@ -492,9 +364,6 @@ class Button:
                     self.last_release_time = current_time
                     self.single_click_timer = threading.Timer(self.click_timeout, self.handle_single_click)
                     self.single_click_timer.start()
-            # else:
-                # 버튼이 눌려있지 않은 상태에서 release가 호출된 경우 (무시 가능)
-                # pass
 
     def start_long_click_timer(self):
         # 롱클릭 타이머 시작
@@ -772,7 +641,7 @@ class Autopilot:
                 self.buffer.write_message_buffer(0, 0x3c2, cmd)
                 self.distance_current -= 1
 
-    def disengage_autopilot(self):
+    def disengage_autopilot(self, depth=None):
         if self.autosteer or self.tacc:
             print('Autopilot Disengaged')
             print(f'current distance : {self.distance_current}, current target : {self.distance_target}')
@@ -785,7 +654,7 @@ class Autopilot:
         self.dash.turn_signal_on_ap = 0
         self.autosteer_active_time = 0
 
-    def engage_autopilot(self):
+    def engage_autopilot(self, depth=None):
         if self.autosteer == 0:
             print('Autopilot Engaged')
             self.tacc = 0
@@ -797,11 +666,13 @@ class Autopilot:
             self.wiper_mode_rollback_request = 0
             self.timer = 0
             self.manual_distance = 0
+            if depth == 4:
+                self.nag_disabler()
         else:
             print('turn signal on ap activated')
             self.dash.turn_signal_on_ap = 1
 
-    def engage_tacc(self):
+    def engage_tacc(self, depth=None):
         if self.tacc == 0 and self.autosteer == 0:
             self.tacc = 1
             self.dash.tacc = 1
@@ -810,7 +681,8 @@ class Autopilot:
             self.manual_distance = 0
         else:
             if (self.autosteer_active_time != 0) and (time.time() - self.autosteer_active_time > 0.5):
-                self.nag_disabler()
+                if depth == 4:
+                    self.nag_disabler()
 
     def nag_disabler(self):
         if self.mars_mode:
@@ -874,10 +746,10 @@ class Autopilot:
             # 기어 스토크 상태 체크
             self.current_gear_position = get_value(byte_data, 12, 3)
             if self.current_gear_position in [1, 2]:
-                self.stalk_up.press()
+                self.stalk_up.press(self.current_gear_position)
                 self.stalk_down.release()
             elif self.current_gear_position in [3, 4]:
-                self.stalk_down.press()
+                self.stalk_down.press(self.current_gear_position)
                 self.stalk_up.release()
             elif self.current_gear_position == 0:
                 self.stalk_up.release()
