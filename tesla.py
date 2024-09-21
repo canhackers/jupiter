@@ -428,6 +428,18 @@ class Button:
         self.release_time = 0     # 버튼이 해제된 시간
         self.last_state_change_time = time.time()  # 마지막으로 상태가 변경된 시간
 
+    def press(self, args=None):
+        """외부에서 버튼이 눌린 상태를 전달할 때 사용"""
+        if args:
+            self.args = args
+        self.raw_pressed = True  # 노이즈 없는 신호로 처리
+        self.update()
+
+    def release(self):
+        """외부에서 버튼이 해제된 상태를 전달할 때 사용"""
+        self.raw_pressed = False  # 노이즈 없는 신호로 처리
+        self.update()
+
     def set_raw_state(self, is_pressed):
         """노이즈가 포함된 원시 입력 상태를 설정합니다."""
         self.raw_pressed = is_pressed
