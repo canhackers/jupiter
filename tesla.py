@@ -352,7 +352,7 @@ class Button:
                     print(self.name, '숏클릭')
 
     def on_click(self, click_type):
-        if click_type in ('short', 'long', 'double'):
+        if click_type in ['short', 'long', 'double']:
             if self.dash.gear in [1, 3]:
                 drive_state = click_type + '_park'
             elif self.dash.gear in [2, 4]:
@@ -360,8 +360,12 @@ class Button:
             if self.args:
                 self.action(drive_state, self.args)
                 self.action(click_type, self.args)
+            else:
+                self.action(drive_state)
+                self.action(click_type)
 
     def action(self, period, args=None):
+        print(period, '액션실행', self.function_name[period])
         if args:
             if type(args) in [list, tuple]:
                 self.function[period](*args)
