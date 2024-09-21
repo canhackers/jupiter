@@ -515,7 +515,7 @@ class Autopilot:
         self.stalk_down = Button(self, 'right_stalk_down')
         self.stalk_down.function['short_drive'] = self.engage_tacc
         self.stalk_down.function['double_drive'] = self.engage_autopilot
-        self.stalk_down.function['long_drive'] = self.nag_disabler
+        # self.stalk_down.function['long_drive'] = self.nag_disabler
 
     def tick(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
@@ -624,9 +624,11 @@ class Autopilot:
         if self.tacc == 0 and self.autosteer == 0:
             self.tacc = 1
             self.dash.tacc = 1
-        self.user_changed_wiper_request = 0
-        self.wiper_mode_rollback_request = 0
-        self.manual_distance = 0
+            self.user_changed_wiper_request = 0
+            self.wiper_mode_rollback_request = 0
+            self.manual_distance = 0
+        else:
+            self.nag_disabler()
 
     def nag_disabler(self):
         if self.mars_mode:
