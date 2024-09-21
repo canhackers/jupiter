@@ -653,6 +653,8 @@ class Autopilot:
         self.dash.nag_disabled = 0
         self.dash.turn_signal_on_ap = 0
         self.autosteer_active_time = 0
+        if depth == 2:
+            print('Reserved Function - Disable Continuous AP')
 
     def engage_autopilot(self, depth=None):
         if self.autosteer == 0:
@@ -782,6 +784,12 @@ class Autopilot:
                 if (far_state == 2 or near_state == 2) and (self.tacc or self.autosteer):
                     self.distance_target = self.distance_current
                     self.manual_distance = 1
+                if self.autosteer and self.dash.turn_signal_on_ap:
+                    self.manual_distance = 0
+                    if far_state == 2:
+                        self.distance_target = self.distance_target - 1
+                    elif near_state == 2:
+                        self.distance_target = self.distance_target + 1
 
         return byte_data
 
