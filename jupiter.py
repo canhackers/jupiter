@@ -65,12 +65,6 @@ class Jupiter(threading.Thread):
                     print(f'Bus Error, {self.dash.bus_error_count}')
                     initialize_canbus_connection()
                     can_bus = can.interface.Bus(channel='can0', interface='socketcan')
-                    try:
-                        AP.sender = can_bus
-                        if self.dash.occupancy == 1:
-                            AP.volume_updown()
-                    except:
-                        pass
                     bus_error = 0
                 else:
                     if (current_time - last_recv_time >= 5):

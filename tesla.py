@@ -465,30 +465,6 @@ class Autopilot:
         else:
             self.set_distance(self.distance_target)
 
-    def volume_updown(self):
-        try:
-            if self.device == 'panda':
-                self.sender.can_send(0x3c2, command['volume_up'], 0)
-                time.sleep(0.5)
-                self.sender.can_send(0x3c2, command['volume_down'], 0)
-                time.sleep(0.5)
-            elif self.device == 'raspi':
-                tx_frame = can.Message()
-                tx_frame.channel = 'can0'
-                tx_frame.dlc = 8
-                tx_frame.arbitration_id = 0x3c2
-                tx_frame.is_extended_id = False
-                tx_frame.data = bytearray(command['volume_down'])
-                self.sender.send(tx_frame)
-                time.sleep(0.5)
-                tx_frame.data = bytearray(command['volume_up'])
-                self.sender.send(tx_frame)
-                time.sleep(0.5)
-            else:
-                pass
-        except Exception as e:
-            print('Error occurred while control volumne up/down', e)
-
     def reset_distance(self):
         try:
             if self.device == 'panda':
@@ -524,25 +500,14 @@ class Autopilot:
             return
         else:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
-            tx_frame = can.Message()
-            tx_frame.channel = 'can0'
-            tx_frame.dlc = 8
-            tx_frame.arbitration_id = 0x3c2
-            tx_frame.is_extended_id = False
-            click_cnt = abs(gap)
             if gap > 0:
                 cmd = command['distance_far']
-                tx_frame.data = bytearray(cmd)
+                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                self.distance_current += 1
             else:
                 cmd = command['distance_near']
-                tx_frame.data = bytearray(cmd)
-            for i in range(click_cnt):
-                if self.device == 'panda':
-                    self.sender.can_send(0x3c2, cmd, 0)
-                elif self.device == 'raspi':
-                    self.sender.send(tx_frame)
-                time.sleep(0.25)
-            self.distance_current = distance_target
+                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                self.distance_current -= 1
 
     def disengage_autopilot(self):
         print('Autopilot Disengaged')
