@@ -462,8 +462,8 @@ class Autopilot:
                 print('Right Scroll Wheel Up')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
                 self.timer = 0
-        else:
-            self.set_distance(self.distance_target)
+        # else:
+        #     self.set_distance(self.distance_target)
 
     def reset_distance(self):
         try:
