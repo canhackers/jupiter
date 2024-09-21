@@ -696,8 +696,9 @@ class RearCenterBuckle:
         # mode: 0/None - 비활성화, 1 - 뒷좌석 중앙만, 2 - 모두
 
     def check(self, bus, address, byte_data):
+        ret = byte_data
         if not self.mode:
-            return False
+            return ret
         mux = get_value(byte_data, loc=0, length=2, endian='little', signed=False)
         if mux == 0:
             if self.mode == 1:
