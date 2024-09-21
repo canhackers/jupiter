@@ -383,7 +383,7 @@ class Button:
     STATE_WAITING_FOR_DOUBLE_CLICK = 'WAITING_FOR_DOUBLE_CLICK'
     STATE_LONG_CLICK = 'LONG_CLICK'
 
-    def __init__(self, manager, btn_name, short_time=0.2, long_time=1.0, debounce_time=0.05):
+    def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0, debounce_time=0.05):
         self.dash = manager.dash
         self.buffer = manager.buffer
         self.name = btn_name
