@@ -287,6 +287,7 @@ class Button:
         self.is_long_click = False
         self.click_timeout = short_time  # 더블클릭 인식 시간 간격
         self.long_click_duration = long_time  # 롱클릭 인식 시간 (1초)
+        self.single_click_event_time = None  # 싱글 클릭을 대기할 타이머
         self.args = None
         self.function = {'short': lambda *args, **kwargs: None,
                          'long': lambda *args, **kwargs: None,
@@ -331,10 +332,16 @@ class Button:
                 # 더블클릭인지 확인
                 if current_time - self.last_click_time <= self.click_timeout:
                     self.is_double_click = True
+                    if self.single_click_event_time:
+                        self.cancel_single_click()  # 싱글 클릭 대기 취소
                     self.on_click('double')
                     print(self.name, '더블클릭')
+                else:
+                    self.schedule_single_click()  # 싱글 클릭 대기 시작
+
             elif not self.is_long_click and (current_time - self.click_time >= self.long_click_duration):
                 self.is_long_click = True
+                self.cancel_single_click()  # 싱글 클릭 대기 취소
                 self.on_click('long')
         else:  # 버튼이 눌리지 않았을 때 (해제 상태)
             if self.is_pressed:  # 클릭 해제 시점
@@ -347,8 +354,22 @@ class Button:
                 elif not self.is_long_click:
                     # 롱 클릭이 아닌 경우 싱글 클릭 처리
                     self.last_click_time = current_time
-                    self.on_click('short')
-                    print(self.name, '숏클릭')
+                    # self.on_click('short')
+                    # print(self.name, '숏클릭')
+    def schedule_single_click(self):
+        # 싱글 클릭을 0.2초 대기한 후 처리 (더블 클릭 대기)
+        if self.single_click_event_time is None:
+            self.single_click_event_time = time.time()  # 현재 시점을 기록
+
+    def cancel_single_click(self):
+        # 싱글 클릭 대기를 취소
+        self.single_click_event_time = None
+
+    def check_single_click(self):
+        # 더블 클릭 없이 0.2초 경과하면 싱글 클릭으로 처리
+        if self.single_click_event_time and time.time() - self.single_click_event_time > self.click_timeout:
+            self.on_click('single')
+            self.cancel_single_click()
 
     def on_click(self, click_type):
         if click_type in ['short', 'long', 'double']:
