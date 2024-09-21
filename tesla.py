@@ -310,7 +310,6 @@ class Button:
                               }
 
     def press(self, args=None):
-        print(self.name, '눌림', self.function_name, '동작')
         if args:
             self.args = args
         self.pressed = True
@@ -333,7 +332,7 @@ class Button:
                 if current_time - self.last_click_time <= self.click_timeout:
                     self.is_double_click = True
                     self.on_click('double')
-
+                    print(self.name, '더블클릭')
         else:  # 버튼이 눌리지 않았을 때 (해제 상태)
             if self.is_pressed:  # 클릭 해제 시점
                 self.is_pressed = False
@@ -345,10 +344,12 @@ class Button:
                 elif click_duration >= self.long_click_duration:
                     # 롱 클릭으로 처리
                     self.on_click('long')
+                    print(self.name, '롱클릭')
                 else:
                     # 싱글 클릭 처리
                     self.last_click_time = current_time
                     self.on_click('short')
+                    print(self.name, '숏클릭')
 
     def on_click(self, click_type):
         if click_type in ('short', 'long', 'double'):
@@ -417,7 +418,6 @@ class ButtonControl:
             map_lamp_right = self.buttons.get('MapLampRight')
             if map_lamp_left:
                 if get_value(byte_data, 14, 1) == 1:
-                    print('왼쪽 맵등 눌림')
                     map_lamp_left.press()
                 else:
                     map_lamp_left.release()
