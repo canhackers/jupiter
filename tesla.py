@@ -310,6 +310,7 @@ class Button:
                               }
 
     def press(self, args=None):
+        print(self.name, '눌림', self.function_name, '동작')
         if args:
             self.args = args
         self.pressed = True
@@ -416,6 +417,7 @@ class ButtonControl:
             map_lamp_right = self.buttons.get('MapLampRight')
             if map_lamp_left:
                 if get_value(byte_data, 14, 1) == 1:
+                    print('왼쪽 맵등 눌림')
                     map_lamp_left.press()
                 else:
                     map_lamp_left.release()
