@@ -683,10 +683,14 @@ class Autopilot:
         self.reset_distance()
         self.stalk_up = Button(self, 'right_stalk_up')
         self.stalk_up.function['short_drive'] = self.disengage_autopilot
+        self.stalk_up.function_name['short_drive'] = 'Disengage Autopilot'
         self.stalk_up.function['long_drive'] = self.disengage_autopilot
+        self.stalk_up.function_name['long_drive'] = 'Disengage Autopilot'
         self.stalk_down = Button(self, 'right_stalk_down')
         self.stalk_down.function['short_drive'] = self.engage_tacc
+        self.stalk_down.function_name['short_drive'] = 'TACC / NAG Eliminator'
         self.stalk_down.function['double_drive'] = self.engage_autopilot
+        self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
         # self.stalk_down.function['long_drive'] = self.continuous_ap   # continuous ap를 위해 남겨둠
 
     def tick(self):
@@ -794,7 +798,8 @@ class Autopilot:
             self.timer = 0
             self.manual_distance = 0
         else:
-            self.dash.turn_signal_on_ap ^= 1
+            print('turn signal on ap activated')
+            self.dash.turn_signal_on_ap = 1
 
     def engage_tacc(self):
         if self.tacc == 0 and self.autosteer == 0:
