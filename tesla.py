@@ -397,11 +397,15 @@ class Button:
             else:
                 drive_state = click_type  # 기어 정보가 없을 때 기본 상태
             if self.args:
-                self.action(drive_state, self.args)
-                self.action(click_type, self.args)
+                if drive_state != click_type:
+                    self.action(drive_state, self.args)
+                else:
+                    self.action(click_type, self.args)
             else:
-                self.action(drive_state)
-                self.action(click_type)
+                if drive_state != click_type:
+                    self.action(drive_state)
+                else:
+                    self.action(click_type)
 
     def action(self, period, args=None):
         print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
