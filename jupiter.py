@@ -4,7 +4,7 @@ import can
 import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonControl, FreshAir, \
+from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
     KickDown, TurnSignal, Reboot, monitoring_addrs
 
 
@@ -46,7 +46,7 @@ class Jupiter(threading.Thread):
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
         REBOOT = Reboot(self.dash)
-        BUTTON = ButtonControl(BUFFER, self.dash)
+        BUTTON = ButtonManager(BUFFER, self.dash)
         BUTTON.add_button(btn_name='MapLampLeft')
         BUTTON.add_button(btn_name='MapLampRight')
         buttons_define = (
@@ -228,10 +228,6 @@ def main():
         from navdy import Hud
         H = Hud(DASH)
         H.start()
-
-        # Navdy를 쓰는 경우, Beacon 접속 시도가 Navdy 접속에 간섭을 주기 때문에, Navdy 접속 전까지 넘어가지 않도록 한다.
-        while DASH.navdy_connected == 0:
-            time.sleep(5)
 
 if __name__ == '__main__':
     main()

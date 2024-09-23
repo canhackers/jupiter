@@ -52,6 +52,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x352: 'BMS_energyStatus',
                     0x3c2: 'VCLEFT_switchStatus',
                     0x31a: 'VCRIGHT_switchStatus',
+                    0x3f5: 'VCFRONT_lighting',
                     0x528: 'UnixTime',
                     }
 
@@ -137,6 +138,9 @@ class Dashboard:
         self.tacc = 0
         self.autopilot = 0
         self.mars_mode = 0
+        self.turn_indicator_left = 0
+        self.turn_indicator_right = 0
+        self.alt_turn_signal = 0
         self.turn_signal_on_ap = 0
         self.nag_disabled = 0
         self.buckle_emulator = 0
@@ -189,7 +193,6 @@ class Dashboard:
                 self.passenger[3] = 1 if get_value(signal, 54, 2) == 2 else 0  # rear center, occupancy
                 self.passenger[4] = 1 if get_value(signal, 58, 2) == 2 else 0  # rear right, occupancy
                 self.passenger_cnt = sum(self.passenger)
-
         elif name == 'VCRIGHT_switchStatus':
             mux = get_value(signal, 0, 2)
             if mux == 0:
@@ -209,6 +212,9 @@ class Dashboard:
                 self.mirror_folded[1] = 0
             elif state in [1, 3]:
                 self.mirror_folded[1] = 1
+        elif name == 'VCFRONT_lighting':
+            self.turn_indicator_left = 0 if get_value(signal, 0, 2) == 0 else 1
+            self.turn_indicator_right = 0 if get_value(signal, 2, 2) == 0 else 1
 
         if self.passenger_cnt > 0:
             if self.occupancy == 0:
@@ -397,18 +403,15 @@ class Button:
             else:
                 drive_state = click_type  # 기어 정보가 없을 때 기본 상태
             if self.args:
-                if drive_state != click_type:
-                    self.action(drive_state, self.args)
-                else:
-                    self.action(click_type, self.args)
+                self.action(drive_state, self.args)
+                self.action(click_type, self.args)
             else:
-                if drive_state != click_type:
-                    self.action(drive_state)
-                else:
-                    self.action(click_type)
+                self.action(drive_state)
+                self.action(click_type)
 
     def action(self, period, args=None):
-        print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
+        if self.function_name[period] != 'Undefined':
+            print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
         if args:
             if isinstance(args, (list, tuple)):
                 self.function[period](*args)
@@ -418,7 +421,7 @@ class Button:
             self.function[period]()
 
 
-class ButtonControl:
+class ButtonManager:
     def __init__(self, buffer, dash):
         self.buffer = buffer
         self.dash = dash
@@ -441,8 +444,6 @@ class ButtonControl:
             return self.buckle_emulator
         if function_name == 'mars_mode_toggle':
             return self.mars_mode_toggle
-        if function_name == 'turn_signal_on_ap':
-            return self.turn_signal_on_ap
 
     def add_button(self, btn_name):
         self.buttons[btn_name] = Button(self, btn_name)
@@ -513,9 +514,6 @@ class ButtonControl:
     def mars_mode_toggle(self):
         self.dash.mars_mode ^= 1
 
-    def turn_signal_on_ap(self):
-        self.dash.turn_signal_on_ap = 1
-
 class Autopilot:
     def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed=0, slow_wiper=0,
                  auto_distance=0):
@@ -525,6 +523,12 @@ class Autopilot:
         self.tacc = 0
         self.autosteer = 0
         self.autosteer_active_time = 0
+        self.continuous_ap_active = 0
+        self.continuous_ap_request = 0
+        self.continuous_ap_request_time = 0
+        self.turn_indicator_on = 0
+        self.turn_indicator_off_time = 0
+        self.disengage_time = 0
         self.current_gear_position = 0
         self.last_gear_position = 0
         self.nag_disabled = 0
@@ -554,17 +558,22 @@ class Autopilot:
         self.speed_deque = deque([0, 0, 0])
         self.smooth_speed = 0
         self.reset_distance()
+        self.stalk_crc = [73, 75, 93, 98, 76, 78, 210, 246, 67, 170, 249, 131, 70, 32, 62, 52]
+        self.stalk_down_count = 0
+        self.stalk_down_time = 0
         self.stalk_up = Button(self, 'right_stalk_up')
-        self.stalk_down = Button(self, 'right_stalk_down')
         self.stalk_up.function['short_drive'] = self.disengage_autopilot
         self.stalk_up.function['long_drive'] = self.disengage_autopilot
-        self.stalk_down.function['short_drive'] = self.engage_tacc
-        self.stalk_down.function['double_drive'] = self.engage_autopilot
+        self.stalk_up.function['double_drive'] = self.disengage_autopilot
         self.stalk_up.function_name['short_drive'] = 'Disengage Autopilot'
         self.stalk_up.function_name['long_drive'] = 'Disengage Autopilot'
+        self.stalk_up.function_name['double_drive'] = 'Disengage Autopilot'
+        self.stalk_down = Button(self, 'right_stalk_down')
+        self.stalk_down.function['short_drive'] = self.engage_tacc
         self.stalk_down.function_name['short_drive'] = 'TACC / NAG Eliminator'
+        self.stalk_down.function['double_drive'] = self.engage_autopilot
         self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
-        # self.stalk_down.function['long_drive'] = self.continuous_ap   # continuous ap를 위해 남겨둠
+        self.stalk_down.function['long_drive'] = self.activate_continuous_ap   # continuous ap를 위해 남겨둠
 
     def tick(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
@@ -653,12 +662,24 @@ class Autopilot:
         self.autosteer = 0
         self.dash.tacc = 0
         self.dash.autopilot = 0
-        self.nag_disabled = 0
-        self.dash.nag_disabled = 0
         self.dash.turn_signal_on_ap = 0
         self.autosteer_active_time = 0
-        if depth == 2:
-            print('Reserved Function - Disable Continuous AP')
+        if not self.continuous_ap_active:
+            self.nag_disabled = 0
+            self.dash.nag_disabled = 0
+        if depth == 1:
+            if self.continuous_ap_active == 1:
+                self.disengage_time = time.time()
+            else:
+                self.disengage_time = 0
+            if self.continuous_ap_active == 1 and self.turn_indicator_on:
+                print('Continuous Autopilot Requested')
+                self.continuous_ap_request = 1
+        elif depth == 2:
+            self.continuous_ap_active = 0
+            self.continuous_ap_request = 0
+            if self.dash.gear == 4:
+                print('Continuous Autopilot Deactivated')
 
     def engage_autopilot(self, depth=None):
         if self.autosteer == 0:
@@ -673,10 +694,12 @@ class Autopilot:
             self.timer = 0
             self.manual_distance = 0
             if depth == 4:
+                self.activate_continuous_ap()
                 self.nag_disabler()
         else:
-            print('turn signal on ap activated')
-            self.dash.turn_signal_on_ap = 1
+            if self.dash.alt_turn_signal:
+                print('turn signal on ap activated')
+                self.dash.turn_signal_on_ap = 1
 
     def engage_tacc(self, depth=None):
         if self.tacc == 0 and self.autosteer == 0:
@@ -696,14 +719,32 @@ class Autopilot:
             self.dash.nag_disabled = 1
             print('NAG Eliminator Activated')
 
+    def activate_continuous_ap(self, depth=None):
+        if self.autosteer:
+            self.continuous_ap_active = 1
+            print('Continuous Autopilot Activated')
+
+    def right_stalk_double_down(self):
+        print('Continuous Autopilot Stalk Action Requested')
+        self.stalk_down_count = 2
+
     def check(self, bus, address, byte_data):
+        ret = byte_data
+        # continuous ap 판단
+        if self.continuous_ap_request == 1:
+            if self.turn_indicator_on == 0 and time.time() - self.turn_indicator_off_time > 2:
+                if self.dash.ui_speed >= 30: # test
+                    self.right_stalk_double_down()
+                self.continuous_ap_request = 0
+                self.turn_indicator_off_time = 0
+
         if self.dash.gear != 4:
-            self.disengage_autopilot()
+            self.disengage_autopilot(depth=2)
         if (bus == 0) and (address == 0x39d):
             if (self.autosteer == 1) or (self.tacc == 1):
                 brake_switch = get_value(byte_data, 16, 2)
                 if brake_switch == 2:
-                    self.disengage_autopilot()
+                    self.disengage_autopilot(depth=2)
 
         if (bus == 0) and (address == 0x273):
             if (self.keep_wiper_speed == 1) and (self.wiper_last_state != self.dash.wiper_state):
@@ -746,9 +787,20 @@ class Autopilot:
             if target_state != self.dash.wiper_state:
                 ret = modify_packet_value(byte_data, 56, 3, target_state)
                 self.buffer.write_message_buffer(0, 0x273, ret)
-                return ret
 
         if (bus == 0) and (address == 0x229) and (self.dash.gear == 4) and (self.dash.drive_time > 1):
+            # Continuous Autopilot을 위한 방향지시등 상태 업데이트
+            if self.dash.turn_indicator_left or self.dash.turn_indicator_right:
+                self.turn_indicator_on = 1
+                if self.disengage_time != 0:
+                    if time.time() - self.disengage_time <= 2:
+                        self.continuous_ap_request = 1
+                    self.disengage_time = 0
+            else:
+                if self.turn_indicator_on:
+                    self.turn_indicator_off_time = time.time()
+                    self.turn_indicator_on = 0
+
             # 기어 스토크 상태 체크
             self.current_gear_position = get_value(byte_data, 12, 3)
             if self.current_gear_position in [1, 2]:
@@ -761,6 +813,20 @@ class Autopilot:
                 self.stalk_up.release()
                 self.stalk_down.release()
             self.last_gear_position = self.current_gear_position
+
+            if self.stalk_down_count == 2 or (self.stalk_down_time != 0 and time.time() - self.stalk_down_time >= 0.5):
+                counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
+                crc = self.stalk_crc[counter]
+                ret = modify_packet_value(byte_data, 8, 4, counter)
+                ret = modify_packet_value(ret, 12, 3, 3)    # half down
+                ret = modify_packet_value(ret, 0, 8, crc)
+                self.buffer.write_message_buffer(bus, address, ret)
+                self.stalk_down_count -= 1
+                if self.stalk_down_count == 1:
+                    self.stalk_down_time = time.time()
+                elif self.stalk_down_count == 0:
+                    self.stalk_down_time = 0
+                    self.engage_autopilot(depth=2)
 
         if (bus == 0) and (address == 0x3c2):
             mux = get_value(byte_data, 0, 2)
@@ -908,6 +974,7 @@ class TurnSignal:
         self.buffer = buffer
         self.dash = dash
         self.enabled = enabled
+        self.dash.alt_turn_signal = enabled
         self.turn_indicator = 0  # 8 = left, 4 = right, 6 = left half, 2 = right half
         self.right_dial_click_time = 0
 
