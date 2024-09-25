@@ -53,6 +53,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x3c2: 'VCLEFT_switchStatus',
                     0x31a: 'VCRIGHT_switchStatus',
                     0x3f5: 'VCFRONT_lighting',
+                    0x39d: 'IBST_status',
                     0x528: 'UnixTime',
                     }
 
@@ -122,6 +123,7 @@ class Dashboard:
         self.parked = 1
         self.gear = 0
         self.accel_pedal_pos = 0
+        self.driver_brake = 0
         self.drive_mode = 0
         self.pedal_map = 0
         self.ui_speed = 0
@@ -170,6 +172,8 @@ class Dashboard:
             self.torque_rear = get_value(signal, 27, 13, signed=True) * 2
         elif name == 'DIF_torque':
             self.torque_front = get_value(signal, 27, 13, signed=True) * 2
+        elif name == 'IBST_status':
+            self.driver_brake = get_value(signal, 16, 2) # 1 Not Apply, 2 Apply
         elif name == '12vBattStatus':
             mux = get_value(signal, 0, 3)
             if mux == 1:
@@ -402,23 +406,20 @@ class Button:
                 drive_state = click_type + '_drive'
             else:
                 drive_state = click_type  # 기어 정보가 없을 때 기본 상태
-            if self.args:
-                self.action(drive_state, self.args)
-                self.action(click_type, self.args)
-            else:
-                self.action(drive_state)
-                self.action(click_type)
+            self.action(drive_state)
+            self.action(click_type)
 
-    def action(self, period, args=None):
+    def action(self, period):
         if self.function_name[period] != 'Undefined':
             print(f"{self.name} - {period} 액션 실행: {self.function_name[period]}")
-        if args:
-            if isinstance(args, (list, tuple)):
-                self.function[period](*args)
+        if self.args:
+            if isinstance(self.args, (list, tuple)):
+                self.function[period](*self.args)
             else:
-                self.function[period](args)
+                self.function[period](self.args)
         else:
             self.function[period]()
+        self.args = None
 
 
 class ButtonManager:
@@ -445,8 +446,8 @@ class ButtonManager:
         if function_name == 'mars_mode_toggle':
             return self.mars_mode_toggle
 
-    def add_button(self, btn_name):
-        self.buttons[btn_name] = Button(self, btn_name)
+    def add_button(self, btn_name, short_time=0.5, long_time=1.0):
+        self.buttons[btn_name] = Button(self, btn_name, short_time, long_time)
 
     def is_button(self, btn_name):
         if self.buttons.get(btn_name):
@@ -474,6 +475,14 @@ class ButtonManager:
                     map_lamp_right.press()
                 else:
                     map_lamp_right.release()
+
+        if (bus == 0) and (address == 0x229):
+            p_btn = self.buttons['ParkingButton']
+            if p_btn:
+                if get_value(byte_data, 16, 2) in [1, 2]:
+                    p_btn.press()
+                else:
+                    p_btn.release()
 
         # Mirror Action
         if (bus == 0) and (address == 0x273):
@@ -593,8 +602,9 @@ class Autopilot:
                 self.distance_target = 4
             else:
                 self.distance_target = 5
-            if self.timer < 5:
+            if self.distance_target != self.distance_current:
                 self.set_distance(self.distance_target)
+                self.timer = 0
 
         # Mars Mode from Spleck's github (https://github.com/spleck/panda)
         # 운전 중 스티어링 휠을 잡고 정확히 조향하는 것은 운전자의 의무입니다.
@@ -606,7 +616,6 @@ class Autopilot:
             elif self.timer == 6:
                 print('Right Scroll Wheel Up')
                 self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
-
         if self.timer >= 7:
             self.timer = 0
 
@@ -655,6 +664,30 @@ class Autopilot:
                 self.distance_current -= 1
 
     def disengage_autopilot(self, depth=None):
+        if depth == 1:
+            if self.continuous_ap_active == 1:
+                if self.autosteer:
+                    # 해제된 시점으로부터 2초 내에 방향지시등이 켜지면 Continuous AP 동작하기 위해 시간을 기록
+                    self.disengage_time = time.time()
+                    if self.turn_indicator_on:
+                        # 오토파일럿 중 방향지시등이 먼저 켜진 상태에서 스토크를 약하게 올려 해제했을 때
+                        print('Continuous Autopilot Requested')
+                        self.continuous_ap_request = 1
+                else:
+                    self.disengage_time = 0
+            else:
+                self.disengage_time = 0
+                self.nag_disabled = 0
+                self.dash.nag_disabled = 0
+        elif depth == 2:
+            self.disengage_time = 0
+            self.continuous_ap_active = 0
+            self.continuous_ap_request = 0
+            self.nag_disabled = 0
+            self.dash.nag_disabled = 0
+            if self.dash.gear == 4:
+                if self.continuous_ap_active:
+                    print('Continuous Autopilot Deactivated')
         if self.autosteer or self.tacc:
             print('Autopilot Disengaged')
             print(f'current distance : {self.distance_current}, current target : {self.distance_target}')
@@ -664,22 +697,6 @@ class Autopilot:
         self.dash.autopilot = 0
         self.dash.turn_signal_on_ap = 0
         self.autosteer_active_time = 0
-        if not self.continuous_ap_active:
-            self.nag_disabled = 0
-            self.dash.nag_disabled = 0
-        if depth == 1:
-            if self.continuous_ap_active == 1:
-                self.disengage_time = time.time()
-            else:
-                self.disengage_time = 0
-            if self.continuous_ap_active == 1 and self.turn_indicator_on:
-                print('Continuous Autopilot Requested')
-                self.continuous_ap_request = 1
-        elif depth == 2:
-            self.continuous_ap_active = 0
-            self.continuous_ap_request = 0
-            if self.dash.gear == 4:
-                print('Continuous Autopilot Deactivated')
 
     def engage_autopilot(self, depth=None):
         if self.autosteer == 0:
@@ -740,11 +757,10 @@ class Autopilot:
 
         if self.dash.gear != 4:
             self.disengage_autopilot(depth=2)
+
         if (bus == 0) and (address == 0x39d):
-            if (self.autosteer == 1) or (self.tacc == 1):
-                brake_switch = get_value(byte_data, 16, 2)
-                if brake_switch == 2:
-                    self.disengage_autopilot(depth=2)
+            if self.dash.driver_brake == 2:
+                self.disengage_autopilot(depth=2)
 
         if (bus == 0) and (address == 0x273):
             if (self.keep_wiper_speed == 1) and (self.wiper_last_state != self.dash.wiper_state):
@@ -793,6 +809,7 @@ class Autopilot:
             if self.dash.turn_indicator_left or self.dash.turn_indicator_right:
                 self.turn_indicator_on = 1
                 if self.disengage_time != 0:
+                    # 오토스티어 해제가 먼저 되었고, 방향지시등이 나중에 점등 된 경우. 오토스티어 해제 2초 이내라면
                     if time.time() - self.disengage_time <= 2:
                         self.continuous_ap_request = 1
                     self.disengage_time = 0
@@ -812,7 +829,6 @@ class Autopilot:
             elif self.current_gear_position == 0:
                 self.stalk_up.release()
                 self.stalk_down.release()
-            self.last_gear_position = self.current_gear_position
 
             if self.stalk_down_count == 2 or (self.stalk_down_time != 0 and time.time() - self.stalk_down_time >= 0.5):
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
@@ -946,9 +962,8 @@ class KickDown:
         if not self.enabled:
             return byte_data
         if (bus == 0) and (address == 0x39d):
-            if self.apply:
-                brake_switch = get_value(byte_data, 16, 2)
-                if brake_switch == 2:
+            if self.dash.driver_brake == 2:
+                if self.apply:
                     print('Brake Pressed, Kick Down mode disabled')
                     self.apply = 0
 
@@ -962,7 +977,6 @@ class KickDown:
                 return ret
 
         return byte_data
-
 
 class TurnSignal:
     def __init__(self, buffer, dash, enabled=0):

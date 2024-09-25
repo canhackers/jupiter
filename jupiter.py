@@ -49,13 +49,15 @@ class Jupiter(threading.Thread):
         BUTTON = ButtonManager(BUFFER, self.dash)
         BUTTON.add_button(btn_name='MapLampLeft')
         BUTTON.add_button(btn_name='MapLampRight')
+        BUTTON.add_button(btn_name='ParkingButton', long_time=0.5)
         buttons_define = (
             ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
             ('MapLampLeft', 'long', self.settings.get('MapLampLeftLong')),
             ('MapLampLeft', 'double', self.settings.get('MapLampLeftDouble')),
             ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
             ('MapLampRight', 'long', self.settings.get('MapLampRightLong')),
-            ('MapLampRight', 'double', self.settings.get('MapLampRightDouble'))
+            ('MapLampRight', 'double', self.settings.get('MapLampRightDouble')),
+            ('ParkingButton', 'long', 'mirror_fold'),
         )
         for (btn, ptype, func) in buttons_define:
             if func:
@@ -157,6 +159,8 @@ class Jupiter(threading.Thread):
 
                 # 실시간 패킷 인식 및 변조
                 if address == 0x1f9:
+                    signal = BUTTON.check(bus, address, signal)
+                if address == 0x229:
                     signal = BUTTON.check(bus, address, signal)
                 if address == 0x249:
                     ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
