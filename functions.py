@@ -28,6 +28,7 @@ def load_settings():
         'SlowWiper' : 1,
         'AltTurnSignal' : 1,
         'AutoFollowingDistance' : 1,
+        'MirrorAutoFold' : 0,
         'NavdyHud' : 0
     }
     if not os.path.exists(json_file):

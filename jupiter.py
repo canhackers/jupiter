@@ -126,6 +126,8 @@ class Jupiter(threading.Thread):
                         LOGGER.initialize()
                     elif (self.dash.gear == 1) and (not self.dash.parked):  # Park
                         print('Parking Gear Detected... Saving Drive history')
+                        if self.settings.get('MirrorAutoFold'):
+                            BUTTON.mirror_request = 1
                         self.dash.parked = 1
                         self.dash.drive_time = 0
                         LOGGER.close()

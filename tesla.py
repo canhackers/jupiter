@@ -173,7 +173,7 @@ class Dashboard:
         elif name == 'DIF_torque':
             self.torque_front = get_value(signal, 27, 13, signed=True) * 2
         elif name == 'IBST_status':
-            self.driver_brake = get_value(signal, 16, 2) # 1 Not Apply, 2 Apply
+            self.driver_brake = get_value(signal, 16, 2)  # 1 Not Apply, 2 Apply
         elif name == '12vBattStatus':
             mux = get_value(signal, 0, 3)
             if mux == 1:
@@ -523,6 +523,7 @@ class ButtonManager:
     def mars_mode_toggle(self):
         self.dash.mars_mode ^= 1
 
+
 class Autopilot:
     def __init__(self, buffer, dash, sender=None, device='raspi', mars_mode=0, keep_wiper_speed=0, slow_wiper=0,
                  auto_distance=0):
@@ -539,7 +540,6 @@ class Autopilot:
         self.turn_indicator_off_time = 0
         self.disengage_time = 0
         self.current_gear_position = 0
-        self.last_gear_position = 0
         self.nag_disabled = 0
         self.mars_mode = mars_mode
         self.dash.mars_mode = mars_mode
@@ -582,7 +582,7 @@ class Autopilot:
         self.stalk_down.function_name['short_drive'] = 'TACC / NAG Eliminator'
         self.stalk_down.function['double_drive'] = self.engage_autopilot
         self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
-        self.stalk_down.function['long_drive'] = self.activate_continuous_ap   # continuous ap를 위해 남겨둠
+        self.stalk_down.function['long_drive'] = self.activate_turn_indicator_on
 
     def tick(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
@@ -710,13 +710,7 @@ class Autopilot:
             self.wiper_mode_rollback_request = 0
             self.timer = 0
             self.manual_distance = 0
-            if depth == 4:
-                self.activate_continuous_ap()
-                self.nag_disabler()
-        else:
-            if self.dash.alt_turn_signal:
-                print('turn signal on ap activated')
-                self.dash.turn_signal_on_ap = 1
+            self.nag_disabler()
 
     def engage_tacc(self, depth=None):
         if self.tacc == 0 and self.autosteer == 0:
@@ -726,9 +720,8 @@ class Autopilot:
             self.wiper_mode_rollback_request = 0
             self.manual_distance = 0
         else:
-            if (self.autosteer_active_time != 0) and (time.time() - self.autosteer_active_time > 0.5):
-                if depth == 4:
-                    self.nag_disabler()
+            if depth == 4:
+                self.activate_continuous_ap()
 
     def nag_disabler(self):
         if self.mars_mode:
@@ -738,8 +731,14 @@ class Autopilot:
 
     def activate_continuous_ap(self, depth=None):
         if self.autosteer:
-            self.continuous_ap_active = 1
-            print('Continuous Autopilot Activated')
+            if (self.autosteer_active_time != 0) and (time.time() - self.autosteer_active_time > 0.5):
+                self.continuous_ap_active = 1
+                print('Continuous Autopilot Activated')
+
+    def activate_turn_indicator_on(self, depth=None):
+        if (self.autosteer or self.tacc) and self.dash.alt_turn_signal:
+            self.dash.turn_signal_on_ap = 1
+            print('ALT Turn indicator on AP activated')
 
     def right_stalk_double_down(self):
         print('Continuous Autopilot Stalk Action Requested')
@@ -750,7 +749,7 @@ class Autopilot:
         # continuous ap 판단
         if self.continuous_ap_request == 1:
             if self.turn_indicator_on == 0 and time.time() - self.turn_indicator_off_time > 2:
-                if self.dash.ui_speed >= 30: # test
+                if self.dash.ui_speed >= 30 and self.dash.accel_pedal_pos > 0:
                     self.right_stalk_double_down()
                 self.continuous_ap_request = 0
                 self.turn_indicator_off_time = 0
@@ -834,7 +833,7 @@ class Autopilot:
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
                 crc = self.stalk_crc[counter]
                 ret = modify_packet_value(byte_data, 8, 4, counter)
-                ret = modify_packet_value(ret, 12, 3, 3)    # half down
+                ret = modify_packet_value(ret, 12, 3, 3)  # half down
                 ret = modify_packet_value(ret, 0, 8, crc)
                 self.buffer.write_message_buffer(bus, address, ret)
                 self.stalk_down_count -= 1
@@ -978,6 +977,7 @@ class KickDown:
 
         return byte_data
 
+
 class TurnSignal:
     def __init__(self, buffer, dash, enabled=0):
         # up = right = 4,  down = left = 8
@@ -1024,12 +1024,27 @@ class TurnSignal:
             if get_value(byte_data, 0, 2) == 1:
                 if get_value(byte_data, 8, 2) == 2:
                     self.right_dial_click_time = time.time()
-                    self.turn_indicator = 6
+                    if self.dash.turn_signal_on_ap:
+                        if self.dash.turn_indicator_right or self.dash.turn_indicator_left:
+                            # 이미 방향지시등이 켜져 있는 경우는 취소하기 위한 얕은 클릭으로 동작
+                            self.turn_indicator = 6
+                        else:
+                            # 오토파일럿 중에는 깊게 눌러야 함
+                            self.turn_indicator = 8
+                    else:
+                        self.turn_indicator = 6
                 elif get_value(byte_data, 10, 2) == 2:
                     self.right_dial_click_time = time.time()
-                    self.turn_indicator = 2
+                    if self.dash.turn_signal_on_ap:
+                        if self.dash.turn_indicator_right or self.dash.turn_indicator_left:
+                            self.turn_indicator = 2
+                        else:
+                            self.turn_indicator = 4
+                    else:
+                        self.turn_indicator = 2
                 else:
                     if self.turn_indicator != 0:
                         if time.time() - self.right_dial_click_time > 0.1:
+                            # indicator 동작 신호 지속시간이 있어야 방향지시등이 동작함
                             self.turn_indicator = 0
         return byte_data
