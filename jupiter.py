@@ -133,7 +133,7 @@ class Jupiter(threading.Thread):
                             self.dash.drive_time = 0
                             self.dash.drive_finished = 1
                             LOGGER.close()
-                        if self.dash.occupancy == 0:
+                        if self.dash.passenger_cnt == 0:
                             if self.settings.get('MirrorAutoFold') and self.dash.drive_finished == 1:
                                 BUTTON.mirror_request = 1
                                 self.dash.drive_finished = 0
