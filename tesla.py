@@ -226,9 +226,10 @@ class Dashboard:
                 self.occupancy_timer = time.time()
                 self.occupancy = 1
         else:
-            if (self.occupancy == 1):
-                if time.time() - self.occupancy_timer > 10:
+            if self.occupancy == 1:
+                if self.occupancy_timer != 0 and time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
+                    self.occupancy_timer = 0
 
 
 class Logger:
