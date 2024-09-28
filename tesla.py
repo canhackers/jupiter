@@ -121,6 +121,7 @@ class Dashboard:
         self.unix_time = 0
         self.clock = None
         self.parked = 1
+        self.drive_finished = 0
         self.gear = 0
         self.accel_pedal_pos = 0
         self.driver_brake = 0

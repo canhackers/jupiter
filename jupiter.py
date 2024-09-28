@@ -124,16 +124,19 @@ class Jupiter(threading.Thread):
                             print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
                             self.dash.parked = 0
                             self.dash.drive_time = 0
+                            self.dash.drive_finished = 0
                             LOGGER.initialize()
                     elif self.dash.gear == 1:
                         if self.dash.parked == 0:  # Drive(4) → Park(1)
                             print('Parking Gear Detected... Saving Drive history')
                             self.dash.parked = 1
                             self.dash.drive_time = 0
+                            self.dash.drive_finished = 1
                             LOGGER.close()
                         if self.dash.occupancy == 0:
-                            if self.settings.get('MirrorAutoFold'):
+                            if self.settings.get('MirrorAutoFold') and self.dash.drive_finished == 1:
                                 BUTTON.mirror_request = 1
+                                self.dash.drive_finished = 0
                     else:
                         pass
 
