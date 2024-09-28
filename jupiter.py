@@ -119,18 +119,21 @@ class Jupiter(threading.Thread):
                 ### 기어 상태 체크 / 로깅 시작 ###
                 if address == 0x118 and (self.dash.clock is not None):
                     self.dash.update('DriveSystemStatus', signal)
-                    if (self.dash.gear == 4) and (self.dash.parked):  # Drive
-                        print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
-                        self.dash.parked = 0
-                        self.dash.drive_time = 0
-                        LOGGER.initialize()
-                    elif (self.dash.gear == 1) and (not self.dash.parked):  # Park
-                        print('Parking Gear Detected... Saving Drive history')
-                        if self.settings.get('MirrorAutoFold'):
-                            BUTTON.mirror_request = 1
-                        self.dash.parked = 1
-                        self.dash.drive_time = 0
-                        LOGGER.close()
+                    if self.dash.gear == 4:
+                        if self.dash.parked == 1:   # Park(1) → Drive(4)
+                            print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
+                            self.dash.parked = 0
+                            self.dash.drive_time = 0
+                            LOGGER.initialize()
+                    elif self.dash.gear == 1:
+                        if self.dash.parked == 0:  # Drive(4) → Park(1)
+                            print('Parking Gear Detected... Saving Drive history')
+                            self.dash.parked = 1
+                            self.dash.drive_time = 0
+                            LOGGER.close()
+                        if self.dash.occupancy == 0:
+                            if self.settings.get('MirrorAutoFold'):
+                                BUTTON.mirror_request = 1
                     else:
                         pass
 
@@ -184,7 +187,6 @@ class Jupiter(threading.Thread):
                     signal = AP.check(bus, address, signal)
                     ##### 재부팅 명령 모니터링 ###
                     signal = REBOOT.check(bus, address, signal)
-
                 if address == 0x334:
                     ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
                     signal = KICKDOWN.check(bus, address, signal)

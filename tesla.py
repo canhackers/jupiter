@@ -226,7 +226,7 @@ class Dashboard:
                 self.occupancy = 1
         else:
             if (self.occupancy == 1):
-                if time.time() - self.occupancy_timer > 10:
+                if time.time() - self.occupancy_timer > 5:
                     self.occupancy = 0
 
 
@@ -873,7 +873,7 @@ class Autopilot:
                     else:
                         self.manual_distance = 1
 
-        return byte_data
+        return ret
 
 
 class RearCenterBuckle:
