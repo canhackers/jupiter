@@ -227,7 +227,7 @@ class Dashboard:
                 self.occupancy = 1
         else:
             if (self.occupancy == 1):
-                if time.time() - self.occupancy_timer > 5:
+                if time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
 
 
