@@ -543,8 +543,8 @@ class Autopilot:
         self.disengage_time = 0
         self.current_gear_position = 0
         self.nag_disabled = 0
-        self.mars_mode = mars_mode
-        self.dash.mars_mode = mars_mode
+        self.mars_mode = mars_mode if mars_mode is not None else 0
+        self.dash.mars_mode = self.mars_mode
         self.keep_wiper_speed = keep_wiper_speed
         self.slow_wiper = slow_wiper
         self.auto_distance = auto_distance
