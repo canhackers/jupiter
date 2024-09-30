@@ -1001,6 +1001,7 @@ class TurnSignal:
             if self.turn_indicator == 0:
                 return byte_data
             else:
+                ret = byte_data
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
                 if self.turn_indicator == 8:
                     crc = self.crc_left[counter]
@@ -1013,11 +1014,11 @@ class TurnSignal:
                 else:
                     crc = None
                 if crc is not None:
-                    ret = modify_packet_value(byte_data, 8, 4, counter)
+                    ret = modify_packet_value(ret, 8, 4, counter)
                     ret = modify_packet_value(ret, 16, 4, self.turn_indicator)
                     ret = modify_packet_value(ret, 0, 8, crc)
                     self.buffer.write_message_buffer(bus, address, ret)
-                return ret
+            return ret
 
         if (bus == 0) and (address == 0x3c2):
             if ((self.dash.autopilot == 1) or (self.dash.tacc == 1)) and (self.dash.turn_signal_on_ap == 0):
@@ -1049,4 +1050,5 @@ class TurnSignal:
                         if time.time() - self.right_dial_click_time > 0.1:
                             # indicator 동작 신호 지속시간이 있어야 방향지시등이 동작함
                             self.turn_indicator = 0
+            return byte_data
         return byte_data
