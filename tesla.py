@@ -237,11 +237,11 @@ class Logger:
         # 클라우드 업로드용은 7zip 알고리즘을 사용하여 용량을 대폭 줄일 수 있으나, 일부 압축프로그램에서 열리지 않음
         self.buffer = buffer
         self.dash = dash
-        self.cloud = cloud
+        self.cloud = cloud if cloud is not None else 0
         self.filename = None
         self.file = None
         self.csvwriter = None
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
 
     def initialize(self):
         if self.enabled == 0:
@@ -545,8 +545,8 @@ class Autopilot:
         self.nag_disabled = 0
         self.mars_mode = mars_mode if mars_mode is not None else 0
         self.dash.mars_mode = self.mars_mode
-        self.keep_wiper_speed = keep_wiper_speed
-        self.slow_wiper = slow_wiper
+        self.keep_wiper_speed = keep_wiper_speed if keep_wiper_speed is not None else 0
+        self.slow_wiper = slow_wiper if slow_wiper is not None else 0
         self.auto_distance = auto_distance
         self.manual_distance = 0
         if sender is not None:
@@ -881,7 +881,7 @@ class Autopilot:
 class RearCenterBuckle:
     def __init__(self, buffer, dash, mode=0):
         self.buffer = buffer
-        self.mode = mode
+        self.mode = mode if mode is not None else 0
         self.dash = dash
         # mode: 0/None - 비활성화, 1 - 뒷좌석 중앙만, 2 - 모두
 
@@ -914,7 +914,7 @@ class FreshAir:
     def __init__(self, buffer, dash, enabled=0):
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
         self.recirc_mode = 1
         # 마지막으로 Frseh로 바뀐 시간, 마지막으로 Recirc로 바뀐 시간
         self.last_mode_change = time.time()
@@ -956,7 +956,7 @@ class KickDown:
     def __init__(self, buffer, dash, enabled=0):
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
         self.apply = 0
 
     def check(self, bus, address, byte_data):
@@ -989,8 +989,8 @@ class TurnSignal:
         self.crc_left_half = (191, 204, 14, 247, 247, 167, 104, 122, 27, 122, 198, 12, 30, 55, 139, 234)
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
-        self.dash.alt_turn_signal = enabled
+        self.enabled = enabled if enabled is not None else 0
+        self.dash.alt_turn_signal = self.enabled
         self.turn_indicator = 0  # 8 = left, 4 = right, 6 = left half, 2 = right half
         self.right_dial_click_time = 0
 

@@ -60,7 +60,7 @@ class Jupiter(threading.Thread):
             ('ParkingButton', 'long', 'mirror_fold'),
         )
         for (btn, ptype, func) in buttons_define:
-            if func:
+            if isinstance(func, str):
                 functions = func.split(',')
                 if len(functions) == 1:
                     BUTTON.assign(btn_name=btn, press_type=ptype, function_name=functions[0].strip())
@@ -235,7 +235,7 @@ def main():
     J = Jupiter(DASH, settings)
     J.start()
 
-    if settings.get('NavdyHud'):
+    if settings.get('NavdyHud') == 1:
         from navdy import Hud
         H = Hud(DASH)
         H.start()
