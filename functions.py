@@ -19,13 +19,17 @@ def load_settings():
     default_settings = {
         'Logger': 1,
         'RearCenterBuckle': 1,
-        'MapLampLeft' : 'mirror_fold',
-        'MapLampRight' : 'open_door_rr',
+        'MapLampLeftLong' : 'mirror_fold',
+        'MapLampRightLong' : 'open_door_rr,buckle_emulator',    # 두개의 함수가 선언되는 경우는 주차 중, 주행 중 기능
+        'MapLampRightDouble': 'open_door_fr,mars_mode_toggle',
         'AutoRecirculation' : 1,
         'KickDown' : 1,
         'KeepWiperSpeed': 1,
         'SlowWiper' : 1,
-        'AltTurnSignal' : 1
+        'AltTurnSignal' : 1,
+        'AutoFollowingDistance' : 1,
+        'MirrorAutoFold' : 0,
+        'NavdyHud' : 0
     }
     if not os.path.exists(json_file):
         # 설정 파일이 없으면 기본 설정 파일 생성
