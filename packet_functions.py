@@ -25,21 +25,42 @@ def get_value(packet_byte, loc, length, endian='little', signed=False):
     return value
 
 
-def modify_packet_value(packet_byte, start_bit, length, new_value):
-    # 카운터와 체크섬이 없고, 특정 비트만 바꾸면 될 때 사용하는 함수
+def modify_packet_value(packet_byte, start_bit, length, new_value, endian='little', signed=False):
     try:
-        byte_index = start_bit // 8
-        bit_index = start_bit % 8
-        if not (0 <= new_value < (1 << length)):
-            # if new_value not fit in range
-            return packet_byte
-        mask = ((1 << length) - 1) << bit_index
+        # 바이트 배열로 변환
         byte_array = bytearray(packet_byte)
-        byte_array[byte_index] &= ~mask
-        byte_array[byte_index] |= (new_value << bit_index)
-        return bytes(byte_array)
-    except:
-        print('An error occurred in modify_packet_value')
+
+        # signed 처리를 위한 최대값과 최소값 계산
+        if signed:
+            min_value = -(1 << (length - 1))
+            max_value = (1 << (length - 1)) - 1
+        else:
+            min_value = 0
+            max_value = (1 << length) - 1
+
+        # new_value가 허용 범위 내에 있는지 확인
+        if not (min_value <= new_value <= max_value):
+            return packet_byte
+
+        # signed 값인 경우 2의 보수 표현으로 변환
+        if signed and new_value < 0:
+            new_value = (1 << length) + new_value
+
+        # 전체 비트를 하나의 정수로 변환
+        packet_int = int.from_bytes(byte_array, byteorder=endian)
+
+        # 기존 값을 지우기 위해 마스크 생성
+        mask = ((1 << length) - 1) << start_bit
+        packet_int &= ~mask  # 해당 비트 필드를 0으로 클리어
+
+        # 새로운 값 설정
+        packet_int |= (new_value << start_bit) & mask
+
+        # 수정된 값을 바이트 배열로 변환
+        modified_bytes = packet_int.to_bytes(len(byte_array), byteorder=endian)
+        return modified_bytes
+    except Exception as e:
+        print(f'An error occurred in modify_packet_value: {e}')
         return packet_byte
 
 
