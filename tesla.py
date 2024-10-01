@@ -757,9 +757,9 @@ class Autopilot:
         ret = byte_data
         # 동시에 두가지 다이얼 조작이 충돌하지 않게 하기 위한 처리
         if self.switch_commands:
-            command = self.switch_commands[0]
+            command_name = self.switch_commands[0]
             # Left dial 충돌 회피
-            if 'volume' in command:
+            if 'volume' in command_name:
                 swcLeftDoublePress = get_value(ret, 41, 1)
                 swcLeftPressed = get_value(ret, 5, 2)
                 swcLeftScrollTicks = get_value(ret, 16, 6, signed=True)
@@ -774,7 +774,7 @@ class Autopilot:
                         ret = modify_packet_value(ret, 16, 6, -1, signed=True)
                     else:
                         pass
-            elif ('speed' in command) or ('distance' in command):
+            elif ('speed' in command_name) or ('distance' in command_name):
                 swcRightDoublePress = get_value(ret, 42, 1)
                 swcRightPressed = get_value(ret, 12, 2)
                 swcRightScrollTicks = get_value(ret, 24, 6, signed=True)
