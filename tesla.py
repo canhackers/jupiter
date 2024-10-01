@@ -568,7 +568,6 @@ class Autopilot:
         self.distance_near_pressed = 0
         self.speed_deque = deque([0, 0, 0])
         self.smooth_speed = 0
-        self.reset_distance()
         self.stalk_crc = [73, 75, 93, 98, 76, 78, 210, 246, 67, 170, 249, 131, 70, 32, 62, 52]
         self.stalk_down_count = 0
         self.stalk_down_time = 0
@@ -586,7 +585,8 @@ class Autopilot:
         self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
         self.stalk_down.function['long_drive'] = self.activate_turn_indicator_on
         self.switch_commands = []
-
+        self.reset_distance()
+                   
     def tick(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
         self.mars_mode = self.dash.mars_mode
