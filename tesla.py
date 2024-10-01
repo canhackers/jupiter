@@ -663,11 +663,13 @@ class Autopilot:
         else:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
             if gap > 0:
-                cmd = command['distance_far']
+                cmd = 'distance_far'
+                # cmd = command['distance_far']
                 # self.buffer.write_message_buffer(0, 0x3c2, cmd)
                 self.distance_current += 1
             else:
-                cmd = command['distance_near']
+                cmd = 'distance_near'
+                # cmd = command['distance_near']
                 # self.buffer.write_message_buffer(0, 0x3c2, cmd)
                 self.distance_current -= 1
             self.switch_commands.append(cmd)
