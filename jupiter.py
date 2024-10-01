@@ -60,7 +60,7 @@ class Jupiter(threading.Thread):
             ('ParkingButton', 'long', 'mirror_fold'),
         )
         for (btn, ptype, func) in buttons_define:
-            if func:
+            if isinstance(func, str):
                 functions = func.split(',')
                 if len(functions) == 1:
                     BUTTON.assign(btn_name=btn, press_type=ptype, function_name=functions[0].strip())
@@ -119,18 +119,24 @@ class Jupiter(threading.Thread):
                 ### 기어 상태 체크 / 로깅 시작 ###
                 if address == 0x118 and (self.dash.clock is not None):
                     self.dash.update('DriveSystemStatus', signal)
-                    if (self.dash.gear == 4) and (self.dash.parked):  # Drive
-                        print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
-                        self.dash.parked = 0
-                        self.dash.drive_time = 0
-                        LOGGER.initialize()
-                    elif (self.dash.gear == 1) and (not self.dash.parked):  # Park
-                        print('Parking Gear Detected... Saving Drive history')
+                    if self.dash.gear == 4:
+                        if self.dash.parked == 1:   # Park(1) → Drive(4)
+                            print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
+                            self.dash.parked = 0
+                            self.dash.drive_time = 0
+                            self.dash.drive_finished = 0
+                            LOGGER.initialize()
+                    elif self.dash.gear == 1:
+                        if self.dash.parked == 0:  # Drive(4) → Park(1)
+                            print('Parking Gear Detected... Saving Drive history')
+                            self.dash.parked = 1
+                            self.dash.drive_time = 0
+                            self.dash.drive_finished = 1
+                            LOGGER.close()
                         if self.settings.get('MirrorAutoFold'):
-                            BUTTON.mirror_request = 1
-                        self.dash.parked = 1
-                        self.dash.drive_time = 0
-                        LOGGER.close()
+                            if self.dash.passenger_cnt == 0 and self.dash.drive_finished == 1:
+                                BUTTON.mirror_request = 1
+                                self.dash.drive_finished = 0
                     else:
                         pass
 
@@ -184,7 +190,6 @@ class Jupiter(threading.Thread):
                     signal = AP.check(bus, address, signal)
                     ##### 재부팅 명령 모니터링 ###
                     signal = REBOOT.check(bus, address, signal)
-
                 if address == 0x334:
                     ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
                     signal = KICKDOWN.check(bus, address, signal)
@@ -230,7 +235,7 @@ def main():
     J = Jupiter(DASH, settings)
     J.start()
 
-    if settings.get('NavdyHud'):
+    if settings.get('NavdyHud') == 1:
         from navdy import Hud
         H = Hud(DASH)
         H.start()

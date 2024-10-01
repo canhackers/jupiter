@@ -33,7 +33,6 @@
 1. 라즈베리파이 2W 또는 2WH : 만약 2W를 구입했다면 HAT을 연결하기 위한 헤더핀을 별도로 구입해 납땜 해야 합니다.<br>
 2. Waveshare RS485 CAN HAT<br>
 3. 12V → 5V Step Down 모듈 (MP1584EN 外)<br>
-   (선택사항) 10~25v, 470~1000uF 범위의 전해 콘덴서. 5V 출력단에 +,-극을 정확히 확인하여 납땜. 안정적 구동에 도움을 줌<br>
 4. Micro USB Male Vertical PCB (<a href="https://www.aliexpress.com/item/1005002320414960.html">https://www.aliexpress.com/item/1005002320414960.html</a>)<br>
 5. Micro SD 메모리 최소 8GB, 권장 32GB 이상<br>
 6. DIY용 OBD 커넥터 (<a href="https://www.aliexpress.com/item/1468276483.html">https://www.aliexpress.com/item/1468276483.html</a>)<br>

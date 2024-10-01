@@ -121,6 +121,7 @@ class Dashboard:
         self.unix_time = 0
         self.clock = None
         self.parked = 1
+        self.drive_finished = 0
         self.gear = 0
         self.accel_pedal_pos = 0
         self.driver_brake = 0
@@ -225,9 +226,10 @@ class Dashboard:
                 self.occupancy_timer = time.time()
                 self.occupancy = 1
         else:
-            if (self.occupancy == 1):
-                if time.time() - self.occupancy_timer > 10:
+            if self.occupancy == 1:
+                if self.occupancy_timer != 0 and time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
+                    self.occupancy_timer = 0
 
 
 class Logger:
@@ -235,11 +237,11 @@ class Logger:
         # 클라우드 업로드용은 7zip 알고리즘을 사용하여 용량을 대폭 줄일 수 있으나, 일부 압축프로그램에서 열리지 않음
         self.buffer = buffer
         self.dash = dash
-        self.cloud = cloud
+        self.cloud = cloud if cloud is not None else 0
         self.filename = None
         self.file = None
         self.csvwriter = None
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
 
     def initialize(self):
         if self.enabled == 0:
@@ -541,10 +543,10 @@ class Autopilot:
         self.disengage_time = 0
         self.current_gear_position = 0
         self.nag_disabled = 0
-        self.mars_mode = mars_mode
-        self.dash.mars_mode = mars_mode
-        self.keep_wiper_speed = keep_wiper_speed
-        self.slow_wiper = slow_wiper
+        self.mars_mode = mars_mode if mars_mode is not None else 0
+        self.dash.mars_mode = self.mars_mode
+        self.keep_wiper_speed = keep_wiper_speed if keep_wiper_speed is not None else 0
+        self.slow_wiper = slow_wiper if slow_wiper is not None else 0
         self.auto_distance = auto_distance
         self.manual_distance = 0
         if sender is not None:
@@ -873,13 +875,13 @@ class Autopilot:
                     else:
                         self.manual_distance = 1
 
-        return byte_data
+        return ret
 
 
 class RearCenterBuckle:
     def __init__(self, buffer, dash, mode=0):
         self.buffer = buffer
-        self.mode = mode
+        self.mode = mode if mode is not None else 0
         self.dash = dash
         # mode: 0/None - 비활성화, 1 - 뒷좌석 중앙만, 2 - 모두
 
@@ -912,7 +914,7 @@ class FreshAir:
     def __init__(self, buffer, dash, enabled=0):
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
         self.recirc_mode = 1
         # 마지막으로 Frseh로 바뀐 시간, 마지막으로 Recirc로 바뀐 시간
         self.last_mode_change = time.time()
@@ -954,7 +956,7 @@ class KickDown:
     def __init__(self, buffer, dash, enabled=0):
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
+        self.enabled = enabled if enabled is not None else 0
         self.apply = 0
 
     def check(self, bus, address, byte_data):
@@ -987,8 +989,8 @@ class TurnSignal:
         self.crc_left_half = (191, 204, 14, 247, 247, 167, 104, 122, 27, 122, 198, 12, 30, 55, 139, 234)
         self.buffer = buffer
         self.dash = dash
-        self.enabled = enabled
-        self.dash.alt_turn_signal = enabled
+        self.enabled = enabled if enabled is not None else 0
+        self.dash.alt_turn_signal = self.enabled
         self.turn_indicator = 0  # 8 = left, 4 = right, 6 = left half, 2 = right half
         self.right_dial_click_time = 0
 
@@ -999,6 +1001,7 @@ class TurnSignal:
             if self.turn_indicator == 0:
                 return byte_data
             else:
+                ret = byte_data
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
                 if self.turn_indicator == 8:
                     crc = self.crc_left[counter]
@@ -1011,11 +1014,11 @@ class TurnSignal:
                 else:
                     crc = None
                 if crc is not None:
-                    ret = modify_packet_value(byte_data, 8, 4, counter)
+                    ret = modify_packet_value(ret, 8, 4, counter)
                     ret = modify_packet_value(ret, 16, 4, self.turn_indicator)
                     ret = modify_packet_value(ret, 0, 8, crc)
                     self.buffer.write_message_buffer(bus, address, ret)
-                return ret
+            return ret
 
         if (bus == 0) and (address == 0x3c2):
             if ((self.dash.autopilot == 1) or (self.dash.tacc == 1)) and (self.dash.turn_signal_on_ap == 0):
@@ -1047,4 +1050,5 @@ class TurnSignal:
                         if time.time() - self.right_dial_click_time > 0.1:
                             # indicator 동작 신호 지속시간이 있어야 방향지시등이 동작함
                             self.turn_indicator = 0
+            return byte_data
         return byte_data
