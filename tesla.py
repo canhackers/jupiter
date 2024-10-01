@@ -777,7 +777,7 @@ class Autopilot:
             elif ('speed' in command) or ('distance' in command):
                 swcRightDoublePress = get_value(ret, 42, 1)
                 swcRightPressed = get_value(ret, 12, 2)
-                swcRightScrollTicks = get_value(24, 6, signed=True)
+                swcRightScrollTicks = get_value(ret, 24, 6, signed=True)
                 swcRightTiltLeft = get_value(ret, 8, 2)
                 swcRightTiltRight = get_value(ret, 10, 2)
                 if swcRightDoublePress == 0 and swcRightScrollTicks == 0 and \
