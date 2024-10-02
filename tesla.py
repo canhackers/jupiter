@@ -585,6 +585,7 @@ class Autopilot:
         self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
         self.stalk_down.function['long_drive'] = self.activate_turn_indicator_on
         self.switch_commands = []
+        self.last_switch_command_time = 0
         self.reset_distance()
                    
     def tick(self):
@@ -759,7 +760,11 @@ class Autopilot:
         ret = byte_data
         # 동시에 두가지 다이얼 조작이 충돌하지 않게 하기 위한 처리
         if self.switch_commands:
-            command_name = self.switch_commands[0]
+            if time.time() - self.last_switch_command_time >= 0.2:
+                command_name = self.switch_commands[0]
+                self.last_switch_command_time = time.time()
+            else:
+                command_name = ''
             # Left dial 충돌 회피
             if 'volume' in command_name:
                 swcLeftDoublePress = get_value(ret, 41, 1)
