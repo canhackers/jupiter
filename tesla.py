@@ -1,6 +1,5 @@
 import os
 import time
-import can
 import csv
 import zipfile
 import shutil
@@ -447,6 +446,7 @@ class ButtonManager:
             return self.buckle_emulator
         if function_name == 'mars_mode_toggle':
             return self.mars_mode_toggle
+        return lambda *args, **kwargs: None
 
     def add_button(self, btn_name, short_time=0.5, long_time=1.0):
         self.buttons[btn_name] = Button(self, btn_name, short_time, long_time)
@@ -463,6 +463,7 @@ class ButtonManager:
         self.buttons[btn_name].function_name[press_type] = function_name
 
     def check(self, bus, address, byte_data):
+        ret = byte_data
         if (bus == 0) and (address == 0x3e2):
             # Check Map Lamp Pressed
             map_lamp_left = self.buttons.get('MapLampLeft')
@@ -499,7 +500,15 @@ class ButtonManager:
             if self.door_open_request is None:
                 pass
             else:
-                ret = command.get('door_open_' + str(self.door_open_request))
+                door_loc = str(self.door_open_request)
+                if door_loc == 'fl':
+                    ret = bytes.fromhex('6000000000000000')
+                elif door_loc == 'fr':
+                    ret = bytes.fromhex('0003000000000000')
+                elif door_loc == 'rl':
+                    ret = bytes.fromhex('0018000000000000')
+                elif door_loc == 'rr':
+                    ret = bytes.fromhex('00c0000000000000')
                 if ret:
                     self.buffer.write_message_buffer(0, 0x1f9, ret)
                 self.door_open_request = None
@@ -568,7 +577,6 @@ class Autopilot:
         self.distance_near_pressed = 0
         self.speed_deque = deque([0, 0, 0])
         self.smooth_speed = 0
-        self.reset_distance()
         self.stalk_crc = [73, 75, 93, 98, 76, 78, 210, 246, 67, 170, 249, 131, 70, 32, 62, 52]
         self.stalk_down_count = 0
         self.stalk_down_time = 0
@@ -585,6 +593,9 @@ class Autopilot:
         self.stalk_down.function['double_drive'] = self.engage_autopilot
         self.stalk_down.function_name['double_drive'] = 'Autopilot / Turn Signal on AP'
         self.stalk_down.function['long_drive'] = self.activate_turn_indicator_on
+        self.switch_commands = []
+        self.last_switch_command_time = 0
+        self.reset_distance()
 
     def tick(self):
         # Dynamic Following Distance 제어를 위해 평균 속도를 산출 및 제어 (최근 3초 평균 속도 기준으로 제어)
@@ -614,35 +625,16 @@ class Autopilot:
         if self.mars_mode and self.autosteer == 1 and self.nag_disabled == 1:
             if self.timer == 5:
                 print('Right Scroll Wheel Down')
-                self.buffer.write_message_buffer(0, 0x3c2, command['speed_down'])
+                self.switch_commands.append('speed_down')
             elif self.timer == 6:
                 print('Right Scroll Wheel Up')
-                self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
+                self.switch_commands.append('speed_up')
         if self.timer >= 7:
             self.timer = 0
 
     def reset_distance(self):
-        try:
-            if self.device == 'panda':
-                for i in range(6):
-                    self.sender.can_send(0x3c2, command['distance_near'], 0)
-                    time.sleep(0.05)
-            elif self.device == 'raspi':
-                tx_frame = can.Message()
-                tx_frame.channel = 'can0'
-                tx_frame.dlc = 8
-                tx_frame.arbitration_id = 0x3c2
-                tx_frame.is_extended_id = False
-                for i in range(6):
-                    tx_frame.data = bytearray(command['distance_near'])
-                    self.sender.send(tx_frame)
-                    time.sleep(0.25)
-            else:
-                pass
-            print('Following distance set to closest')
-
-        except Exception as e:
-            print('Failed to set distance\n', e)
+        for i in range(6):
+            self.switch_commands.append('distance_near')
 
     def set_distance(self, target=None):
         if target:
@@ -657,13 +649,12 @@ class Autopilot:
         else:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
             if gap > 0:
-                cmd = command['distance_far']
-                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                cmd = 'distance_far'
                 self.distance_current += 1
             else:
-                cmd = command['distance_near']
-                self.buffer.write_message_buffer(0, 0x3c2, cmd)
+                cmd = 'distance_near'
                 self.distance_current -= 1
+            self.switch_commands.append(cmd)
 
     def disengage_autopilot(self, depth=None):
         if depth == 1:
@@ -745,6 +736,58 @@ class Autopilot:
     def right_stalk_double_down(self):
         print('Continuous Autopilot Stalk Action Requested')
         self.stalk_down_count = 2
+
+    def dial_work(self, byte_data):
+        ret = byte_data
+        # 동시에 두가지 다이얼 조작이 충돌하지 않게 하기 위한 처리
+        if self.switch_commands:
+            if time.time() - self.last_switch_command_time >= 0.2:
+                command_name = self.switch_commands[0]
+                self.last_switch_command_time = time.time()
+            else:
+                command_name = ''
+            # Left dial 충돌 회피
+            if 'volume' in command_name:
+                swcLeftDoublePress = get_value(ret, 41, 1)
+                swcLeftPressed = get_value(ret, 5, 2)
+                swcLeftScrollTicks = get_value(ret, 16, 6, signed=True)
+                swcLeftTiltLeft = get_value(ret, 14, 2)
+                swcLeftTiltRight = get_value(ret, 3, 2)
+                if swcLeftDoublePress == 0 and swcLeftScrollTicks == 0 and \
+                        swcLeftPressed == 1 and swcLeftTiltLeft == 1 and swcLeftTiltRight == 1:
+                    cmd = self.switch_commands.pop(0)
+                    if cmd == 'volume_down':  # down value 1, up value -1
+                        ret = modify_packet_value(ret, 16, 6, 1, signed=True)
+                    elif cmd == 'volume_up':
+                        ret = modify_packet_value(ret, 16, 6, -1, signed=True)
+                    else:
+                        pass
+                    self.buffer.write_message_buffer(0, 0x3c2, ret)
+            elif ('speed' in command_name) or ('distance' in command_name):
+                swcRightDoublePress = get_value(ret, 42, 1)
+                swcRightPressed = get_value(ret, 12, 2)
+                swcRightScrollTicks = get_value(ret, 24, 6, signed=True)
+                swcRightTiltLeft = get_value(ret, 8, 2)
+                swcRightTiltRight = get_value(ret, 10, 2)
+                if swcRightDoublePress == 0 and swcRightScrollTicks == 0 and \
+                        swcRightPressed == 1 and swcRightTiltLeft == 1 and swcRightTiltRight == 1:
+                    cmd = self.switch_commands.pop(0)
+                    if cmd == 'speed_down':
+                        ret = modify_packet_value(ret, 24, 6, -1, signed=True)
+                    elif cmd == 'speed_up':
+                        ret = modify_packet_value(ret, 24, 6, 1, signed=True)
+                    elif cmd == 'distance_far':
+                        ret = modify_packet_value(ret, 8, 2, 2)
+                    elif cmd == 'distance_near':
+                        ret = modify_packet_value(ret, 10, 2, 2)
+                    else:
+                        pass
+                    self.buffer.write_message_buffer(0, 0x3c2, ret)
+            else:
+                pass
+            return ret
+        else:
+            return ret
 
     def check(self, bus, address, byte_data):
         ret = byte_data
@@ -848,6 +891,9 @@ class Autopilot:
         if (bus == 0) and (address == 0x3c2):
             mux = get_value(byte_data, 0, 2)
             if mux == 1:
+                # 다이얼 명령어 처리
+                ret = self.dial_work(byte_data)
+                # 현재 상태 읽기
                 far_state = get_value(byte_data, 8, 2)
                 near_state = get_value(byte_data, 10, 2)
                 if far_state == 2:
@@ -874,7 +920,6 @@ class Autopilot:
                         self.manual_distance = 0
                     else:
                         self.manual_distance = 1
-
         return ret
 
 
@@ -889,24 +934,26 @@ class RearCenterBuckle:
         ret = byte_data
         if (not self.mode) or (self.dash.buckle_emulator == 0):
             return ret
-        mux = get_value(ret, loc=0, length=2, endian='little', signed=False)
-        if mux == 0:
-            if self.mode == 1:
-                # 뒷좌석 좌, 우 어느 한 쪽에 사람이 앉아 있는 상태에서 가운데에 착좌가 인식되는 경우 안전벨트 스위치 켜기
-                if self.dash.passenger[2] == 1 or self.dash.passenger[4] == 1:
-                    if self.dash.passenger[3] == 1:
-                        ret = modify_packet_value(ret, 62, 2, 2)
-                        self.buffer.write_message_buffer(bus, address, ret)
-            elif self.mode == 2:
-                # ★★★★ Warning : 뒷좌석 안전벨트 미착용 상태로 승객을 태우는 것은 매우 위험하며, 도로교통법 위반입니다. ★★★★★
-                # 짐을 쌓은 상태로 부득이 정리가 어려운 경우에만 사용하세요.
-                ret = modify_packet_value(ret, 54, 2, 1)
-                ret = modify_packet_value(ret, 62, 2, 2)
-                # Disable rearLeftOccupancySwitch
-                ret = modify_packet_value(ret, 56, 2, 1)
-                # Disable rearRightOccupancySwitch
-                ret = modify_packet_value(ret, 58, 2, 1)
-                self.buffer.write_message_buffer(bus, address, ret)
+
+        if bus == 0 and address == 0x3c2:
+            mux = get_value(ret, loc=0, length=2, endian='little', signed=False)
+            if mux == 0:
+                if self.mode == 1:
+                    # 뒷좌석 좌, 우 어느 한 쪽에 사람이 앉아 있는 상태에서 가운데에 착좌가 인식되는 경우 안전벨트 스위치 켜기
+                    if self.dash.passenger[2] == 1 or self.dash.passenger[4] == 1:
+                        if self.dash.passenger[3] == 1:
+                            ret = modify_packet_value(ret, 62, 2, 2)
+                            self.buffer.write_message_buffer(bus, address, ret)
+                elif self.mode == 2:
+                    # ★★★ Warning : 뒷좌석 안전벨트 미착용 상태로 승객을 태우는 것은 매우 위험하며, 도로교통법 위반입니다. ★★★★
+                    # 짐을 쌓은 상태로 부득이 정리가 어려운 경우에만 사용하세요.
+                    ret = modify_packet_value(ret, 54, 2, 1)
+                    ret = modify_packet_value(ret, 62, 2, 2)
+                    # Disable rearLeftOccupancySwitch
+                    ret = modify_packet_value(ret, 56, 2, 1)
+                    # Disable rearRightOccupancySwitch
+                    ret = modify_packet_value(ret, 58, 2, 1)
+                    self.buffer.write_message_buffer(bus, address, ret)
         return ret
 
 
