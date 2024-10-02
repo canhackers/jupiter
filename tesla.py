@@ -776,6 +776,7 @@ class Autopilot:
                         ret = modify_packet_value(ret, 16, 6, -1, signed=True)
                     else:
                         pass
+                    self.buffer.write_message_buffer(0, 0x3c2, ret)
             elif ('speed' in command_name) or ('distance' in command_name):
                 swcRightDoublePress = get_value(ret, 42, 1)
                 swcRightPressed = get_value(ret, 12, 2)
@@ -795,6 +796,7 @@ class Autopilot:
                         ret = modify_packet_value(ret, 10, 2, 2)
                     else:
                         pass
+                    self.buffer.write_message_buffer(0, 0x3c2, ret)
             else:
                 pass
             return ret
