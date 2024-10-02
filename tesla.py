@@ -1,12 +1,12 @@
 import os
 import time
-import can
 import csv
 import zipfile
 import shutil
 import threading
 from collections import deque
 from packet_functions import get_value, modify_packet_value, make_new_packet
+from functions import load_settings
 
 csv_path = '/home/drive_record/'
 
@@ -21,19 +21,55 @@ logging_address = ['0x108', '0x118', '0x129', '0x132', '0x186', '0x1d5', '0x1d8'
 mux_address = {'0x282': 2, '0x352': 2, '0x3fd': 3, '0x332': 2, '0x261': 2, '0x243': 3, '0x7ff': 8, '0x2e1': 3,
                '0x201': 3, '0x7aa': 4, '0x2b3': 4, '0x3f2': 4, '0x32c': 8, '0x401': 8}
 
-command = {
-    'empty': bytes.fromhex('2955000000000000'),
-    'volume_down': bytes.fromhex('2955010000000000'),
-    'volume_up': bytes.fromhex('29553f0000000000'),
-    'speed_down': bytes.fromhex('2955003f00000000'),
-    'speed_up': bytes.fromhex('2955000100000000'),
-    'distance_far': bytes.fromhex('2956000000000000'),
-    'distance_near': bytes.fromhex('2959000000000000'),
-    'door_open_fl': bytes.fromhex('6000000000000000'),
-    'door_open_fr': bytes.fromhex('0003000000000000'),
-    'door_open_rl': bytes.fromhex('0018000000000000'),
-    'door_open_rr': bytes.fromhex('00c0000000000000'),
-}
+pack_btns = [
+    "WinSWPack_LF_Up", "WinSWPack_LF_AutoUp", "WinSWPack_LF_Down", "WinSWPack_LF_AutoDown",
+    "WinSWPack_LR_Up", "WinSWPack_LR_AutoUp", "WinSWPack_LR_Down", "WinSWPack_LR_AutoDown",
+    "WinSWPack_RF_Up", "WinSWPack_RF_Down", "WinSWPack_RF_Down", "WinSWPack_RF_AutoDown",
+    "WinSWPack_RR_Up", "WinSWPack_RR_Down", "WinSWPack_RR_Down", "WinSWPack_RR_AutoDown",
+]
+
+settings = load_settings()
+buttons_define = (
+    ('MapLampLeft', 'short', settings.get('MapLampLeftShort')),
+    ('MapLampLeft', 'long', settings.get('MapLampLeftLong')),
+    ('MapLampLeft', 'double', settings.get('MapLampLeftDouble')),
+    ('MapLampRight', 'short', settings.get('MapLampRightShort')),
+    ('MapLampRight', 'long', settings.get('MapLampRightLong')),
+    ('MapLampRight', 'double', settings.get('MapLampRightDouble')),
+    ('ParkingButton', 'long', 'mirror_fold'),
+    ('WinSWPack_LF_Up', 'long', settings.get('WinSWPack_LF_Up_Long')),
+    ('WinSWPack_LF_Up', 'double', settings.get('WinSWPack_LF_Up_Double')),
+    ('WinSWPack_LF_Down', 'long', settings.get('WinSWPack_LF_Down_Long')),
+    ('WinSWPack_LF_Down', 'double', settings.get('WinSWPack_LF_Down_Double')),
+    ('WinSWPack_LF_AutoUp', 'long', settings.get('WinSWPack_LF_AutoUp_Long')),
+    ('WinSWPack_LF_AutoUp', 'double', settings.get('WinSWPack_LF_AutoUp_Double')),
+    ('WinSWPack_LF_AutoDown', 'long', settings.get('WinSWPack_LF_AutoDown_Long')),
+    ('WinSWPack_LF_AutoDown', 'double', settings.get('WinSWPack_LF_AutoDown_Double')),
+    ('WinSWPack_RF_Up', 'long', settings.get('WinSWPack_RF_Up_Long')),
+    ('WinSWPack_RF_Up', 'double', settings.get('WinSWPack_RF_Up_Double')),
+    ('WinSWPack_RF_Down', 'long', settings.get('WinSWPack_RF_Down_Long')),
+    ('WinSWPack_RF_Down', 'double', settings.get('WinSWPack_RF_Down_Double')),
+    ('WinSWPack_RF_AutoUp', 'long', settings.get('WinSWPack_RF_AutoUp_Long')),
+    ('WinSWPack_RF_AutoUp', 'double', settings.get('WinSWPack_RF_AutoUp_Double')),
+    ('WinSWPack_RF_AutoDown', 'long', settings.get('WinSWPack_RF_AutoDown_Long')),
+    ('WinSWPack_RF_AutoDown', 'double', settings.get('WinSWPack_RF_AutoDown_Double')),
+    ('WinSWPack_LR_Up', 'long', settings.get('WinSWPack_LR_Up_Long')),
+    ('WinSWPack_LR_Up', 'double', settings.get('WinSWPack_LR_Up_Double')),
+    ('WinSWPack_LR_Down', 'long', settings.get('WinSWPack_LR_Down_Long')),
+    ('WinSWPack_LR_Down', 'double', settings.get('WinSWPack_LR_Down_Double')),
+    ('WinSWPack_LR_AutoUp', 'long', settings.get('WinSWPack_LR_AutoUp_Long')),
+    ('WinSWPack_LR_AutoUp', 'double', settings.get('WinSWPack_LR_AutoUp_Double')),
+    ('WinSWPack_LR_AutoDown', 'long', settings.get('WinSWPack_LR_AutoDown_Long')),
+    ('WinSWPack_LR_AutoDown', 'double', settings.get('WinSWPack_LR_AutoDown_Double')),
+    ('WinSWPack_RR_Up', 'long', settings.get('WinSWPack_RR_Up_Long')),
+    ('WinSWPack_RR_Up', 'double', settings.get('WinSWPack_RR_Up_Double')),
+    ('WinSWPack_RR_Down', 'long', settings.get('WinSWPack_RR_Down_Long')),
+    ('WinSWPack_RR_Down', 'double', settings.get('WinSWPack_RR_Down_Double')),
+    ('WinSWPack_RR_AutoUp', 'long', settings.get('WinSWPack_RR_AutoUp_Long')),
+    ('WinSWPack_RR_AutoUp', 'double', settings.get('WinSWPack_RR_AutoUp_Double')),
+    ('WinSWPack_RR_AutoDown', 'long', settings.get('WinSWPack_RR_AutoDown_Long')),
+    ('WinSWPack_RR_AutoDown', 'double', settings.get('WinSWPack_RR_AutoDown_Double'))
+)
 
 # 상시 모니터링 할 주요 차량정보 접근 주소
 monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
@@ -447,6 +483,7 @@ class ButtonManager:
             return self.buckle_emulator
         if function_name == 'mars_mode_toggle':
             return self.mars_mode_toggle
+        return lambda *args, **kwargs: None
 
     def add_button(self, btn_name, short_time=0.5, long_time=1.0):
         self.buttons[btn_name] = Button(self, btn_name, short_time, long_time)
@@ -463,6 +500,7 @@ class ButtonManager:
         self.buttons[btn_name].function_name[press_type] = function_name
 
     def check(self, bus, address, byte_data):
+        ret = byte_data
         if (bus == 0) and (address == 0x3e2):
             # Check Map Lamp Pressed
             map_lamp_left = self.buttons.get('MapLampLeft')
@@ -486,6 +524,17 @@ class ButtonManager:
                 else:
                     p_btn.release()
 
+        if (bus == 0) and (address == 0x3c2):
+            mux = get_value(byte_data, 0, 2)
+            if mux == 0:
+                pack = self.get_window_button_states(byte_data)
+                for btn_name in pack_btns:
+                    btn = self.buttons[btn_name]
+                    if btn and pack.get(btn_name):
+                        btn.press()
+                    else:
+                        btn.release()
+
         # Mirror Action
         if (bus == 0) and (address == 0x273):
             if self.mirror_request in [1, 2]:
@@ -499,12 +548,56 @@ class ButtonManager:
             if self.door_open_request is None:
                 pass
             else:
-                ret = command.get('door_open_' + str(self.door_open_request))
+                door_loc = str(self.door_open_request)
+                if door_loc == 'fl':
+                    ret = bytes.fromhex('6000000000000000')
+                elif door_loc == 'fr':
+                    ret = bytes.fromhex('0003000000000000')
+                elif door_loc == 'rl':
+                    ret = bytes.fromhex('0018000000000000')
+                elif door_loc == 'rr':
+                    ret = bytes.fromhex('00c0000000000000')
                 if ret:
                     self.buffer.write_message_buffer(0, 0x1f9, ret)
                 self.door_open_request = None
                 return ret
         return byte_data
+
+    def get_window_button_states(self, packet_byte):
+        # 패킷을 정수로 변환
+        packet_int = int.from_bytes(packet_byte, byteorder='little')
+
+        # 32번 비트부터 47번 비트까지 추출 (16비트)
+        button_bits = (packet_int >> 32) & 0xFFFF  # 16비트 마스크
+
+        # 각 비트를 변수명과 매핑
+        bit_names = [
+            "WinSWPack_LF_Up",  # 비트 32
+            "WinSWPack_LF_AutoUp",  # 비트 33
+            "WinSWPack_LF_Down",  # 비트 34
+            "WinSWPack_LF_AutoDown",  # 비트 35
+            "WinSWPack_LR_Up",  # 비트 36
+            "WinSWPack_LR_AutoUp",  # 비트 37
+            "WinSWPack_LR_Down",  # 비트 38
+            "WinSWPack_LR_AutoDown",  # 비트 39
+            "WinSWPack_RF_Up",  # 비트 40
+            "WinSWPack_RF_AutoUp",  # 비트 41
+            "WinSWPack_RF_Down",  # 비트 42
+            "WinSWPack_RF_AutoDown",  # 비트 43
+            "WinSWPack_RR_Up",  # 비트 44
+            "WinSWPack_RR_AutoUp",  # 비트 45
+            "WinSWPack_RR_Down",  # 비트 46
+            "WinSWPack_RR_AutoDown",  # 비트 47
+        ]
+
+        # 결과를 저장할 딕셔너리
+        button_states = {}
+
+        for i, name in enumerate(bit_names):
+            bit_value = (button_bits >> i) & 0x1
+            button_states[name] = bit_value
+
+        return button_states
 
     # Action 함수들
     def mirror_fold(self):
@@ -617,39 +710,15 @@ class Autopilot:
             if self.timer == 5:
                 print('Right Scroll Wheel Down')
                 self.switch_commands.append('speed_down')
-                # self.buffer.write_message_buffer(0, 0x3c2, command['speed_down'])
             elif self.timer == 6:
                 print('Right Scroll Wheel Up')
                 self.switch_commands.append('speed_up')
-                # self.buffer.write_message_buffer(0, 0x3c2, command['speed_up'])
         if self.timer >= 7:
             self.timer = 0
 
     def reset_distance(self):
         for i in range(6):
             self.switch_commands.append('distance_near')
-        # try:
-        #     if self.device == 'panda':
-        #         for i in range(6):
-        #             self.switch_commands.append('distance_near')
-        #             self.sender.can_send(0x3c2, command['distance_near'], 0)
-        #             time.sleep(0.05)
-        #     elif self.device == 'raspi':
-        #         tx_frame = can.Message()
-        #         tx_frame.channel = 'can0'
-        #         tx_frame.dlc = 8
-        #         tx_frame.arbitration_id = 0x3c2
-        #         tx_frame.is_extended_id = False
-        #         for i in range(6):
-        #             tx_frame.data = bytearray(command['distance_near'])
-        #             self.sender.send(tx_frame)
-        #             time.sleep(0.25)
-        #     else:
-        #         pass
-        #     print('Following distance set to closest')
-        #
-        # except Exception as e:
-        #     print('Failed to set distance\n', e)
 
     def set_distance(self, target=None):
         if target:
@@ -665,13 +734,9 @@ class Autopilot:
             print(f'Change Following distance from {self.distance_current} to {distance_target}')
             if gap > 0:
                 cmd = 'distance_far'
-                # cmd = command['distance_far']
-                # self.buffer.write_message_buffer(0, 0x3c2, cmd)
                 self.distance_current += 1
             else:
                 cmd = 'distance_near'
-                # cmd = command['distance_near']
-                # self.buffer.write_message_buffer(0, 0x3c2, cmd)
                 self.distance_current -= 1
             self.switch_commands.append(cmd)
 
@@ -775,7 +840,7 @@ class Autopilot:
                 if swcLeftDoublePress == 0 and swcLeftScrollTicks == 0 and \
                         swcLeftPressed == 1 and swcLeftTiltLeft == 1 and swcLeftTiltRight == 1:
                     cmd = self.switch_commands.pop(0)
-                    if cmd == 'volume_down':    # down value 1, up value -1
+                    if cmd == 'volume_down':  # down value 1, up value -1
                         ret = modify_packet_value(ret, 16, 6, 1, signed=True)
                     elif cmd == 'volume_up':
                         ret = modify_packet_value(ret, 16, 6, -1, signed=True)

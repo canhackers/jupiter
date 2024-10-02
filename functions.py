@@ -19,9 +19,6 @@ def load_settings():
     default_settings = {
         'Logger': 1,
         'RearCenterBuckle': 1,
-        'MapLampLeftLong' : 'mirror_fold',
-        'MapLampRightLong' : 'open_door_rr,buckle_emulator',    # 두개의 함수가 선언되는 경우는 주차 중, 주행 중 기능
-        'MapLampRightDouble': 'open_door_fr,mars_mode_toggle',
         'AutoRecirculation' : 1,
         'KickDown' : 1,
         'KeepWiperSpeed': 1,
@@ -29,7 +26,34 @@ def load_settings():
         'AltTurnSignal' : 1,
         'AutoFollowingDistance' : 1,
         'MirrorAutoFold' : 0,
-        'NavdyHud' : 0
+        'NavdyHud' : 0,
+        'MapLampLeftLong': 'mirror_fold',
+        'MapLampRightLong': 'open_door_rr,buckle_emulator',  # 두개의 함수가 선언되는 경우는 주차 중, 주행 중 기능
+        'MapLampRightDouble': 'open_door_fr,mars_mode_toggle',
+        'WinSWPack_LF_Up_Long' : 'n/a',
+        'WinSWPack_LF_Up_Double' : 'n/a',
+        'WinSWPack_LF_Down_Long' : 'n/a',
+        'WinSWPack_LF_Down_Double': 'n/a',
+        'WinSWPack_LF_AutoUp_Long': 'n/a',
+        'WinSWPack_LF_AutoUp_Double': 'n/a',
+        'WinSWPack_LF_AutoDown_Long': 'n/a',
+        'WinSWPack_LF_AutoDown_Double': 'n/a',
+        'WinSWPack_RF_Up_Long': 'n/a',
+        'WinSWPack_RF_Up_Double': 'n/a',
+        'WinSWPack_RF_Down_Long': 'n/a',
+        'WinSWPack_RF_Down_Double': 'n/a',
+        'WinSWPack_RF_AutoUp_Long': 'n/a',
+        'WinSWPack_RF_AutoUp_Double': 'n/a',
+        'WinSWPack_RF_AutoDown_Long': 'n/a',
+        'WinSWPack_RF_AutoDown_Double': 'n/a',
+        'WinSWPack_LR_Up_Long': 'n/a',
+        'WinSWPack_LR_Up_Double': 'n/a',
+        'WinSWPack_LR_Down_Long': 'n/a',
+        'WinSWPack_LR_Down_Double': 'n/a',
+        'WinSWPack_RR_Up_Long': 'n/a',
+        'WinSWPack_RR_Up_Double': 'n/a',
+        'WinSWPack_RR_Down_Long': 'n/a',
+        'WinSWPack_RR_Down_Double': 'n/a',
     }
     if not os.path.exists(json_file):
         # 설정 파일이 없으면 기본 설정 파일 생성

@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
-    KickDown, TurnSignal, Reboot, monitoring_addrs
+    KickDown, TurnSignal, Reboot, monitoring_addrs, buttons_define, pack_btns
 
 
 class Jupiter(threading.Thread):
@@ -50,15 +50,9 @@ class Jupiter(threading.Thread):
         BUTTON.add_button(btn_name='MapLampLeft')
         BUTTON.add_button(btn_name='MapLampRight')
         BUTTON.add_button(btn_name='ParkingButton', long_time=0.5)
-        buttons_define = (
-            ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
-            ('MapLampLeft', 'long', self.settings.get('MapLampLeftLong')),
-            ('MapLampLeft', 'double', self.settings.get('MapLampLeftDouble')),
-            ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
-            ('MapLampRight', 'long', self.settings.get('MapLampRightLong')),
-            ('MapLampRight', 'double', self.settings.get('MapLampRightDouble')),
-            ('ParkingButton', 'long', 'mirror_fold'),
-        )
+        for btn in pack_btns:
+            BUTTON.add_button(btn_name=btn, long_time=3)
+
         for (btn, ptype, func) in buttons_define:
             if isinstance(func, str):
                 functions = func.split(',')
