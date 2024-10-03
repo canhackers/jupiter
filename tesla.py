@@ -24,8 +24,8 @@ mux_address = {'0x282': 2, '0x352': 2, '0x3fd': 3, '0x332': 2, '0x261': 2, '0x24
 pack_btns = [
     "WinSWPack_LF_Up", "WinSWPack_LF_AutoUp", "WinSWPack_LF_Down", "WinSWPack_LF_AutoDown",
     "WinSWPack_LR_Up", "WinSWPack_LR_AutoUp", "WinSWPack_LR_Down", "WinSWPack_LR_AutoDown",
-    "WinSWPack_RF_Up", "WinSWPack_RF_Down", "WinSWPack_RF_Down", "WinSWPack_RF_AutoDown",
-    "WinSWPack_RR_Up", "WinSWPack_RR_Down", "WinSWPack_RR_Down", "WinSWPack_RR_AutoDown",
+    "WinSWPack_RF_Up", "WinSWPack_RF_AutoUp", "WinSWPack_RF_Down", "WinSWPack_RF_AutoDown",
+    "WinSWPack_RR_Up", "WinSWPack_RR_AutoUp", "WinSWPack_RR_Down", "WinSWPack_RR_AutoDown",
 ]
 
 settings = load_settings()
