@@ -15,6 +15,7 @@ class Jupiter(threading.Thread):
         self.dash = dash
         self.vcgm = Vcgencmd()
         self.settings = settings
+        self.working_time = 0
 
     def run(self):
         if not self.jupiter_online:
@@ -139,6 +140,7 @@ class Jupiter(threading.Thread):
                     TICK = True
                     bus_connected = 1
                     self.dash.update('UnixTime', signal)
+                    self.working_time += 1
                 else:
                     TICK = False
 
@@ -148,7 +150,7 @@ class Jupiter(threading.Thread):
                     if self.dash.gear == 4:
                         self.dash.drive_time += 1
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
-                    if self.dash.drive_time % 60 == 0:
+                    if self.working_time % 60 == 0:
                         calculated_buffer = (100 - self.dash.soc) / 100 * self.dash.energy_buffer
                         usable_kwh_1 = self.dash.nominal_full * self.dash.soc / 100 - calculated_buffer
                         usable_kwh_2 = self.dash.nominal_remain - calculated_buffer
