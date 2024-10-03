@@ -149,7 +149,7 @@ class Jupiter(threading.Thread):
                         self.dash.drive_time += 1
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
                     if self.dash.drive_time % 60 == 0:
-                        calculated_buffer = (1 - self.dash.soc) * self.dash.energy_buffer
+                        calculated_buffer = (100 - self.dash.soc) / 100 * self.dash.energy_buffer
                         usable_kwh_1 = self.dash.nominal_full * self.dash.soc / 100 - calculated_buffer
                         usable_kwh_2 = self.dash.nominal_remain - calculated_buffer
                         calculated_range_1 = usable_kwh_1 * 1000 / self.dash.ui_whpk
