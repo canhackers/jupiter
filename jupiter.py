@@ -161,7 +161,7 @@ class Jupiter(threading.Thread):
                               f'Expected Energy {self.dash.expected_energy:.1f} kwh\n'
                               f'Energy Buffer {self.dash.energy_buffer:.1f} kwh\n'
                               f'UI Range: {self.dash.ui_range} km\n'
-                              f'UI Wh/Km: {self.dash.whpk} Wh/km\n'
+                              f'UI Wh/Km: {self.dash.ui_whpk} Wh/km\n'
                               f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.ui_whpk)} km\n'
                               f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.ui_whpk)} km\n'
                               f'Calculated Range (from full) : {calculated_range_1} km\n'
