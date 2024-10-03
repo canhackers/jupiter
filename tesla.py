@@ -169,9 +169,14 @@ class Dashboard:
         self.LVB_voltage = 0
         self.soc = 0
         self.ui_range = 0
+        self.ui_whpk = 150
         self.HVB_max_temp = 0
         self.HVB_min_temp = 0
         self.nominal_full = 0
+        self.nominal_remain = 0
+        self.energy_buffer = 0
+        self.ideal_remain = 0
+        self.expected_energy = 0
         self.device_temp = 0
         self.fresh_request = 0
         self.tacc = 0
@@ -218,9 +223,17 @@ class Dashboard:
         elif name == 'BMS_SOC':
             self.soc = get_value(signal, 10, 10) * 0.1
         elif name == 'UI_rangeSOC':
-            self.ui_range = int(get_value(signal, 0, 10) * 1.6)
+            self.ui_range = int(get_value(signal, 0, 10) * 1.60934)
+            self.ui_whpk = int(get_value(signal, 32, 10) / 1.60934)
         elif name == 'BMS_energyStatus':
-            self.nominal_full = get_value(signal, 0, 11) * 0.1
+            mux = get_value(signal, 0, 2)
+            if mux == 0:
+                self.nominal_full = get_value(signal, 16, 16) * 0.02
+                self.nominal_remain = get_value(signal, 32, 16) * 0.02
+                self.ideal_remain = get_value(signal, 48, 16) * 0.02
+            elif mux == 1:
+                self.energy_buffer = get_value(signal, 16, 16) * 0.02
+                self.expected_energy = get_value(signal, 32, 16) * 0.02
         elif name == 'BMSthermal':
             self.HVB_max_temp = get_value(signal, 53, 9) * 0.25 - 25
             self.HVB_min_temp = get_value(signal, 44, 9) * 0.25 - 25
