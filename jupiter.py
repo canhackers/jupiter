@@ -152,8 +152,8 @@ class Jupiter(threading.Thread):
                         calculated_buffer = (1 - self.dash.soc) * self.dash.energy_buffer
                         usable_kwh_1 = self.dash.nominal_full * self.dash.soc / 100 - calculated_buffer
                         usable_kwh_2 = self.dash.nominal_remain - calculated_buffer
-                        calculated_range_1 = usable_kwh_1 * 1000 / self.dash.whpk
-                        calculated_range_2 = usable_kwh_2 * 1000 / self.dash.whpk
+                        calculated_range_1 = usable_kwh_1 * 1000 / self.dash.ui_whpk
+                        calculated_range_2 = usable_kwh_2 * 1000 / self.dash.ui_whpk
                         print(f'[Energy Status]\n'
                               f'Nominal Full {self.dash.nominal_full:.1f} kwh\n'
                               f'Nominal Remain {self.dash.nominal_remain:.1f} kwh\n'
@@ -162,8 +162,8 @@ class Jupiter(threading.Thread):
                               f'Energy Buffer {self.dash.energy_buffer:.1f} kwh\n'
                               f'UI Range: {self.dash.ui_range} km\n'
                               f'UI Wh/Km: {self.dash.whpk} Wh/km\n'
-                              f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.whpk)} km\n'
-                              f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.whpk)} km\n'
+                              f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.ui_whpk)} km\n'
+                              f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.ui_whpk)} km\n'
                               f'Calculated Range (from full) : {calculated_range_1} km\n'
                               f'Calculated Range (from remain) : {calculated_range_2} km\n'
                               )
