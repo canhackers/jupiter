@@ -239,7 +239,7 @@ class Dashboard:
                 self.nominal_remain = get_value(signal, 32, 16) * 0.02
                 self.ideal_remain = get_value(signal, 48, 16) * 0.02
             elif mux == 1:
-                self.energy_buffer = get_value(signal, 16, 16) * 0.02
+                self.energy_buffer = get_value(signal, 16, 16) * 0.01
                 if self.batt_initial == 0:
                     self.batt_initial = get_value(signal, 32, 16) * 0.02
                     self.expected_energy = self.batt_initial
