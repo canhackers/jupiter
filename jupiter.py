@@ -153,10 +153,10 @@ class Jupiter(threading.Thread):
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
                     if self.working_time % 30 == 0:
                         if self.dash.drive_finished == 0:
-                            drive_distance = (self.dash.odometer - self.dash.odometer_initial) / 1000
+                            drive_distance = (self.dash.odometer - self.dash.odometer_initial)
                             consumed_energy = self.dash.batt_initial - self.dash.expected_energy
                             if drive_distance > 0 and consumed_energy > 0:
-                                self.dash.ui_whpk = (consumed_energy / drive_distance)
+                                self.dash.ui_whpk = consumed_energy * 1000 / drive_distance
                         print(f'[Energy Status]\n'
                               f'Nominal Full {self.dash.nominal_full:.1f} kwh\n'
                               f'Nominal Remain {self.dash.nominal_remain:.1f} kwh\n'
@@ -164,10 +164,10 @@ class Jupiter(threading.Thread):
                               f'Expected Energy {self.dash.expected_energy:.1f} kwh\n'
                               f'Energy Buffer {self.dash.energy_buffer:.1f} kwh\n'
                               f'UI Range: {self.dash.ui_range} km\n'
-                              f'Drive Distance: {drive_distance:.1f} km\n'
+                              f'Drive Distance: {drive_distance:.1f} meter\n'
                               f'Calculated Wh/Km: {self.dash.ui_whpk:.1f} Wh/km\n'
-                              f'Nominal Range: {int(self.dash.nominal_remain / self.dash.ui_whpk)} km\n'
-                              f'Expected Range: {int(self.dash.expected_energy / self.dash.ui_whpk)} km\n'
+                              f'Nominal Range: {int(self.dash.nominal_remain * self.dash.ui_whpk)} km\n'
+                              f'Expected Range: {int(self.dash.expected_energy * self.dash.ui_whpk)} km\n'
                               )
 
                     # for bid, val in self.dash.beacon.items():
