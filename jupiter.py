@@ -155,7 +155,7 @@ class Jupiter(threading.Thread):
                         if self.dash.drive_finished == 0:
                             drive_distance = self.dash.odometer - self.dash.odometer_initial
                             consumed_energy = self.dash.batt_initial - self.dash.expected_energy
-                            if drive_distance > 0:
+                            if drive_distance > 0 and consumed_energy > 0:
                                 self.dash.ui_whpk = (consumed_energy / drive_distance)
                         print(f'[Energy Status]\n'
                               f'Nominal Full {self.dash.nominal_full:.1f} kwh\n'
