@@ -86,6 +86,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x33a: 'UI_rangeSOC',
                     0x334: 'UI_powertrainControl',
                     0x352: 'BMS_energyStatus',
+                    0x3b6: 'DI_odometerStatus',
                     0x3c2: 'VCLEFT_switchStatus',
                     0x31a: 'VCRIGHT_switchStatus',
                     0x3f5: 'VCFRONT_lighting',
@@ -168,12 +169,15 @@ class Dashboard:
         self.torque_rear = 0
         self.LVB_voltage = 0
         self.soc = 0
+        self.odometer = 0
+        self.odometer_initial = 0
         self.ui_range = 0
         self.ui_whpk = 150
         self.HVB_max_temp = 0
         self.HVB_min_temp = 0
         self.nominal_full = 0
         self.nominal_remain = 0
+        self.batt_initial = 0
         self.energy_buffer = 0
         self.ideal_remain = 0
         self.expected_energy = 0
@@ -222,6 +226,10 @@ class Dashboard:
                 self.LVB_voltage = get_value(signal, 32, 12) * 0.00544368
         elif name == 'BMS_SOC':
             self.soc = get_value(signal, 10, 10) * 0.1
+        elif name == 'DI_odometerStatus':
+            self.odometer = get_value(signal, 0, 32)
+            if self.odometer_initial == 0:
+                self.odometer_initial = self.odometer
         elif name == 'UI_rangeSOC':
             self.ui_range = int(get_value(signal, 0, 10) * 1.60934)
             self.ui_whpk = int(get_value(signal, 32, 10) / 1.60934)
@@ -233,7 +241,11 @@ class Dashboard:
                 self.ideal_remain = get_value(signal, 48, 16) * 0.02
             elif mux == 1:
                 self.energy_buffer = get_value(signal, 16, 16) * 0.02
-                self.expected_energy = get_value(signal, 32, 16) * 0.02
+                if self.batt_initial == 0:
+                    self.batt_initial = get_value(signal, 32, 16) * 0.02
+                    self.expected_energy = self.batt_initial
+                else:
+                    self.expected_energy = get_value(signal, 32, 16) * 0.02
         elif name == 'BMSthermal':
             self.HVB_max_temp = get_value(signal, 53, 9) * 0.25 - 25
             self.HVB_min_temp = get_value(signal, 44, 9) * 0.25 - 25
