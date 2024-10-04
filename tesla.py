@@ -173,6 +173,7 @@ class Dashboard:
         self.odometer_initial = 0
         self.ui_range = 0
         self.ui_whpk = 150
+        self.efficiency = 6.6125
         self.HVB_max_temp = 0
         self.HVB_min_temp = 0
         self.nominal_full = 0
