@@ -156,7 +156,8 @@ class Jupiter(threading.Thread):
                             drive_distance = (self.dash.odometer - self.dash.odometer_initial)
                             consumed_energy = self.dash.batt_initial - self.dash.expected_energy
                             if drive_distance > 0 and consumed_energy > 0:
-                                self.dash.ui_whpk = consumed_energy * 1000 / drive_distance
+                                self.dash.ui_whpk = consumed_energy / drive_distance * 100000
+                                km_per_kwh = (drive_distance / 1000) / consumed_energy
                         print(f'[Energy Status]\n'
                               f'Nominal Full {self.dash.nominal_full:.1f} kwh\n'
                               f'Nominal Remain {self.dash.nominal_remain:.1f} kwh\n'
@@ -166,6 +167,7 @@ class Jupiter(threading.Thread):
                               f'UI Range: {self.dash.ui_range} km\n'
                               f'Drive Distance: {drive_distance:.1f} meter\n'
                               f'Calculated Wh/Km: {self.dash.ui_whpk:.1f} Wh/km\n'
+                              f'Nominal Range _ km/kwh: {int(self.dash.nominal_remain * km_per_kwh)} km\n'
                               f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.ui_whpk)} km\n'
                               f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.ui_whpk)} km\n'
                               )
