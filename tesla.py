@@ -232,7 +232,6 @@ class Dashboard:
                 self.odometer_initial = self.odometer
         elif name == 'UI_rangeSOC':
             self.ui_range = int(get_value(signal, 0, 10) * 1.60934)
-            self.ui_whpk = int(get_value(signal, 32, 10) / 1.60934)
         elif name == 'BMS_energyStatus':
             mux = get_value(signal, 0, 2)
             if mux == 0:
