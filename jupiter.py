@@ -166,8 +166,8 @@ class Jupiter(threading.Thread):
                               f'UI Range: {self.dash.ui_range} km\n'
                               f'Drive Distance: {drive_distance:.1f} meter\n'
                               f'Calculated Wh/Km: {self.dash.ui_whpk:.1f} Wh/km\n'
-                              f'Nominal Range: {int(self.dash.nominal_remain * self.dash.ui_whpk)} km\n'
-                              f'Expected Range: {int(self.dash.expected_energy * self.dash.ui_whpk)} km\n'
+                              f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.ui_whpk)} km\n'
+                              f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.ui_whpk)} km\n'
                               )
 
                     # for bid, val in self.dash.beacon.items():
