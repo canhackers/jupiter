@@ -173,7 +173,7 @@ class Dashboard:
         self.odometer_initial = 0
         self.ui_range = 0
         self.ui_whpk = 150
-        self.efficiency = 6.6125
+        self.efficiency = 6.666
         self.HVB_max_temp = 0
         self.HVB_min_temp = 0
         self.nominal_full = 0
@@ -229,7 +229,7 @@ class Dashboard:
             self.soc = get_value(signal, 10, 10) * 0.1
         elif name == 'DI_odometerStatus':
             self.odometer = get_value(signal, 0, 32)
-            if self.odometer_initial == 0:
+            if self.odometer_initial == 0 and self.odometer > 0:
                 self.odometer_initial = self.odometer
         elif name == 'UI_rangeSOC':
             self.ui_range = int(get_value(signal, 0, 10) * 1.60934)
@@ -291,6 +291,27 @@ class Dashboard:
                 if self.occupancy_timer != 0 and time.time() - self.occupancy_timer > 10:
                     self.occupancy = 0
                     self.occupancy_timer = 0
+
+    def odometer(self):
+        if self.gear in [2, 4]:
+            drive_distance = (self.odometer - self.odometer_initial)
+            consumed_energy = self.batt_initial - self.expected_energy
+            if drive_distance > 500 and consumed_energy > 0:
+                self.ui_whpk = consumed_energy / drive_distance * 100000
+                self.efficiency = (drive_distance / 1000) / consumed_energy
+        print(f'[Energy Status]\n'
+              f'Nominal Full {self.nominal_full:.1f} kwh\n'
+              f'Nominal Remain {self.nominal_remain:.1f} kwh\n'
+              f'Ideal Remain {self.ideal_remain:.1f} kwh\n'
+              f'Expected Energy {self.expected_energy:.1f} kwh\n'
+              f'Energy Buffer {self.energy_buffer:.1f} kwh\n'
+              f'UI Range: {self.ui_range} km\n'
+              f'Drive Distance: {drive_distance:.1f} meter\n'
+              f'Calculated Wh/Km: {self.ui_whpk:.1f} Wh/km\n'
+              f'Nominal Range _ km/kwh: {int(self.nominal_remain * self.efficiency)} km\n'
+              f'Nominal Range: {int(self.nominal_remain * 1000 / self.ui_whpk)} km\n'
+              f'Expected Range: {int(self.expected_energy * 1000 / self.ui_whpk)} km\n'
+              )
 
 
 class Logger:

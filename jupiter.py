@@ -121,6 +121,7 @@ class Jupiter(threading.Thread):
                             self.dash.drive_time = 0
                             self.dash.drive_finished = 0
                             self.dash.batt_initial = 0
+                            self.dash.odometer_initial = 0
                             LOGGER.initialize()
                     elif self.dash.gear == 1:
                         if self.dash.parked == 0:  # Drive(4) → Park(1)
@@ -152,25 +153,7 @@ class Jupiter(threading.Thread):
                         self.dash.drive_time += 1
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
                     if self.working_time % 30 == 0:
-                        if self.dash.drive_finished == 0:
-                            drive_distance = (self.dash.odometer - self.dash.odometer_initial)
-                            consumed_energy = self.dash.batt_initial - self.dash.expected_energy
-                            if drive_distance > 0 and consumed_energy > 0:
-                                self.dash.ui_whpk = consumed_energy / drive_distance * 100000
-                                self.dash.efficiency = (drive_distance / 1000) / consumed_energy
-                        print(f'[Energy Status]\n'
-                              f'Nominal Full {self.dash.nominal_full:.1f} kwh\n'
-                              f'Nominal Remain {self.dash.nominal_remain:.1f} kwh\n'
-                              f'Ideal Remain {self.dash.ideal_remain:.1f} kwh\n'
-                              f'Expected Energy {self.dash.expected_energy:.1f} kwh\n'
-                              f'Energy Buffer {self.dash.energy_buffer:.1f} kwh\n'
-                              f'UI Range: {self.dash.ui_range} km\n'
-                              f'Drive Distance: {drive_distance:.1f} meter\n'
-                              f'Calculated Wh/Km: {self.dash.ui_whpk:.1f} Wh/km\n'
-                              f'Nominal Range _ km/kwh: {int(self.dash.nominal_remain * self.dash.efficiency)} km\n'
-                              f'Nominal Range: {int(self.dash.nominal_remain * 1000 / self.dash.ui_whpk)} km\n'
-                              f'Expected Range: {int(self.dash.expected_energy * 1000 / self.dash.ui_whpk)} km\n'
-                              )
+                        self.dash.odometer()
 
                     # for bid, val in self.dash.beacon.items():
                     #     print(f'{bid} value is now {val}')
