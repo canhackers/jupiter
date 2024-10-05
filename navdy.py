@@ -127,7 +127,7 @@ class Hud(threading.Thread):
                         payload['voltage'] = self.dash.LVB_voltage
                         payload['soc'] = self.dash.soc
                         payload['hv_temp'] = self.dash.HVB_max_temp
-                        payload['ui_range'] = self.dash.ui_range * 0.7 + (self.dash.expected_energy * 1000 / self.dash.ui_whpk) * 0.3
+                        payload['ui_range'] = self.dash.ui_range * 0.5 + (self.dash.expected_energy * 1000 / self.dash.ui_whpk) * 0.5
                         payload['ui_range_map'] = self.dash.ui_range
                         payload['raspi_temp'] = self.dash.device_temp
                     self.navdy.send_message(payload)
