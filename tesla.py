@@ -293,6 +293,7 @@ class Dashboard:
                     self.occupancy_timer = 0
 
     def get_range(self):
+        drive_distance = 0
         if self.gear in [2, 4]:
             drive_distance = (self.odometer - self.odometer_initial)
             consumed_energy = self.batt_initial - self.expected_energy
