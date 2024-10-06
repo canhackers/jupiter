@@ -153,7 +153,7 @@ class Jupiter(threading.Thread):
                         self.dash.drive_time += 1
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
                     if self.working_time % 30 == 0:
-                        self.dash.odometer()
+                        self.dash.get_range()
 
                     # for bid, val in self.dash.beacon.items():
                     #     print(f'{bid} value is now {val}')
