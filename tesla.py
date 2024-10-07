@@ -298,7 +298,7 @@ class Dashboard:
             drive_distance = (self.odometer - self.odometer_initial)
             consumed_energy = self.batt_initial - self.expected_energy
             if drive_distance > 500 and consumed_energy > 0:
-                self.ui_whpk = consumed_energy / drive_distance * 100000
+                self.ui_whpk = consumed_energy / drive_distance * 1000000
                 self.efficiency = (drive_distance / 1000) / consumed_energy
         print(f'[Energy Status]\n'
               f'Nominal Full {self.nominal_full:.1f} kwh\n'
