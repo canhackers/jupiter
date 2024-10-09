@@ -127,7 +127,7 @@ class Hud(threading.Thread):
                         payload['voltage'] = self.dash.LVB_voltage
                         payload['soc'] = self.dash.soc
                         payload['hv_temp'] = self.dash.HVB_max_temp
-                        payload['ui_range'] = self.dash.ui_range * 0.5 + (self.dash.expected_energy * 1000 / self.dash.ui_whpk) * 0.5
+                        payload['ui_range'] = self.dash.estimated_range
                         payload['ui_range_map'] = self.dash.ui_range
                         payload['raspi_temp'] = self.dash.device_temp
                     self.navdy.send_message(payload)
@@ -137,3 +137,9 @@ class Hud(threading.Thread):
     def stop(self):
         self.thread_online = False
         self.loop.call_soon_threadsafe(self.loop.stop)
+
+
+ui_range = 300
+current_energy = 50
+distance = 10000
+whpk = 150

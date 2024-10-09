@@ -154,6 +154,7 @@ class Dashboard:
         self.bus_error_cout = 0
         self.current_time = 0
         self.drive_time = 0
+        self.drive_distance = 0
         self.last_update = 0
         self.unix_time = 0
         self.clock = None
@@ -172,6 +173,7 @@ class Dashboard:
         self.odometer = 0
         self.odometer_initial = 0
         self.ui_range = 0
+        self.estimate_distance = 0
         self.ui_whpk = 150
         self.efficiency = 6.666
         self.HVB_max_temp = 0
@@ -292,14 +294,16 @@ class Dashboard:
                     self.occupancy = 0
                     self.occupancy_timer = 0
 
-    def get_range(self):
-        drive_distance = 0
+    def get_range(self, weight_max_distance = 20000):
         if self.gear in [2, 4]:
-            drive_distance = (self.odometer - self.odometer_initial)
             consumed_energy = self.batt_initial - self.expected_energy
-            if drive_distance > 500 and consumed_energy > 0:
-                self.ui_whpk = consumed_energy / drive_distance * 1000000
-                self.efficiency = (drive_distance / 1000) / consumed_energy
+            if consumed_energy > 0:
+                self.ui_whpk = consumed_energy / self.drive_distance * 1000000
+                self.drive_distance = (self.odometer - self.odometer_initial)
+                self.efficiency = (self.drive_distance / 1000) / consumed_energy
+            calculated_range = (self.dash.expected_energy * 1000) / self.dash.ui_whpk
+            weight = min(self.dash.drive_distance / weight_max_distance, 1.0)
+            self.estimate_distance = (1 - weight) * self.dash.ui_range + weight * calculated_range
         print(f'[Energy Status]\n'
               f'Nominal Full {self.nominal_full:.1f} kwh\n'
               f'Nominal Remain {self.nominal_remain:.1f} kwh\n'
@@ -307,12 +311,18 @@ class Dashboard:
               f'Expected Energy {self.expected_energy:.1f} kwh\n'
               f'Energy Buffer {self.energy_buffer:.1f} kwh\n'
               f'UI Range: {self.ui_range} km\n'
-              f'Drive Distance: {drive_distance:.1f} meter\n'
+              f'Drive Distance: {self.drive_distance:.1f} meter\n'
               f'Calculated Wh/Km: {self.ui_whpk:.1f} Wh/km\n'
               f'Nominal Range _ km/kwh: {int(self.nominal_remain * self.efficiency)} km\n'
               f'Nominal Range: {int(self.nominal_remain * 1000 / self.ui_whpk)} km\n'
               f'Expected Range: {int(self.expected_energy * 1000 / self.ui_whpk)} km\n'
+              f'Blended Range: {int(self.expected_energy * 1000 / self.ui_whpk)} km\n'
               )
+    def estimate_range(self, distance, whpk, weight_max_distance=20000):
+        drive_distance = (self.odometer - self.odometer_initial)
+        calculated_range = (self.dash.expected_energy * 1000) / self.dash.ui_whpk
+        weight = min(self.dash.distance / weight_max_distance, 1.0)
+        return (1 - weight) * self.dash.ui_range + weight * calculated_range
 
 
 class Logger:
