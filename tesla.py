@@ -318,11 +318,6 @@ class Dashboard:
               f'Expected Range: {int(self.expected_energy * 1000 / self.ui_whpk)} km\n'
               f'Blended Range: {int(self.estimated_range)} km\n'
               )
-    def estimate_range(self, distance, whpk, weight_max_distance=20000):
-        drive_distance = (self.odometer - self.odometer_initial)
-        calculated_range = (self.dash.expected_energy * 1000) / self.dash.ui_whpk
-        weight = min(self.dash.distance / weight_max_distance, 1.0)
-        return (1 - weight) * self.dash.ui_range + weight * calculated_range
 
 
 class Logger:
