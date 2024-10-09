@@ -297,9 +297,9 @@ class Dashboard:
     def get_range(self, weight_max_distance = 20000):
         if self.gear in [2, 4]:
             consumed_energy = self.batt_initial - self.expected_energy
+            self.drive_distance = (self.odometer - self.odometer_initial)
             if consumed_energy > 0 and self.drive_distance > 0:
                 self.ui_whpk = consumed_energy / self.drive_distance * 1000000
-                self.drive_distance = (self.odometer - self.odometer_initial)
                 self.efficiency = (self.drive_distance / 1000) / consumed_energy
             calculated_range = (self.expected_energy * 1000) / self.ui_whpk
             weight = min(self.drive_distance / weight_max_distance, 1.0)
