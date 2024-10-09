@@ -301,9 +301,9 @@ class Dashboard:
                 self.ui_whpk = consumed_energy / self.drive_distance * 1000000
                 self.drive_distance = (self.odometer - self.odometer_initial)
                 self.efficiency = (self.drive_distance / 1000) / consumed_energy
-            calculated_range = (self.dash.expected_energy * 1000) / self.dash.ui_whpk
-            weight = min(self.dash.drive_distance / weight_max_distance, 1.0)
-            self.estimated_range = (1 - weight) * self.dash.ui_range + weight * calculated_range
+            calculated_range = (self.expected_energy * 1000) / self.ui_whpk
+            weight = min(self.drive_distance / weight_max_distance, 1.0)
+            self.estimated_range = (1 - weight) * self.ui_range + weight * calculated_range
         print(f'[Energy Status]\n'
               f'Nominal Full {self.nominal_full:.1f} kwh\n'
               f'Nominal Remain {self.nominal_remain:.1f} kwh\n'
