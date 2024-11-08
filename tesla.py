@@ -1114,6 +1114,7 @@ class FreshAir:
             return byte_data
         if (bus == 0) and (address == 0x2f3):
             if self.dash.recirc_mode == 0:
+                ret = byte_data
                 parameters = self.time_dict.get(self.dash.passenger_cnt)
                 if parameters:
                     recirc_time, fresh_time = parameters
