@@ -1129,8 +1129,9 @@ class FreshAir:
                     # 외기 모드로 지정 시간을 넘었을 때
                     self.recirc_mode = 1
                     self.last_mode_change = now
-                ret = modify_packet_value(byte_data, 20, 2, self.recirc_mode)
-                self.buffer.write_message_buffer(bus, address, ret)
+                if self.recirc_mode == 2:
+                    ret = modify_packet_value(byte_data, 20, 2, self.recirc_mode)
+                    self.buffer.write_message_buffer(bus, address, ret)
                 return ret
         return byte_data
 
