@@ -54,6 +54,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x3f5: 'VCFRONT_lighting',
                     0x39d: 'IBST_status',
                     0x528: 'UnixTime',
+                    0x7ff: 'carConfig',
                     }
 
 
@@ -1025,6 +1026,40 @@ class KickDown:
                 ret = make_new_packet(0x334, byte_data, [(5, 2, 1)])
                 self.buffer.write_message_buffer(bus, address, ret)
                 return ret
+
+        return byte_data
+
+class ChangeRegion:
+    def __init__(self, buffer, dash, enabled=0):
+        self.buffer = buffer
+        self.dash = dash
+        self.enabled = enabled if enabled is not None else 0
+        self.apply = 1
+
+    # KR = 0x4B(K) + 0x52(R)로 이루어져 있으며, 이를 십진수로 19282로 환산됨
+    # US = 0x55(U) + 0x53(S)로 바꿔야 함.  0x5553  (십진수로는 21843)
+
+    def check(self, bus, address, byte_data):
+        if not self.enabled:
+            return byte_data
+        if (bus == 0) and (address == 0x7ff):
+            mux = get_value(byte_data, 0, 8)
+            if (mux == 1):
+                if (not self.apply):
+                    pass
+                    # print('------- Region Change Not Applied -------')
+                    # self.apply = 1
+                if self.apply:
+                    ret = modify_packet_value(
+                        packet_byte=byte_data,
+                        start_bit=16,
+                        length=16,
+                        new_value=21843,  # US = 0x5553
+                        endian='little',
+                        signed=False
+                    )
+                    self.buffer.write_message_buffer(bus, address, ret)
+                    return ret
 
         return byte_data
 

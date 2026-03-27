@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
-    KickDown, TurnSignal, Reboot, monitoring_addrs
+    KickDown, TurnSignal, ChangeRegion, Reboot, monitoring_addrs
 
 
 class Jupiter(threading.Thread):
@@ -45,6 +45,7 @@ class Jupiter(threading.Thread):
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
+        CHANGE_REGION = ChangeRegion(BUFFER, self.dash, enabled=1)
         REBOOT = Reboot(self.dash)
         BUTTON = ButtonManager(BUFFER, self.dash)
         BUTTON.add_button(btn_name='MapLampLeft')
@@ -203,6 +204,8 @@ class Jupiter(threading.Thread):
                 if address == 0x2f3:
                     ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
                     signal = FRESH.check(bus, address, signal)
+                if address == 0x7ff:
+                    signal = CHANGE_REGION.check(bus, address, signal)
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
