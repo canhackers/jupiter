@@ -17,7 +17,9 @@ class Jupiter(threading.Thread):
             return False
         # CAN Bus Device 초기화
         initialize_canbus_connection()
+        print('이니셜 빠져나옴')
         can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+        print('can버스 선언 빠져나옴')
         bus_connected = 0
         bus_error = 0
         self.dash.bus_error_count = 0
@@ -26,11 +28,11 @@ class Jupiter(threading.Thread):
 
         # 핵심 기능 로딩
         BUFFER = Buffer()
-
+        print('버퍼 선언 완료')
         #  부가 기능 로딩
         FSD_CONTROL = FSD_Control(BUFFER, self.dash)
 
-        print('루프 진입합니다.')
+        print('FSD Control 선언 완료 루프 진입합니다.')
         while True:
             current_time = time.time()
             self.dash.current_time = current_time
