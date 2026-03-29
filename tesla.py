@@ -3,13 +3,14 @@ from packet_functions import get_value, modify_packet_value
 # multiplexer 적용 패킷인 경우, multiplexer 개수 정보 추가
 mux_address = {'0x3fd': 8}
 
-command = {
-}
 
 # 상시 모니터링 할 주요 차량정보 접근 주소
-monitoring_addrs = {0x3fd: 'UI_autopilotControl',
-                    0x3f8: 'UI_driverAssistControl',
-                    }
+# monitoring_addrs = {0x3fd: 'UI_autopilotControl',
+#                     0x3f8: 'UI_driverAssistControl',
+#                     }
+
+monitoring_addrs = {}
+
 
 class Buffer:
     def __init__(self):
@@ -17,6 +18,7 @@ class Buffer:
         self.can_buffer = {}
         self.message_buffer = []
         self.initial_can_buffer()
+        self.logging_address = {}
 
     def initial_can_buffer(self):
         self.can_buffer = {0: {x: {0: None} for x in self.logging_address}}
