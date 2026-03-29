@@ -47,7 +47,7 @@ class Dashboard:
         self.bus_error_count = 0
         self.current_time = 0
         self.last_update = 0
-        self.occupancy = 0
+        self.occupancy = 1
 
     def update(self, name, signal):
         if name == 'UI_autopilotControl':
