@@ -73,7 +73,7 @@ class Jupiter(threading.Thread):
                 last_recv_time = time.time()
                 address = recv_message.arbitration_id
                 signal = recv_message.data
-                BUFFER.write_can_buffer(bus, address, signal)
+                # BUFFER.write_can_buffer(bus, address, signal)
 
                 # 여러 로직에 활용하기 위한 차량 상태값 모니터링
                 dash_item = monitoring_addrs.get(address)
@@ -85,6 +85,8 @@ class Jupiter(threading.Thread):
                 if address in [0x3f8, 0x3fd]:
                     bus_connected = 1
                     signal = FSD_CONTROL.check(bus, address, signal)
+                if address == 0x115:
+                    self.dash.check(bus, address, signal)
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
