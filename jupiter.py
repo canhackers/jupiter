@@ -30,6 +30,7 @@ class Jupiter(threading.Thread):
         #  부가 기능 로딩
         FSD_CONTROL = FSD_Control(BUFFER, self.dash)
 
+        print('루프 진입합니다.')
         while True:
             current_time = time.time()
             self.dash.current_time = current_time
@@ -89,6 +90,7 @@ class Jupiter(threading.Thread):
 
             try:
                 if self.dash.occupancy == 0:
+                    print('승객 없습니다.')
                     BUFFER.flush_message_buffer()
                     continue
                 else:
