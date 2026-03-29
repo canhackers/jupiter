@@ -63,7 +63,7 @@ class FSD_Control:
         self.dash = dash
         self.following_distance = 1
         self.speed_profile = 2
-        self.fsd_enabled = 0
+        self.fsd_enabled = 1
         self.speed_offset = 0
 
     def check(self, bus, address, byte_data):
@@ -85,7 +85,8 @@ class FSD_Control:
             mux = get_value(ret, 0, 3)
             print(mux, '0x3fd 진입. FSD활성화여부', self.fsd_enabled)
             if mux == 0:
-                self.fsd_enabled = get_value(ret, 38, 1)
+                # self.fsd_enabled = get_value(ret, 38, 1)
+                self.fsd_enabled = 1
                 if self.fsd_enabled == 1:
                     off = int(get_value(ret, 25, 6) - 30)
                     self.speed_offset = max(min(off * 5, 100), 0)
