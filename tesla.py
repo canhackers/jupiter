@@ -68,7 +68,7 @@ class FSD_Control:
 
     def check(self, bus, address, byte_data):
         ret = byte_data
-
+        print('변조전 메시지: ', ret)
         if bus == 0 and address == 0x3f8:   # 1016
             self.following_distance = get_value(ret, 45, 3)
             if self.following_distance == 1:
@@ -83,7 +83,7 @@ class FSD_Control:
 
         if bus == 0 and address == 0x3fd:   # 1021
             mux = get_value(ret, 0, 3)
-
+            print(mux, '0x3fd 진입. FSD활성화여부', self.fsd_enabled)
             if mux == 0:
                 self.fsd_enabled = get_value(ret, 38, 1)
                 if self.fsd_enabled == 1:
@@ -99,6 +99,7 @@ class FSD_Control:
 
                     ret = modify_packet_value(ret, 46, 1, 1)
                     ret = modify_packet_value(ret, 49, 2, self.speed_profile)
+                    print('mux 0 변조된 메시지', ret)
                     self.buffer.write_message_buffer(0, address, ret)
                 return ret
 
@@ -106,6 +107,7 @@ class FSD_Control:
                 # UI_applyEceR79를 False로
                 ret = modify_packet_value(ret, 19, 1, 0)
                 self.buffer.write_message_buffer(0, address, ret)
+                print('mux 1 변조된 메시지', ret)
                 return ret
 
             elif mux == 2:
@@ -114,6 +116,7 @@ class FSD_Control:
                     ret = modify_packet_value(ret, 6, 2, self.speed_offset % 4)
                     ret = modify_packet_value(ret, 8, 6, self.speed_offset // 4)
                     self.buffer.write_message_buffer(0, address, ret)
+                    print('mux 2 변조된 메시지', ret)
                 return ret
 
         return ret
