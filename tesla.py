@@ -3,6 +3,7 @@ from packet_functions import get_value, modify_packet_value
 # multiplexer 적용 패킷인 경우, multiplexer 개수 정보 추가
 mux_address = {'0x3fd': 8}
 
+logging_address = ['0x3fd', '0x3f8']
 
 # 상시 모니터링 할 주요 차량정보 접근 주소
 # monitoring_addrs = {0x3fd: 'UI_autopilotControl',
@@ -18,7 +19,7 @@ class Buffer:
         self.can_buffer = {}
         self.message_buffer = []
         self.initial_can_buffer()
-        self.logging_address = {}
+        self.logging_address = [int(x, 16) for x in logging_address]
 
     def initial_can_buffer(self):
         self.can_buffer = {0: {x: {0: None} for x in self.logging_address}}
@@ -43,10 +44,10 @@ class Buffer:
 
 class Dashboard:
     def __init__(self):
-        self.bus_error_cout = 0
+        self.bus_error_count = 0
         self.current_time = 0
         self.last_update = 0
-
+        self.occupancy = 0
 
     def update(self, name, signal):
         if name == 'UI_autopilotControl':
@@ -98,12 +99,13 @@ class FSD_Control:
 
                     ret = modify_packet_value(ret, 46, 1, 1)
                     ret = modify_packet_value(ret, 49, 2, self.speed_profile)
-
+                    self.buffer.write_message_buffer(0, address, ret)
                 return ret
 
             elif mux == 1:
                 # UI_applyEceR79를 False로
                 ret = modify_packet_value(ret, 19, 1, 0)
+                self.buffer.write_message_buffer(0, address, ret)
                 return ret
 
             elif mux == 2:
@@ -111,6 +113,7 @@ class FSD_Control:
                 if self.fsd_enabled == 1:
                     ret = modify_packet_value(ret, 6, 2, self.speed_offset % 4)
                     ret = modify_packet_value(ret, 8, 6, self.speed_offset // 4)
+                    self.buffer.write_message_buffer(0, address, ret)
                 return ret
 
         return ret
