@@ -119,6 +119,5 @@ class FSD_Control:
                     self.buffer.write_message_buffer(0, address, ret)
                     print('mux 2 변조된 메시지', ret)
                 return ret
-
         return ret
 
