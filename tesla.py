@@ -18,8 +18,8 @@ class Buffer:
         self.mux_address = mux_address
         self.can_buffer = {}
         self.message_buffer = []
-        self.initial_can_buffer()
         self.logging_address = [int(x, 16) for x in logging_address]
+        self.initial_can_buffer()
 
     def initial_can_buffer(self):
         self.can_buffer = {0: {x: {0: None} for x in self.logging_address}}
