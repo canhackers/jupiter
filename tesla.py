@@ -1101,3 +1101,18 @@ class TurnSignal:
                             self.turn_indicator = 0
             return byte_data
         return byte_data
+
+class BlockUpdate:
+    def __init__(self, buffer, dash, enabled=0):
+        self.buffer = buffer
+        self.dash = dash
+        self.enabled = enabled if enabled is not None else 0
+
+    def check(self, bus, address, byte_data):
+        if not self.enabled:
+            return byte_data
+        ret = byte_data
+        if (bus == 0) and (address == 0x261):
+            ret = make_new_packet(address, byte_data, [(46, 1, 0)], constant=0x1D)
+            self.buffer.write_message_buffer(0, address, ret)
+        return ret

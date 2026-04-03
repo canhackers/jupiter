@@ -19,6 +19,7 @@ def load_settings():
     default_settings = {
         'Logger': 1,
         'RearCenterBuckle': 1,
+        'BlockUpdate' : 1,
         'MapLampLeftLong' : 'mirror_fold',
         'MapLampRightLong' : 'open_door_rr,buckle_emulator',    # 두개의 함수가 선언되는 경우는 주차 중, 주행 중 기능
         'MapLampRightDouble': 'open_door_fr,mars_mode_toggle',
