@@ -40,6 +40,7 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x108: 'DIR_torque',
                     0x118: 'DriveSystemStatus',
                     0x186: 'DIF_torque',
+                    0x238: 'UI_driverAssistMapData',
                     0x257: 'DIspeed',
                     0x261: '12vBattStatus',
                     0x273: 'UI_vehicleControl',
@@ -1114,5 +1115,21 @@ class BlockUpdate:
         ret = byte_data
         if (bus == 0) and (address == 0x261):
             ret = make_new_packet(address, byte_data, [(46, 1, 0)], constant=0x1D)
+            self.buffer.write_message_buffer(0, address, ret)
+        return ret
+
+
+class SpeedLimit:
+    def __init__(self, buffer, dash, enabled=0):
+        self.buffer = buffer
+        self.dash = dash
+        self.enabled = enabled if enabled is not None else 0
+
+    def check(self, bus, address, byte_data):
+        if not self.enabled:
+            return byte_data
+        ret = byte_data
+        if (bus == 0) and (address == 0x238):
+            ret = make_new_packet(address, byte_data, [(8, 5, 30)])
             self.buffer.write_message_buffer(0, address, ret)
         return ret

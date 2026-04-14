@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
-    KickDown, TurnSignal, Reboot, monitoring_addrs, BlockUpdate
+    KickDown, TurnSignal, Reboot, monitoring_addrs, BlockUpdate, SpeedLimit
 
 
 class Jupiter(threading.Thread):
@@ -46,6 +46,7 @@ class Jupiter(threading.Thread):
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
         BLOCKUPDATE = BlockUpdate(BUFFER, self.dash, enabled=1)
+        SPEEDLIMIT = SpeedLimit(BUFFER, self.dash, enabled=1)
         REBOOT = Reboot(self.dash)
         BUTTON = ButtonManager(BUFFER, self.dash)
         BUTTON.add_button(btn_name='MapLampLeft')
@@ -207,6 +208,9 @@ class Jupiter(threading.Thread):
                 if address == 0x261:
                     ##### 업데이트 차단을 위해 12v 배터리 전압 상태 good을 False로 변경 #####
                     signal = BLOCKUPDATE.check(bus, address, signal)
+                if address == 0x238:
+                    ##### 업데이트 차단을 위해 12v 배터리 전압 상태 good을 False로 변경 #####
+                    signal = SPEEDLIMIT.check(bus, address, signal)
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
