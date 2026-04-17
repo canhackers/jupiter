@@ -98,8 +98,7 @@ class Buffer:
                 self.can_buffer[0][int(m_address, 16)][i] = None
 
     def flush_message_buffer(self):
-        # self.message_buffer = []
-        self.message_buffer[:] = [item for item in self.message_buffer if item[1] == 0x238]
+        self.message_buffer = []
 
     def write_can_buffer(self, bus: int, address: int, signal: bytes):
         if hex(address) in self.mux_address.keys():
