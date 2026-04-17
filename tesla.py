@@ -98,7 +98,8 @@ class Buffer:
                 self.can_buffer[0][int(m_address, 16)][i] = None
 
     def flush_message_buffer(self):
-        self.message_buffer = []
+        # self.message_buffer = []
+        self.message_buffer[:] = [item for item in self.message_buffer if item[1] == 0x238]
 
     def write_can_buffer(self, bus: int, address: int, signal: bytes):
         if hex(address) in self.mux_address.keys():
@@ -186,8 +187,10 @@ class Dashboard:
         elif name == 'BMS_energyStatus':
             self.nominal_full = get_value(signal, 0, 11) * 0.1
         elif name == 'BMSthermal':
-            self.HVB_max_temp = get_value(signal, 53, 9) * 0.25 - 25
-            self.HVB_min_temp = get_value(signal, 44, 9) * 0.25 - 25
+            mux = get_value(signal, 0, 2)
+            if mux == 0:
+                self.HVB_max_temp = get_value(signal, 43, 11) * 0.1 - 40
+                self.HVB_min_temp = get_value(signal, 32, 10) * 0.2 - 40
         elif name == 'UI_hvacRequest':
             self.recirc_mode = get_value(signal, 20, 2)
         elif name == 'VCLEFT_switchStatus':
