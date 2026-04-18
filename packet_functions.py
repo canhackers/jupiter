@@ -64,14 +64,13 @@ def modify_packet_value(packet_byte, start_bit, length, new_value, endian='littl
         return packet_byte
 
 
-def calculate_checksum(frame_id, packet_byte):
-    id_val = (str(hex(frame_id)) if type(frame_id) == int else frame_id)[2:].zfill(4)
-    common_val = int(id_val[:2], 16) + int(id_val[2:], 16)
-    return (sum(packet_byte[:-1]) + common_val) % 256
-
+def calculate_checksum(frame_id, packet_byte, constant=0):
+    frame_id = int(frame_id, 16) if isinstance(frame_id, str) else frame_id
+    common_val = ((frame_id >> 8) & 0xFF) + (frame_id & 0xFF)
+    return (sum(packet_byte[:-1]) + common_val + constant) & 0xFF
 
 def make_new_packet(frame_id, packet, modify_list, counter_loc=52, counter_bit=4, checksum_loc=56, checksum_bit=8,
-                    keep_counter=False):
+                    keep_counter=False, constant=0):
     # 카운터와 체크섬이 존재하는 경우 변조에 사용하는 함수
     for loc, length, new_value in modify_list:
         packet = modify_packet_value(packet, loc, length, new_value)
@@ -81,6 +80,6 @@ def make_new_packet(frame_id, packet, modify_list, counter_loc=52, counter_bit=4
     else:
         new_counter = (old_counter + 1) % (2 ** counter_bit)
     packet = modify_packet_value(packet, counter_loc, counter_bit, new_counter)
-    new_checksum = calculate_checksum(frame_id, packet)
+    new_checksum = calculate_checksum(frame_id, packet, constant)
     packet = modify_packet_value(packet, checksum_loc, checksum_bit, new_checksum)
     return packet
