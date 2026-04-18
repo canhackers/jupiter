@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
-    KickDown, TurnSignal, Reboot, monitoring_addrs
+    KickDown, TurnSignal, Reboot, monitoring_addrs, BatteryLogger
 
 
 class Jupiter(threading.Thread):
@@ -31,6 +31,9 @@ class Jupiter(threading.Thread):
         # 핵심 기능 로딩
         BUFFER = Buffer()
         LOGGER = Logger(BUFFER, self.dash, cloud=0, enabled=self.settings.get('Logger'))
+        BAT_LOGGER = BatteryLogger(BUFFER, self.dash)
+        dynamic_log_timer = 0
+        last_high_load_log = 0
 
         #  부가 기능 로딩
         AP = Autopilot(BUFFER, self.dash,
@@ -126,6 +129,7 @@ class Jupiter(threading.Thread):
                             self.dash.drive_time = 0
                             self.dash.drive_finished = 0
                             LOGGER.initialize()
+                            BAT_LOGGER.log_health("DRIVE_START")
                     elif self.dash.gear == 1:
                         if self.dash.parked == 0:  # Drive(4) → Park(1)
                             print('Parking Gear Detected... Saving Drive history')
@@ -133,6 +137,7 @@ class Jupiter(threading.Thread):
                             self.dash.drive_time = 0
                             self.dash.drive_finished = 1
                             LOGGER.close()
+                            BAT_LOGGER.log_health("DRIVE_END")
                         if self.settings.get('MirrorAutoFold'):
                             if self.dash.passenger_cnt == 0 and self.dash.drive_finished == 1:
                                 BUTTON.mirror_request = 1
@@ -153,6 +158,10 @@ class Jupiter(threading.Thread):
                     self.dash.device_temp = self.vcgm.measure_temp()
                     if self.dash.gear == 4:
                         self.dash.drive_time += 1
+                        dynamic_log_timer += 1
+                        if dynamic_log_timer >= 300:  # 300초(5분) 경과 시
+                            BAT_LOGGER.log_dynamics()
+                            dynamic_log_timer = 0
                     print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
 
                     # for bid, val in self.dash.beacon.items():
@@ -203,6 +212,12 @@ class Jupiter(threading.Thread):
                 if address == 0x2f3:
                     ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
                     signal = FRESH.check(bus, address, signal)
+                if address in [0x108, 0x186]:
+                    total_torque = abs(self.dash.torque_front) + abs(self.dash.torque_rear)
+                    # 임계치 2000Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
+                    if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
+                        BAT_LOGGER.log_high_load(total_torque)
+                        last_high_load_log = current_time
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
