@@ -214,8 +214,8 @@ class Jupiter(threading.Thread):
                     signal = FRESH.check(bus, address, signal)
                 if address in [0x108, 0x186]:
                     total_torque = abs(self.dash.torque_front) + abs(self.dash.torque_rear)
-                    # 임계치 300Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
-                    if total_torque > 300 and (current_time - last_high_load_log > 0.5):
+                    # 임계치 2000Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
+                    if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
                         BAT_LOGGER.log_high_load(total_torque)
                         last_high_load_log = current_time
 
