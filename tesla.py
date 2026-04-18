@@ -426,6 +426,28 @@ class BatteryLogger:
         print(
             f"[{self.dash.clock}] ⚡ Dynamics Log: Bus {bus_v_min:.1f}~{bus_v_max:.1f}V, SOC Avg {soc_avg:.1f}%, Temp Avg {t_avg:.1f}°C")
 
+    def log_high_load(self, torque_total):
+        # 0x332 (BMB Min/Max)에서 최저 전압 추출
+        brick_v_min = 0
+        sig_332_1 = self._safe_get(0x332, 1)
+        if sig_332_1:
+            brick_v_min = get_value(sig_332_1, 16, 12) * 0.02  # 0.002 scale factor
+
+        # 0x2d2 (Drive Limits)에서 버스 전압 추출
+        bus_v_min = 0
+        sig_2d2_0 = self._safe_get(0x2d2, 0)
+        if sig_2d2_0:
+            bus_v_min = get_value(sig_2d2_0, 0, 16) * 0.02
+
+        headers = ['Time', 'Total_Torque(Nm)', 'Brick_V_Min(V)', 'Bus_V_Min(V)', 'SOC_Avg(%)']
+        row = [self.dash.clock, torque_total, brick_v_min, bus_v_min, self.dash.soc]
+
+        self._write_safe('Battery_HighLoad_Event.csv', headers, row)
+
+        # 고부하 시에는 즉각적인 시각적 확인이 중요하므로 강렬하게 출력
+        print(
+            f"!!! HIGH LOAD DETECTED !!! Torque: {torque_total}Nm | Min Brick: {brick_v_min:.3f}V | Bus: {bus_v_min:.1f}V")
+
 class Button:
     def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
         self.dash = manager.dash

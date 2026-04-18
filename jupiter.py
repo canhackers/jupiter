@@ -33,6 +33,7 @@ class Jupiter(threading.Thread):
         LOGGER = Logger(BUFFER, self.dash, cloud=0, enabled=self.settings.get('Logger'))
         BAT_LOGGER = BatteryLogger(BUFFER, self.dash)
         dynamic_log_timer = 0
+        last_high_load_log = 0
 
         #  부가 기능 로딩
         AP = Autopilot(BUFFER, self.dash,
@@ -211,6 +212,12 @@ class Jupiter(threading.Thread):
                 if address == 0x2f3:
                     ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
                     signal = FRESH.check(bus, address, signal)
+                if address in [0x108, 0x186]:
+                    total_torque = abs(self.dash.torque_front) + abs(self.dash.torque_rear)
+                    # 임계치 300Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
+                    if total_torque > 300 and (current_time - last_high_load_log > 0.5):
+                        BAT_LOGGER.log_high_load(total_torque)
+                        last_high_load_log = current_time
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
