@@ -14,11 +14,12 @@ logging_address = ['0x108', '0x118', '0x129', '0x132', '0x186', '0x1d5', '0x1d8'
                    '0x243', '0x249', '0x257', '0x25a', '0x261', '0x266', '0x273', '0x282', '0x292', '0x293', '0x2a7',
                    '0x2b3', '0x2d3', '0x2e1', '0x2e5', '0x2f1', '0x2f3', '0x312', '0x315', '0x318', '0x321', '0x32c',
                    '0x332', '0x334', '0x33a', '0x352', '0x353', '0x373', '0x376', '0x383', '0x39d', '0x3b6', '0x3d2',
-                   '0x3d8', '0x3e2', '0x3e3', '0x3f2', '0x3f5', '0x3fd', '0x401', '0x4f', '0x528', '0x7aa', '0x7ff']
+                   '0x3d8', '0x3e2', '0x3e3', '0x3f2', '0x3f5', '0x3fd', '0x401', '0x4f', '0x528', '0x7aa', '0x7ff',
+                   '0x2d2', '0x3b2', '0x3f2', '0x782']
 
 # multiplexer 적용 패킷인 경우, multiplexer 개수 정보 추가
 mux_address = {'0x282': 2, '0x352': 2, '0x3fd': 3, '0x332': 2, '0x261': 2, '0x243': 3, '0x7ff': 8, '0x2e1': 3,
-               '0x201': 3, '0x7aa': 4, '0x2b3': 4, '0x3f2': 4, '0x32c': 8, '0x401': 8}
+               '0x201': 3, '0x7aa': 4, '0x2b3': 4, '0x3f2': 4, '0x32c': 8, '0x401': 8, '0x3b2': 7, '0x782': 7}
 
 command = {
     'empty': bytes.fromhex('2955000000000000'),
@@ -54,6 +55,13 @@ monitoring_addrs = {0x102: 'VCLEFT_doorStatus',
                     0x3f5: 'VCFRONT_lighting',
                     0x39d: 'IBST_status',
                     0x528: 'UnixTime',
+                    0x2d2: 'BMS_driveLimits',
+                    0x332: 'BMS_bmbMinMax',
+                    0x3b2: 'BMS_log2',
+                    0x3d2: 'BMS_kwhCounter',
+                    0x3f2: 'BMS_kwhCountersMultiplexed',
+                    0x401: 'BMS_brickMeasurements',
+                    0x782: 'BMS_log3'
                     }
 
 
@@ -156,6 +164,16 @@ class Dashboard:
         self.mirror_folded = [0, 0]  # folded 1, unfolded 0
         self.navdy_connected = 0
         self.beacon = {}
+        self.bat_health = {
+            'soh': 0, 'full_pack_energy': 0, 'cac_max': 0, 'cac_min': 0, 'cac_avg': 0,
+            'kwh_discharge': 0, 'kwh_charge': 0, 'ac_kwh': 0, 'dc_kwh': 0,
+            'brick_cac': [0] * 108
+        }
+        self.bat_dynamics = {
+            'bus_v_min': 0, 'bus_v_max': 0, 'soc_min': 0, 'soc_max': 0, 'soc_avg': 0,
+            'brick_v_max': 0, 'brick_v_min': 0, 't_max': 0, 't_min': 0, 't_avg': 0,
+            'brick_v': [0] * 108
+        }
 
     def update(self, name, signal):
         if name == 'UnixTime':
@@ -287,6 +305,126 @@ class Logger:
                     if signal is not None:
                         self.csvwriter.writerow([self.dash.clock, 0, str(hex(address)), mux, '0x' + str(signal.hex())])
 
+
+class BatteryLogger:
+    def __init__(self, buffer, dash):
+        self.buffer = buffer
+        self.dash = dash
+        self.csv_path = '/home/drive_record/battery/'
+        if not os.path.exists(self.csv_path):
+            os.makedirs(self.csv_path)
+
+    def _write_safe(self, filename, headers, row_data):
+        filepath = self.csv_path + filename
+        file_exists = os.path.isfile(filepath)
+        with open(filepath, 'a', newline='') as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(headers)
+            writer.writerow(row_data)
+            f.flush()
+            os.fsync(f.fileno())
+
+    def _safe_get(self, address, mux):
+        # 버퍼에 데이터가 없을 경우를 대비한 안전한 조회
+        try:
+            return self.buffer.can_buffer[0][address][mux]
+        except KeyError:
+            return None
+
+    def log_health(self, event_type="UNKNOWN"):
+        soh = full_pack_energy = cac_max = cac_min = cac_avg = 0
+        kwh_discharge = kwh_charge = ac_kwh = dc_kwh = 0
+        brick_cac = [0] * 108
+
+        # BMS_energyStatus (0x352)
+        sig_352_0 = self._safe_get(0x352, 0)
+        if sig_352_0: full_pack_energy = get_value(sig_352_0, 16, 16) * 0.02
+
+        # BMS_log2 (0x3b2)
+        sig_3b2_0 = self._safe_get(0x3b2, 0)
+        if sig_3b2_0:
+            cac_avg = get_value(sig_3b2_0, 8, 13) * 0.1
+            cac_min = get_value(sig_3b2_0, 24, 13) * 0.1
+            cac_max = get_value(sig_3b2_0, 44, 13) * 0.1
+        sig_3b2_83 = self._safe_get(0x3b2, 83)
+        if sig_3b2_83: soh = get_value(sig_3b2_83, 35, 10) * 0.1
+
+        # BMS_kwhCounter (0x3d2)
+        sig_3d2_0 = self._safe_get(0x3d2, 0)
+        if sig_3d2_0:
+            kwh_discharge = get_value(sig_3d2_0, 0, 32) * 0.001
+            kwh_charge = get_value(sig_3d2_0, 32, 32) * 0.001
+
+        # BMS_kwhCountersMultiplexed (0x3f2)
+        sig_3f2_0 = self._safe_get(0x3f2, 0)
+        if sig_3f2_0: ac_kwh = get_value(sig_3f2_0, 8, 32) * 0.001
+        sig_3f2_1 = self._safe_get(0x3f2, 1)
+        if sig_3f2_1: dc_kwh = get_value(sig_3f2_1, 8, 32) * 0.001
+
+        # BMS_log3 (0x782) - Brick CAC
+        for mux in range(108):
+            sig_782 = self._safe_get(0x782, mux)
+            if sig_782: brick_cac[mux] = get_value(sig_782, 22, 13) * 0.1
+
+        headers = ['Time', 'Event', 'SoH(%)', 'FullPackEnergy(kWh)', 'CAC_Max(Ah)', 'CAC_Min(Ah)', 'CAC_Avg(Ah)',
+                   'Total_Dchg(kWh)', 'Total_Chg(kWh)', 'AC_Chg(kWh)', 'DC_Chg(kWh)'] + [f'Brick{i + 1}_CAC' for i in
+                                                                                         range(108)]
+        row = [self.dash.clock, event_type, soh, full_pack_energy, cac_max, cac_min, cac_avg,
+               kwh_discharge, kwh_charge, ac_kwh, dc_kwh] + brick_cac
+
+        self._write_safe('Battery_Health_Log.csv', headers, row)
+        print(f"[{self.dash.clock}] Battery Health Logged: {event_type}")
+        print(
+            f"[{self.dash.clock}] 🔋 Health Log ({event_type}): SoH {soh}%, Energy {full_pack_energy:.2f}kWh, CAC Avg {cac_avg:.1f}Ah")
+
+    def log_dynamics(self):
+        bus_v_min = bus_v_max = soc_min = soc_max = soc_avg = 0
+        brick_v_max = brick_v_min = t_max = t_min = t_avg = 0
+        brick_v = [0] * 108
+
+        # BMS_driveLimits (0x2d2)
+        sig_2d2_0 = self._safe_get(0x2d2, 0)
+        if sig_2d2_0:
+            bus_v_min = get_value(sig_2d2_0, 0, 16) * 0.02
+            bus_v_max = get_value(sig_2d2_0, 16, 16) * 0.02
+
+        # BMS_SOC (0x292)
+        sig_292_0 = self._safe_get(0x292, 0)
+        if sig_292_0:
+            soc_min = get_value(sig_292_0, 0, 10) * 0.1
+            soc_max = get_value(sig_292_0, 20, 10) * 0.1
+            soc_avg = get_value(sig_292_0, 30, 10) * 0.1
+
+        # BMS_bmbMinMax (0x332)
+        sig_332_0 = self._safe_get(0x332, 0)
+        if sig_332_0:
+            t_max = get_value(sig_332_0, 16, 8) * 0.5 - 40
+            t_min = get_value(sig_332_0, 24, 8) * 0.5 - 40
+            t_avg = get_value(sig_332_0, 32, 8) * 0.5 - 40
+
+        sig_332_1 = self._safe_get(0x332, 1)
+        if sig_332_1:
+            brick_v_max = get_value(sig_332_1, 2, 12) * 0.002
+            brick_v_min = get_value(sig_332_1, 16, 12) * 0.002
+
+        # BMS_brickMeasurements (0x401)
+        for mux in range(36):
+            sig_401 = self._safe_get(0x401, mux)
+            if sig_401:
+                idx1, idx2, idx3 = mux * 3, mux * 3 + 1, mux * 3 + 2
+                if idx1 < 108: brick_v[idx1] = get_value(sig_401, 16, 16) * 0.0001
+                if idx2 < 108: brick_v[idx2] = get_value(sig_401, 32, 16) * 0.0001
+                if idx3 < 108: brick_v[idx3] = get_value(sig_401, 48, 16) * 0.0001
+
+        headers = ['Time', 'Bus_V_Max', 'Bus_V_Min', 'SOC_Max', 'SOC_Min', 'SOC_Avg',
+                   'Brick_V_Max', 'Brick_V_Min', 'T_Max', 'T_Min', 'T_Avg'] + [f'Brick{i + 1}_V' for i in range(108)]
+        row = [self.dash.clock, bus_v_max, bus_v_min, soc_max, soc_min, soc_avg,
+               brick_v_max, brick_v_min, t_max, t_min, t_avg] + brick_v
+
+        self._write_safe('Battery_Dynamics_Log.csv', headers, row)
+        print(
+            f"[{self.dash.clock}] ⚡ Dynamics Log: Bus {bus_v_min:.1f}~{bus_v_max:.1f}V, SOC Avg {soc_avg:.1f}%, Temp Avg {t_avg:.1f}°C")
 
 class Button:
     def __init__(self, manager, btn_name, short_time=0.5, long_time=1.0):
