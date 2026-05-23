@@ -5,7 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from functions import initialize_canbus_connection, load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
-    KickDown, TurnSignal, Reboot, monitoring_addrs, BatteryLogger
+    KickDown, TurnSignal, Reboot, monitoring_addrs, BatteryLogger, Bridge
 
 
 class Jupiter(threading.Thread):
@@ -48,6 +48,7 @@ class Jupiter(threading.Thread):
         FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
         KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
         TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
+        BRIDGE = Bridge(BUFFER, self.dash, autopilot=AP)
         REBOOT = Reboot(self.dash)
         BUTTON = ButtonManager(BUFFER, self.dash)
         BUTTON.add_button(btn_name='MapLampLeft')
@@ -203,6 +204,8 @@ class Jupiter(threading.Thread):
                     ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
                     signal = KICKDOWN.check(bus, address, signal)
                 if address == 0x39d:
+                    ##### Chassis CAN bridge mock payload monitoring #####
+                    signal = BRIDGE.check(bus, address, signal)
                     ##### 브레이크 밟힘 감지 - 브레이크를 감지해 해제해야 하는 기능 #####
                     signal = AP.check(bus, address, signal)
                     signal = KICKDOWN.check(bus, address, signal)

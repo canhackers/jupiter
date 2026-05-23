@@ -164,6 +164,10 @@ class Dashboard:
         self.mirror_folded = [0, 0]  # folded 1, unfolded 0
         self.navdy_connected = 0
         self.beacon = {}
+        self.bridge_payload_valid = 0
+        self.bridge_last_payload = 0
+        self.bridge_last_update = 0
+        self.bridge_bits = {i: 0 for i in range(1, 7)}
         self.bat_health = {
             'soh': 0, 'full_pack_energy': 0, 'cac_max': 0, 'cac_min': 0, 'cac_avg': 0,
             'kwh_discharge': 0, 'kwh_charge': 0, 'ac_kwh': 0, 'dc_kwh': 0,
@@ -738,6 +742,10 @@ class Autopilot:
         self.stalk_crc = [73, 75, 93, 98, 76, 78, 210, 246, 67, 170, 249, 131, 70, 32, 62, 52]
         self.stalk_down_count = 0
         self.stalk_down_time = 0
+        self.stalk_down_injection_enabled = 0
+        self.stalk_down_injection_frames = 0
+        self.stalk_down_injection_source = None
+        self.stalk_down_last_request_time = {}
         self.stalk_up = Button(self, 'right_stalk_up')
         self.stalk_up.function['short_drive'] = self.disengage_autopilot
         self.stalk_up.function['long_drive'] = self.disengage_autopilot
@@ -895,6 +903,29 @@ class Autopilot:
         print('Continuous Autopilot Stalk Action Requested')
         self.stalk_down_count = 2
 
+    def request_right_stalk_down(self, frames=3, min_interval=1.0, source='bridge'):
+        if not self.stalk_down_injection_enabled:
+            print(f'Right stalk down injection disabled. source={source}, frames={frames}')
+            return False
+        if not (self.autosteer or self.tacc):
+            print(f'Right stalk down injection ignored. AP/TACC inactive. source={source}')
+            return False
+
+        now = time.time()
+        last_time = self.stalk_down_last_request_time.get(source, 0)
+        if now - last_time < min_interval:
+            print(f'Right stalk down injection ignored by cooldown. source={source}')
+            return False
+        if self.stalk_down_injection_frames > 0 or self.stalk_down_count > 0:
+            print(f'Right stalk down injection ignored by pending request. source={source}')
+            return False
+
+        self.stalk_down_injection_frames = frames
+        self.stalk_down_injection_source = source
+        self.stalk_down_last_request_time[source] = now
+        print(f'Right stalk down injection requested. source={source}, frames={frames}')
+        return True
+
     def dial_work(self, byte_data):
         ret = byte_data
         # 동시에 두가지 다이얼 조작이 충돌하지 않게 하기 위한 처리
@@ -1031,6 +1062,18 @@ class Autopilot:
             elif self.current_gear_position == 0:
                 self.stalk_up.release()
                 self.stalk_down.release()
+
+            if self.stalk_down_injection_enabled and self.stalk_down_injection_frames > 0:
+                counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
+                crc = self.stalk_crc[counter]
+                ret = modify_packet_value(byte_data, 8, 4, counter)
+                ret = modify_packet_value(ret, 12, 3, 3)  # right stalk half down
+                ret = modify_packet_value(ret, 0, 8, crc)
+                self.buffer.write_message_buffer(bus, address, ret)
+                self.stalk_down_injection_frames -= 1
+                if self.stalk_down_injection_frames == 0:
+                    self.stalk_down_injection_source = None
+                return ret
 
             if self.stalk_down_count == 2 or (self.stalk_down_time != 0 and time.time() - self.stalk_down_time >= 0.5):
                 counter = (get_value(byte_data, 8, 4) + 1) % (2 ** 4)
@@ -1185,6 +1228,76 @@ class KickDown:
                 return ret
 
         return byte_data
+
+
+class Bridge:
+    def __init__(self, buffer, dash, autopilot=None, enabled=1, injection_enabled=0):
+        self.buffer = buffer
+        self.dash = dash
+        self.autopilot = autopilot
+        self.enabled = enabled if enabled is not None else 1
+        self.injection_enabled = injection_enabled if injection_enabled is not None else 0
+        self.prev_bits = {i: 0 for i in range(1, 7)}
+        self.last_valid = None
+        self.last_payload = None
+        self.action_names = {
+            1: 'right_stalk_down_short',
+            2: 'undefined',
+            3: 'undefined',
+            4: 'undefined',
+            5: 'undefined',
+            6: 'undefined',
+        }
+
+    def check(self, bus, address, byte_data):
+        if not self.enabled:
+            return byte_data
+        if bus != 0 or address != 0x39d:
+            return byte_data
+
+        valid = get_value(byte_data, 39, 1)
+        payload = get_value(byte_data, 33, 6) if valid else 0
+        current_bits = {
+            bit_num: (payload >> (bit_num - 1)) & 1
+            for bit_num in range(1, 7)
+        }
+
+        self.dash.bridge_payload_valid = valid
+        self.dash.bridge_last_payload = payload
+        self.dash.bridge_last_update = time.time()
+        for bit_num, value in current_bits.items():
+            self.dash.bridge_bits[bit_num] = value
+
+        if valid != self.last_valid or payload != self.last_payload:
+            bit_text = ', '.join(
+                f'b{bit_num}={current_bits[bit_num]}'
+                for bit_num in range(1, 7)
+            )
+            print(f'Bridge payload: valid={valid}, payload=0b{payload:06b}, {bit_text}')
+            self.last_valid = valid
+            self.last_payload = payload
+
+        for bit_num in range(1, 7):
+            if current_bits[bit_num] == 1 and self.prev_bits[bit_num] == 0:
+                self._run_action(bit_num)
+
+        self.prev_bits = current_bits
+        return byte_data
+
+    def _run_action(self, bit_num):
+        action_name = self.action_names.get(bit_num, 'undefined')
+        print(f'Bridge action detected: bit{bit_num}={action_name}')
+        if action_name != 'right_stalk_down_short':
+            return
+        if not self.injection_enabled:
+            print('Bridge bit1 injection is prepared but disabled.')
+            return
+        if self.autopilot is not None:
+            self.autopilot.request_right_stalk_down(
+                frames=3,
+                min_interval=1.0,
+                source='bridge_bit1'
+            )
 
 
 class TurnSignal:
