@@ -95,60 +95,16 @@ class Jupiter(threading.Thread):
                     self.dash.update(dash_item, signal)
                 self.dash.runtime.last_update = current_time
 
-                ### 기어 상태 체크 / 로깅 시작 ###
-                if address == 0x118 and (self.dash.di.clock is not None):
-                    self.dash.update('DriveSystemStatus', signal)
-                    if self.dash.di.gear == 4:
-                        if self.dash.di.parked == 1:   # Park(1) → Drive(4)
-                            print(f'Drive Gear Detected... Recording Drive history from {self.dash.di.clock}')
-                            self.dash.di.parked = 0
-                            self.dash.di.drive_time = 0
-                            self.dash.di.drive_finished = 0
-                            LOGGER.initialize()
-                            BAT_LOGGER.log_health("DRIVE_START")
-                    elif self.dash.di.gear == 1:
-                        if self.dash.di.parked == 0:  # Drive(4) → Park(1)
-                            print('Parking Gear Detected... Saving Drive history')
-                            self.dash.di.parked = 1
-                            self.dash.di.drive_time = 0
-                            self.dash.di.drive_finished = 1
-                            LOGGER.close()
-                            BAT_LOGGER.log_health("DRIVE_END")
-                        if self.settings.get('MirrorAutoFold'):
-                            if self.dash.cabin.occupant_count == 0 and self.dash.di.drive_finished == 1:
-                                BUTTON.mirror_request = 1
-                                self.dash.di.drive_finished = 0
-                    else:
-                        pass
-
-                # 1초에 한번 전송되는 차량 시각 정보 수신
-                if address == 0x528:
-                    TICK = True
-                    bus_connected = 1
-                    self.dash.update('UnixTime', signal)
-                else:
-                    TICK = False
-
-                # 매 1초마다 실행할 액션 지정
-                if TICK:
-                    self.dash.device.temperature = self.vcgm.measure_temp()
-                    if self.dash.di.gear == 4:
-                        self.dash.di.drive_time += 1
-                        dynamic_log_timer += 1
-                        if dynamic_log_timer >= 300:  # 300초(5분) 경과 시
-                            BAT_LOGGER.log_dynamics()
-                            dynamic_log_timer = 0
-                    print(f'Clock: {self.dash.di.clock}  Temperature: {self.dash.device.temperature}')
-
-                    # for bid, val in self.dash.device.beacon.items():
-                    #     print(f'{bid} value is now {val}')
-
-                    ##### Log writer ######
-                    if (LOGGER.file is not None):
-                        LOGGER.write()
-
-                    ##### Mars Mode ######
-                    AP.tick()
+                self._handle_drive_transition(address, signal, LOGGER, BAT_LOGGER, BUTTON)
+                bus_connected, dynamic_log_timer = self._handle_tick(
+                    address,
+                    signal,
+                    bus_connected,
+                    dynamic_log_timer,
+                    LOGGER,
+                    BAT_LOGGER,
+                    AP,
+                )
 
                 # 실시간 패킷 인식 및 변조
                 if address == 0x1f9:
@@ -218,6 +174,51 @@ class Jupiter(threading.Thread):
 
     def stop(self):
         self.jupiter_online = False
+
+    def _handle_drive_transition(self, address, signal, logger, battery_logger, button):
+        if address == 0x118 and (self.dash.di.clock is not None):
+            self.dash.update('DriveSystemStatus', signal)
+            if self.dash.di.gear == 4:
+                if self.dash.di.parked == 1:   # Park(1) -> Drive(4)
+                    print(f'Drive Gear Detected... Recording Drive history from {self.dash.di.clock}')
+                    self.dash.di.parked = 0
+                    self.dash.di.drive_time = 0
+                    self.dash.di.drive_finished = 0
+                    logger.initialize()
+                    battery_logger.log_health("DRIVE_START")
+            elif self.dash.di.gear == 1:
+                if self.dash.di.parked == 0:  # Drive(4) -> Park(1)
+                    print('Parking Gear Detected... Saving Drive history')
+                    self.dash.di.parked = 1
+                    self.dash.di.drive_time = 0
+                    self.dash.di.drive_finished = 1
+                    logger.close()
+                    battery_logger.log_health("DRIVE_END")
+                if self.settings.get('MirrorAutoFold'):
+                    if self.dash.cabin.occupant_count == 0 and self.dash.di.drive_finished == 1:
+                        button.mirror_request = 1
+                        self.dash.di.drive_finished = 0
+
+    def _handle_tick(self, address, signal, bus_connected, dynamic_log_timer, logger, battery_logger, autopilot):
+        if address != 0x528:
+            return bus_connected, dynamic_log_timer
+
+        bus_connected = 1
+        self.dash.update('UnixTime', signal)
+        self.dash.device.temperature = self.vcgm.measure_temp()
+        if self.dash.di.gear == 4:
+            self.dash.di.drive_time += 1
+            dynamic_log_timer += 1
+            if dynamic_log_timer >= 300:  # 300초(5분) 경과 시
+                battery_logger.log_dynamics()
+                dynamic_log_timer = 0
+        print(f'Clock: {self.dash.di.clock}  Temperature: {self.dash.device.temperature}')
+
+        if logger.file is not None:
+            logger.write()
+
+        autopilot.tick()
+        return bus_connected, dynamic_log_timer
 
 
 def main():
