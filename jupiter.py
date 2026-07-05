@@ -50,27 +50,13 @@ class Jupiter(threading.Thread):
         while True:
             current_time = time.time()
             self.dash.runtime.current_time = current_time
-            if (bus_connected == 1):
-                if self.dash.runtime.bus_error_count > 5:
-                    print('Bus Error Count Over, reboot')
-                    os.system('sudo reboot')
-                if bus_error == 1:
-                    self.dash.runtime.bus_error_count += 1
-                    print(f'Bus Error, {self.dash.runtime.bus_error_count}')
-                    initialize_canbus_connection()
-                    can_bus = can.interface.Bus(channel='can0', interface='socketcan')
-                    bus_error = 0
-                else:
-                    if (current_time - last_recv_time >= 5):
-                        print('bus error counted')
-                        bus_error = 1
-                        self.dash.runtime.bus_error_count += 1
-                        last_recv_time = time.time()
-            elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
-                print('Waiting until CAN Bus Connecting...',
-                      time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
-                initialize_canbus_connection()
-                last_recv_time = time.time()
+            can_bus, bus_error, last_recv_time = self._handle_bus_watchdog(
+                can_bus,
+                bus_connected,
+                bus_error,
+                current_time,
+                last_recv_time,
+            )
 
             ###################################################
             ############## 파트1. 메시지를 읽는 영역 ##############
@@ -148,6 +134,30 @@ class Jupiter(threading.Thread):
                     if self.dash.cabin.occupant_count == 0 and self.dash.di.drive_finished == 1:
                         button.mirror_request = 1
                         self.dash.di.drive_finished = 0
+
+    def _handle_bus_watchdog(self, can_bus, bus_connected, bus_error, current_time, last_recv_time):
+        if bus_connected == 1:
+            if self.dash.runtime.bus_error_count > 5:
+                print('Bus Error Count Over, reboot')
+                os.system('sudo reboot')
+            if bus_error == 1:
+                self.dash.runtime.bus_error_count += 1
+                print(f'Bus Error, {self.dash.runtime.bus_error_count}')
+                initialize_canbus_connection()
+                can_bus = can.interface.Bus(channel='can0', interface='socketcan')
+                bus_error = 0
+            else:
+                if current_time - last_recv_time >= 5:
+                    print('bus error counted')
+                    bus_error = 1
+                    self.dash.runtime.bus_error_count += 1
+                    last_recv_time = time.time()
+        elif bus_connected == 0 and current_time - last_recv_time >= 10:
+            print('Waiting until CAN Bus Connecting...',
+                  time.strftime('%m/%d %H:%M:%S', time.localtime(last_recv_time)))
+            initialize_canbus_connection()
+            last_recv_time = time.time()
+        return can_bus, bus_error, last_recv_time
 
     def _handle_tick(self, address, signal, bus_connected, dynamic_log_timer, logger, battery_logger, autopilot):
         if address != 0x528:
