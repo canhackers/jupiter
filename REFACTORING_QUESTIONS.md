@@ -317,14 +317,14 @@
 3. `Reboot.check()`는 다른 feature `check()`와 같이 payload를 반환하도록 보완했습니다.
 4. `load_settings()`는 기본 설정과 기존 설정을 병합한 결과를 파일과 현재 부팅 세션 반환값에 모두 반영합니다.
 5. `Hud.run()`이 연결 해제 뒤 `dash.device.navdy_connected`를 0으로 되돌리지 않던 문제는 `_update_connected_state()`로 보완했습니다.
+6. `ButtonManager.check()`는 `ParkingButton` 등록이 누락되어도 0x229 frame 처리에서 예외가 나지 않도록 보완했습니다.
 
 ## 남은 확인 후보
 
 1. `initialize_canbus_connection()`은 `os.system()` exit code를 확인하지 않으므로 실제 실패를 성공처럼 처리할 수 있습니다. 다만 shell command sequence 자체는 보존 테스트로 고정했습니다.
-2. `ButtonManager.check()`의 `p_btn = self.buttons['ParkingButton']`는 버튼 등록 누락 시 예외가 납니다. 현재는 `FeatureStack` 등록 순서와 wiring test로 보존합니다.
-3. `command` dict, `fold_request_time`, `door_open_start_time`, `Autopilot.continuous_ap_request_time`, `Autopilot.sender`, `Autopilot.device`는 현재 사용 범위가 불분명합니다.
-4. `beacon.py`에서 `dash=None`으로 직접 실행하는 경로는 notification task를 만들지 않지만, BLE thread lifecycle 정리는 별도 후보로 남깁니다.
-5. `except:`가 여러 곳에 있어 실제 오류 종류를 놓칠 수 있습니다.
+2. `command` dict, `fold_request_time`, `door_open_start_time`, `Autopilot.continuous_ap_request_time`, `Autopilot.sender`, `Autopilot.device`는 현재 사용 범위가 불분명합니다.
+3. `beacon.py`에서 `dash=None`으로 직접 실행하는 경로는 notification task를 만들지 않지만, BLE thread lifecycle 정리는 별도 후보로 남깁니다.
+4. `except:`가 여러 곳에 있어 실제 오류 종류를 놓칠 수 있습니다.
 
 ## 테스트 질문
 

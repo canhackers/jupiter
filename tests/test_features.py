@@ -3,6 +3,7 @@ import io
 import unittest
 
 from features.drive import KickDown
+from features.buttons import ButtonManager
 from features.hvac import FreshAir
 from features.safety import RearCenterBuckle
 from features.signaling import TurnSignal
@@ -20,6 +21,17 @@ class FakeBuffer:
 
 
 class FeatureCheckTests(unittest.TestCase):
+    def test_button_manager_ignores_parking_button_frame_when_button_is_not_registered(self):
+        buffer = FakeBuffer()
+        dash = Dashboard()
+        manager = ButtonManager(buffer, dash)
+        signal = b'12345678'
+
+        modified = manager.check(0, 0x229, signal)
+
+        self.assertEqual(modified, signal)
+        self.assertEqual(buffer.message_buffer, [])
+
     def test_kickdown_applies_sport_pedal_map_when_comfort_and_accelerating(self):
         buffer = FakeBuffer()
         dash = Dashboard()

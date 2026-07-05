@@ -198,7 +198,7 @@ class ButtonManager:
                     map_lamp_right.release()
 
         if (bus == 0) and (address == 0x229):
-            p_btn = self.buttons['ParkingButton']
+            p_btn = self.buttons.get('ParkingButton')
             if p_btn:
                 if get_value(byte_data, 16, 2) in [1, 2]:
                     p_btn.press()
