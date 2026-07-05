@@ -34,7 +34,7 @@ class Navdy:
         try:
             self.sock.send(length + serialized)
             return True
-        except:
+        except Exception:
             self.connected = False
             return False
 

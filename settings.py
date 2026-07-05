@@ -44,7 +44,7 @@ def load_settings(path=json_file):
         with open(path, 'w') as f:
             json.dump(default_settings, f, indent=4)
         return default_settings
-    except:
+    except Exception:
         error_file = path.split('.')[0] + '_error.json'
         os.rename(path, error_file)
         with open(path, 'w') as f:
