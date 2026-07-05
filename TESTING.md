@@ -17,6 +17,7 @@ python -m unittest discover -s tests
 - `jupiter.py`: bus watchdog, feature dispatch, send buffer helper
 - `can_io.py`: 실제 shell 실행 없이 CAN 초기화 command sequence 보존 확인
 - `navdy.py`: fake `bluetooth` 모듈로 HUD 연결 상태 표시 갱신 확인
+- `beacon.py`: fake `bleak` 모듈로 Holy-IOT notification 상태 반영 확인
 - `tesla.py`, `functions.py`, `packet_functions.py`: 기존 import 경로 호환 export 확인
 
 ## 컴파일 확인
