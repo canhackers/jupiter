@@ -13,14 +13,15 @@ python -m unittest discover -s tests
 - `packets.py`: bit field 읽기/쓰기, signed 값, counter/checksum 포함 패킷 생성
 - `state.py`: `Dashboard.update()`의 주요 상태 갱신
 - `features/`: 주요 `check(bus, address, byte_data)` payload 변조
+- `feature_stack.py`: 설정값이 기능 객체와 버튼 매핑으로 연결되는지 확인
 - `jupiter.py`: bus watchdog, feature dispatch, send buffer helper
 
 ## 컴파일 확인
 
-장치 의존 import를 제외한 문법 문제를 빠르게 확인하려면 아래 명령을 사용합니다.
+문법 문제를 빠르게 확인하려면 아래 명령을 사용합니다.
 
 ```powershell
-python -m py_compile beacon.py can_io.py can_registry.py feature_stack.py functions.py jupiter.py navdy.py packet_functions.py packets.py runtime.py settings.py state.py tesla.py features\__init__.py features\autopilot.py features\buttons.py features\drive.py features\hvac.py features\safety.py features\signaling.py features\system.py
+python -m compileall -q .
 ```
 
 ## 한계

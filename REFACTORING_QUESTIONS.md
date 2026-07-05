@@ -193,7 +193,7 @@
 - `features/`: 버튼, Autopilot, 안전벨트, 공조, 킥다운, 방향지시등, reboot 기능 핸들러를 담습니다.
 - `tesla.py`: 예전 `from tesla import ...` 경로를 보존하기 위한 compatibility export layer입니다.
 - `navdy.py`: Navdy HUD 블루투스 연결과 Dashboard 상태 전송을 담당합니다.
-- `beacon.py`: Holy-IOT BLE 비콘 검색, 등록 파일 관리, 버튼 알림 수신, `dash.beacon` 상태 갱신을 담당합니다.
+- `beacon.py`: Holy-IOT BLE 비콘 검색, 등록 파일 관리, 버튼 알림 수신, `dash.device.beacon` 상태 갱신을 담당합니다.
 
 ## 핵심 데이터 흐름
 
@@ -337,8 +337,9 @@
 2. `Dashboard`, `Buffer`, `Logger`, `BatteryLogger`를 `tesla.py`에서 분리했습니다.
 3. 기능 클래스는 인터페이스를 유지한 채 `features/`로 나눴습니다.
 4. `Jupiter` 런타임 루프는 `FeatureStack`, bus watchdog, drive/tick 처리, frame handler, send helper로 1차 분리했습니다.
-5. 다음 추천 단계는 실차 없이 가능한 smoke/unit test를 추가해 `packets.py`, `Dashboard.update()`, 주요 feature `check()`의 기준선을 고정하는 것입니다.
-6. frame별 mutation 누적과 최종 checksum/counter 계산 구조는 2차 리팩터링 후보로 남깁니다.
+5. 실차 없이 가능한 unit test를 추가해 `packets.py`, `Dashboard.update()`, 주요 feature `check()`, `Jupiter` runtime helper, `FeatureStack` wiring의 기준선을 고정했습니다.
+6. 다음 추천 단계는 Raspberry Pi에서 import/service smoke test를 실행하고, 문제가 없으면 실차 CAN timing과 주요 기능을 확인하는 것입니다.
+7. frame별 mutation 누적과 최종 checksum/counter 계산 구조는 2차 리팩터링 후보로 남깁니다.
 
 ## 답변 템플릿
 
