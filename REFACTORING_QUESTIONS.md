@@ -319,8 +319,8 @@
 5. `initialize_canbus_connection()`은 `os.system()` exit code를 확인하지 않으므로 실제 실패를 성공처럼 처리할 수 있습니다.
 6. `ButtonManager.check()`의 `p_btn = self.buttons['ParkingButton']`는 버튼 등록 누락 시 예외가 납니다. 현재 등록 순서에 의존합니다.
 7. `command` dict, `fold_request_time`, `door_open_start_time`, `Autopilot.continuous_ap_request_time`, `Autopilot.sender`, `Autopilot.device`는 현재 사용 범위가 불분명합니다.
-8. `Hud.run()`은 연결이 끊긴 뒤 `dash.navdy_connected`를 0으로 되돌리지 않습니다.
-9. `beacon.py`에서 `dash=None`으로 실행하면 notification 수신 시 `self.dash.beacon` 접근이 실패할 수 있습니다.
+8. `Hud.run()`이 연결 해제 뒤 `dash.device.navdy_connected`를 0으로 되돌리지 않던 문제는 `_update_connected_state()`로 보완했습니다.
+9. `beacon.py`에서 `dash=None`으로 직접 실행하는 경로는 notification task를 만들지 않지만, BLE thread lifecycle 정리는 별도 후보로 남깁니다.
 10. `except:`가 여러 곳에 있어 실제 오류 종류를 놓칠 수 있습니다.
 
 ## 테스트 질문

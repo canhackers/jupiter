@@ -90,6 +90,13 @@ class Hud(threading.Thread):
         self.thread_online = True
         self.loop = asyncio.new_event_loop()
 
+    def _update_connected_state(self):
+        if not self.navdy.connected:
+            self.dash.device.navdy_connected = 0
+            return False
+        self.dash.device.navdy_connected = 1
+        return True
+
     def start_event_loop(self):
         asyncio.set_event_loop(self.loop)
         self.loop.create_task(self.connector.connect_hud())
@@ -101,11 +108,9 @@ class Hud(threading.Thread):
         last_update_fast = 0
         last_update_slow = 0
         while self.thread_online:
-            if not self.navdy.connected:
+            if not self._update_connected_state():
                 time.sleep(5)
                 continue
-            else:
-                self.dash.device.navdy_connected = 1
             time.sleep(0.2)
             current_time = self.dash.runtime.current_time
             try:
