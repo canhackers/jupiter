@@ -46,7 +46,7 @@ def load_settings():
                 default_settings[key] = val
         with open(json_file, 'w') as f:
             json.dump(default_settings, f, indent=4)
-        return settings
+        return default_settings
     except:
         error_file = json_file.split('.')[0] + '_error.json'
         os.rename(json_file, error_file)

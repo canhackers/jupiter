@@ -88,6 +88,7 @@ class Reboot:
                             os.system('sudo reboot')
                 else:
                     self.requested = 0
+        return byte_data
 
 
 class Buffer:
@@ -121,7 +122,7 @@ class Buffer:
 
 class Dashboard:
     def __init__(self):
-        self.bus_error_cout = 0
+        self.bus_error_count = 0
         self.current_time = 0
         self.drive_time = 0
         self.last_update = 0
@@ -1176,7 +1177,7 @@ class KickDown:
                     self.apply = 0
 
         if (bus == 0) and (address == 0x334):
-            if (self.dash.drive_mode == 0) and (self.dash.accel_pedal_pos > 90) and (not self.apply):
+            if (self.dash.pedal_map == 0) and (self.dash.accel_pedal_pos > 90) and (not self.apply):
                 print('------- Kick Down / Sports Mode On -------')
                 self.apply = 1
             if self.apply:
