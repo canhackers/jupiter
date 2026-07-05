@@ -105,31 +105,31 @@ class Hud(threading.Thread):
                 time.sleep(5)
                 continue
             else:
-                self.dash.navdy_connected = 1
+                self.dash.device.navdy_connected = 1
             time.sleep(0.2)
-            current_time = self.dash.current_time
+            current_time = self.dash.runtime.current_time
             try:
                 if (current_time - last_update_fast) >= 0.2:
                     last_update_fast = current_time
-                    if self.dash.parked:
+                    if self.dash.di.parked:
                         gear = 1
                     else:
-                        if self.dash.autopilot == 1:
-                            gear = 6 if self.dash.nag_disabled == 1 else 5
+                        if self.dash.ap.autopilot == 1:
+                            gear = 6 if self.dash.ap.nag_disabled == 1 else 5
                         else:
-                            gear = self.dash.gear
-                    payload = {'__speed__': self.dash.ui_speed,
-                               '__tachometer__': abs(self.dash.torque_front + self.dash.torque_rear),
+                            gear = self.dash.di.gear
+                    payload = {'__speed__': self.dash.di.speed,
+                               '__tachometer__': abs(self.dash.powertrain.torque_front + self.dash.powertrain.torque_rear),
                                'gear': gear
                                }
                     if (current_time - last_update_slow) >= 2:
                         last_update_slow = current_time
-                        payload['voltage'] = self.dash.LVB_voltage
-                        payload['soc'] = self.dash.soc
-                        payload['hv_temp'] = self.dash.HVB_max_temp
-                        payload['ui_range'] = self.dash.ui_range
-                        payload['ui_range_map'] = self.dash.ui_range
-                        payload['raspi_temp'] = self.dash.device_temp
+                        payload['voltage'] = self.dash.bms.lv_voltage
+                        payload['soc'] = self.dash.bms.soc
+                        payload['hv_temp'] = self.dash.bms.hv_max_temp
+                        payload['ui_range'] = self.dash.ui_display.range_km
+                        payload['ui_range_map'] = self.dash.ui_display.range_km
+                        payload['raspi_temp'] = self.dash.device.temperature
                     self.navdy.send_message(payload)
             except Exception as e:
                 print("Exception caught while processing Navdy Dash", e)

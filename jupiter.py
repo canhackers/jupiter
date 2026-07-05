@@ -5,7 +5,8 @@ import threading
 from vcgencmd import Vcgencmd
 from can_io import initialize_canbus_connection
 from settings import load_settings
-from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
+from state import Dashboard
+from tesla import Buffer, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
     KickDown, TurnSignal, Reboot, monitoring_addrs, BatteryLogger
 
 
@@ -25,7 +26,7 @@ class Jupiter(threading.Thread):
         can_bus = can.interface.Bus(channel='can0', interface='socketcan')
         bus_connected = 0
         bus_error = 0
-        self.dash.bus_error_count = 0
+        self.dash.runtime.bus_error_count = 0
         last_recv_time = time.time()
         bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 
@@ -74,14 +75,14 @@ class Jupiter(threading.Thread):
 
         while True:
             current_time = time.time()
-            self.dash.current_time = current_time
+            self.dash.runtime.current_time = current_time
             if (bus_connected == 1):
-                if self.dash.bus_error_count > 5:
+                if self.dash.runtime.bus_error_count > 5:
                     print('Bus Error Count Over, reboot')
                     os.system('sudo reboot')
                 if bus_error == 1:
-                    self.dash.bus_error_count += 1
-                    print(f'Bus Error, {self.dash.bus_error_count}')
+                    self.dash.runtime.bus_error_count += 1
+                    print(f'Bus Error, {self.dash.runtime.bus_error_count}')
                     initialize_canbus_connection()
                     can_bus = can.interface.Bus(channel='can0', interface='socketcan')
                     bus_error = 0
@@ -89,7 +90,7 @@ class Jupiter(threading.Thread):
                     if (current_time - last_recv_time >= 5):
                         print('bus error counted')
                         bus_error = 1
-                        self.dash.bus_error_count += 1
+                        self.dash.runtime.bus_error_count += 1
                         last_recv_time = time.time()
             elif (bus_connected == 0) and (current_time - last_recv_time >= 10):
                 print('Waiting until CAN Bus Connecting...',
@@ -118,31 +119,31 @@ class Jupiter(threading.Thread):
                 dash_item = monitoring_addrs.get(address)
                 if dash_item is not None:
                     self.dash.update(dash_item, signal)
-                self.dash.last_update = current_time
+                self.dash.runtime.last_update = current_time
 
                 ### 기어 상태 체크 / 로깅 시작 ###
-                if address == 0x118 and (self.dash.clock is not None):
+                if address == 0x118 and (self.dash.di.clock is not None):
                     self.dash.update('DriveSystemStatus', signal)
-                    if self.dash.gear == 4:
-                        if self.dash.parked == 1:   # Park(1) → Drive(4)
-                            print(f'Drive Gear Detected... Recording Drive history from {self.dash.clock}')
-                            self.dash.parked = 0
-                            self.dash.drive_time = 0
-                            self.dash.drive_finished = 0
+                    if self.dash.di.gear == 4:
+                        if self.dash.di.parked == 1:   # Park(1) → Drive(4)
+                            print(f'Drive Gear Detected... Recording Drive history from {self.dash.di.clock}')
+                            self.dash.di.parked = 0
+                            self.dash.di.drive_time = 0
+                            self.dash.di.drive_finished = 0
                             LOGGER.initialize()
                             BAT_LOGGER.log_health("DRIVE_START")
-                    elif self.dash.gear == 1:
-                        if self.dash.parked == 0:  # Drive(4) → Park(1)
+                    elif self.dash.di.gear == 1:
+                        if self.dash.di.parked == 0:  # Drive(4) → Park(1)
                             print('Parking Gear Detected... Saving Drive history')
-                            self.dash.parked = 1
-                            self.dash.drive_time = 0
-                            self.dash.drive_finished = 1
+                            self.dash.di.parked = 1
+                            self.dash.di.drive_time = 0
+                            self.dash.di.drive_finished = 1
                             LOGGER.close()
                             BAT_LOGGER.log_health("DRIVE_END")
                         if self.settings.get('MirrorAutoFold'):
-                            if self.dash.passenger_cnt == 0 and self.dash.drive_finished == 1:
+                            if self.dash.cabin.occupant_count == 0 and self.dash.di.drive_finished == 1:
                                 BUTTON.mirror_request = 1
-                                self.dash.drive_finished = 0
+                                self.dash.di.drive_finished = 0
                     else:
                         pass
 
@@ -156,16 +157,16 @@ class Jupiter(threading.Thread):
 
                 # 매 1초마다 실행할 액션 지정
                 if TICK:
-                    self.dash.device_temp = self.vcgm.measure_temp()
-                    if self.dash.gear == 4:
-                        self.dash.drive_time += 1
+                    self.dash.device.temperature = self.vcgm.measure_temp()
+                    if self.dash.di.gear == 4:
+                        self.dash.di.drive_time += 1
                         dynamic_log_timer += 1
                         if dynamic_log_timer >= 300:  # 300초(5분) 경과 시
                             BAT_LOGGER.log_dynamics()
                             dynamic_log_timer = 0
-                    print(f'Clock: {self.dash.clock}  Temperature: {self.dash.device_temp}')
+                    print(f'Clock: {self.dash.di.clock}  Temperature: {self.dash.device.temperature}')
 
-                    # for bid, val in self.dash.beacon.items():
+                    # for bid, val in self.dash.device.beacon.items():
                     #     print(f'{bid} value is now {val}')
 
                     ##### Log writer ######
@@ -214,7 +215,7 @@ class Jupiter(threading.Thread):
                     ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
                     signal = FRESH.check(bus, address, signal)
                 if address in [0x108, 0x186]:
-                    total_torque = abs(self.dash.torque_front) + abs(self.dash.torque_rear)
+                    total_torque = abs(self.dash.powertrain.torque_front) + abs(self.dash.powertrain.torque_rear)
                     # 임계치 2000Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
                     if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
                         BAT_LOGGER.log_high_load(total_torque)
@@ -225,7 +226,7 @@ class Jupiter(threading.Thread):
             ###################################################
 
             try:
-                if self.dash.occupancy == 0:
+                if self.dash.cabin.is_occupied == 0:
                     BUFFER.flush_message_buffer()
                     continue
                 else:

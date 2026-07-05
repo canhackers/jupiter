@@ -53,10 +53,10 @@ class HolyIoT(threading.Thread):
     def notification_handler(self, sender, data, bid):
         if data[-1] == 0:
             print(f'{bid} button released')
-            self.dash.beacon[bid] = 0
+            self.dash.device.beacon[bid] = 0
         if data[-1] == 1:
             print(f'{bid} button pressed')
-            self.dash.beacon[bid] = 1
+            self.dash.device.beacon[bid] = 1
 
     async def monitor_button(self):
         while self.thread_online:
@@ -131,11 +131,11 @@ class HolyIoT(threading.Thread):
 
         UUIDs = []
         if self.dash is not None:
-            self.dash.beacon = {}
+            self.dash.device.beacon = {}
         for bid, (addr, uuid) in registered_beacons.items():
             UUIDs.append((bid, addr, uuid))
             if self.dash is not None:
-                self.dash.beacon[bid] = 0
+                self.dash.device.beacon[bid] = 0
 
         return UUIDs
 
