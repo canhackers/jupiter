@@ -106,71 +106,21 @@ class Jupiter(threading.Thread):
                     AP,
                 )
 
-                # 실시간 패킷 인식 및 변조
-                if address == 0x1f9:
-                    signal = BUTTON.check(bus, address, signal)
-                if address == 0x229:
-                    signal = BUTTON.check(bus, address, signal)
-                if address == 0x249:
-                    ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 스토크 동작 에뮬레이션 #####
-                    signal = TURNSIGNAL.check(bus, address, signal)
-                if address == 0x3e2:
-                    ##### 맵등 버튼을 길게 눌러 기능을 제공하기 위해, 눌림 상태를 점검 #####
-                    signal = BUTTON.check(bus, address, signal)
-                if address == 0x273:
-                    ##### 와이퍼 상태 유지 #####
-                    signal = AP.check(bus, address, signal)
-                    ##### 미러 폴딩 기능 동작 #####
-                    signal = BUTTON.check(bus, address, signal)
-                if address == 0x3c2:
-                    ##### 주행 중 뒷좌석 가운데 안전벨트 체크 해제 #####
-                    signal = BUCKLE.check(bus, address, signal)
-                    ##### 오토파일럿이 아닐 때 우측 다이얼을 이용해 깜빡이를 켜기 위함 - 버튼 체크 #####
-                    signal = TURNSIGNAL.check(bus, address, signal)
-                    ##### 오토파일럿이 우측 다이얼 조작을 통한 거리 설정을 인지하게 하기 위함 #####
-                    signal = AP.check(bus, address, signal)
-                    ##### 재부팅 명령 모니터링 ###
-                    signal = REBOOT.check(bus, address, signal)
-                if address == 0x334:
-                    ###### Kick Down 동작을 통해 페달맵을 Comfort → Sport로 변경 #####
-                    signal = KICKDOWN.check(bus, address, signal)
-                if address == 0x39d:
-                    ##### 브레이크 밟힘 감지 - 브레이크를 감지해 해제해야 하는 기능 #####
-                    signal = AP.check(bus, address, signal)
-                    signal = KICKDOWN.check(bus, address, signal)
-                if address == 0x229:
-                    ##### 기어 스토크 조작 인식 - 오토파일럿 동작 여부 확인 #####
-                    signal = AP.check(bus, address, signal)
-                if address == 0x2f3:
-                    ##### 실내 이산화탄소 농도 관리를 위해 내/외기 모드 자동 변경 (탑승인원 비례) #####
-                    signal = FRESH.check(bus, address, signal)
-                if address in [0x108, 0x186]:
-                    total_torque = abs(self.dash.powertrain.torque_front) + abs(self.dash.powertrain.torque_rear)
-                    # 임계치 2000Nm 설정, 0.5초 간격으로 제한하여 중복 기록 방지
-                    if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
-                        BAT_LOGGER.log_high_load(total_torque)
-                        last_high_load_log = current_time
+                signal, last_high_load_log = self._apply_feature_handlers(
+                    bus,
+                    address,
+                    signal,
+                    feature_stack,
+                    current_time,
+                    last_high_load_log,
+                )
 
             ###################################################
             ############ 파트2. 메시지를 보내는 영역 ##############
             ###################################################
 
-            try:
-                if self.dash.cabin.is_occupied == 0:
-                    BUFFER.flush_message_buffer()
-                    continue
-                else:
-                    for _, address, signal in BUFFER.message_buffer:
-                        can_bus.send(can.Message(arbitration_id=address,
-                                                 channel='can0',
-                                                 data=bytearray(signal),
-                                                 dlc=len(bytearray(signal)),
-                                                 is_extended_id=False))
-            except Exception as e:
-                print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
+            if self._send_buffered_messages(can_bus, BUFFER):
                 bus_error = 1
-
-            BUFFER.flush_message_buffer()
 
     def stop(self):
         self.jupiter_online = False
@@ -219,6 +169,55 @@ class Jupiter(threading.Thread):
 
         autopilot.tick()
         return bus_connected, dynamic_log_timer
+
+    def _apply_feature_handlers(self, bus, address, signal, feature_stack, current_time, last_high_load_log):
+        if address == 0x1f9:
+            signal = feature_stack.button.check(bus, address, signal)
+        if address == 0x229:
+            signal = feature_stack.button.check(bus, address, signal)
+        if address == 0x249:
+            signal = feature_stack.turn_signal.check(bus, address, signal)
+        if address == 0x3e2:
+            signal = feature_stack.button.check(bus, address, signal)
+        if address == 0x273:
+            signal = feature_stack.autopilot.check(bus, address, signal)
+            signal = feature_stack.button.check(bus, address, signal)
+        if address == 0x3c2:
+            signal = feature_stack.buckle.check(bus, address, signal)
+            signal = feature_stack.turn_signal.check(bus, address, signal)
+            signal = feature_stack.autopilot.check(bus, address, signal)
+            signal = feature_stack.reboot.check(bus, address, signal)
+        if address == 0x334:
+            signal = feature_stack.kickdown.check(bus, address, signal)
+        if address == 0x39d:
+            signal = feature_stack.autopilot.check(bus, address, signal)
+            signal = feature_stack.kickdown.check(bus, address, signal)
+        if address == 0x229:
+            signal = feature_stack.autopilot.check(bus, address, signal)
+        if address == 0x2f3:
+            signal = feature_stack.fresh_air.check(bus, address, signal)
+        if address in [0x108, 0x186]:
+            total_torque = abs(self.dash.powertrain.torque_front) + abs(self.dash.powertrain.torque_rear)
+            if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
+                feature_stack.battery_logger.log_high_load(total_torque)
+                last_high_load_log = current_time
+        return signal, last_high_load_log
+
+    def _send_buffered_messages(self, can_bus, buffer):
+        try:
+            if self.dash.cabin.is_occupied != 0:
+                for _, address, signal in buffer.message_buffer:
+                    can_bus.send(can.Message(arbitration_id=address,
+                                             channel='can0',
+                                             data=bytearray(signal),
+                                             dlc=len(bytearray(signal)),
+                                             is_extended_id=False))
+        except Exception as e:
+            print("메시지 발신 실패, Can Bus 리셋 시도 \n", e)
+            return True
+        finally:
+            buffer.flush_message_buffer()
+        return False
 
 
 def main():
