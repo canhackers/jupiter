@@ -5,10 +5,11 @@ import threading
 from vcgencmd import Vcgencmd
 from can_io import initialize_canbus_connection
 from can_registry import monitoring_addrs
+from features import FreshAir, KickDown, RearCenterBuckle, Reboot, TurnSignal
 from runtime import BatteryLogger, Buffer, Logger
 from settings import load_settings
 from state import Dashboard
-from tesla import Autopilot, RearCenterBuckle, ButtonManager, FreshAir, KickDown, TurnSignal, Reboot
+from tesla import Autopilot, ButtonManager
 
 
 class Jupiter(threading.Thread):
