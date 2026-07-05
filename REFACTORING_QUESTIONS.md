@@ -45,16 +45,21 @@
 - 본격 리팩터링은 런타임 계층 중심으로 분리합니다.
 - 기능 클래스들은 루트의 `functions.py`와 충돌하지 않도록 `features/` 패키지 아래에 기능별 파일로 둡니다.
 - 1차 리팩터링에서는 기능 클래스의 기존 `check(bus, address, byte_data)` 인터페이스를 유지해 동작 보존을 우선합니다.
-- 제안 구조:
-  - `jupiter.py`: 진입점과 wiring
-  - `runtime.py`: 메인 루프, tick, dispatch 흐름
+- 현재 적용된 1차 구조:
+  - `jupiter.py`: 진입점, CAN 수신 루프, 상태 갱신, feature dispatch, 송신 흐름
+  - `feature_stack.py`: 기능 객체 생성과 버튼 매핑 wiring
+  - `runtime.py`: CAN buffer, 일반 logger, battery logger
   - `can_io.py`: CAN 초기화, bus 생성, 송수신 래핑
   - `settings.py`: 설정 로드/병합
   - `state.py`: 차량/장치 상태
-  - `buffer.py`: CAN 수신 버퍼와 송신 큐
-  - `signals.py`: 주소, mux, signal mapping, scale 정의
+  - `can_registry.py`: 주소 목록, mux 정보, monitoring address mapping, command 상수
   - `packets.py`: bit field, checksum, packet mutation
-  - `features/`: reboot, buttons, autopilot, buckle, fresh_air, kickdown, turn_signal, logger, battery_logger, navdy, beacon
+  - `features/`: `autopilot`, `buttons`, `drive`, `hvac`, `safety`, `signaling`, `system`
+  - `tesla.py`: 기존 import 경로를 깨지 않기 위한 compatibility export layer
+- 아직 2차 후보로 남겨둘 구조:
+  - `signals.py` 또는 `decoders.py`: 주소, mux, signal mapping, scale 정의
+  - frame mutation 누적/최종 checksum 계산 dispatcher
+  - Navdy/Holy-IOT 같은 외부 장치 기능의 선택 모듈화
 
 ### 6. 상태 관리 방향
 
@@ -178,17 +183,22 @@
 이 프로젝트는 Raspberry Pi Zero 2W에서 `can0` SocketCAN을 열고 Tesla 차량 CAN 메시지를 수신합니다. 수신된 메시지는 `Dashboard` 상태 객체와 `Buffer.can_buffer`에 저장되고, 기능 클래스들이 필요할 때 변조된 payload를 `Buffer.message_buffer`에 넣습니다. `Jupiter.run()` 메인 루프는 매 사이클 수신, 상태 갱신, 기능별 `check()`, 송신, 버퍼 비우기를 수행합니다.
 
 - `README.md`: 안전 경고, 지원 차량, Raspberry Pi 설치, CAN HAT 설정, Python 의존성, 자동 실행, Navdy HUD 설정을 설명합니다.
-- `functions.py`: CAN 인터페이스 초기화와 `/home/jupiter_settings.json` 설정 파일 생성/병합/복구를 담당합니다.
-- `packet_functions.py`: payload bit field 읽기/쓰기, checksum 계산, counter/checksum 포함 패킷 생성을 담당합니다.
+- `functions.py`: 기존 import 호환용 wrapper입니다. 실제 CAN 초기화는 `can_io.py`, 설정 처리는 `settings.py`가 담당합니다.
+- `packet_functions.py`: 기존 import 호환용 wrapper입니다. 실제 bit field/packet helper는 `packets.py`가 담당합니다.
 - `jupiter.py`: 전체 런타임 중심입니다. CAN 연결, 수신 루프, Dashboard 업데이트, 기능 호출, 로그 생명주기, 송신 처리를 담당합니다.
-- `tesla.py`: 차량 상태 모델, 로그, 배터리 로그, 버튼 입력, Autopilot 보조, 안전벨트 에뮬레이션, 공조, 킥다운, 방향지시등 로직을 모두 담고 있습니다.
+- `feature_stack.py`: 기능 객체와 버튼 매핑을 생성해 `Jupiter` 런타임에 제공합니다.
+- `state.py`: `Dashboard`와 하위 상태 dataclass를 담습니다.
+- `runtime.py`: `Buffer`, `Logger`, `BatteryLogger`를 담습니다.
+- `can_registry.py`: 주소/mux/monitoring mapping과 명령 상수를 담습니다.
+- `features/`: 버튼, Autopilot, 안전벨트, 공조, 킥다운, 방향지시등, reboot 기능 핸들러를 담습니다.
+- `tesla.py`: 예전 `from tesla import ...` 경로를 보존하기 위한 compatibility export layer입니다.
 - `navdy.py`: Navdy HUD 블루투스 연결과 Dashboard 상태 전송을 담당합니다.
 - `beacon.py`: Holy-IOT BLE 비콘 검색, 등록 파일 관리, 버튼 알림 수신, `dash.beacon` 상태 갱신을 담당합니다.
 
 ## 핵심 데이터 흐름
 
 1. `main()`이 설정을 읽고 `Dashboard`와 `Jupiter` 스레드를 시작합니다.
-2. `Jupiter.run()`이 `can0`를 초기화하고 `Buffer`, `Logger`, `BatteryLogger`, `Autopilot`, `ButtonManager` 등 기능 객체를 생성합니다.
+2. `Jupiter.run()`이 `can0`를 초기화하고 `FeatureStack`을 통해 `Buffer`, `Logger`, `BatteryLogger`, `Autopilot`, `ButtonManager` 등 기능 객체를 생성합니다.
 3. CAN 메시지를 수신하면 `Buffer.can_buffer`에 최근 payload를 저장합니다.
 4. `monitoring_addrs`에 등록된 주소는 `Dashboard.update()`로 차량 상태를 갱신합니다.
 5. 특정 주소별로 기능 객체의 `check(bus, address, signal)`이 호출되어 payload를 유지하거나 변조합니다.
@@ -323,11 +333,12 @@
 
 ## 추천 1차 리팩터링 범위
 
-1. 동작 변경 없는 구조화부터 시작합니다.
-2. `packet_functions.py`에 unit test를 추가해 bit 조작의 기준선을 고정합니다.
-3. `Dashboard`, `Buffer`, `Logger`, `BatteryLogger`를 `tesla.py`에서 분리합니다.
-4. 기능 클래스는 인터페이스를 유지한 채 파일만 나눕니다.
-5. 의심 지점은 별도 커밋 또는 별도 단계로 고칩니다. 특히 `Reboot.check()`, `bus_error_count`, `load_settings()` 반환값, `KickDown` 조건은 실차 영향 가능성이 있으므로 사용자 답변 후 처리합니다.
+1. 동작 변경 없는 구조화부터 시작합니다. 현재 진행 중입니다.
+2. `Dashboard`, `Buffer`, `Logger`, `BatteryLogger`를 `tesla.py`에서 분리했습니다.
+3. 기능 클래스는 인터페이스를 유지한 채 `features/`로 나눴습니다.
+4. `Jupiter` 런타임 루프는 `FeatureStack`, bus watchdog, drive/tick 처리, frame handler, send helper로 1차 분리했습니다.
+5. 다음 추천 단계는 실차 없이 가능한 smoke/unit test를 추가해 `packets.py`, `Dashboard.update()`, 주요 feature `check()`의 기준선을 고정하는 것입니다.
+6. frame별 mutation 누적과 최종 checksum/counter 계산 구조는 2차 리팩터링 후보로 남깁니다.
 
 ## 답변 템플릿
 
