@@ -5,8 +5,7 @@ import threading
 from vcgencmd import Vcgencmd
 from can_io import initialize_canbus_connection
 from can_registry import monitoring_addrs
-from features import Autopilot, ButtonManager, FreshAir, KickDown, RearCenterBuckle, Reboot, TurnSignal
-from runtime import BatteryLogger, Buffer, Logger
+from feature_stack import FeatureStack
 from settings import load_settings
 from state import Dashboard
 
@@ -32,47 +31,21 @@ class Jupiter(threading.Thread):
         bus = 0  # 라즈베리파이는 항상 0, panda는 다채널이므로 수신하면서 확인
 
         # 핵심 기능 로딩
-        BUFFER = Buffer()
-        LOGGER = Logger(BUFFER, self.dash, cloud=0, enabled=self.settings.get('Logger'))
-        BAT_LOGGER = BatteryLogger(BUFFER, self.dash)
+        feature_stack = FeatureStack(self.dash, self.settings, can_bus)
+        BUFFER = feature_stack.buffer
+        LOGGER = feature_stack.logger
+        BAT_LOGGER = feature_stack.battery_logger
         dynamic_log_timer = 0
         last_high_load_log = 0
 
         #  부가 기능 로딩
-        AP = Autopilot(BUFFER, self.dash,
-                       sender=can_bus,
-                       device='raspi',
-                       mars_mode=self.settings.get('MarsMode'),
-                       keep_wiper_speed=self.settings.get('KeepWiperSpeed'),
-                       slow_wiper=self.settings.get('SlowWiper'),
-                       auto_distance=self.settings.get('AutoFollowingDistance'))
-
-        BUCKLE = RearCenterBuckle(BUFFER, self.dash, mode=self.settings.get('RearCenterBuckle'))
-        FRESH = FreshAir(BUFFER, self.dash, enabled=self.settings.get('AutoRecirculation'))
-        KICKDOWN = KickDown(BUFFER, self.dash, enabled=self.settings.get('KickDown'))
-        TURNSIGNAL = TurnSignal(BUFFER, self.dash, enabled=self.settings.get('AltTurnSignal'))
-        REBOOT = Reboot(self.dash)
-        BUTTON = ButtonManager(BUFFER, self.dash)
-        BUTTON.add_button(btn_name='MapLampLeft')
-        BUTTON.add_button(btn_name='MapLampRight')
-        BUTTON.add_button(btn_name='ParkingButton', long_time=0.5)
-        buttons_define = (
-            ('MapLampLeft', 'short', self.settings.get('MapLampLeftShort')),
-            ('MapLampLeft', 'long', self.settings.get('MapLampLeftLong')),
-            ('MapLampLeft', 'double', self.settings.get('MapLampLeftDouble')),
-            ('MapLampRight', 'short', self.settings.get('MapLampRightShort')),
-            ('MapLampRight', 'long', self.settings.get('MapLampRightLong')),
-            ('MapLampRight', 'double', self.settings.get('MapLampRightDouble')),
-            ('ParkingButton', 'long', 'mirror_fold'),
-        )
-        for (btn, ptype, func) in buttons_define:
-            if isinstance(func, str):
-                functions = func.split(',')
-                if len(functions) == 1:
-                    BUTTON.assign(btn_name=btn, press_type=ptype, function_name=functions[0].strip())
-                else:
-                    BUTTON.assign(btn_name=btn, press_type=ptype + '_park', function_name=functions[0].strip())
-                    BUTTON.assign(btn_name=btn, press_type=ptype + '_drive', function_name=functions[1].strip())
+        AP = feature_stack.autopilot
+        BUCKLE = feature_stack.buckle
+        FRESH = feature_stack.fresh_air
+        KICKDOWN = feature_stack.kickdown
+        TURNSIGNAL = feature_stack.turn_signal
+        REBOOT = feature_stack.reboot
+        BUTTON = feature_stack.button
 
         while True:
             current_time = time.time()
