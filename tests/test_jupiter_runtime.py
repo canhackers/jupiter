@@ -64,6 +64,18 @@ class JupiterRuntimeHelperTests(unittest.TestCase):
         self.jupiter.dash = Dashboard()
         self.jupiter.settings = {}
 
+    def make_feature_stack(self, calls):
+        return types.SimpleNamespace(
+            button=FakeHandler('button', calls),
+            turn_signal=FakeHandler('turn_signal', calls),
+            autopilot=FakeHandler('autopilot', calls),
+            buckle=FakeHandler('buckle', calls),
+            reboot=FakeHandler('reboot', calls),
+            kickdown=FakeHandler('kickdown', calls),
+            fresh_air=FakeHandler('fresh_air', calls),
+            battery_logger=types.SimpleNamespace(log_high_load=lambda torque: calls.append(f'high:{torque}')),
+        )
+
     def test_send_buffered_messages_sends_when_occupied_and_flushes(self):
         buffer = FakeBuffer()
         bus = FakeCanBus()
@@ -88,22 +100,60 @@ class JupiterRuntimeHelperTests(unittest.TestCase):
 
     def test_apply_feature_handlers_preserves_3c2_order(self):
         calls = []
-        stack = types.SimpleNamespace(
-            button=FakeHandler('button', calls),
-            turn_signal=FakeHandler('turn_signal', calls),
-            autopilot=FakeHandler('autopilot', calls),
-            buckle=FakeHandler('buckle', calls),
-            reboot=FakeHandler('reboot', calls),
-            kickdown=FakeHandler('kickdown', calls),
-            fresh_air=FakeHandler('fresh_air', calls),
-            battery_logger=types.SimpleNamespace(log_high_load=lambda torque: calls.append(f'high:{torque}')),
-        )
+        stack = self.make_feature_stack(calls)
 
         signal, last_high_load_log = self.jupiter._apply_feature_handlers(0, 0x3c2, b'', stack, 10.0, 0.0)
 
         self.assertEqual(calls, ['buckle', 'turn_signal', 'autopilot', 'reboot'])
         self.assertEqual(signal, b'btar')
         self.assertEqual(last_high_load_log, 0.0)
+
+    def test_apply_feature_handlers_preserves_address_orders(self):
+        cases = (
+            (0x1f9, ['button']),
+            (0x229, ['button', 'autopilot']),
+            (0x249, ['turn_signal']),
+            (0x273, ['autopilot', 'button']),
+            (0x2f3, ['fresh_air']),
+            (0x334, ['kickdown']),
+            (0x39d, ['autopilot', 'kickdown']),
+            (0x3e2, ['button']),
+        )
+
+        for address, expected_calls in cases:
+            with self.subTest(address=hex(address)):
+                calls = []
+                stack = self.make_feature_stack(calls)
+
+                signal, last_high_load_log = self.jupiter._apply_feature_handlers(
+                    0,
+                    address,
+                    b'',
+                    stack,
+                    10.0,
+                    0.0,
+                )
+
+                self.assertEqual(calls, expected_calls)
+                self.assertEqual(signal, b''.join(name[:1].encode('ascii') for name in expected_calls))
+                self.assertEqual(last_high_load_log, 0.0)
+
+    def test_apply_feature_handlers_logs_high_load_with_cooldown(self):
+        self.jupiter.dash.powertrain.torque_front = 1200
+        self.jupiter.dash.powertrain.torque_rear = -900
+        calls = []
+        stack = self.make_feature_stack(calls)
+
+        signal, last_high_load_log = self.jupiter._apply_feature_handlers(0, 0x108, b'raw', stack, 10.0, 9.0)
+        self.assertEqual(calls, ['high:2100'])
+        self.assertEqual(signal, b'raw')
+        self.assertEqual(last_high_load_log, 10.0)
+
+        calls.clear()
+        signal, last_high_load_log = self.jupiter._apply_feature_handlers(0, 0x186, b'raw', stack, 10.2, 10.0)
+        self.assertEqual(calls, [])
+        self.assertEqual(signal, b'raw')
+        self.assertEqual(last_high_load_log, 10.0)
 
     def test_bus_watchdog_reinitializes_after_error(self):
         calls = []

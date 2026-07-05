@@ -10,6 +10,22 @@ from settings import load_settings
 from state import Dashboard
 
 
+# 기존 순차 payload 변조 순서를 보존한다.
+FEATURE_HANDLER_ORDER = {
+    0x1f9: ('button',),
+    0x229: ('button', 'autopilot'),
+    0x249: ('turn_signal',),
+    0x273: ('autopilot', 'button'),
+    0x2f3: ('fresh_air',),
+    0x334: ('kickdown',),
+    0x39d: ('autopilot', 'kickdown'),
+    0x3c2: ('buckle', 'turn_signal', 'autopilot', 'reboot'),
+    0x3e2: ('button',),
+}
+
+HIGH_LOAD_LOG_ADDRESSES = {0x108, 0x186}
+
+
 class Jupiter(threading.Thread):
     def __init__(self, dash, settings):
         super().__init__()
@@ -38,14 +54,7 @@ class Jupiter(threading.Thread):
         dynamic_log_timer = 0
         last_high_load_log = 0
 
-        #  부가 기능 로딩
-        AP = feature_stack.autopilot
-        BUCKLE = feature_stack.buckle
-        FRESH = feature_stack.fresh_air
-        KICKDOWN = feature_stack.kickdown
-        TURNSIGNAL = feature_stack.turn_signal
-        REBOOT = feature_stack.reboot
-        BUTTON = feature_stack.button
+        autopilot = feature_stack.autopilot
 
         while True:
             current_time = time.time()
@@ -89,7 +98,7 @@ class Jupiter(threading.Thread):
                     dynamic_log_timer,
                     LOGGER,
                     BAT_LOGGER,
-                    AP,
+                    autopilot,
                 )
 
                 signal, last_high_load_log = self._apply_feature_handlers(
@@ -181,32 +190,11 @@ class Jupiter(threading.Thread):
         return bus_connected, dynamic_log_timer
 
     def _apply_feature_handlers(self, bus, address, signal, feature_stack, current_time, last_high_load_log):
-        if address == 0x1f9:
-            signal = feature_stack.button.check(bus, address, signal)
-        if address == 0x229:
-            signal = feature_stack.button.check(bus, address, signal)
-        if address == 0x249:
-            signal = feature_stack.turn_signal.check(bus, address, signal)
-        if address == 0x3e2:
-            signal = feature_stack.button.check(bus, address, signal)
-        if address == 0x273:
-            signal = feature_stack.autopilot.check(bus, address, signal)
-            signal = feature_stack.button.check(bus, address, signal)
-        if address == 0x3c2:
-            signal = feature_stack.buckle.check(bus, address, signal)
-            signal = feature_stack.turn_signal.check(bus, address, signal)
-            signal = feature_stack.autopilot.check(bus, address, signal)
-            signal = feature_stack.reboot.check(bus, address, signal)
-        if address == 0x334:
-            signal = feature_stack.kickdown.check(bus, address, signal)
-        if address == 0x39d:
-            signal = feature_stack.autopilot.check(bus, address, signal)
-            signal = feature_stack.kickdown.check(bus, address, signal)
-        if address == 0x229:
-            signal = feature_stack.autopilot.check(bus, address, signal)
-        if address == 0x2f3:
-            signal = feature_stack.fresh_air.check(bus, address, signal)
-        if address in [0x108, 0x186]:
+        for handler_name in FEATURE_HANDLER_ORDER.get(address, ()):
+            handler = getattr(feature_stack, handler_name)
+            signal = handler.check(bus, address, signal)
+
+        if address in HIGH_LOAD_LOG_ADDRESSES:
             total_torque = abs(self.dash.powertrain.torque_front) + abs(self.dash.powertrain.torque_rear)
             if total_torque > 2000 and (current_time - last_high_load_log > 0.5):
                 feature_stack.battery_logger.log_high_load(total_torque)
