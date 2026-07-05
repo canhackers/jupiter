@@ -1,3 +1,5 @@
+import contextlib
+import io
 import json
 import os
 import tempfile
@@ -7,11 +9,15 @@ from settings import DEFAULT_SETTINGS, load_settings
 
 
 class SettingsLoadTests(unittest.TestCase):
+    def load_settings_quietly(self, path):
+        with contextlib.redirect_stdout(io.StringIO()):
+            return load_settings(path)
+
     def test_missing_settings_file_is_created_with_defaults(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = os.path.join(temp_dir, 'jupiter_settings.json')
 
-            loaded = load_settings(path)
+            loaded = self.load_settings_quietly(path)
 
             self.assertEqual(loaded, DEFAULT_SETTINGS)
             with open(path, 'r') as f:
@@ -24,7 +30,7 @@ class SettingsLoadTests(unittest.TestCase):
             with open(path, 'w') as f:
                 json.dump({'Logger': 0}, f)
 
-            loaded = load_settings(path)
+            loaded = self.load_settings_quietly(path)
 
             self.assertEqual(loaded['Logger'], 0)
             self.assertEqual(loaded['MarsMode'], 0)
@@ -40,7 +46,7 @@ class SettingsLoadTests(unittest.TestCase):
             with open(path, 'w') as f:
                 f.write('{not json')
 
-            loaded = load_settings(path)
+            loaded = self.load_settings_quietly(path)
 
             self.assertEqual(loaded, DEFAULT_SETTINGS)
             self.assertTrue(os.path.exists(os.path.join(temp_dir, 'jupiter_settings_error.json')))

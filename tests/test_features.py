@@ -1,3 +1,5 @@
+import contextlib
+import io
 import unittest
 
 from features.drive import KickDown
@@ -25,7 +27,8 @@ class FeatureCheckTests(unittest.TestCase):
         dash.di.accel_pedal_pos = 91
         feature = KickDown(buffer, dash, enabled=1)
 
-        modified = feature.check(0, 0x334, bytes(8))
+        with contextlib.redirect_stdout(io.StringIO()):
+            modified = feature.check(0, 0x334, bytes(8))
 
         self.assertEqual(get_value(modified, 5, 2), 1)
         self.assertEqual(buffer.message_buffer, [(0, 0x334, modified)])
@@ -38,7 +41,8 @@ class FeatureCheckTests(unittest.TestCase):
         feature.apply = 1
         signal = b'12345678'
 
-        modified = feature.check(0, 0x39d, signal)
+        with contextlib.redirect_stdout(io.StringIO()):
+            modified = feature.check(0, 0x39d, signal)
 
         self.assertEqual(modified, signal)
         self.assertEqual(feature.apply, 0)

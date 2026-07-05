@@ -1,3 +1,5 @@
+import contextlib
+import io
 import sys
 import types
 import unittest
@@ -108,13 +110,14 @@ class JupiterRuntimeHelperTests(unittest.TestCase):
         original_init = jupiter.initialize_canbus_connection
         jupiter.initialize_canbus_connection = lambda: calls.append('init')
         try:
-            new_bus, bus_error, last_recv_time = self.jupiter._handle_bus_watchdog(
-                object(),
-                bus_connected=1,
-                bus_error=1,
-                current_time=100.0,
-                last_recv_time=95.0,
-            )
+            with contextlib.redirect_stdout(io.StringIO()):
+                new_bus, bus_error, last_recv_time = self.jupiter._handle_bus_watchdog(
+                    object(),
+                    bus_connected=1,
+                    bus_error=1,
+                    current_time=100.0,
+                    last_recv_time=95.0,
+                )
         finally:
             jupiter.initialize_canbus_connection = original_init
 
