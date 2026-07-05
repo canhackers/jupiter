@@ -51,6 +51,7 @@ class Jupiter(threading.Thread):
         BUFFER = feature_stack.buffer
         LOGGER = feature_stack.logger
         BAT_LOGGER = feature_stack.battery_logger
+        BUTTON = feature_stack.button
         dynamic_log_timer = 0
         last_high_load_log = 0
 

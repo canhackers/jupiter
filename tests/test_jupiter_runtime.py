@@ -24,6 +24,17 @@ class FakeCanBus:
         sent_messages.append(message.kwargs)
 
 
+class FakeRecvCanBus:
+    def recv(self, timeout):
+        return types.SimpleNamespace(
+            arbitration_id=0x528,
+            data=(1).to_bytes(4, 'big'),
+        )
+
+    def send(self, message):
+        pass
+
+
 fake_can = types.ModuleType('can')
 fake_can.Message = FakeMessage
 fake_can.interface = types.SimpleNamespace(Bus=lambda **kwargs: FakeCanBus())
@@ -176,6 +187,90 @@ class JupiterRuntimeHelperTests(unittest.TestCase):
         self.assertEqual(last_recv_time, 95.0)
         self.assertEqual(self.jupiter.dash.runtime.bus_error_count, 1)
         self.assertEqual(calls, ['init'])
+
+    def test_run_processes_first_received_frame_with_feature_stack_button(self):
+        calls = []
+
+        class FakeRuntimeBuffer:
+            def __init__(self):
+                self.message_buffer = []
+
+            def write_can_buffer(self, bus, address, signal):
+                calls.append(('buffer', address, signal))
+
+            def flush_message_buffer(self):
+                calls.append('flush')
+
+        class FakeRuntimeLogger:
+            file = None
+
+            def initialize(self):
+                calls.append('logger_initialize')
+
+            def close(self):
+                calls.append('logger_close')
+
+            def write(self):
+                calls.append('logger_write')
+
+        class FakeBatteryLogger:
+            def log_health(self, event_type):
+                calls.append(('health', event_type))
+
+            def log_dynamics(self):
+                calls.append('dynamics')
+
+            def log_high_load(self, torque):
+                calls.append(('high_load', torque))
+
+        class FakeAutopilot:
+            def tick(self):
+                calls.append('tick')
+
+        class FakeRuntimeFeatureStack:
+            def __init__(self, dash, settings, sender):
+                self.buffer = FakeRuntimeBuffer()
+                self.logger = FakeRuntimeLogger()
+                self.battery_logger = FakeBatteryLogger()
+                self.autopilot = FakeAutopilot()
+                self.button = FakeHandler('button', calls)
+                self.turn_signal = FakeHandler('turn_signal', calls)
+                self.fresh_air = FakeHandler('fresh_air', calls)
+                self.kickdown = FakeHandler('kickdown', calls)
+                self.buckle = FakeHandler('buckle', calls)
+                self.reboot = FakeHandler('reboot', calls)
+
+        def stop_after_first_send(self, can_bus, buffer):
+            calls.append('send')
+            raise StopIteration
+
+        runner = object.__new__(Jupiter)
+        runner.jupiter_online = True
+        runner.dash = Dashboard()
+        runner.settings = {}
+        runner.vcgm = types.SimpleNamespace(measure_temp=lambda: 0)
+
+        original_init = jupiter.initialize_canbus_connection
+        original_bus = jupiter.can.interface.Bus
+        original_feature_stack = jupiter.FeatureStack
+        original_send = Jupiter._send_buffered_messages
+        jupiter.initialize_canbus_connection = lambda: calls.append('init')
+        jupiter.can.interface.Bus = lambda **kwargs: FakeRecvCanBus()
+        jupiter.FeatureStack = FakeRuntimeFeatureStack
+        Jupiter._send_buffered_messages = stop_after_first_send
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                with self.assertRaises(StopIteration):
+                    runner.run()
+        finally:
+            jupiter.initialize_canbus_connection = original_init
+            jupiter.can.interface.Bus = original_bus
+            jupiter.FeatureStack = original_feature_stack
+            Jupiter._send_buffered_messages = original_send
+
+        self.assertIn(('buffer', 0x528, (1).to_bytes(4, 'big')), calls)
+        self.assertIn('tick', calls)
+        self.assertIn('send', calls)
 
 
 if __name__ == '__main__':
