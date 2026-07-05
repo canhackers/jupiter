@@ -5,7 +5,7 @@ import zipfile
 import shutil
 import threading
 from collections import deque
-from packet_functions import get_value, modify_packet_value, make_new_packet
+from packets import get_value, modify_packet_value, make_new_packet
 
 csv_path = '/home/drive_record/'
 

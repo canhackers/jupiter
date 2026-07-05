@@ -3,7 +3,8 @@ import time
 import can
 import threading
 from vcgencmd import Vcgencmd
-from functions import initialize_canbus_connection, load_settings
+from can_io import initialize_canbus_connection
+from settings import load_settings
 from tesla import Buffer, Dashboard, Logger, Autopilot, RearCenterBuckle, ButtonManager, FreshAir, \
     KickDown, TurnSignal, Reboot, monitoring_addrs, BatteryLogger
 
